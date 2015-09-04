@@ -1,0 +1,78 @@
+package br.com.infoglobo.testes.tabelas.formulaUm;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.tabelas.formulaUm.TabelaFormulaUmAbaCalendario;
+
+@RunWith(OrdenadorTestes.class)
+public class TabelaFormulaUmAbaCalendarioTest {
+
+	private static TabelaFormulaUmAbaCalendario formulaUm;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(formulaUm.getDriver());
+	
+	@BeforeClass
+	public static void before() throws Exception{
+		formulaUm = new TabelaFormulaUmAbaCalendario(Navegador.CHROME);
+		formulaUm.esperaSuperLeaderboardVoltarAoTamanhoNormal(150);
+		formulaUm.esperaCarregar(10);
+	}
+	
+	@AfterClass
+	public static void finalizaTeste() {
+		formulaUm.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 1)
+	@Test
+	public void verificaSeAoClicarNaOpcaoDaAbaCalendarioOBoxDestaAbaEhExibido() {
+		assertTrue(formulaUm.exibiuBoxDaAbaCalendarioAposClicarNoMenu());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 2)
+	@Test
+	public void verificaSeOTituloDaAbaCalendarioEstaSendoExibido() {
+		assertTrue(formulaUm.exibiuTituloDaAba());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 3)
+	@Test
+	public void verificaSeOCalendarioEstaSendoExibido() {
+		assertTrue(formulaUm.exibiuOCalendario());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 4)
+	@Test
+	public void verificaSeAsColunasDoCalendarioEstaoSendoExibidas() {
+		assertTrue(formulaUm.exibiuAsColunasDoCalendario());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 5)
+	@Test
+	public void verificaSeONomeDasColunasDoCalendarioEstaSendoExibido() {
+		assertTrue(formulaUm.exibiuONomeDasColunasDoCalendario());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 6)
+	@Test
+	public void verificaSeNoMinimoUmaCorridaEstaSendoExibidaNoCalendario() {
+		assertTrue(formulaUm.exibiuNoMinimoUmaCorridaNoCalendario());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 7)
+	@Test
+	public void verificaSeParaCadaCorridaADataAHoraOGrandePremioOCircuitoACidadeEOsValoresDestesCamposEstaoSendoExibidos() {
+		assertTrue(formulaUm.exibiuADataAHoraOGrandePremioOCircuitoACidadeEOsValoresDestesCamposParaCadaCorrida());
+	}
+}

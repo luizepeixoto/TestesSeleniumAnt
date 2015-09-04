@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.tabelas.libertadores.paginaTempoReal;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.tabelas.libertadores.TabelaLibertadoresFaseDeGruposPaginaPadrao;
+
+public class TabelaLibertadoresFaseDeGruposPaginaTempoReal extends TabelaLibertadoresFaseDeGruposPaginaPadrao {	
+	
+	public TabelaLibertadoresFaseDeGruposPaginaTempoReal(Navegador navegador) throws Exception {
+		super(navegador);
+	}	
+}

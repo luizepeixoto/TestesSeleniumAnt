@@ -1,0 +1,58 @@
+package testes.indicadores;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+
+import pages.indicadores.Indicadores;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+public class TabelaIndicadoresEconomicosTest {
+	
+	private static Indicadores indicadoresFinanceiros;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(indicadoresFinanceiros.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		indicadoresFinanceiros = new Indicadores(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		indicadoresFinanceiros.fechar();
+	}
+	
+	@Test
+	public void exibiuTabelaDeIndicadoresFinanceiros(){
+		assertNotNull(indicadoresFinanceiros.exibiuTabelaDePetroleoEOuro());
+	}
+	
+	@Test
+	public void exibiuTituloDeIndicadoresFinanceiros(){
+		String tituloEsperado="INDICADORES ECONÔMICOS";
+		assertEquals(tituloEsperado, indicadoresFinanceiros.exibiuTituloDeIndicadoresFinanceiros());
+	}
+	
+	@Test
+	public void exibiuColunasTabelaDeVariacaoDasAcoesIndicadoresFinanceiros(){
+		assertTrue("Não exibiu Coluna Papel", indicadoresFinanceiros.exibiuColunaPapelIndicadoresFinanceiros());
+		assertTrue("Não exibiu Coluna Descrição", indicadoresFinanceiros.exibiuColunaDescricaoIndicadoresFinanceiros());
+		assertTrue("Não exibiu Coluna Variação", indicadoresFinanceiros.exibiuColunaVariacaoIndicadoresFinanceiros());
+	}
+	
+	@Ignore
+	@Test
+	public void verificaSeAPrimeiraLinhaDaTabelaDeIndicadoresFinanceirosEstaExibindoInformacoesValidas(){
+		assertTrue("Não exibiu primeira linha da coluna Papel", indicadoresFinanceiros.exibiuPrimeiraLinhaDaColunaPapelDeIndicadoresFinanceiros());
+		assertTrue("Não exibiu primeira linha da coluna Descrição", indicadoresFinanceiros.exibiuPrimeiraLinhaDaColunaDescricaoIndicadoresFinanceiros());
+		assertTrue("Não exibiu primeira linha da coluna Variação", indicadoresFinanceiros.exibiuPrimeiraLinhaDaColunaVariacaoIndicadoresFinanceiros());
+	}
+}

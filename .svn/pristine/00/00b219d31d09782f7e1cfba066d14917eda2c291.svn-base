@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.ela.materia.widget;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.materia.widget.BoxDeAudio;
+
+public class BoxDeAudioEla extends BoxDeAudio {
+	
+	public BoxDeAudioEla(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

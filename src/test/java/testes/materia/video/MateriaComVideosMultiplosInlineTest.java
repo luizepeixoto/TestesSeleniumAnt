@@ -1,0 +1,60 @@
+package testes.materia.video;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import pages.materia.video.MateriaComVideosMultiplosInline;
+
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+public class MateriaComVideosMultiplosInlineTest {
+	
+	private static MateriaComVideosMultiplosInline materia;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(materia.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new MateriaComVideosMultiplosInline();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeOVideoDoVevoEstaSendoExibido(){
+		assertTrue(materia.getVideoVevo());
+	}
+	
+	@Test
+	public void verificaSeOVideoDaGloboPontoComEstaSendoExibido(){
+		assertTrue(materia.getVideoGlobo());
+	}
+	
+	@Test
+	public void verificaSeOVideoDoYoutubeEstaSendoExibido(){
+		assertTrue(materia.getVideoYoutube());
+	}
+	
+	@Test
+	public void verificaSeOVideoDoVimeoEstaSendoExibido(){
+		assertTrue(materia.getVideoVimeo());
+	}
+	
+	@Test
+	public void verificaSeOVideoDoUstreamEstaSendoExibido(){
+		assertTrue(materia.getVideoUstream());
+	}
+	
+	@Test
+	public void verificaSeOVideoDoLivestreamEstaSendoExibido(){
+		assertTrue(materia.getVideoLivestream());
+	}
+}

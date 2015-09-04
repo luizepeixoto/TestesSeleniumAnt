@@ -1,0 +1,192 @@
+package pages.agenda;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import crops.CropsDeArticles;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class AgendaEventos extends AceitacaoAbstractTest {
+	
+	public AgendaEventos(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public void scroll() throws InterruptedException{
+		esperaCarregar(3);
+		executarScroll(getDriver().findElement(By.className("cal")).getLocation().toString());
+	}
+	
+	public void clicarNumaDataValida() throws InterruptedException{
+		getDriver().findElement(By.linkText("11")).click();
+		esperaCarregar(3);
+	}
+	
+	public WebElement exibiuClasseAgenda() {
+		return getDriver().findElement(By.className("agenda"));
+	}
+	
+	public List<WebElement> listaComTodosEventos() {
+		return exibiuClasseAgenda().findElement(By.className("col")).findElements(By.className("item"));
+	}
+
+	public boolean exibiuListaDeEventos() {
+		return listaComTodosEventos().size() > 0;
+	}
+
+	public boolean exibiuADataDosEventos() {
+		String diaDaSemanaCompleto =  exibiuClasseAgenda().findElement(By.className("evento")).findElement(By.className("data")).findElement(By.tagName("p")).getAttribute("textContent");
+		String diaDaSemanaApenasNumero = diaDaSemanaCompleto.replace("\"", "").toLowerCase();
+		
+		return (Integer.parseInt(diaDaSemanaApenasNumero.substring(0, diaDaSemanaApenasNumero.indexOf(" "))) > 0 && Integer.parseInt(diaDaSemanaApenasNumero.substring(0, diaDaSemanaApenasNumero.indexOf(" "))) <= 31);
+	}
+
+	public boolean exibiuDiaDaSemana() {
+		String diaDaSemana =  exibiuClasseAgenda().findElement(By.className("selecionado")).findElement(By.className("data")).findElement(By.tagName("p")).findElement(By.tagName("span")).getAttribute("textContent");
+		String diaDaSemanaSemAspas = diaDaSemana.replace("\"", "").toLowerCase();
+		
+		return ((diaDaSemanaSemAspas.equals("segunda") || diaDaSemanaSemAspas.equals("terça") || 
+				diaDaSemanaSemAspas.equals("quarta") || diaDaSemanaSemAspas.equals("quinta") || 
+				diaDaSemanaSemAspas.equals("sexta") || diaDaSemanaSemAspas.equals("sábado") || diaDaSemanaSemAspas.equals("domingo")));
+	}
+	
+	public List<WebElement> listaDeEventosDeUmDiaSelecionado() {
+		return getDriver().findElement(By.className("selecionado")).findElement(By.className("col")).findElements(By.className("item"));
+	}
+	
+	public boolean exibiuUmaFotoParaCadaEventoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			if(!listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.tagName("img")).isDisplayed()){
+				imprimirMensagemDeErro("imagem", i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOCropCorretoParaCadaFotoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			if(!listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.tagName("img")).getAttribute("src").contains(CropsDeArticles.agenda.cropProporcional())){
+				imprimirMensagemDeErroDeImagem(listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.tagName("img")).getAttribute("src"), CropsDeArticles.agenda.cropProporcional());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOWidthCorretoParaCadaFotoDaLista() {
+		
+		String widthEsperado = CropsDeArticles.agenda.getWidth();
+		int widthEsperadoConvertido = Integer.parseInt(widthEsperado);
+		
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			
+			String widthDaFotoAtual = listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.tagName("img")).getAttribute("width");
+			int widthPosicaoAtualConvertido = Integer.parseInt(widthDaFotoAtual);
+			
+			if(widthPosicaoAtualConvertido > widthEsperadoConvertido){
+				imprimirMensagemDeErroDeImagem(i, widthDaFotoAtual, widthEsperado);
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuOHeightCorretoParaCadaFotoDaLista() { 
+		
+		String heightEsperado = CropsDeArticles.agenda.getHeight();
+		int heightEsperadoConvertido = Integer.parseInt(heightEsperado);
+		
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			
+			String heightDaFotoAtual = listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.tagName("img")).getAttribute("height");
+			int heightPosicaoAtualConvertido = Integer.parseInt(heightDaFotoAtual);
+			
+			if(heightPosicaoAtualConvertido > heightEsperadoConvertido){
+				imprimirMensagemDeErroDeImagem(i, heightDaFotoAtual, heightEsperado);
+				return false;
+			}
+			
+		}
+		return true;
+	}
+	
+	public boolean exibiuUmTituloParaCadaEventoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			if(listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.tagName("h3")).getText().isEmpty()){
+				imprimirMensagemDeErro("titulo", i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuUmaDescricaoParaCadaEventoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			if(listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.tagName("p")).getText().isEmpty()){
+				imprimirMensagemDeErro("descrição", i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuCampoEndereçoParaCadaEventoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			List<WebElement> listaDeCamposDoEvento = listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.className("info")).findElements(By.tagName("p"));
+			if(listaDeCamposDoEvento.get(0).getText().isEmpty()){
+				imprimirMensagemDeErro("endereço do evento", i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuCampoHoraParaCadaEventoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			List<WebElement> listaDeCamposDoEvento = listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.className("info")).findElements(By.tagName("p"));
+			if(listaDeCamposDoEvento.get(1).getText().isEmpty()){
+				imprimirMensagemDeErro("hora do evento", i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuCampoValorParaCadaEventoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			List<WebElement> listaDeCamposDoEvento = listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.className("info")).findElements(By.tagName("p"));
+			if(listaDeCamposDoEvento.get(2).getText().isEmpty()){
+				imprimirMensagemDeErro("valor do evento", i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuUmLinkExternoParaCadaEventoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			List<WebElement> listaDeCamposDoEvento = listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.className("info")).findElements(By.tagName("p"));
+			if(!listaDeCamposDoEvento.get(2).findElement(By.tagName("a")).isDisplayed()){
+				imprimirMensagemDeErro("link do site", i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOTituloDoUmLinkExternoParaCadaEventoDaLista() {
+		for(int i=0; i<listaDeEventosDeUmDiaSelecionado().size(); i++){
+			List<WebElement> listaDeCamposDoEvento = listaDeEventosDeUmDiaSelecionado().get(i).findElement(By.className("info")).findElements(By.tagName("p"));
+			if(listaDeCamposDoEvento.get(2).findElement(By.tagName("a")).getText().isEmpty()){
+				imprimirMensagemDeErro("titulo do link", i);
+				return false;
+			}
+		}
+		return true;
+	}
+}

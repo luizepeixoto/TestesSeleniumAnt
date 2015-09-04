@@ -1,0 +1,56 @@
+package br.com.infoglobo.pages.materia.widget;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxCitacao extends AceitacaoAbstractTest {
+	
+	public BoxCitacao(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public WebElement getBoxCitacao(){
+		return getDriver().findElement(By.className("box-citacao"));
+	}
+	
+	public boolean exibiuOBoxCitacao() {
+		return getBoxCitacao().isDisplayed();
+	}
+	
+	public boolean exibiuOBoxCitacaoComBorda() {
+		return (getBoxCitacao().getCssValue("border-top").equals("2px solid rgb(221, 221, 221)") &&
+				getBoxCitacao().getCssValue("border-bottom").equals("2px solid rgb(221, 221, 221)") );
+	}
+	
+	protected WebElement obterFraseDoBox() {
+		return getBoxCitacao().findElement(By.tagName("quote"));
+	}
+	
+	public boolean getBoxCitacaoFrase(){
+		return ! obterFraseDoBox().getText().isEmpty();
+	}
+	
+	public boolean exibiuAspasSimplesNoInicioENoFinalDaFrase() {
+		String frase = obterFraseDoBox().getText();
+		return ( frase.startsWith("‘") && frase.endsWith("’") );
+	}
+	
+	protected WebElement obterAutorDaFrase() {
+		return getBoxCitacao().findElement(By.className("autor")).findElement(By.tagName("strong"));
+	}
+	
+	public boolean getBoxCitacaoAutor(){
+		return ! obterAutorDaFrase().getText().isEmpty();
+	}
+	
+	protected WebElement obterCargoDoAutor() {
+		return getBoxCitacao().findElement(By.className("autor")).findElement(By.tagName("span"));
+	}
+	
+	public boolean getBoxCitacaoCargo(){
+		return ! obterCargoDoAutor().getText().isEmpty();
+	}
+}

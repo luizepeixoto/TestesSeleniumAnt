@@ -1,0 +1,38 @@
+package br.com.infoglobo.pages.capa.direita;
+
+import org.openqa.selenium.By;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxProjetosDeMarketing extends AceitacaoAbstractTest{
+	
+	public BoxProjetosDeMarketing(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+
+	public boolean exibiuBoxProjetosDeMarketing() {
+		return getDriver().findElement(By.xpath("//div[@class='projetos-mkt slider-lateral']")).isDisplayed();
+	}
+
+	public String exibiuTituloProjetosDeMarketing() {
+		return getDriver().findElement(By.xpath("//div[@class='projetos-mkt slider-lateral']/p")).getText();
+	}
+
+	public boolean exibiuPrimeiroConteudoDoBox() {
+		return !getDriver().findElement(By.xpath("//div[@class='slider-container']/ul/li[1]")).getText().isEmpty();
+	}
+
+	public void clicouNaSetaDaDireita() {
+		getDriver().findElement(By.xpath("//div[@class='nav-container clearfix']/span[2]")).click();		
+	}
+
+	public boolean exibiuSegundoConteudoDoBox() {
+		return getDriver().findElement(By.xpath("//div[@class='slider-container']/ul/li[2]")).isDisplayed();
+	}
+
+	public void clicouNaSetaDaEsquerda() {
+		getDriver().findElement(By.xpath("//div[@class='nav-container clearfix']/span[1]")).click();
+		
+	}
+}

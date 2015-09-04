@@ -1,0 +1,103 @@
+package pages.materia.capitulo;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class MenuLateralNavegacao extends AceitacaoAbstractTest {
+	
+	public MenuLateralNavegacao() throws Exception {
+		super();
+	}
+	
+	public MenuLateralNavegacao(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	void executaScrollParaBaixo() throws InterruptedException{
+		JavascriptExecutor jse = (JavascriptExecutor)getDriver();
+		jse.executeScript("scroll(0, 6000)");
+		Thread.sleep(1000);
+	}
+	
+	void executaScrollParaOMeio(){
+		JavascriptExecutor jse = (JavascriptExecutor)getDriver();
+		jse.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight,document.documentElement.clientHeight));");
+	}
+	
+	void executaScrollParaCima() throws InterruptedException{
+		JavascriptExecutor jse = (JavascriptExecutor)getDriver();
+		jse.executeScript("scroll(1600, 0)"); 
+		Thread.sleep(1000);
+	}
+	
+	public WebElement exibiuMenuNaLateral() {
+		return getDriver().findElement(By.id("fixaMenu"));
+	}
+	
+	public List<WebElement> listaDeCapitulosDoMenuLateral() {
+		return exibiuMenuNaLateral().findElement(By.id("summary")).findElements(By.tagName("li"));
+	}
+
+	public boolean exibiuUmaListaDe12Capitulos() {
+		return listaDeCapitulosDoMenuLateral().size() == Integer.parseInt("12");
+	}
+
+	public boolean exibiuTituloDeCadaMateriaNaChamadaDoMenuLateral() {
+		for(int i=0; i<listaDeCapitulosDoMenuLateral().size(); i++){
+			if(listaDeCapitulosDoMenuLateral().get(i).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public List<WebElement> listaTotalDeMaterias() {
+		return getDriver().findElement(By.className("v2")).findElements(By.className("capituloPage"));
+	}
+	
+	public boolean exibiuOTituloCorretoNoMenuLateralParaCadaCapituloDoMenu() throws InterruptedException {
+		executaScrollParaBaixo();
+		Thread.sleep(1000);
+		for(int i=0; i<listaDeCapitulosDoMenuLateral().size(); i++){
+				String tituloAtualNoMenuLateral = listaDeCapitulosDoMenuLateral().get(i).getText().toLowerCase();
+				String tituloAtualDoCapitulo = listaTotalDeMaterias().get(i).findElement(By.tagName("h2")).getText().toLowerCase();			
+				if(!tituloAtualDoCapitulo.contains(tituloAtualNoMenuLateral)){
+					return false;
+				}
+		}
+		return true;
+	}
+	
+	public boolean exibiuUmLinkNoMenuLateralParaCadaUmDosCapitulos() throws InterruptedException {
+		executaScrollParaBaixo();
+		Thread.sleep(1000);
+		for(int i=0; i<listaDeCapitulosDoMenuLateral().size(); i++){
+				if(!listaDeCapitulosDoMenuLateral().get(i).findElement(By.tagName("a")).isDisplayed()){
+					return false;
+				}
+		}
+		return true;
+	}
+
+	public boolean executaNavegacaoPeloMenu() throws InterruptedException {
+		
+		executaScrollParaBaixo();
+		getDriver().findElement(By.xpath("//ul[@id='summary']/li/a")).click();
+		executaScrollParaCima();
+		
+		for(int i=1; i<listaDeCapitulosDoMenuLateral().size(); i++){
+			executaScrollParaBaixo();
+			getDriver().findElement(By.xpath("//ul[@id='summary']/li[" +i+ "]/a")).click();
+			executaScrollParaCima();
+		}
+		return true;
+	}
+}
+
+

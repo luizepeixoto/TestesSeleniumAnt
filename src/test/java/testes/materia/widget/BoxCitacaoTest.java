@@ -1,0 +1,56 @@
+package testes.materia.widget;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import pages.materia.widget.BoxCitacao;
+
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxCitacaoTest {
+	
+	private static BoxCitacao materia;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new BoxCitacao(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDaCitacaoEstaSendoExibido(){
+		assertTrue(materia.exibiuOBoxCitacao());
+	}
+	
+	@Test
+	public void verificaSeOBoxPossuiBorda(){
+		assertTrue(materia.exibiuOBoxCitacaoComBorda());
+	}
+	
+	@Test
+	public void verificaSeOAFraseDaCitacaoEstaSendoExibida(){
+		assertTrue(materia.getBoxCitacaoFrase());
+	}
+	
+	@Test
+	public void verificaSeAFrasePossuiAspasSimplesNoInicioENoFinal(){
+		assertTrue(materia.exibiuAspasSimplesNoInicioENoFinalDaFrase());
+	}
+	
+	@Test
+	public void verificaSeOAutorDaCitacaoEstaSendoExibido(){
+		assertTrue(materia.getBoxCitacaoAutor());
+	}
+	
+	@Test
+	public void verificaSeOCargoDoAutorDaCitacaoEstaSendoExibido(){
+		assertTrue(materia.getBoxCitacaoCargo());
+	}
+}

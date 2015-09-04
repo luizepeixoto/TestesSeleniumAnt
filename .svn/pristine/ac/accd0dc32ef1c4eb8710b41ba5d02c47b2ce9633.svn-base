@@ -1,0 +1,14 @@
+package br.com.infoglobo.pages.enem;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class EnemValidaJson extends AceitacaoAbstractTest {
+	
+	public EnemValidaJson() throws Exception{
+		super();
+	}
+	
+	public String exibiuCodigoFonteDaPagina(){
+		return getDriver().getPageSource();
+	}
+}

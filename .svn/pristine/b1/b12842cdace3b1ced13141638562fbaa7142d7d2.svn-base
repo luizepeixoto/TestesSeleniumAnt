@@ -1,0 +1,29 @@
+package br.com.infoglobo.pages.materia.widget;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class BoxCitacao extends AceitacaoAbstractTest {
+	
+	public BoxCitacao() throws Exception {
+		super();
+	}
+	
+	public WebElement getBoxCitacao(){
+		return getDriver().findElement(By.className("box-citacao"));
+	}
+	
+	public boolean getBoxCitacaoFrase(){
+		return !getBoxCitacao().findElement(By.tagName("quote")).getText().isEmpty();
+	}
+	
+	public boolean getBoxCitacaoAutor(){
+		return !getBoxCitacao().findElement(By.className("autor")).findElement(By.tagName("strong")).getText().isEmpty();
+	}
+	
+	public boolean getBoxCitacaoCargo(){
+		return !getBoxCitacao().findElement(By.className("autor")).findElement(By.tagName("span")).getText().isEmpty();
+	}
+}

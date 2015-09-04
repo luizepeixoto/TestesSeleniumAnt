@@ -1,0 +1,16 @@
+package br.com.infoglobo.pages.fotogaleria;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.banners.BannerArrobaPadrao;
+
+public class BoxFotogaleriaBanner extends BannerArrobaPadrao {
+	
+	public BoxFotogaleriaBanner(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public WebElement acessaBoxDeUltimasFotogalerias = getDriver().findElement(By.id("lastFrom"));
+}

@@ -1,0 +1,64 @@
+package br.com.infoglobo.testes.indicadores;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.indicadores.Indicadores;
+
+public class TabelaImpostoDeRendaTest {
+	
+	private static Indicadores impostoDeRenda;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(impostoDeRenda.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		impostoDeRenda = new Indicadores(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		impostoDeRenda.fechar();
+	}
+	
+	@Test
+	public void exibiuTabelaDeImpostoDeRenda(){
+		assertNotNull(impostoDeRenda.exibiuTabelaDoImpostoDeRenda());
+	}
+	
+	@Test
+	public void exibiuTituloDeImpostoDeRenda(){
+		String tituloEsperado="IMPOSTO DE RENDA";
+		assertEquals(tituloEsperado, impostoDeRenda.exibiuTituloDoImpostoDeRenda());
+	}
+	
+	@Test
+	public void exibiuColunasTabelaDeVariacaoDasAcoesImpostoDeRenda(){
+		assertTrue("Não exibiu Coluna Descrição De Imposto De Renda", impostoDeRenda.exibiuColunaDescricaoDoImpostoDeRenda());
+		assertTrue("Não exibiu Coluna Valor De Imposto De Renda", impostoDeRenda.exibiuColunaValorDoImpostoDeRenda());
+	}
+	
+	@Ignore
+	@Test
+	public void verificaSeAPrimeiraLinhaDaTabelaDoImpostoDeRendaEstaExibindoInformacoesValidas(){
+		assertTrue("Não exibiu primeira linha da coluna Descrição De Imposto De Renda", impostoDeRenda.exibiuPrimeiraLinhaDaColunaDescricaoDoImpostoDeRenda());
+		assertTrue("Não exibiu primeira linha da coluna Valor De Imposto De Renda", impostoDeRenda.exibiuPrimeiraLinhaDaColunaValorDoImpostoDeRenda());
+	}
+	
+	@Ignore
+	@Test
+	public void exibiuOBoxDeObservacao(){
+		String textoEsperadoNoPrimeiroParagrafo="Deduções: a) R$ 164,56 por dependente; b) dedução especial para aposentados, pensionistas e transferidos para a reserva remunerada com 65 anos ou mais: R$ 1.637,11; c) contribuição mensal à Previdência Social; d) pensão alimentícia paga devido a acordo ou sentença judicial.";
+		String textoEsperadoNoSegundoParagrafo="Esta nova tabela só vale para o recolhimento do IRRF este ano.";
+		assertEquals("Não exibiu O texto do primeiro parágrafo de observações de IR", textoEsperadoNoPrimeiroParagrafo, impostoDeRenda.exibiuPrimeiroParagrafoDeObservacaoDoIR());
+		assertEquals("Não exibiu O texto do Segundo parágrafo de observações de IR", textoEsperadoNoSegundoParagrafo, impostoDeRenda.exibiuSegundoParagrafoDeObservacaoDoIR());
+	}
+}

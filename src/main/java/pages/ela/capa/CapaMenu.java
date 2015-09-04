@@ -1,0 +1,239 @@
+package pages.ela.capa;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class CapaMenu extends AceitacaoAbstractTest {
+
+	public CapaMenu(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+
+	public WebElement acessaMenu() {
+		return getDriver().findElement(By.className("header-container")).findElement(By.className("large-16 "));
+	}
+
+	public boolean exibiuMenuNaCorCorreta(){
+		
+		String corEsperada = "rgba(34, 34, 34, 1)";
+		String corAtual = acessaMenu().getCssValue("color");
+		
+		if(!corAtual.equals(corEsperada)){
+			imprimirMensagemDeErroDeUmaTag("cor do menu", corEsperada, corAtual);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean escondeuOMenuDoElaNaPosicaoInicial(){
+		
+			if(acessaMenu().findElement(By.id("bt-editoria")).isDisplayed()){
+				imprimirMensagemDeErroGenerica("Exibiu o menu na posição inicial.");
+				return false;	
+			}
+		
+		return true;
+	}
+	
+	public boolean exibiuOMenuDoElaAposOMenu() throws InterruptedException{
+		
+		executarScroll(getDriver().findElement(By.className("hightlightsEla")).getLocation());
+		esperaCarregar(1);
+		
+		if(!acessaMenu().findElement(By.id("bt-editoria")).isDisplayed()){
+			imprimirMensagemDeErroGenerica("Não exibiu o menu após scroll.");
+			return false;	
+		}
+	
+		return true;
+	}
+
+	public boolean exibiuOMenuEditoria() throws InterruptedException {
+
+		executarMouseOver(acessaMenu().findElement(By.id("bt-editoria")).findElement(By.tagName("a")));
+		esperaCarregar(2);
+		
+		if(!getDriver().findElement(By.id("menu-editoria")).isDisplayed()){
+			imprimirMensagemDeErroGenerica("Não exibiu o menu editoria após o mouse over.");
+			return false;	
+		}
+		
+		return true;
+	}
+
+	public boolean deixouDeExibirOMenuAposScrollAteOTopo() throws InterruptedException {
+		
+		esperaCarregar(2);
+		executarScroll(getDriver().findElement(By.className("barra-itens")).getLocation());
+		esperaCarregar(1);
+		
+		if(acessaMenu().findElement(By.id("bt-editoria")).isDisplayed()){
+			imprimirMensagemDeErroGenerica("Exibiu o menu na posição inicial.");
+			return false;	
+		}
+	
+		return true;
+	}
+	
+	public WebElement acessaHeaderDoMenuEla(){
+		return getDriver().findElement(By.className("navEla"));
+	}
+	
+	public boolean exibiuMenuEla(){
+		return acessaHeaderDoMenuEla().isDisplayed();
+	}
+	
+	public WebElement acessaLogoEla(){
+		return acessaHeaderDoMenuEla().findElement(By.className("logo"));
+	}
+	
+	public WebElement acessaImagemMenuEla(){
+		return acessaLogoEla().findElement(By.tagName("img"));
+	}
+	
+	public boolean exibiuImagemDoSiteEla() {
+		
+		int contadorDeErros = 0;
+		
+		String widthEsperado = "250";
+		String heightEsperado = "122";
+		String alinhamentoEsperado = "center";
+		String espacoTopoEsperado = "20px";
+		String espacoBottomEsperado = "20px";
+		
+		String widthAtual = acessaImagemMenuEla().getAttribute("width");
+		String heightAtual = acessaImagemMenuEla().getAttribute("height");;
+		String alinhamentoAtual = acessaImagemMenuEla().getCssValue("text-align");
+		String espacoTopoAtual = acessaLogoEla().getCssValue("padding-top");
+		String espacoBottomAtual = acessaLogoEla().getCssValue("padding-bottom");
+		
+		if(!acessaImagemMenuEla().isDisplayed()){
+			imprimirMensagemDeErroGenerica("Não exibiu imagem no menu.");
+			contadorDeErros++;
+		}
+		
+		if(!widthAtual.equals(widthEsperado)){
+			imprimirMensagemDeErroDeUmaTag("width da imagem do menu", widthEsperado, widthAtual);
+			contadorDeErros++;
+		}
+		
+		if(!heightAtual.equals(heightEsperado)){
+			imprimirMensagemDeErroDeUmaTag("height da imagem do menu", heightEsperado, heightAtual);
+			contadorDeErros++;
+		}
+		
+		if(!alinhamentoAtual.equals(alinhamentoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("alinhamento da imagem do menu", alinhamentoEsperado, alinhamentoAtual);
+			contadorDeErros++;
+		}
+		
+		if(!espacoTopoAtual.equals(espacoTopoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("espaço do topo da imagem do menu", espacoTopoEsperado, espacoTopoAtual);
+			contadorDeErros++;
+		}
+		
+		if(!espacoBottomAtual.equals(espacoBottomEsperado)){
+			imprimirMensagemDeErroDeUmaTag("espaço do bottom da imagem do menu", espacoBottomEsperado, espacoBottomAtual);
+			contadorDeErros++;
+		}
+		
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public WebElement acessaEditoriasNoMenu() {
+		return acessaHeaderDoMenuEla().findElement(By.tagName("nav"));
+	}
+	
+	public boolean exibiuEditoriasNoMenu() {
+		return acessaEditoriasNoMenu().isDisplayed();
+	}
+	
+	public List<WebElement> listaDeEditoriasDoMenu() {
+		return acessaEditoriasNoMenu().findElements(By.tagName("li"));
+	}
+	
+	public int totalDeEditoriasDoMenu() {
+		return listaDeEditoriasDoMenu().size();
+	}
+
+	public boolean exibiuLayoutCorretoParaEditoriasNoMenu() {
+		int contadorDeErros = 0;
+
+		String fonteEsperada = "OgloboXCondensed, sans-serif";
+		String tamanhoFonteEsperada = "19px";
+		String corFonteEsperada = "rgba(34, 34, 34, 1)";
+		String textTransformEsperado = "uppercase";
+		String alinhamentoEsperado = "center";
+		String espacamentoEsquerdaEsperado = "0px";
+		String espacamentoDireitaEsperado = "12px";
+
+		for (int i = 0; i < totalDeEditoriasDoMenu(); i++) {
+
+			WebElement acessaEditoriaPosicaoAtual = listaDeEditoriasDoMenu().get(i);
+
+			String editoriaAtual = acessaEditoriaPosicaoAtual.getText();
+			String fonteAtual = acessaEditoriaPosicaoAtual.getCssValue("font-family");
+			String tamanhoFonteAtual = acessaEditoriaPosicaoAtual.getCssValue("font-size");
+			String corFonteAtual = acessaEditoriaPosicaoAtual.getCssValue("color");
+			String textTransformAtual = acessaEditoriaPosicaoAtual.getCssValue("text-transform");
+			String alinhamentoAtual = acessaEditoriaPosicaoAtual.getCssValue("text-align");
+			String espacamentoEsquerdaAtual = acessaEditoriaPosicaoAtual.getCssValue("padding-left");
+			String espacamentoDireitaAtual = acessaEditoriaPosicaoAtual.getCssValue("padding-right");
+			
+			if (editoriaAtual.isEmpty()) {
+				imprimirMensagemDeErroGenerica("Não exibiu editoria para a posição: "+(i+1)+".");
+				contadorDeErros++;
+			}
+
+			if (!fonteEsperada.equals(fonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("fonte da editoria para a posição: "+(i+1)+"", fonteEsperada, fonteAtual);
+				contadorDeErros++;
+			}
+
+			if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("tamanho da fonte da editoria para a posição: "+(i+1)+"", tamanhoFonteEsperada, tamanhoFonteAtual);
+				contadorDeErros++;
+			}
+
+			if (!corFonteEsperada.equals(corFonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("cor da fonte da editoria para a posição: "+(i+1)+"", corFonteEsperada, corFonteAtual);
+				contadorDeErros++;
+			}
+
+			if (!textTransformEsperado.equals(textTransformAtual)) {
+				imprimirMensagemDeErroDeUmaTag("text transform da fonte da editoria para a posição: "+(i+1)+"", textTransformEsperado, textTransformAtual);
+				contadorDeErros++;
+			}
+			
+			if (!alinhamentoEsperado.equals(alinhamentoAtual)) {
+				imprimirMensagemDeErroDeUmaTag("alinhamento da editoria para a posição: "+(i+1)+"", alinhamentoEsperado, alinhamentoAtual);
+				contadorDeErros++;
+			}
+			
+			if (!espacamentoEsquerdaEsperado.equals(espacamentoEsquerdaAtual)) {
+				imprimirMensagemDeErroDeUmaTag("espaçamento a esquerda da editoria para a posição: "+(i+1)+"", espacamentoEsquerdaEsperado, espacamentoEsquerdaAtual);
+				contadorDeErros++;
+			}
+			
+			if (!espacamentoDireitaEsperado.equals(espacamentoDireitaAtual)) {
+				imprimirMensagemDeErroDeUmaTag("espaçamento a direita da editoria para a posição: "+(i+1)+"", espacamentoDireitaEsperado, espacamentoDireitaAtual);
+				contadorDeErros++;
+			}
+		}
+
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,477 @@
+# 1) Ambiente (host, proxy, proxyUser...)
+ambiente=STG
+
+dominio=globostg.globoi.com
+
+# 2) "path" para os modelos usados no teste.
+
+##Agenda##
+  AgendaEventos.path=rio/agenda/
+
+##ASP##
+  CapaDeBlogs.path=blogs/
+  CapaEuReporter.path=participe/
+  CapaTireDuvidas.path=servicos/tireduvidas/pec-das-empregadas-domesticas/
+  CapaDeUmBlog.path=blogs/radarolimpico/
+  PostDeUmBlog.path=blogs/radarolimpico/posts/2014/12/12/esgrimista-renzo-agresta-compete-em-nova-york-556876.asp
+  
+##Barreira##
+  Degustacao.path=
+  BarreiraEspecialPublicitario.path=
+  BarreiraWhiteList.path=
+  Paywall.path=registro?evento=rw
+  
+##Capa##
+  CabecalhoBarrinha.path= 
+  CapaMenuMeio.path=teste-jenkins/
+  CapaMenuInferior.path=teste-jenkins/
+  CapaCabecalho.path=
+  CapaCabecalhoPublicidade.path=
+  
+##Capa da Esquerda##
+  ChamadaPrincipal.path=teste-jenkins/
+  ChamadaSemEditoria.path=teste-jenkins/
+  ChamadaComWebChamada.path=teste-jenkins/
+  ChamadaComFoto.path=teste-jenkins/
+  ChamadaComChamadaSecundariaComTarja.path=teste-jenkins/
+  ChamadaComWebChamadasComTarjas.path=teste-jenkins/
+  ChamadaEspecial.path=teste-jenkins/teste-jenkins-5/
+  ChamadaInformePublicitario.path=teste-jenkins/informe-publicitario
+  ChamadaInformePublicitarioLinkExterno.path=teste-jenkins/teste-jenkins-5/
+  ChamadaConteudoComVideo.path=teste-jenkins/teste-jenkins-videos/
+  BoxDeMaisMaterias.path=teste-jenkins/
+
+##Capa: Coluna da Direita##
+  BoxAcervo.path=teste-jenkins/
+  BoxArroba.path=teste-jenkins/
+  BoxAsMais.path=teste-jenkins/
+  BoxCincoMinutos.path=teste-jenkins/ela
+  BoxCotacoesFinanceiras.path=teste-jenkins/
+  BoxDeAgenda.path=teste-jenkins/
+  BoxEdicaoDigital.path=teste-jenkins/
+  BoxEuReporter.path=teste-jenkins/
+  BoxGenteDoGlobo.path=teste-jenkins/teste-jenkins-2/
+  BoxGenteDoGloboComExclusoes.path=teste-jenkins/teste-jenkins-5/
+  BoxHoroscopo.path=teste-jenkins/
+  BoxMemoria.path=teste-jenkins/
+  BoxNewsletter.path=teste-jenkins/
+  BoxMaisBlogs.path=teste-jenkins/teste-jenkins-urgente/
+  BoxOGloboAMais.path=teste-jenkins/
+  BoxProjetosInstitucionais.path=teste-jenkins/?ban=ok
+  BoxProjetosDeMarketing.path=teste-jenkins/
+  BoxDeEnqueteAberta.path=teste-jenkins/teste-jenkins-2/
+  BoxDeEnqueteFechada.path=teste-jenkins/teste-jenkins-3/
+  BoxRevistaDaTv.path=teste-jenkins/
+  BoxRio2016.path=teste-jenkins/teste-jenkins-6/
+  BoxRioShow.path=teste-jenkins/teste-jenkins-2/
+  BoxUltimasPlantao.path=teste-jenkins/
+  BoxVaiRio.path=teste-jenkins/
+  BoxClubeSouMaisRio.path=teste-jenkins/
+
+##Capa: Coluna da Meio##
+  BoxCarrosselMancheteHorizontal.path=teste-jenkins/
+  BoxColunistasEBlogueiros.path=teste-jenkins/teste-jenkins-2/
+  BoxHumor.path=teste-jenkins/
+  BoxOpiniao.path=teste-jenkins/
+  BoxDeVideos.path=teste-jenkins/
+  BoxEspecial.path=teste-jenkins/teste-jenkins-5/
+  CapaMeioPublicidade.path=teste-jenkins/
+  CapaMeioMancheteDuasColunasDuasManchetes.path=teste-jenkins/
+  CapaMeioMancheteDuasColunasUmaMancheteFotoHorizontal.path=teste-jenkins/
+  CapaMeioMancheteDuasColunasUmaMancheteFotoVertical.path=teste-jenkins/
+  CapaMeioMancheteHorizontal.path=teste-jenkins/
+  CapaMeioMancheteDuasColunasDuasManchetesComVideo.path=teste-jenkins/teste-jenkins-videos/
+  CapaMeioMancheteDuasColunasUmaMancheteComVideoHorizontal.path=teste-jenkins/teste-jenkins-videos/
+  CapaMeioMancheteHorizontalComVideo.path=teste-jenkins/teste-jenkins-videos/
+  CapaMeioMancheteInformePublicitario.path=teste-jenkins/teste-jenkins-4/
+  CapaMeioMancheteInformePublicitarioLinkExterno.path=teste-jenkins/teste-jenkins-5/
+
+##Compartilhamento##
+  CompartilharColuna.path=teste-jenkins/coluna-1031078
+  CompartilharMateria.path=teste-jenkins/morre-em-varsovia-ultimo-lider-do-comunismo-polones-1031041
+  CompartilharEditoria.path=teste-jenkins/
+  CompartilharPlantao.path=rio/teste-plantao-1030819
+  CompartilharFotogaleria.path=pais/dias-de-chuva-1031234
+
+##Coluna##
+  Coluna.path=teste-jenkins/coluna-1031078
+  ColunaComFoto.path=teste-jenkins/tropicalia-ou-panis-et-circensis-1045813
+  ColunaComAutorNaDescricao.path=teste-jenkins/coluna-1031078
+  ColunaMetadado.path=teste-jenkins/coluna-1031078
+  ColunaNavegacao.path=sociedade/tecnologia/vida-digital/e-hora-de-ler-castells-1045998
+  ColunaNavegacaoSemAnterior.path=sociedade/educacao/coluna-ustream-1011283
+  ColunaNavegacaoSemProxima.path=sociedade/educacao/outro-titulo-da-coluna-1011515
+  ColunaSemBoxNavegacao.path=sociedade/saude/os-sons-da-cidade-1049744
+
+##Comentário##
+  CabecalhoComentario.path=teste-jenkins/cristovao-lamenta-erros-do-flu-na-derrota-para-atletico-mg-1031156
+  ComentarioComRespostas.path=teste-jenkins/nao-tem-terceiro-turno-no-brasil-diz-mercadante-sobre-panelaco-1049999
+  ComentarioInvalido.path=teste-jenkins/webdriver-os-comentarios-para-esta-materia-devem-permanecer-em-aberto-1031156
+  FormularioBotaoDenunciar.path=teste-jenkins/webdriver-os-comentarios-para-esta-materia-devem-permanecer-em-aberto-1031156
+  FormularioBotaoResponder.path=teste-jenkins/webdriver-os-comentarios-para-esta-materia-devem-permanecer-em-aberto-1031156
+  FormularioDeComentarioAberto.path=teste-jenkins/webdriver-os-comentarios-para-esta-materia-devem-permanecer-em-aberto-1031156
+  MateriaComBotaoMaisComentarios.path=teste-jenkins/cristovao-lamenta-erros-do-flu-na-derrota-para-atletico-mg-1031156
+  MateriaComComentarioExpirado.path=esportes/santos-aceita-proposta-cicero-esta-voltando-ao-fluminense-1031154
+  MateriaComComentarioModerado.path=teste-jenkins/dolar-comercial-tem-sua-quarta-alta-seguida-cotacao-volta-encostar-nos-3-bolsa-sobe-1049836
+  MateriaComComentarios.path=teste-jenkins/cristovao-lamenta-erros-do-flu-na-derrota-para-atletico-mg-1031156
+  MateriaComUmComentario.path=teste-jenkins/botafogo-empata-com-vitoria-em-macae-1-1-1031158
+  MateriaSemComentarioHabilitado.path=teste-jenkins/homem-pede-esmola-em-nova-york-para-comprar-cerveja-1031169
+  MateriaSemComentarios.path=teste-jenkins/aumento-do-repasse-ao-fundo-partidario-um-escarnio-diz-joaquim-barbosa-1056991
+
+##Destaques##
+  DestaqueHorizontalCom2Colunas.path=teste-jenkins/teste-jenkins-2/
+  DestaqueHorizontalCom2ColunasComVariacoes.path=teste-jenkins/teste-jenkins-6/ 
+  DestaqueHorizontalCom3Colunas1Foto.path=teste-jenkins/teste-jenkins-4/
+  DestaqueHorizontalCom3Colunas2Fotos.path=teste-jenkins/teste-jenkins-3/
+  DestaqueHorizontalEspecialCom3Colunas.path=teste-jenkins/teste-jenkins-5/
+  DestaqueFimDeSemanaDoisDestaques.path=teste-jenkins/teste-jenkins-5/
+  DestaqueFimDeSemanaTresDestaques.path=teste-jenkins/teste-jenkins-4/
+  DestaqueDuasColunasUrgente.path=teste-jenkins/teste-jenkins-urgente/
+
+##Destaques Semi-Automáticos##
+  DestaqueCom4FotosAoLado.path=teste-jenkins/subeditoria-4-destaque-lado/
+  DestaqueCom4FotosAbaixo.path=teste-jenkins/subeditoria-4-destaque-abaixo/
+  DestaqueCom6Fotos.path=teste-jenkins/subeditoria-6-destaque/
+  DestaquesBlog.path=teste-jenkins/subeditoria/
+  DestaquesLista.path=teste-jenkins/subeditoria/
+  DestaquesComInformePublicitario.path=teste-jenkins/subeditoria-4-destaque-abaixo/
+  DestaquesVideos.path=teste-jenkins/subeditoria/
+  DestaquesTopicoAutomatico.path=teste-jenkins/subeditoria/
+  DestaqueSemManchete.path=sociedade/ciencia
+
+##Editorias##
+  EditoriaAutomaticaTitulo.path=teste-jenkins/
+  BarraDeBuscaRioGastronomia.path=teste-jenkins/teste-jenkins-3
+  BoxDeCriticasComPaginacao.path=teste-jenkins/teste-jenkins-4/
+  BoxDeCriticasSemPaginacao.path=teste-jenkins/teste-jenkins-2/
+  BoxDeUltimasNoticiasDeEditoria.path=teste-jenkins/teste-jenkins-videos/
+  BoxDeUltimasNoticiasDeSubEditoria.path=teste-jenkins/teste-jenkins-urgente/
+  BoxDeUltimasNoticiasDeUmTopico.path=teste-jenkins/teste-jenkins-5/
+  EditoriaComDoisIncludesDeMancheteDuasColunasUrgente.path=teste-jenkins/teste-jenkins-urgente/
+  Editorias.path=teste-jenkins/
+  MenuDestaquesComColunaEsquerdaVazia.path=editoria-automatica/
+  MenuDestaquesComColunaEsquerdaVaziaSubEditoria.path=mundo/subeditoria-automatica/
+
+##Editoria - Eu-Reporter##
+  EuReporterMenuSubEditorias.path=eu-reporter/
+  EuReporterWidget.path=eu-reporter/
+
+##Ela##
+  CapaEla.path=teste-jenkins/siteela/
+  CapaMenu.path=ela/
+  ElaCapaDaEsquerda.path=teste-jenkins/siteela/
+  UltimasNoticiasEla.path=teste-jenkins/siteela/ultimas-noticias
+  
+##Ela - Destaques##
+  DestaqueElaCom4FotosAbaixo.path=teste-jenkins/ela/ela-subeditoria-4-destaques-abaixo/
+  DestaqueElaCom4FotosAoLado.path=teste-jenkins/ela/ela-subeditoria-4-destaques-lado/
+  DestaqueElaCom6Fotos.path=teste-jenkins/ela/ela-subeditoria-6-destaques/
+  DestaquesElaBlog.path=teste-jenkins/ela/beleza/
+  DestaquesElaLista.path=teste-jenkins/ela/beleza/
+  DestaquesElaVideos.path=teste-jenkins/ela/beleza/
+  
+##Ela - Matéria Widgets##
+  BoxCitacaoEla.path=ela/jenkins-ela-2/ainda-da-tempo-aprenda-como-fazer-um-legitimo-baiao-de-dois-para-as-festas-juninas-1063377
+  BoxDeAudioEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  MateriaComBoxDeMusicaAEsquerdaEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  MateriaComBoxDeMusicaCentralizadaEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  BoxEmDestaqueEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  BoxFotogaleriaInlineEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  BoxInteressadoEmEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  BoxListaDeFatosInlineComFotoEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  BoxListaDeFatosInlineComTextoEla.path=teste-jenkins/siteela/teste-ela-2/doze-pessoas-sao-detidas-em-investigacao-de-atentado-em-hotel-na-tunisia-1063704
+  BoxListaDeFatosInlineComVideoEla.path=teste-jenkins/siteela/teste-ela-2/base-da-marinha-em-washington-fechada-apos-relatos-de-tiros-1063728
+  BoxMaisLidasEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  BoxTwitterEmbeddedEla.path=ela/saiba-como-disfarcar-aquela-gordurinha-debaixo-do-braco-1063136
+  BoxVejaTambemComTarjaEla.path=teste-jenkins/siteela/teste-ela-2/doze-pessoas-sao-detidas-em-investigacao-de-atentado-em-hotel-na-tunisia-1063704
+  BoxVejaTambemDeListaDeFatosEla.path=teste-jenkins/siteela/teste-ela-2/base-da-marinha-em-washington-fechada-apos-relatos-de-tiros-1063728
+  BoxVejaTambemEla.path=teste-jenkins/siteela/o-look-que-cindy-crawford-prefere-esquecer-uma-roupa-de-cowgirl-ou-seria-uma-domestica-sexy-1062459
+  
+##Enem##
+  EnemIframe.path=sociedade/educacao/enem-e-vestibular/simulados/
+  EnemValidaJson.path=correcaoprova/2014/enem/arquivos/correcaoprovaenem-alterado.json
+  
+##Enquete##
+  EnqueteEnriquecidaBusca.path=rio/blocos-do-carnaval-do-rio-de-janeiro-2015-1045457
+  EnqueteEnriquecidaPaginaGeral.path=rio/blocos-do-carnaval-do-rio-de-janeiro-2015-1045457
+  EnqueteEnriquecidaVotada.path=rio/blocos-do-carnaval-do-rio-de-janeiro-2015-1045457
+  EnqueteEnriquecidaVotarNovamente.path=teste-jenkins/blocos-teste-jenkins-1045705
+  EnqueteSuperPaginaGeral.path= 
+  EnqueteSuperResultados.path= 
+  EnqueteSuperVotada.path= 
+  EnqueteSuperVotarNovamente.path= 
+
+##Fotogaleria##
+  FotogaleriaHome.path=fotogalerias/
+  FotogaleriaLinkRelacionado.path=teste-jenkins/massacre-em-garissa-university-college-1055361
+  FotogaleriaMetadado.path=teste-jenkins/massacre-em-garissa-university-college-1055361
+  Fotogaleria.path=teste-jenkins/massacre-em-garissa-university-college-1055361
+  FotogaleriaAmpliada.path=teste-jenkins/massacre-em-garissa-university-college-1055361
+  FotogaleriaCompartilhamento.path=teste-jenkins/o-amanhecer-desta-semana-1059263
+  BoxDeUltimasFotogalerias.path=teste-jenkins/massacre-em-garissa-university-college-1055361
+  BoxFotogaleriaBanner.path=rio/teste-fotogaleria-001-1063252
+  
+##Horóscopo##
+  Horoscopo.path=horoscopo/
+  HoroscopoCabecalho.path=horoscopo/
+
+##Informe Publicitário##
+  EditoriaInformeDestaquePequeno.path=teste-jenkins/nike/
+  EditoriaInformeDestaqueGrande.path=teste-jenkins/adidas/
+  MateriaInformePublicitario.path=teste-jenkins/informe-publicitario/caroline-bittencourt-diz-que-recebe-criticas-por-corpo-musculoso-1047399
+  PaginaAutomaticaDeTopicosComInformePublicitario.path=
+  
+##Indicadores Financeiros##
+  Indicadores.path=economia/indicadores/
+  
+##Json de Aplicativos##
+  JsonHome.path=api/oglobo/v1/ece_frontpage/conteudo.json
+  JsonFotogaleria.path=api/v1/app-noticias/fotogalerias/ece_frontpage/conteudo.json
+  JsonUltimasNoticias.path=api/v1/app-noticias/ultimas/ece_frontpage/conteudo.json
+  JsonPais.path=api/v1/app-noticias/pais/conteudo.json
+  JsonSociedade.path=api/v1/app-noticias/sociedade/conteudo.json
+  JsonRio.path=api/v1/app-noticias/rio/conteudo.json
+  JsonEsportes.path=api/v1/app-noticias/esportes/conteudo.json
+  JsonEconomia.path=api/v1/app-noticias/economia/conteudo.json
+  JsonCultura.path=api/v1/app-noticias/cultura/conteudo.json
+  JsonMundo.path=api/v1/app-noticias/mundo/conteudo.json
+  JsonTecnologia.path=api/v1/app-noticias/tecnologia/conteudo.json
+  JsonCiencia.path=api/v1/app-noticias/ciencia/conteudo.json
+  JsonSaude.path=api/v1/app-noticias/saude/conteudo.json
+  JsonOpiniao.path=api/v1/app-noticias/opiniao/conteudo.json
+
+##Json de Blogs##
+  JsonBoxDeBlogs.path=blogs/box-capas.asp
+  JsonListaDeBlogs.path=servicos/json/lerlistablogs.asp?quantidade=10
+  JsonPostDeBlog.path=servicos/json/lerpost.asp?p=512281
+  JsonPostsDeUmBlog.path=servicos/json/lerblog.asp?dir=moreno&quantidadePosts=20
+
+##Lista de Fatos##
+  ListaComFoto.path=teste-jenkins/presidente-do-bb-entrega-cargo-mas-mudanca-so-sera-divulgada-depois-1044718
+  ListaSemFoto.path=teste-jenkins/indonesia-revisara-as-operacoes-da-airasia-no-pais-1044723
+  ListaTextoComLink.path=teste-jenkins/indonesia-revisara-as-operacoes-da-airasia-no-pais-1044723
+  ListaComVideoGlobo.path=teste-jenkins/lista-de-videos-para-webdriverglobocom-1047287
+  ListaComVideoYoutube.path=teste-jenkins/lista-de-videos-para-webdrivervideos-youtube-1047297
+  ListaComVideoVevo.path=teste-jenkins/lista-de-videos-para-webdrivervideos-vevo-1047332
+  ListaComVideoVimeo.path=teste-jenkins/lista-de-videos-para-webdrivervideos-vimeo-1047344
+  ListaComVideosMisto.path=teste-jenkins/lista-de-videos-para-webdriver-1047346
+  ListaBoxDeMaisGalerias.path=teste-jenkins/corpos-suspensos-por-ganchos-1047355
+
+##Marcação##
+  MarcacaoFacebook.path=teste-jenkins/carro-bomba-mata-23-em-bagda-1036124
+  MarcacaoGoogleArticle.path=teste-jenkins/carro-bomba-mata-23-em-bagda-1036124
+  MarcacaoGoogleFotoGaleria.path=teste-jenkins/fotogaleria-sem-foto-1047365
+
+##Matéria##
+  Materia2Niveis.path=teste-jenkins/teste-jenkins-2/filme-do-turco-nuri-bilge-ceylan-vence-premio-da-critica-em-cannes-1031290
+  Materia3Niveis.path=teste-jenkins/informe-publicitario/publicitario-externo/semana-da-critica-de-cannes-premia-filme-ucraniano-1031292
+  MateriaComUmaPublicidade.path=teste-jenkins/erro-de-digitacao-faz-ginasta-diego-hypolito-virar-piada-em-rede-social-1047527
+  MateriaComDuasPublicidades.path=teste-jenkins/jade-barbosa-relaxa-em-piscina-em-aracaju-apos-conquistar-medalhas-na-ginastica-1040487
+  MateriaComTresPublicidades.path=teste-jenkins/entre-um-treino-outro-jade-barbosa-posa-sensual-para-foto-1040489
+  MateriaNavegacao.path=evolucao/subevolucao/eduardo-cunha-sinaliza-amenizar-relacao-com-pt-1047568
+  MateriaNavegacaoMaiorQue90Dias.path=teste-jenkins/teste-jenkins-5/caminhoes-estacionados-em-calcada-fecham-passagem-na-rua-jardim-botanico-1041487
+  MateriaNavegacaoSemAnterior.path=evolucao/subevolucao/senadores-defendem-derrubada-do-veto-de-dilma-correcao-de-65-do-ir-1047567
+  MateriaNavegacaoSemProxima.path=evolucao/subevolucao/dilma-se-reune-com-ministros-para-discutir-reconciliacao-com-partidos-da-base-aliada-1047570
+  MateriaSemBoxNavegacao.path=games/tim-cook-revela-mais-detalhes-do-apple-watch-ser-lancado-em-abril-1049743
+  Materia.path=teste-jenkins/mba/xavier-dolan-assume-um-promissor-processo-de-amadurecimento-1031281
+  MateriaSemAutor.path=teste-jenkins/mba/filme-hungaro-sobre-revolta-de-caes-vence-mostra-un-certain-regard-1031286
+  MateriaMetadado.path=teste-jenkins/trt-julgara-greve-dos-rodoviarios-do-rio-na-segunda-feira-1031146
+  
+##Matéria - Menu##
+  Menu.path=teste-jenkins/chico-buarque-le-trecho-de-irmao-alemao-seu-novo-livro-1045973
+  MenuBusca.path=teste-jenkins/morre-em-varsovia-ultimo-lider-do-comunismo-polones-1031041
+  MenuEditorias.path=teste-jenkins/subcomandante-marcos-deixa-de-existir-1031072
+  MenuEditoriaSubeditoriaVazia.path=teste-jenkins/
+  MenuTopicoVazio.path=teste-jenkins/teste-jenkins-2/
+  MenuFotogaleria.path=teste-jenkins/morre-em-varsovia-ultimo-lider-do-comunismo-polones-1031041
+  MenuSubEditorias.path=rio/
+  MenuDestaques.path=teste-jenkins/subcomandante-marcos-deixa-de-existir-1031072
+  SubmenuDeEditorias.path=teste-jenkins
+  
+##Matéria Widgets##
+  BoxDeAudio.path=eu-reporter/tampa-de-bueiro-se-desloca-deixa-buraco-aberto-em-calcada-do-cosme-velho-1055824
+  BoxCitacao.path=teste-jenkins/protestos-anti-dilma-reunem-mais-de-2-milhoes-de-pessoas-pelo-pais-1050548
+  MateriaComBoxDeMusicaAEsquerda.path=teste-jenkins/flamengo-tem-seu-segundo-pior-inicio-de-brasileiro-por-pontos-corridos-1046582
+  MateriaComBoxDeMusicaCentralizada.path=teste-jenkins/abastecimento-da-ceasa-ja-sofre-com-greve-de-caminhoneiros-1048617
+  BoxEmDestaque.path=teste-jenkins/chico-buarque-le-trecho-de-irmao-alemao-seu-novo-livro-1045973
+  BoxFotogaleriaInline.path=teste-jenkins/relator-da-cpi-da-petrobras-recebeu-quase-1-milhao-de-empresas-investigadas-na-lava-jato-1049184
+  BoxInteressadoEm.path=teste-jenkins/prf-afirma-que-ja-identificou-responsaveis-pelo-fechamento-da-ponte-rio-niteroi-1047409
+  BoxListaDeFatosInlineComFoto.path=teste-jenkins/vendas-no-varejo-recuam-04-em-abril-terceiro-mes-seguido-de-perdas-1062916
+  BoxListaDeFatosInlineComVideo.path=teste-jenkins/webdriver-lista-de-fatos-inline-consumo-de-gas-para-geracao-eletrica-caiu-pela-1-vez-no-ano-em-abril-1062930
+  BoxListaDeFatosInlineComTexto.path=teste-jenkins/contas-do-governo-de-2014-nao-fecham-1062948
+  BoxMaisLidas.path=teste-jenkins/chico-buarque-le-trecho-de-irmao-alemao-seu-novo-livro-1045973
+  BoxTwitterEmbed.path=mundo/alemao-de-programa-satirico-eleito-para-parlamento-europeu-imitando-hitler-1031069
+  BoxVejaTambem.path=teste-jenkins/motoristas-nao-respeitam-sinalizacao-prejudicam-ciclistas-em-niteroi-1045624
+  BoxVejaTambemComTarja.path=teste-jenkins/alemao-de-programa-satirico-eleito-para-parlamento-europeu-imitando-hitler-1031069
+  BoxVejaTambemDefeitoSemLinks.path=teste-jenkins/explosao-em-plataforma-da-petrobras-no-norte-do-espirito-santo-deixa-tres-mortos-diz-sindicato-1047504
+  BoxVejaTambemDeListaDeFatos.path=teste-jenkins/oea-acusa-venezuela-de-cerco-imprensa-1045402
+  
+ ##Matéria Widget Genérico##
+  BoxGenericoDailymotion.path=teste-jenkins/nao-tenho-qualquer-dificuldade-em-julgar-nenhum-partido-diz-fachin-em-sabatina-1059288
+  BoxGenericoFacebook.path=teste-jenkins/floriano-peixoto-teve-5-indicacoes-para-stf-rejeitadas-1059294
+  BoxGenericoFacebookComVideo.path=teste-jenkins/doleira-canta-amada-amante-de-roberto-carlos-em-audiencia-da-cpi-da-petrobras-1059299
+  BoxGenericoFacebookPostComVideo.path=teste-jenkins/em-sessao-solene-na-camara-sergio-reis-canta-panela-velha-1059297
+  BoxGenericoInstagram.path=teste-jenkins/dos-38-detidos-em-operacao-contra-suspeitos-de-assaltos-no-aterro-so-um-ficou-preso-1059303
+  BoxGenericoInstagramComVideo.path=teste-jenkins/beltrame-alerta-que-policia-nao-pode-ser-baba-de-menores-moradores-de-rua-1059305
+  BoxGenericoSoundcloud.path=teste-jenkins/levy-papel-do-governo-criar-palco-para-setor-privado-desempenhar-seu-papel-1059310
+  BoxGenericoSoundcloudComPlaylist.path=teste-jenkins/novo-terremoto-deixa-ao-menos-68-mortos-mais-de-mil-feridos-no-nepal-1059309
+  BoxGenericoTwitterComVideo.path=teste-jenkins/novo-terremoto-no-nepal-sequencia-do-sismo-de-abril-outros-podem-vir-alertam-especialistas-1059341
+  BoxGenericoVevo.path=teste-jenkins/barcelona-perde-mas-elimina-bayern-vai-final-da-liga-dos-campeoes-1059314
+  BoxGenericoVimeo.path=teste-jenkins/como-foi-primeiro-dia-do-wct-do-rio-1059316
+  BoxGenericoVine.path=teste-jenkins/itamaraty-diz-que-brasileiros-no-nepal-estao-bem-apos-novo-terremoto-1059337
+  BoxGenericoYoutube.path=teste-jenkins/a-vibracao-da-torcida-com-os-tubos-surfados-por-wiggolly-foi-um-aperitivo-para-que-estava-por-vir-1059318
+
+##Matéria Com Imagem Inline##
+  MateriaComFotoCentroGrande.path=teste-jenkins/trt-julgara-greve-dos-rodoviarios-do-rio-na-segunda-feira-1031146
+  MateriaComFotoEsquerdaGrande.path=teste-jenkins/linkedin-se-torna-segunda-rede-social-mais-popular-do-brasil-1031172
+  MateriaComFotoEsquerdaPequena.path=teste-jenkins/trezentos-vinte-cinco-coletivos-sao-depredados-por-grevistas-1029863
+  MateriaComFotoEsquerdaVertical.path=teste-jenkins/subcomandante-marcos-deixa-de-existir-1031072
+  MateriaComFotoPosicaoPrincipal.path=teste-jenkins/trezentos-vinte-cinco-coletivos-sao-depredados-por-grevistas-1029863
+  MateriaComMultiplasFotos.path=teste-jenkins/botafogo-vence-palmeiras-sai-da-zona-de-rebaixamento-1031261
+
+##Matéria Com Vídeos Inline##
+  MateriaComVideoGlobo.path=teste-jenkins/em-cima-da-hora-cristiano-ronaldo-se-apresenta-selecao-portuguesa-1031205
+  MateriaComDoisVideosGlobo.path=teste-jenkins/julio-cesar-quebra-protocolo-de-seguranca-atende-fas-apos-treino-1031203
+  MateriaComVideoLivestream.path=teste-jenkins/uma-galera-nao-entendeu-grito-nao-vai-ter-copa-diz-diretor-de-filme-sobre-protestos-1031202
+  MateriaComVideoUstream.path=teste-jenkins/servidores-da-ufrj-bloqueiam-acesso-reitoria-no-fundao-1031198
+  MateriaComVideoVimeo.path=teste-jenkins/nova-pintura-nao-agrada-sera-retirada-de-calcadao-em-ipanema-1031192
+  MateriaComVideoVevo.path=teste-jenkins/intelectuais-fazem-manifesto-contra-protestos-com-bloqueios-1031181
+  MateriaComVideoYoutube.path=teste-jenkins/no-plenario-do-stf-barbosa-anuncia-sua-aposentadoria-1031173
+  MateriaComVideosMultiplosInline.path=teste-jenkins/tecnologia/linkedin-se-torna-segunda-rede-social-mais-popular-do-brasil-1-1031209
+
+##Matéria Em Capítulo - Menu Lateral##
+  MenuLateralComAudio.path=teste-jenkins/webdriver-menu-lateral-lais-souza-desabafa-primeiro-eu-era-atleta-acidentada-agora-gay-eu-sou-so-lais-1059430
+  MenuLateralComComentario.path=teste-jenkins/o-apelo-de-francisco-negociacao-entre-eua-cuba-passou-pelo-vaticano-1044378
+  MenuLateralComElementosInline.path=teste-jenkins/nao-altere-tipo-de-menu-menu-lateral-1047426
+  MenuLateralElementosEmbedGenerico.path=teste-jenkins/webdriver-menu-lateral-lais-souza-desabafa-primeiro-eu-era-atleta-acidentada-agora-gay-eu-sou-so-lais-1059430
+  MenuLateralComFoto.path=teste-jenkins/o-apelo-de-francisco-negociacao-entre-eua-cuba-passou-pelo-vaticano-1044378
+  MenuLateralNavegacao.path=teste-jenkins/o-apelo-de-francisco-negociacao-entre-eua-cuba-passou-pelo-vaticano-1044378
+  MenuLateralSemAutor.path=teste-jenkins/vik-muniz-familia-passam-madrugada-em-aviao-ate-tam-anunciar-cancelamento-do-voo-1045851
+  MenuLateralComAncora.path=teste-jenkins/nao-altere-tipo-de-menu-menu-lateral-1047426#3
+ 
+##Matéria Em Capítulo - Menu Superior##
+  MenuSuperiorComAudio.path=teste-jenkins/sonhos-congelados-new-york-times-conta-com-destaque-drama-da-ginasta-lais-souza-1059425
+  MenuSuperiorComComentario.path=teste-jenkins/graca-estou-aqui-enquanto-contar-com-confianca-da-presidente-1045667
+  MenuSuperiorComFoto.path=teste-jenkins/webdriver-materia-em-capitulos-turma-do-stf-mantem-1045920
+  MenuSuperiorElementosInline.path=teste-jenkins/materia-em-capitulos-apos-duas-derrotas-para-velasquez-cigano-diz-que-esta-melhor-mentalmente-1045939
+  MenuSuperiorElementosEmbedGenerico.path=teste-jenkins/sonhos-congelados-new-york-times-conta-com-destaque-drama-da-ginasta-lais-souza-1059425
+  MenuSuperiorNavegacao.path=teste-jenkins/webdriver-materia-em-capitulos-turma-do-stf-mantem-1045920
+  MenuSuperiorSemAutor.path=teste-jenkins/graca-estou-aqui-enquanto-contar-com-confianca-da-presidente-1045667
+  MenuSuperiorSemFoto.path=teste-jenkins/materia-em-capitulos-casada-livia-andrade-recebe-chamego-de-advogado-bonitao-na-bahia-vira-alvo-de-comentarios-1045745
+  MenuSuperiorComAncora.path=teste-jenkins/materia-em-capitulos-apos-duas-derrotas-para-velasquez-cigano-diz-que-esta-melhor-mentalmente-1045939#3
+
+##Newsletter - Confirmação##
+  ConfirmacaoComSucesso.path=newsletter/confirmacao/
+  ConfirmacaoComErro.path=newsletter/erro/
+
+##Newsletter - Destaques do Dia##
+  DestaquesDoDiaCabecalho.path=newsletter/destaques-do-dia/
+  DestaquesDoDiaCorpo.path=newsletter/destaques-do-dia/
+  DestaquesDoDiaRodape.path=newsletter/destaques-do-dia/
+  DestaquesDoDiaTagueamento.path=newsletter/destaques-do-dia/
+
+##Newsletter - Seleção dos Editores##
+  SelecaoDosEditoresCabecalho.path=newsletter/selecao-dos-editores/
+  SelecaoDosEditoresCorpo.path=newsletter/selecao-dos-editores/
+  SelecaoDosEditoresRodape.path=newsletter/selecao-dos-editores/
+  SelecaoDosEditoresTagueamento.path=newsletter/selecao-dos-editores/
+
+##Newsletter - Urgente##
+  UrgenteCabecalho.path=newsletter/urgente/
+  UrgenteCorpo.path=newsletter/urgente/
+  UrgenteRodape.path=newsletter/urgente/
+  UrgenteTagueamento.path=newsletter/urgente/
+
+##Opine##
+  Opine.path=teste-jenkins/vasco-ou-flamengo-quem-sera-campeao-1047560
+
+##Páginas Estáticas##
+  Expediente.path=expediente/
+  FaleConosco.path=fale-conosco/
+  PrincipiosEditoriais.path=principios-editoriais/
+
+##Páginas de Erro##
+  Pagina404.path=jaskilk/
+  Pagina404VaiRio.path=/rio/vairio/
+  PaginaErroInesperado.path=?service=erroInesperado
+  PaginaErroEscenic.path=?service=estatica
+
+##Plantão##
+  Plantao.path=teste-jenkins/dona-de-caes-agredidos-acha-que-limpar-latrina-sera-pena-merecida-para-ex-1030819
+  PlantaoDoVaiRio.path=rio/vairio/autoestrada-lagoa-barra-apresenta-lentidao-no-sentido-barra-no-sentido-lagoa-transito-lento-na-altura-da-rocinha-1059883
+  PlantaoDeEditoria.path=teste-jenkins/plantao
+  PlantaoLegendaFotos.path=teste-jenkins/webdriver-plantao-com-fotos-para-testes-1050556
+  PlantaoNavegacao.path=teste-jenkins/teste-jenkins-5/apos-tiroteio-policiamento-esta-reforcado-no-salgueiro-1048000
+  PlantaoNavegacaoMaiorQue90Dias.path=teste-jenkins/teste-jenkins-5/trafego-lento-na-avenida-venezuela-altura-da-rua-edgard-romero-1012184
+  PlantaoNavegacaoSemAnterior.path=teste-jenkins/teste-jenkins-5/foram-retirados-carro-utilitario-que-bateram-na-pista-lateral-da-avenida-brasil-sentido-zona-oeste-altura-da-penha-nao-ha-retencoes-1047999
+  PlantaoNavegacaoSemProxima.path=teste-jenkins/teste-jenkins-5/crianca-baleada-em-belford-roxo-nao-corre-mais-risco-de-vida-1048001
+  PlantaoSemBoxNavegacao.path=estilo/onibus-enguicado-ocupa-uma-faixa-da-sao-clemente-altura-da-das-palmeiras-transito-intenso-1049781
+  PlantaoMultiplasFotos.path=rio/vairio/viaduto-31-de-marco-com-transito-intenso-nos-dois-sentidos-1055822
+
+##Rodapé##
+  Rodape.path=
+  RodapeBannerAssinatura.path=
+  
+##Tabela - Copa Do Brasil##
+  TabelaCopaDoBrasil.path=esportes/tabela-copa-brasil-2015/
+  TabelaCopaDoBrasilComTempoReal.path=teste-jenkins/copa-do-brasilgremio-flamengo-1049122
+
+##Tabela - Campeonato Carioca##  
+  TabelaCampeonatoCariocaPaginaTempoReal.path=teste-jenkins/tabela-campeonato-carioca-com-tempo-real-1049182
+  TabelaCampeonatoCarioca.path=esportes/tabela-campeonato-carioca-2015
+  
+##Tabelas - Campeonato Brasileiro##
+  TabelaSerieA.path=esportes/tabela-campeonato-brasileiro/2015/
+  TabelaSerieARodadas.path=esportes/tabela-campeonato-brasileiro/2015/
+  TabelaSerieB.path=esportes/tabela-campeonato-brasileiro-serie-b/2015/
+  TabelaSerieBRodadas.path=esportes/tabela-campeonato-brasileiro-serie-b/2015/
+  TempoRealComTabelaSerieA.path=teste-jenkins/classico-de-hoje-flamengo-fluminense-1057186
+  TempoRealComTabelaSerieARodadas.path=teste-jenkins/classico-de-hoje-flamengo-fluminense-1057186
+  TempoRealComTabelaSerieB.path=teste-jenkins/webdriver-serie-tempo-real-1051391
+  TempoRealComTabelaSerieBRodadas.path=teste-jenkins/webdriver-serie-tempo-real-1051391
+   
+##Tabelas - Formula Um##
+  TabelaFormulaUm.path=esportes/tabela-formula-1/
+  TabelaFormulaUmAbaCalendario.path=esportes/tabela-formula-1/
+  TabelaFormulaUmAbaResultadoPorPiloto.path=esportes/tabela-formula-1/
+  TabelaFormulaUmAbaResultadoPorEquipe.path=esportes/tabela-formula-1/
+  TabelaFormulaUmAbaResultadoPorCorrida.path=esportes/tabela-formula-1/
+  
+##Tabelas - Libertadores##
+  TabelaLibertadores.path=esportes/tabela-libertadores-2015/
+  TabelaLibertadoresPaginaTempoReal.path=teste-jenkins/webdriver-libertadores-brasil-jamaica-1029841
+  #Fases MataMata#
+  TabelaLibertadoresFaseMataMataPaginaPadrao.path=esportes/tabela-libertadores-2015/
+  TabelaLibertadoresFaseMataMataPaginaTempoRealPaginaPadrao.path=teste-jenkins/webdriver-libertadores-brasil-jamaica-1029841
+  #Fase De Grupos#
+  TabelaLibertadoresFaseDeGrupos.path=esportes/tabela-libertadores-2015/
+  TabelaLibertadoresFaseDeGruposPaginaTempoReal.path=teste-jenkins/webdriver-libertadores-brasil-jamaica-1029841
+
+##Tabela - Copa América#  
+  CopaAmerica.path=esportes/tabela-copa-america/2015/
+  CopaAmericaComTempoReal.path=teste-jenkins/tempo-real-com-copa-america-1059766
+    
+##Tempo Real##
+  AbasPosJogo.path=teste-jenkins/tempo-real-de-futebol-vasco-botafogo-1033163
+  Cronica.path=teste-jenkins/tempo-real-de-futebol-vasco-botafogo-1033163
+  LancesDoJogo.path=teste-jenkins/webdrivernao-altere-teste-de-lances-de-um-jogo-1049710
+  Penaltis.path=teste-jenkins/classico-de-hoje-flamengo-fluminense-1057186
+  PlacarDoJogo.path=teste-jenkins/webdrivernao-altere-teste-de-lances-de-um-jogo-1049710
+  TabEmCampo.path=teste-jenkins/tempo-real-de-futebol-brasil-de-pelotas-flamengo-1049260
+  TabEscalacao.path=teste-jenkins/tempo-real-de-futebol-brasil-de-pelotas-flamengo-1049260
+  TabEstatisticasDoJogo.path=teste-jenkins/tempo-real-de-futebol-brasil-de-pelotas-flamengo-1049260
+  TabSobreOJogo.path=teste-jenkins/tempo-real-de-futebol-brasil-de-pelotas-flamengo-1049260
+  JogosDeHoje.path=teste-jenkins/tempo-real-de-futebol-brasil-de-pelotas-flamengo-1049260
+  	  
+##Últimas Notícias##
+  UltimasDeEditoria.path=teste-jenkins/ultimas-noticias
+  UltimasDeTopicos.path=sociedade/tecnologia/pedro-doria/
+  UltimasDaCapa.path=ultimas-noticias/
+  UltimasNoticiasComInformePublicitario.path=teste-jenkins/informe-publicitario/ultimas-noticias
+
+##Visual Revenue##
+  MarcacoesCapaEditoriaSimples.path=teste-jenkins/
+  MarcacoesCapaDestaque2Colunas.path=teste-jenkins/teste-jenkins-2/
+  MarcacoesCapaDestaque3Colunas.path=teste-jenkins/teste-jenkins-3/
+  MarcacoesCapaDestaque3E2Colunas.path=teste-jenkins/teste-jenkins-4/
+  

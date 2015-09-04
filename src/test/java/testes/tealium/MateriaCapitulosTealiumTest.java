@@ -1,0 +1,99 @@
+package testes.tealium;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import pages.materia.capitulo.MenuSuperiorNavegacao;
+
+import br.com.infoglobo.pages.Navegador;
+
+public class MateriaCapitulosTealiumTest {
+	
+	private static MenuSuperiorNavegacao materia;
+	private String codigoFonteDaPagina = materia.getCodigoFonte();
+
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new MenuSuperiorNavegacao(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+
+	@Test
+	public void verificaSeAVariavelUtagDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonteDaPagina.contains("var utag_data"));
+	}
+
+	@Test
+	public void verificaSeATagProdutoDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonteDaPagina.contains("produto"));
+	}
+
+	@Test
+	public void verificaSeATagTipoPaginaDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonteDaPagina.contains("tipo_pagina"));
+	}
+
+	@Test
+	public void verificaSeATagEditoriaDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonteDaPagina.contains("editoria"));
+	}
+
+	@Test
+	public void verificaSeATagIdConteudoDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonteDaPagina.contains("id_conteudo"));
+	}
+
+	@Test
+	public void verificaSeATagEntidadesDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonteDaPagina.contains("entidades"));
+	}
+
+	@Test
+	public void verificaSeATagTopicosDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonteDaPagina.contains("topicos"));
+	}
+
+	@Test
+	public void verificaSeATagProdutoEhIgualOGlobo(){
+		assertTrue(codigoFonteDaPagina.contains("produto : \"O Globo\""));
+	}
+
+	@Test
+	public void verificaSeATagTipoPaginaEhIgualAMateriaEmCapitulos(){
+		assertTrue(codigoFonteDaPagina.contains("tipo_pagina : \"Materia em Capitulos\""));
+	}
+
+	@Test
+	public void verificaSeATagEditoriaEstaPreenchida(){
+		String nomeEditoria = materia.obterNomeDaEditoria().toLowerCase();
+		nomeEditoria = nomeEditoria.replace(" ", "-");
+		assertTrue(codigoFonteDaPagina.contains("editoria : \""+nomeEditoria+"\""));
+	}
+
+	@Test
+	public void verificaSeATagIdConteudoEstaPreenchida(){
+		assertTrue(!codigoFonteDaPagina.contains("id_conteudo : \"\""));
+	}
+
+	@Test
+	public void verificaSeATagEntidadesEstaPreenchida(){
+		assertTrue(!codigoFonteDaPagina.contains("entidades : [\"\"]"));
+	}
+
+	@Test
+	public void verificaSeATagTopicosEstaPreenchida(){
+		assertTrue(!codigoFonteDaPagina.contains("topicos : [\"\"]"));
+	}
+
+	@Test
+	public void verificaSeOScriptAssincronoEstaSendoCarregadoNoCodigoDaPagina() throws InterruptedException{
+		assertTrue(materia.carregouJSNoModoAssincrono());
+	}
+}

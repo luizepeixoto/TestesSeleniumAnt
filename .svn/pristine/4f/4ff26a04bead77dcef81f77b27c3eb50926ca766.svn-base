@@ -1,0 +1,22 @@
+package br.com.infoglobo.pages.asp;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.tealium.MarcacoesDoTealium;
+
+public class CapaEuReporter extends MarcacoesDoTealium {
+	
+	public CapaEuReporter(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+	
+	public WebElement exibiuFormulario() {
+		return getDriver().findElement(By.className("body")).findElement(By.className("form-estudante"));
+	}
+	
+	public boolean exibiuPaginaDoEuReporter() {
+		return exibiuFormulario().isDisplayed();
+	}
+}

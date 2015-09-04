@@ -1,0 +1,71 @@
+package testes.fotogaleria;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.fotogaleria.BoxFotogaleriaBanner;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class FotogaleriaBannerTest {
+	
+	private static BoxFotogaleriaBanner fotogaleria;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(fotogaleria.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		fotogaleria = new BoxFotogaleriaBanner(Navegador.CHROME);
+		fotogaleria.esperaSuperLeaderboardVoltarAoTamanhoNormal(150);
+		fotogaleria.executaScrollAteAPosicaoDesejada(fotogaleria.acessaBoxDeUltimasFotogalerias);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		fotogaleria.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void verificaSeOBannerArrobaEstaSendoExibidonaPagina() throws InterruptedException{
+		fotogaleria.executaScrollParaAparecerOTituloPublicidade(fotogaleria.acessaBoxDeUltimasFotogalerias);
+		assertNotNull(fotogaleria.acessaBannerArroba(fotogaleria.acessaBoxDeUltimasFotogalerias));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void verificaSeOBannerArrobaEstaExibindoUmTituloDePublicidade(){
+		String tituloEsperado = "PUBLICIDADE";
+		assertEquals(tituloEsperado, fotogaleria.exibiuTituloPublicidade(fotogaleria.acessaBoxDeUltimasFotogalerias));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void verificaSeOTituloPublicidadeAcimaDoBannerArrobaPossuiUmLink(){
+		assertTrue(fotogaleria.exibiuLinkNoTituloPublicidade(fotogaleria.acessaBoxDeUltimasFotogalerias));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void verificaSeOLinkDoTituloPublicidadeAcimaDoBannerArrobaEstaAbrindoNumaNovaJanela(){
+		assertTrue(fotogaleria.exibiuOLinkNoTituloPublicidadeComTargetBlank(fotogaleria.acessaBoxDeUltimasFotogalerias));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void verificaSeOScriptDePublicidadeArrobaEstaSendoCarregado(){
+		assertNotNull(fotogaleria.validarScriptPublicidade(fotogaleria.acessaBoxDeUltimasFotogalerias));
+	}
+}

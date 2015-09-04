@@ -1,0 +1,79 @@
+package testes.materia.capitulos;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.materia.capitulo.MenuSuperiorNavegacao;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class MenuSuperiorNavegacaoTest {
+	
+	private static MenuSuperiorNavegacao materia;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(materia.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new MenuSuperiorNavegacao(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void verificaSeOMenuEstaSendoChamandoNoTopoDaPagina() {
+		assertNotNull(materia.exibiuMenuNoTopo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void verificaSeOMenuEstaTrazendoOTituloDaMateria() throws InterruptedException {
+		assertTrue(materia.exibiuTituloDaMateriaNoMenu());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void verificaSeOApresentadoNoMenuEhOMesmoDaMateriaPrincipal() {
+		assertTrue(materia.exibiuTituloDaMateriaPrincipalNoMenuNoTopo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void verificaSeOMenuEstaTrazendoOsDozeCapitulosDasMaterias() {
+		assertTrue(materia.exibiuUmaListaDe12Capitulos());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void verificaSeOMenuEstaTrazendoOTituloDeCadaMateriaNoMouseOver() {
+		assertTrue(materia.exibiuTituloDeCadaMateriaNoToolTipDoMenu());
+	}
+	
+	@Ignore
+	@OrdemExecucaoTeste(Ordem=6)
+	@Test
+	public void verificaSeCadaTituloDosCapitulosNoMenuCorrespondeAosTitulosDasMaterias() throws InterruptedException {
+		assertTrue(materia.exibiuOTituloCorretoNoToolTipParaCadaCapituloDoMenu());
+	}
+
+	@OrdemExecucaoTeste(Ordem=7)
+	@Test
+	public void verificaSeOMenuEstaRedirecionandoOUsuarioAoClicarNosCapitulos() throws InterruptedException {
+		assertTrue(materia.executaNavegacaoPeloMenu());
+	}
+}

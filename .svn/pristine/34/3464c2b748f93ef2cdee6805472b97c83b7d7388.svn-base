@@ -1,0 +1,476 @@
+package br.com.infoglobo.pages.barreira;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class Paywall extends AceitacaoAbstractTest {
+	
+	private String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+	private String corTituloEsperado = "rgba(44, 76, 114, 1)";
+	private String tamanhoFonteTituloEsperado = "27px";
+	private String tamanhoFonteDescricaoEsperado = "28px";
+	private String alinhamentoImagemEsperado = "left";
+	private String heightEsperado = "66px";
+	
+	public Paywall() throws Exception {
+		super();
+	}
+	
+	public Paywall(Navegador navegacao) throws Exception {
+		super(navegacao);
+	}
+	
+	public WebElement acessaClassePaywall(){
+		return getDriver().findElement(By.className("paywall-container-rodape"));
+	}
+	
+	public WebElement acessaClasseVantagens(){
+		return getDriver().findElement(By.className("vantagens-container"));
+	}
+	
+	public String exibiuOTituloDeExclusivoParaAssinantes(){
+		return acessaClasseVantagens().findElement(By.tagName("p")).getText();
+	}
+	
+	public WebElement acessaVantagensOGlobo(){
+		return acessaClasseVantagens().findElement(By.className("icon-globo"));
+	}
+	
+	public WebElement acessaVantagensEdicaoDigital(){
+		return acessaClasseVantagens().findElement(By.className("icon-devices"));
+	}
+	
+	public WebElement acessaVantagensAcervo(){
+		return acessaClasseVantagens().findElement(By.className("icon-acervo"));
+	}
+	
+	public WebElement acessaVantagensEbooks(){
+		return acessaClasseVantagens().findElement(By.className("icon-ebooks"));
+	}
+	
+	public boolean exibiuVantagensOGloboParaAssinantes(){
+		
+		String tituloEsperado = "SITE DO GLOBO";
+	    String descricaoEsperado = "Acesso ilimitado ao site do Globo: Reportagens exclusivas, colunistas, blogs e vídeos";
+	    String widthEsperado = "98px";
+	   
+		WebElement acessaImagem = acessaVantagensOGlobo().findElement(By.tagName("span"));
+		WebElement acessaTitulo = acessaVantagensOGlobo().findElement(By.className("title"));
+		WebElement acessaDescricao = acessaVantagensOGlobo().findElement(By.className("about"));
+		
+		String urlImagem = acessaImagem.getCssValue("background-image");
+		
+		String tituloAtual = acessaTitulo.getText();
+	    String descricaoAtual = acessaDescricao.getText();
+	    String fonteTituloAtual = acessaTitulo.getCssValue("font-family");
+	    String fonteDescricaoAtual = acessaDescricao.getCssValue("font-family");
+	    
+	    String tamanhoFonteTituloAtual = acessaTitulo.getCssValue("font-size");
+	    String tamanhoFonteDescricaoAtual = acessaDescricao.getCssValue("font-size");
+	    
+	    String corTituloAtual = acessaTitulo.getCssValue("color");
+	    String corDescricaoAtual = acessaDescricao.getCssValue("color");
+				
+		String widthAtual = acessaImagem.getCssValue("width");
+		String heightAtual = acessaImagem.getCssValue("height");
+		String alinhamentoImagemAtual = acessaImagem.getCssValue("float");
+		
+		if(urlImagem.isEmpty()){
+			imprimirMensagemDeErroGenerica("Imagem do globo não estás endo exibida");
+			return false;
+		}
+		
+		if(!tituloAtual.equals(tituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("título", tituloEsperado, tituloAtual);
+			return false;
+		}
+		
+		if(!descricaoAtual.equals(descricaoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("descrição", descricaoEsperado, descricaoAtual);
+			return false;
+		}
+		
+		if(!fonteTituloAtual.equals(fonteEsperada)){
+			imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteTituloAtual);
+			return false;
+		}
+		
+		if(!fonteDescricaoAtual.equals(fonteEsperada)){
+			imprimirMensagemDeErroDeUmaTag("fonte da descrição", fonteEsperada, fonteDescricaoAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteTituloAtual.equals(tamanhoFonteTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteTituloEsperado, tamanhoFonteTituloAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteDescricaoAtual.equals(tamanhoFonteDescricaoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte da descrição", tamanhoFonteDescricaoEsperado, tamanhoFonteDescricaoAtual);
+			return false;
+		}
+		
+		if(!corTituloAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor da fonte da título", corTituloEsperado, corTituloAtual);
+			return false;
+		}
+		
+		if(!corDescricaoAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor da fonte da descrição", corTituloEsperado, corDescricaoAtual);
+			return false;
+		}
+		
+		if(!widthAtual.equals(widthEsperado)){
+			imprimirMensagemDeErroDeUmaTag("width da imagem", widthEsperado, widthAtual);
+			return false;
+		}
+		
+		if(!heightAtual.equals(heightEsperado)){
+			imprimirMensagemDeErroDeUmaTag("height da imagem", heightEsperado, heightAtual);
+			return false;
+		}
+		
+		if(!alinhamentoImagemAtual.equals(alinhamentoImagemEsperado)){
+			imprimirMensagemDeErroDeUmaTag("alinhamento da imagem", alinhamentoImagemEsperado, alinhamentoImagemAtual);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean exibiuVantagensDigitaisParaAssinantes(){
+		
+		String tituloEsperado = "EDIÇÃO DIGITAL";
+	    String descricaoEsperado = "Jornal O Globo na tela do seu computador, iPad ou tablets Android";
+	    String widthEsperado = "180px";
+	   
+		WebElement acessaImagem = acessaVantagensEdicaoDigital().findElement(By.tagName("span"));
+		WebElement acessaTitulo = acessaVantagensEdicaoDigital().findElement(By.className("title"));
+		WebElement acessaDescricao = acessaVantagensEdicaoDigital().findElement(By.className("about"));
+		
+		String urlImagem = acessaImagem.getCssValue("background-image");
+		
+		String tituloAtual = acessaTitulo.getText();
+	    String descricaoAtual = acessaDescricao.getText();
+	    String fonteTituloAtual = acessaTitulo.getCssValue("font-family");
+	    String fonteDescricaoAtual = acessaDescricao.getCssValue("font-family");
+	    
+	    String tamanhoFonteTituloAtual = acessaTitulo.getCssValue("font-size");
+	    String tamanhoFonteDescricaoAtual = acessaDescricao.getCssValue("font-size");
+	    
+	    String corTituloAtual = acessaTitulo.getCssValue("color");
+	    String corDescricaoAtual = acessaDescricao.getCssValue("color");
+				
+		String widthAtual = acessaImagem.getCssValue("width");
+		String heightAtual = acessaImagem.getCssValue("height");
+		String alinhamentoImagemAtual = acessaImagem.getCssValue("float");
+		
+		if(urlImagem.isEmpty()){
+			imprimirMensagemDeErroGenerica("Imagem do globo não está sendo exibida");
+			return false;
+		}
+		
+		if(!tituloAtual.equals(tituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("título", tituloEsperado, tituloAtual);
+			return false;
+		}
+		
+		if(!descricaoAtual.equals(descricaoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("descrição", descricaoEsperado, descricaoAtual);
+			return false;
+		}
+		
+		if(!fonteTituloAtual.equals(fonteEsperada)){
+			imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteTituloAtual);
+			return false;
+		}
+		
+		if(!fonteDescricaoAtual.equals(fonteEsperada)){
+			imprimirMensagemDeErroDeUmaTag("fonte da descrição", fonteEsperada, fonteDescricaoAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteTituloAtual.equals(tamanhoFonteTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteTituloEsperado, tamanhoFonteTituloAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteDescricaoAtual.equals(tamanhoFonteDescricaoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte da descrição", tamanhoFonteDescricaoEsperado, tamanhoFonteDescricaoAtual);
+			return false;
+		}
+		
+		if(!corTituloAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor da fonte da título", corTituloEsperado, corTituloAtual);
+			return false;
+		}
+		
+		if(!corDescricaoAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor da fonte da descrição", corTituloEsperado, corDescricaoAtual);
+			return false;
+		}
+		
+		if(!widthAtual.equals(widthEsperado)){
+			imprimirMensagemDeErroDeUmaTag("width da imagem", widthEsperado, widthAtual);
+			return false;
+		}
+		
+		if(!heightAtual.equals(heightEsperado)){
+			imprimirMensagemDeErroDeUmaTag("height da imagem", heightEsperado, heightAtual);
+			return false;
+		}
+		
+		if(!alinhamentoImagemAtual.equals(alinhamentoImagemEsperado)){
+			imprimirMensagemDeErroDeUmaTag("alinhamento da imagem", alinhamentoImagemEsperado, alinhamentoImagemAtual);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean exibiuVantagensAcervoParaAssinantes(){
+		
+		String tituloEsperado = "ACERVO O GLOBO";
+	    String descricaoEsperado = "Consulta a todo o conteúdo digitalizado do Globo desde 1925";
+	    String widthEsperado = "98px";
+	   
+		WebElement acessaImagem = acessaVantagensAcervo().findElement(By.tagName("span"));
+		WebElement acessaTitulo = acessaVantagensAcervo().findElement(By.className("title"));
+		WebElement acessaDescricao = acessaVantagensAcervo().findElement(By.className("about"));
+		
+		String urlImagem = acessaImagem.getCssValue("background-image");
+		
+		String tituloAtual = acessaTitulo.getText();
+	    String descricaoAtual = acessaDescricao.getText();
+	    String fonteTituloAtual = acessaTitulo.getCssValue("font-family");
+	    String fonteDescricaoAtual = acessaDescricao.getCssValue("font-family");
+	    
+	    String tamanhoFonteTituloAtual = acessaTitulo.getCssValue("font-size");
+	    String tamanhoFonteDescricaoAtual = acessaDescricao.getCssValue("font-size");
+	    
+	    String corTituloAtual = acessaTitulo.getCssValue("color");
+	    String corDescricaoAtual = acessaDescricao.getCssValue("color");
+				
+		String widthAtual = acessaImagem.getCssValue("width");
+		String heightAtual = acessaImagem.getCssValue("height");
+		String alinhamentoImagemAtual = acessaImagem.getCssValue("float");
+		
+		if(urlImagem.isEmpty()){
+			imprimirMensagemDeErroGenerica("Imagem do globo não está sendo exibida");
+			return false;
+		}
+		
+		if(!tituloAtual.equals(tituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("título", tituloEsperado, tituloAtual);
+			return false;
+		}
+		
+		if(!descricaoAtual.equals(descricaoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("descrição", descricaoEsperado, descricaoAtual);
+			return false;
+		}
+		
+		if(!fonteTituloAtual.equals(fonteEsperada)){
+			imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteTituloAtual);
+			return false;
+		}
+		
+		if(!fonteDescricaoAtual.equals(fonteEsperada)){
+			imprimirMensagemDeErroDeUmaTag("fonte da descrição", fonteEsperada, fonteDescricaoAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteTituloAtual.equals(tamanhoFonteTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteTituloEsperado, tamanhoFonteTituloAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteDescricaoAtual.equals(tamanhoFonteDescricaoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte da descrição", tamanhoFonteDescricaoEsperado, tamanhoFonteDescricaoAtual);
+			return false;
+		}
+		
+		if(!corTituloAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor da fonte da título", corTituloEsperado, corTituloAtual);
+			return false;
+		}
+		
+		if(!corDescricaoAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor da fonte da descrição", corTituloEsperado, corDescricaoAtual);
+			return false;
+		}
+		
+		if(!widthAtual.equals(widthEsperado)){
+			imprimirMensagemDeErroDeUmaTag("width da imagem", widthEsperado, widthAtual);
+			return false;
+		}
+		
+		if(!heightAtual.equals(heightEsperado)){
+			imprimirMensagemDeErroDeUmaTag("height da imagem", heightEsperado, heightAtual);
+			return false;
+		}
+		
+		if(!alinhamentoImagemAtual.equals(alinhamentoImagemEsperado)){
+			imprimirMensagemDeErroDeUmaTag("alinhamento da imagem", alinhamentoImagemEsperado, alinhamentoImagemAtual);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean exibiuVantagensDoEbooksParaAssinantes(){
+		
+		String tituloEsperado = "O GLOBO E-BOOKS";
+	    String descricaoEsperado = "Livros digitais exclusivos em diversos temas para ler no seu tablet, e-reader e no smartphone.";
+	    String widthEsperado = "98px";
+	    String heightEsperado = "42px";
+	    
+		WebElement acessaImagem = acessaVantagensEbooks().findElement(By.tagName("span"));
+		WebElement acessaTitulo = acessaVantagensEbooks().findElement(By.className("title"));
+		WebElement acessaDescricao = acessaVantagensEbooks().findElement(By.className("about"));
+		
+		String urlImagem = acessaImagem.getCssValue("background-image");
+		
+		String tituloAtual = acessaTitulo.getText();
+	    String descricaoAtual = acessaDescricao.getText();
+	    String fonteTituloAtual = acessaTitulo.getCssValue("font-family");
+	    String fonteDescricaoAtual = acessaDescricao.getCssValue("font-family");
+	    
+	    String tamanhoFonteTituloAtual = acessaTitulo.getCssValue("font-size");
+	    String tamanhoFonteDescricaoAtual = acessaDescricao.getCssValue("font-size");
+	    
+	    String corTituloAtual = acessaTitulo.getCssValue("color");
+	    String corDescricaoAtual = acessaDescricao.getCssValue("color");
+				
+		String widthAtual = acessaImagem.getCssValue("width");
+		String heightAtual = acessaImagem.getCssValue("height");
+		String alinhamentoImagemAtual = acessaImagem.getCssValue("float");
+		
+		if(urlImagem.isEmpty()){
+			imprimirMensagemDeErroGenerica("Imagem do globo não está sendo exibida");
+			return false;
+		}
+		
+		if(!tituloAtual.equals(tituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("título", tituloEsperado, tituloAtual);
+			return false;
+		}
+		
+		if(!descricaoAtual.equals(descricaoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("descrição", descricaoEsperado, descricaoAtual);
+			return false;
+		}
+		
+		if(!fonteTituloAtual.equals(fonteEsperada)){
+			imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteTituloAtual);
+			return false;
+		}
+		
+		if(!fonteDescricaoAtual.equals(fonteEsperada)){
+			imprimirMensagemDeErroDeUmaTag("fonte da descrição", fonteEsperada, fonteDescricaoAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteTituloAtual.equals(tamanhoFonteTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteTituloEsperado, tamanhoFonteTituloAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteDescricaoAtual.equals(tamanhoFonteDescricaoEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte da descrição", tamanhoFonteDescricaoEsperado, tamanhoFonteDescricaoAtual);
+			return false;
+		}
+		
+		if(!corTituloAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor da fonte da título", corTituloEsperado, corTituloAtual);
+			return false;
+		}
+		
+		if(!corDescricaoAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor da fonte da descrição", corTituloEsperado, corDescricaoAtual);
+			return false;
+		}
+		
+		if(!widthAtual.equals(widthEsperado)){
+			imprimirMensagemDeErroDeUmaTag("width da imagem", widthEsperado, widthAtual);
+			return false;
+		}
+		
+		if(!heightAtual.equals(heightEsperado)){
+			imprimirMensagemDeErroDeUmaTag("height da imagem", heightEsperado, heightAtual);
+			return false;
+		}
+		
+		if(!alinhamentoImagemAtual.equals(alinhamentoImagemEsperado)){
+			imprimirMensagemDeErroDeUmaTag("alinhamento da imagem", alinhamentoImagemEsperado, alinhamentoImagemAtual);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public WebElement exibiuOBoxDeFAQ() {
+		return getDriver().findElement(By.className("paywall-container-rodape")).findElement(By.className("duvidas"));
+	}
+
+	public String exibiuOTituloDuvidas() {
+		return exibiuOBoxDeFAQ().findElement(By.className("icon-duvidas")).getText().toLowerCase();
+	}
+
+	public boolean exibiuOIconeDeInterrogacao() {
+		return exibiuOBoxDeFAQ().findElement(By.className("icon-duvidas")).isDisplayed();
+	}
+
+	public String exibiuOTituloDeFAQ() {
+		return exibiuOBoxDeFAQ().findElement(By.className("faq")).getText().toLowerCase();
+	}
+
+	public boolean exibiuUmLinkNoFAQ() {
+		return exibiuOBoxDeFAQ().findElement(By.tagName("a")).isDisplayed();
+	}
+
+	public boolean exibiuUmLinkValidoNoFAQ() {
+		return !exibiuOBoxDeFAQ().findElement(By.tagName("a")).getAttribute("href").isEmpty();
+	}
+
+	public WebElement exibiuClasseFAQ() {
+		return getDriver().findElement(By.className("faq-inner-container"));
+	}
+	
+	public String exibiuOTextoFAQRegisterWall() throws InterruptedException {
+		exibiuOBoxDeFAQ().findElement(By.className("faq")).click();
+		Thread.sleep(2000);
+		return exibiuClasseFAQ().findElement(By.className("titulo")).getText().toLowerCase();
+	}
+
+	public boolean exibiuOPerguntasComRespostas() {
+		List<WebElement> totalDePerguntas = exibiuClasseFAQ().findElements(By.className("questao"));
+		List<WebElement> totalDeRespostas = exibiuClasseFAQ().findElements(By.className("resposta"));
+		
+		for(int i=0; i<totalDePerguntas.size(); i++){
+			if(totalDePerguntas.get(i).getText().isEmpty() || totalDeRespostas.get(i).findElement(By.tagName("p")).getText().isEmpty()){
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+	public boolean exibiuPaginaInicial() throws InterruptedException {
+		getDriver().manage().deleteAllCookies();
+		Thread.sleep(1000);
+		getDriver().findElement(By.xpath("//*[@id=\"paywall\"]/div[2]/div[2]/div/div/div/a")).click();
+		//getDriver().findElement(By.className("paywall-container-rodape")).findElement(By.className("left")).click();
+		Thread.sleep(1000);
+		return getDriver().findElement(By.className("headline")).isDisplayed();
+	}
+
+	public boolean exibiuBannerDeAssinatura() {
+		return getDriver().findElements(By.className("subscriptionFooter")).size()==0;
+	}
+}

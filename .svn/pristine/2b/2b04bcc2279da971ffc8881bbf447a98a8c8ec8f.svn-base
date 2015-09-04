@@ -1,0 +1,190 @@
+package br.com.infoglobo.pages.ela.ultimas;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.ultimas.UltimasDaCapa;
+
+public class UltimasNoticiasEla extends UltimasDaCapa {
+	
+	public UltimasNoticiasEla() throws Exception {
+		super();
+	}
+	
+	public UltimasNoticiasEla(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+
+	public boolean exibiuBotaoComOLayoutCorretoParaOEla() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(0, 0, 0, 1)";
+		String tamanhoFonteEsperada = "18px";
+		String alinhamentoEsperado = "center";
+		String backgroundColorEsperado = "rgba(249, 249, 249, 1)";
+		String textTransformEsperado = "uppercase";
+		
+		String fonteAtual = acessaBotaoCarregarMaisNoticias().getCssValue("font-family");
+		String corFonteAtual = acessaBotaoCarregarMaisNoticias().getCssValue("color");
+		String tamanhoFonteAtual = acessaBotaoCarregarMaisNoticias().getCssValue("font-size");
+		String alinhamentoAtual = acessaBotaoCarregarMaisNoticias().getCssValue("text-align");
+		String backgroundColorAtual = acessaBotaoCarregarMaisNoticias().getCssValue("background-color");
+		String textTransformAtual = acessaBotaoCarregarMaisNoticias().getCssValue("text-transform");
+		
+		if (!fonteEsperada.equals(fonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("fonte do botão", fonteEsperada, fonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!corFonteEsperada.equals(corFonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("cor da fonte do botão", corFonteEsperada, corFonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do botão", tamanhoFonteEsperada, tamanhoFonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!alinhamentoEsperado.equals(alinhamentoAtual)) {
+			imprimirMensagemDeErroDeUmaTag("alinhamento do botão", alinhamentoEsperado, alinhamentoAtual);
+			contadorDeErros++;
+		}
+		
+		if (!backgroundColorEsperado.equals(backgroundColorAtual)) {
+			imprimirMensagemDeErroDeUmaTag("cor de fundo do botão", backgroundColorEsperado, backgroundColorAtual);
+			contadorDeErros++;
+		}
+		
+		if (!textTransformEsperado.equals(textTransformAtual)) {
+			imprimirMensagemDeErroDeUmaTag("Text Transform do título do botão", textTransformEsperado, textTransformAtual);
+			contadorDeErros++;
+		}
+		
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public boolean exibiuOLayoutCorretoDoTituloDeUltimasParaOEla() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(28, 49, 77, 1)";
+		String tamanhoFonteEsperada = "45px";
+		String alinhamentoEsperado = "center";
+		
+		String fonteAtual = acessaTituloDeUltimas().getCssValue("font-family");
+		String corFonteAtual = acessaTituloDeUltimas().getCssValue("color");
+		String tamanhoFonteAtual = acessaTituloDeUltimas().getCssValue("font-size");
+		String alinhamentoAtual = acessaTituloDeUltimas().getCssValue("text-align");
+		
+		if (!fonteEsperada.equals(fonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!corFonteEsperada.equals(corFonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("cor da fonte do título", corFonteEsperada, corFonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteEsperada, tamanhoFonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!alinhamentoEsperado.equals(alinhamentoAtual)) {
+			imprimirMensagemDeErroDeUmaTag("alinhamento do título", alinhamentoEsperado, alinhamentoAtual);
+			contadorDeErros++;
+		}
+		
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public boolean exibiuLayoutCorretoParaAsEditoriaDasMateriasDeUltimasDoEla() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboXCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(255, 25, 41, 1)";
+		String tamanhoFonteEsperada = "20px";
+		String textTransformEsperado = "uppercase";
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+				WebElement acessaEditoria = listaTotalDeUltimas().get(i).findElement(By.className("editoria"));
+				
+				String fonteAtual = acessaEditoria.getCssValue("font-family");
+				String corFonteAtual = acessaEditoria.getCssValue("color");
+				String tamanhoFonteAtual = acessaEditoria.getCssValue("font-size");
+				String textTransformAtual = acessaEditoria.getCssValue("text-transform");
+				
+				if (!fonteEsperada.equals(fonteAtual)) {
+					imprimirMensagemDeErroDeUmaTag("fonte da editoria", fonteEsperada, fonteAtual);
+					contadorDeErros++;
+				}
+				
+				if (!corFonteEsperada.equals(corFonteAtual)) {
+					imprimirMensagemDeErroDeUmaTag("cor da fonte da editoria", corFonteEsperada, corFonteAtual);
+					contadorDeErros++;
+				}
+				
+				if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+					imprimirMensagemDeErroDeUmaTag("tamanho da fonte da editoria", tamanhoFonteEsperada, tamanhoFonteAtual);
+					contadorDeErros++;
+				}
+				
+				if (!textTransformEsperado.equals(textTransformAtual)) {
+					imprimirMensagemDeErroDeUmaTag("alinhamento da editoria", textTransformEsperado, textTransformAtual);
+					contadorDeErros++;
+				}
+				
+		}
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public boolean exibiuLayoutCorretoParaOTituloDasMateriasDeUltimasDoEla() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(0, 0, 0, 1)";
+		String tamanhoFonteEsperada = "24px";
+		String textTransformEsperado = "none";
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+				WebElement acessaTituloPosicaoAtual = listaTotalDeUltimas().get(i).findElement(By.tagName("h2")).findElement(By.tagName("a"));
+				
+				String fonteAtual = acessaTituloPosicaoAtual.getCssValue("font-family");
+				String corFonteAtual = acessaTituloPosicaoAtual.getCssValue("color");
+				String tamanhoFonteAtual = acessaTituloPosicaoAtual.getCssValue("font-size");
+				String textTransformAtual = acessaTituloPosicaoAtual.getCssValue("text-transform");
+				
+				if (!fonteEsperada.equals(fonteAtual)) {
+					imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteAtual);
+					contadorDeErros++;
+				}
+				
+				if (!corFonteEsperada.equals(corFonteAtual)) {
+					imprimirMensagemDeErroDeUmaTag("cor da fonte do título", corFonteEsperada, corFonteAtual);
+					contadorDeErros++;
+				}
+				
+				if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+					imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteEsperada, tamanhoFonteAtual);
+					contadorDeErros++;
+				}
+				
+				if (!textTransformEsperado.equals(textTransformAtual)) {
+					imprimirMensagemDeErroDeUmaTag("alinhamento do título", textTransformEsperado, textTransformAtual);
+					contadorDeErros++;
+				}
+				
+		}
+		return validacaoDeErros(contadorDeErros);
+	}
+}

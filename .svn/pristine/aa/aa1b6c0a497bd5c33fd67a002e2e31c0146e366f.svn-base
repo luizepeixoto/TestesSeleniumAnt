@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<project name="Teste Funcional Globo Integração" basedir="." default="test">
+	<property name="testdir" location="test" />
+	
+	<property name="report.dir" location="test" />
+	<property name="srcdir" location="src" />
+	<property name="engine_lib_path" value="lib" />
+	<property name="full-compile" value="false" />
+	<path id="classpath.base" />
+	<path id="classpath.test">
+		<fileset dir="${engine_lib_path}" includes="**/*.jar" />
+		<pathelement location="${testdir}" />
+		<pathelement location="${srcdir}" />
+		<path refid="classpath.base" />
+	</path>
+
+	<target name="clean">
+		<delete verbose="${full-compile}">
+			<fileset dir="${testdir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${srcdir}" destdir="${testdir}" verbose="${full-compile}">
+			<compilerarg line="-encoding utf-8"/>
+			<classpath refid="classpath.test" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile">
+		<junit  printsummary="yes" haltonfailure="no">
+			<classpath refid="classpath.test" />
+			<sysproperty key="propertyFile" value="src/resources/Configuracoes-INT.properties" />
+			<!-- formatter type="brief" usefile="false" / -->
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${srcdir}">
+				<fileset dir="${srcdir}">
+					<include name="**/*Test.java"/>
+					<exclude name="**/AceitacaoAbstractTest.java"/>
+					<exclude name="**/ComentarioDenunciarTest.java"/>
+					<exclude name="**/ComentarioFormularioAbertoTest.java"/>
+					<exclude name="**/ComentarioFormularioMensagensDeErroTest.java"/>
+					<exclude name="**/ComentarioResponderTest.java"/>
+					<exclude name="**/BoxAcervoTest.java"/>
+					<exclude name="**/BoxMemoriaTest.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<junitreport todir="${report.dir}">
+		<fileset dir="${report.dir}">
+			<include name="TEST-*.xml" />
+		</fileset>
+		<report format="frames" todir="${report.dir}" />
+	</junitreport>
+</project>

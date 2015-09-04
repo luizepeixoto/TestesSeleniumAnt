@@ -1,0 +1,39 @@
+package br.com.infoglobo.testes.materia.widget;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.materia.widget.BoxVejaTambemComTarja;
+
+public class BoxVejaTambemComTarjaTest {
+	
+	private static BoxVejaTambemComTarja materia;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new BoxVejaTambemComTarja();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeATarjaDeVideoDaMateriaDoBoxDoVejaTambemEstaSendoExibida(){
+		assertTrue(materia.getTarja());
+	}
+	
+	@Test
+	public void verificaSeATarjaDeGaleriaDaMateriaDoBoxDoVejaTambemEstaSendoExibida(){
+		assertTrue(materia.getTarja());
+	}
+	
+	@Test
+	public void verificaSeATarjaDeInfograficoDaMateriaDoBoxDoVejaTambemEstaSendoExibida(){
+		assertTrue(materia.getTarja());
+	}
+}

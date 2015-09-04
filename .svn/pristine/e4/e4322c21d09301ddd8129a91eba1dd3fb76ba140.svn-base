@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.asp;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.tealium.MarcacoesDoTealium;
+
+public class PostDeUmBlog extends MarcacoesDoTealium {
+	
+	public PostDeUmBlog(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+}

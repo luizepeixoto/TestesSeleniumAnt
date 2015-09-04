@@ -1,0 +1,40 @@
+package br.com.infoglobo.testes.revenue;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.revenue.MarcacoesCapaEditoriaSimples;
+
+public class MarcacoesEditoriaSimplesTest {
+	
+	private static MarcacoesCapaEditoriaSimples capa;
+	private String codigoFonte = capa.exibiuCodigoFonteDaPagina(); 
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		capa = new MarcacoesCapaEditoriaSimples();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		capa.fechar();
+	}
+	//Capa apenas com as colunas esquerda, centro e direita
+	@Test
+	public void verificaSeAMetatagDataVrZoneEsquerdaEstaSendoCarregadoNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("data-vr-zone=\"Esquerda\""));
+	}
+	
+	@Test
+	public void verificaSeAMetatagDataVrZoneCentroEstaSendoCarregadoNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("data-vr-zone=\"Centro\""));
+	}
+	
+	@Test
+	public void verificaSeAMetatagDataVrZoneDireitaEstaSendoCarregadoNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("data-vr-zone=\"Direita\""));
+	}
+}

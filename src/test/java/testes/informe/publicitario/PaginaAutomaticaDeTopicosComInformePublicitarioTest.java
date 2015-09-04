@@ -1,0 +1,45 @@
+package testes.informe.publicitario;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import pages.informe.publicitario.PaginaAutomaticaDeTopicosComInformePublicitario;
+
+
+public class PaginaAutomaticaDeTopicosComInformePublicitarioTest {
+	
+	private static PaginaAutomaticaDeTopicosComInformePublicitario topico;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		topico = new PaginaAutomaticaDeTopicosComInformePublicitario();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		topico.fechar();
+	}
+	
+	@Test
+	public void verificaSeAPaginaDeUltimasDeUmTopicoEstaExibindoUmaChamadaDeInformePublicitario(){
+		assertNotNull(topico.exibiuChamadaDeInformePublicitarioDentroDeEmTopico());
+	}
+	
+	@Test
+	public void verificaSeChamadaDeEspecialPublicitarioEstaSendoExibindaNumaPaginaDeTopicos(){
+		assertTrue(topico.exibiuTituloDeEspecialPublicitario());
+	}
+	
+	@Test
+	public void verificaSeOTituloEmItalicoEstaSendoExibidaNaChamadaDeInformePublicitario(){
+		assertTrue(topico.exibiuTituloEmItalicoNaChamadaDoEspecialPublicitario());
+	}
+	
+	@Test
+	public void verificaSeEstaSendoExibidoUmaFotoOuADescricaoNaChamadaDoInforme(){
+		assertTrue(topico.exibiuFotoOuDescricaoNaChamadaDoInformePublicitario());
+	}
+}

@@ -1,0 +1,93 @@
+package testes.capa.inferior;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import pages.capa.CapaMenuInferior;
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+public class BoxSelecaoOGloboTest {
+
+	private static CapaMenuInferior capaMenuInferior;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(capaMenuInferior.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		capaMenuInferior = new CapaMenuInferior(Navegador.CHROME);
+		capaMenuInferior.scrollAteSelecao();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		capaMenuInferior.fechar();
+	}
+
+	@Test
+	public void verificaSeOBoxSelecaoOGloboEstaSendoExibidoNaCapa() {
+		assertNotNull(capaMenuInferior.exibiuOBoxDoSelecaoOGlobo());
+	}
+
+	@Test
+	public void verificaSeOTituloSelecaoOGloboEstaSendoExibindo() {
+		String resultadoEsperado = "Seleção O Globo";
+		assertEquals(resultadoEsperado.toLowerCase(), capaMenuInferior.exibiuOTituloDoSelecaoOGlobo().toLowerCase());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoSelecaoOGloboNaoPossuiUmLink() {
+		assertTrue(capaMenuInferior.oTituloSelecaoOGloboNaoPossuiUmLink());
+	}
+	
+	@Test
+	public void verificaSeOBoxSelecaoOGloboEstaExibindoUmaListaDeMaterias() {
+		assertTrue(capaMenuInferior.exibiuAsMateriasDoSelecaoOGlobo());
+	}
+
+	@Test
+	public void verificaSeAsMateriasDoSelecaoOGloboEstaoExibindoATag() {
+		assertTrue(capaMenuInferior.asMateriasDoSelecaoOGloboPossuemTag());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDoSelecaoOGloboEstaoExibindoUmaImagem() {
+		assertTrue(capaMenuInferior.asMateriasDoSelecaoOGloboPossuemImagem());
+	}
+	
+	@Test
+	public void verificaSeOAltDaImagemDoSelecaoOGloboEstaExibindoOAutorDaFoto() {
+		assertTrue(capaMenuInferior.oAltDasImagensDasMateriasDoSelecaoOGloboPossuemAutor());
+	}
+	
+	@Test
+	public void verificaSeAsImagensDasMateriasDoSelecaoOGloboPossuemUmWidthDe189Px() {
+		assertTrue(capaMenuInferior.asImagensDasMateriasDoSelecaoOGloboPossuemWidthDe189Px());
+	}
+	
+	@Test
+	public void verificaSeAsImagensDasMateriasDoSelecaoOGloboPossuemUmHeightDe114Px() {
+		assertTrue(capaMenuInferior.asImagensDasMateriasDoSelecaoOGloboPossuemHeightDe114Px());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDoSelecaoOGloboEstaoExibindoOTitulo() {
+		assertTrue(capaMenuInferior.asMateriasDoSelecaoOGloboPossuemTitulo());
+	}
+	
+	@Test
+	public void verificaSeOTituloDasMateriasDoSelecaoOGloboEstaoExibindoUmLink() {
+		assertTrue(capaMenuInferior.oTituloDasMateriasDoSelecaoOGloboPossuemUmLink());
+	}
+	
+	@Test
+	public void verificaSeOTituloDasMateriasDoSelecaoOGloboEstaoExibindoUmLinkValido() {
+		assertTrue(capaMenuInferior.osLinksDoTituloDasMateriasDoSelecaoOGloboSaoValidos());
+	}
+}

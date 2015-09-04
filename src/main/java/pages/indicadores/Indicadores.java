@@ -1,0 +1,690 @@
+package pages.indicadores;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class Indicadores extends AceitacaoAbstractTest{
+	
+	public Indicadores() throws Exception {
+		super();
+	}
+	
+	public Indicadores(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public List<WebElement> listaDeCotacoes(){
+		getDriver().manage().deleteAllCookies();	
+		return getDriver().findElement(By.id("destind")).findElements(By.className("cotacao"));
+	}
+	
+	public boolean exibiuTresCotacoes() {
+		return listaDeCotacoes().size()==3;
+	}
+	
+	public WebElement exibiuOBoxIbovespa() {
+		return listaDeCotacoes().get(0);
+	}
+	
+	public String exibiuOTituloIbovespa() {
+		return exibiuOBoxIbovespa().findElement(By.tagName("h3")).getText();
+	}
+	
+	public boolean exibiuVariacaoIbovespa() {
+		return getDriver().findElement(By.xpath("//*[@id=\"destind\"]/div[1]/p[1]")).isDisplayed();
+	}
+	
+	public boolean exibiuColunaUltimoDoBoxIbovespa() {
+		return exibiuOBoxIbovespa().findElement(By.className("ultimo")).getText().equals("ÚLTIMO");
+	}
+
+	public boolean exibiuColunaDiaAnteriorIbovespa() {
+		return exibiuOBoxIbovespa().findElement(By.className("dia_anterior")).getText().equals("DIA ANTERIOR");
+	}
+
+	public boolean exibiuColunaVariacaoDoBoxIbovespa() {
+		return exibiuOBoxIbovespa().findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+	
+	public String exibiuIbovespaVerMais() {
+		return exibiuOBoxIbovespa().findElement(By.className("mais")).getText();
+	}
+	
+	public boolean exibiuIbovespaLinkVerMaisBolsas() {
+		return exibiuOBoxIbovespa().findElement(By.className("mais")).findElement(By.tagName("a")).isDisplayed();
+	}
+	
+	public boolean exibiuIbovespaLinkCorretoEmVerMaisBolsas() {
+		return exibiuOBoxIbovespa().findElement(By.className("mais")).findElement(By.tagName("a")).getAttribute("href").contains("#bolsas-mundiais");
+	}
+	
+	//Início Box Dolar Comercial
+	public WebElement exibiuOBoxDolarComercial() {
+		return listaDeCotacoes().get(1);
+	}
+	
+	public boolean exibiuOTituloDolarComercial() {
+		return !exibiuOBoxDolarComercial().findElement(By.tagName("h3")).getText().isEmpty();
+	}
+	
+	public boolean exibiuVariacaoDolarComercial() { 
+		return getDriver().findElement(By.xpath("//*[@id=\"destind\"]/div[2]/p[1]")).isDisplayed();
+	}
+	
+	public boolean exibiuColunaUltimoDolarComercial() {
+		return exibiuOBoxDolarComercial().findElement(By.className("ultimo")).getText().equals("ÚLTIMO");
+	}
+
+	public boolean exibiuColunaCompraDolarComercial() {
+		return exibiuOBoxDolarComercial().findElement(By.className("compra")).getText().equals("COMPRA");
+	}
+	
+	public boolean exibiuColunaVendaDolarComercial() {
+		return exibiuOBoxDolarComercial().findElement(By.className("venda")).getText().equals("VENDA");
+	}
+	
+	public boolean exibiuColunaVariacaoDolarComercial() {
+		return exibiuOBoxDolarComercial().findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+	
+	public boolean exibiuDolarComercialVerMais() {
+		return !exibiuOBoxDolarComercial().findElement(By.className("mais")).getText().isEmpty();
+	}
+	
+	public boolean exibiuDolarComercialLinkVerMaisMoedas() {
+		return exibiuOBoxDolarComercial().findElement(By.className("mais")).findElement(By.tagName("a")).isDisplayed();
+	}
+	
+	public boolean exibiuDolarComercialLinkCorretoEmVerMaisMoedas() {
+		return exibiuOBoxDolarComercial().findElement(By.className("mais")).findElement(By.tagName("a")).getAttribute("href").contains("#cambio-moedas");
+	}
+	
+	//Início Box Dolar Turismo
+	public WebElement exibiuOBoxDolarTurismo() {
+		return listaDeCotacoes().get(2);
+	}
+	public boolean exibiuOTituloDolarTurismo() {
+		return !listaDeCotacoes().get(2).findElement(By.tagName("h3")).getText().isEmpty();
+	}
+
+	public boolean exibiuVariacaoDolarTurismo() {
+		return getDriver().findElement(By.xpath("//*[@id=\"destind\"]/div[3]/p[1]")).isDisplayed();
+	}
+	
+	public boolean exibiuColunaUltimoDolarTurismo() {
+		return exibiuOBoxDolarTurismo().findElement(By.className("ultimo")).getText().equals("ÚLTIMO");
+	}
+
+	public boolean exibiuColunaCompraDolarTurismo() {
+		return exibiuOBoxDolarTurismo().findElement(By.className("compra")).getText().equals("COMPRA");
+	}
+	
+	public boolean exibiuColunaVendaDolarTurismo() {
+		return exibiuOBoxDolarTurismo().findElement(By.className("venda")).getText().equals("VENDA");
+	}
+	
+	public boolean exibiuColunaVariacaoDolarTurismo() {
+		return exibiuOBoxDolarTurismo().findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+	
+	public boolean exibiuDolarTurismoVerMais() {
+		return !exibiuOBoxDolarTurismo().findElement(By.className("mais")).getText().isEmpty();
+	}
+	
+	public boolean exibiuDolarTurismoLinkVerMaisMoedas() {
+		return exibiuOBoxDolarTurismo().findElement(By.className("mais")).findElement(By.tagName("a")).isDisplayed();
+	}
+	
+	public boolean exibiuDolarTurismoLinkCorretoEmVerMaisMoedas() {
+		return exibiuOBoxDolarTurismo().findElement(By.className("mais")).findElement(By.tagName("a")).getAttribute("href").contains("#cambio-moedas");
+	}
+
+	public WebElement exibiuPublicidade() {
+		return getDriver().findElement(By.className("publicidade"));
+	}
+
+	public boolean exibiuTituloPublicidade() {
+		return exibiuPublicidade().findElement(By.className("publicidade-container")).findElement(By.tagName("p")).getText().equals("Publicidade");
+	}
+
+	//Início Tabela Bovespa
+	public WebElement exibiuTabelaBovespa() {
+		return getDriver().findElement(By.id("bovespa"));
+	}
+
+	public String exibiuTituloDaTabelaBovespa() {
+		return exibiuTabelaBovespa().findElement(By.tagName("h3")).getText().toLowerCase();
+	}
+
+	public List<WebElement> listaDeColunasBovespa() {
+		return exibiuTabelaBovespa().findElement(By.className("tabs")).findElement(By.tagName("ul")).findElements(By.tagName("li"));
+	}	
+	
+	public boolean exibiuTab10MaisNegociadas() {
+		return listaDeColunasBovespa().get(0).findElement(By.tagName("a")).getText().toLowerCase().equals("as 10 mais negociadas");
+	}
+
+	public boolean exibiuTab10MaioresAltas() {
+		return listaDeColunasBovespa().get(1).findElement(By.tagName("a")).getText().toLowerCase().equals("as 10 maiores altas");
+	}
+
+	public boolean exibiuTab10MaioresBaixas() {
+		return listaDeColunasBovespa().get(2).findElement(By.tagName("a")).getText().toLowerCase().equals("as 10 maiores baixas");
+	}
+
+	public boolean exibiuColunaPapelBovespa() {
+		return exibiuTabelaBovespa().findElement(By.className("tab")).findElement(By.className("papel")).getText().equals("PAPEL");
+	}
+
+	public boolean exibiuColunaDescricaoBovespa() {
+		return exibiuTabelaBovespa().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("DESCRIÇÃO");
+	}
+
+	public boolean exibiuColunaUltimoBovespa() {
+		return exibiuTabelaBovespa().findElement(By.className("tab")).findElement(By.className("ultimo")).getText().equals("ÚLTIMO");
+	}
+
+	public boolean exibiuColunaMaximoBovespa() {
+		return exibiuTabelaBovespa().findElement(By.className("tab")).findElement(By.className("maximo")).getText().equals("MÁXIMO");
+	}
+
+	public boolean exibiuColunaMinimoBovespa() {
+		return exibiuTabelaBovespa().findElement(By.className("tab")).findElement(By.className("minimo")).getText().equals("MÍNIMO");
+	}
+
+	public boolean exibiuColunaVariacaoBovespa() {
+		return exibiuTabelaBovespa().findElement(By.className("tab")).findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+
+	public boolean exibiuColunaDiaAnterioBovespa() {
+		return exibiuTabelaBovespa().findElement(By.className("tab")).findElement(By.className("dia_anterior")).getText().equals("DIA ANTERIOR");
+	}
+	
+	//Início Tabela Ibovespa
+	public WebElement exibiuTabelaIbovespa() {
+		return getDriver().findElement(By.id("ibovespa"));
+	}
+
+	public String exibiuTituloDaTabelaIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.tagName("h3")).getText().toLowerCase();
+	}
+
+	public List<WebElement> listaDeColunasIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.className("tabs")).findElement(By.tagName("ul")).findElements(By.tagName("li"));
+	}	
+	
+	public boolean exibiuTab10MaioresAltasDaIbovespa() {
+		return listaDeColunasIbovespa().get(0).findElement(By.tagName("a")).getText().toLowerCase().equals("as 10 maiores altas");
+	}
+
+	public boolean exibiuTab10MaioresBaixasDaIbovespa() {
+		return listaDeColunasIbovespa().get(1).findElement(By.tagName("a")).getText().toLowerCase().equals("as 10 maiores baixas");
+	}
+
+	public boolean exibiuColunaPapelIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.className("tab")).findElement(By.className("papel")).getText().equals("PAPEL");
+	}
+
+	public boolean exibiuColunaDescricaoIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("DESCRIÇÃO");
+	}
+
+	public boolean exibiuColunaUltimoIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.className("tab")).findElement(By.className("ultimo")).getText().equals("ÚLTIMO");
+	}
+
+	public boolean exibiuColunaMaximoIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.className("tab")).findElement(By.className("maximo")).getText().equals("MÁXIMO");
+	}
+
+	public boolean exibiuColunaMinimoIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.className("tab")).findElement(By.className("minimo")).getText().equals("MÍNIMO");
+	}
+
+	public boolean exibiuColunaVariacaoIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.className("tab")).findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+
+	public boolean exibiuColunaDiaAnterioIbovespa() {
+		return exibiuTabelaIbovespa().findElement(By.className("tab")).findElement(By.className("dia_anterior")).getText().equals("DIA ANTERIOR");
+	}
+	
+	//Início Tabela Bolsas Mundiais
+	
+	//Início Tabela Bolsas Mundiais
+	public WebElement exibiuTabelaBolsasMundiais() {
+		return getDriver().findElement(By.id("bolsas-mundiais"));
+	}
+
+	public String exibiuTituloDaTabelaBolsasMundiais() {
+		return exibiuTabelaBolsasMundiais().findElement(By.tagName("h3")).getText().toLowerCase();
+	}
+
+	public List<WebElement> listaDeColunasBolsasMundiais() {
+		return exibiuTabelaBolsasMundiais().findElement(By.className("tabs")).findElement(By.tagName("ul")).findElements(By.tagName("li"));
+	}	
+
+	public boolean exibiuColunaIndiceBolsasMundiais() {
+		return exibiuTabelaBolsasMundiais().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("ÍNDICE");
+	}
+
+	public boolean exibiuColunaUltimoBolsasMundiais() {
+		return exibiuTabelaBolsasMundiais().findElement(By.className("tab")).findElement(By.className("ultimo")).getText().equals("ÚLTIMO");
+	}
+
+	public boolean exibiuColunaMaximoBolsasMundiais() {
+		return exibiuTabelaBolsasMundiais().findElement(By.className("tab")).findElement(By.className("maximo")).getText().equals("MÁXIMO");
+	}
+
+	public boolean exibiuColunaMinimoBolsasMundiais() {
+		return exibiuTabelaBolsasMundiais().findElement(By.className("tab")).findElement(By.className("minimo")).getText().equals("MÍNIMO");
+	}
+
+	public boolean exibiuColunaVariacaoBolsasMundiais() {
+		return exibiuTabelaBolsasMundiais().findElement(By.className("tab")).findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+
+	public boolean exibiuColunaDiaAnterioBolsasMundiais() {
+		return exibiuTabelaBolsasMundiais().findElement(By.className("tab")).findElement(By.className("dia_anterior")).getText().equals("DIA ANTERIOR");
+	}
+	
+	
+	public boolean exibiuPrimeiraBandeiraIndiceBolsasMundiais(){
+		return getDriver().findElement(By.xpath("//*[@id=\"25309tbody0\"]/tr[1]/td[1]")).isDisplayed();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaIndiceBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25309tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaUltimoBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25309tbody0\"]/tr[1]/td[3]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaMaximoBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25309tbody0\"]/tr[1]/td[4]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaMinimoBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25309tbody0\"]/tr[1]/td[5]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaDiaAnteriorBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25309tbody0\"]/tr[1]/td[5]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaVariacaoBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25309tbody0\"]/tr[1]/td[6]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaDiaAnterioBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25309tbody0\"]/tr[1]/td[7]")).getText().isEmpty();
+	}
+	
+	public List<WebElement> listaDeTabelasClasseTitint() {
+		return getDriver().findElement(By.className("content")).findElements(By.className("titint"));
+	}
+	
+	public WebElement exibiuSegundaTabelaDentroDeBolsasMundiais() {
+		return listaDeTabelasClasseTitint().get(3);
+	}
+	
+	public boolean exibiuColunaIndiceNaSegundaTabelaBolsasMundiais() {
+		return exibiuSegundaTabelaDentroDeBolsasMundiais().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("ÍNDICE");
+	}
+	
+	public boolean exibiuColunaDiaAnteriorNaSegundaTabelaBolsasMundiais() {
+		return exibiuSegundaTabelaDentroDeBolsasMundiais().findElement(By.className("tab")).findElement(By.className("dia_anterior")).getText().equals("DIA ANTERIOR");
+	}
+	
+	public boolean exibiuColunaVariacaoNaSegundaTabelaBolsasMundiais() {
+		return exibiuSegundaTabelaDentroDeBolsasMundiais().findElement(By.className("tab")).findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+	
+	public boolean exibiuColunaDataNaSegundaTabelaBolsasMundiais() {
+		return exibiuSegundaTabelaDentroDeBolsasMundiais().findElement(By.className("tab")).findElement(By.className("data")).getText().equals("DATA");
+	}
+	
+	public boolean exibiuBandeiraNaPrimeiraLinhaDaSegundaTabelaBolsasMundiais(){
+		return getDriver().findElement(By.xpath("//*[@id=\"25310tbody0\"]/tr[1]/td[1]")).isDisplayed();
+	}
+	
+	public boolean  exibiuColunaIndiceNaPrimeiraLinhaNaSegundaTabelaBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25310tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuColunaDiaAnteriorNaPrimeiraLinhaDaSegundaTabelaBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25310tbody0\"]/tr[1]/td[3]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuColunaVariacaoNaPrimeiraLinhaDaSegundaTabelaBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25310tbody0\"]/tr[1]/td[4]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuColunaDataNaPrimeiraLinhaDaSegundaTabelaBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25310tbody0\"]/tr[1]/td[5]")).getText().isEmpty();
+	}
+	
+	public WebElement exibiuTerceiraTabelaDentroDeBolsasMundiais() {
+		return listaDeTabelasClasseTitint().get(4);
+	}
+	
+	public boolean exibiuColunaIndiceNaTerceiraTabelaBolsasMundiais() {
+		return exibiuTerceiraTabelaDentroDeBolsasMundiais().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("ÍNDICE");
+	}
+	
+	public boolean exibiuColunaDiaAnteriorNaTerceiraTabelaBolsasMundiais() {
+		return exibiuTerceiraTabelaDentroDeBolsasMundiais().findElement(By.className("tab")).findElement(By.className("dia_anterior")).getText().equals("DIA ANTERIOR");
+	}
+	
+	public boolean exibiuColunaVariacaoNaTerceiraTabelaBolsasMundiais() {
+		return exibiuTerceiraTabelaDentroDeBolsasMundiais().findElement(By.className("tab")).findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+	
+	public boolean exibiuColunaDataNaTerceiraTabelaBolsasMundiais() {
+		return exibiuTerceiraTabelaDentroDeBolsasMundiais().findElement(By.className("tab")).findElement(By.className("data")).getText().equals("DATA");
+	}
+	
+	public boolean exibiuBandeiraNaPrimeiraLinhaDaTerceiraTabelaBolsasMundiais(){
+		return getDriver().findElement(By.xpath("//*[@id=\"25311tbody0\"]/tr[1]/td[1]")).isDisplayed();
+	}
+	
+	public boolean  exibiuColunaIndiceNaPrimeiraLinhaNaTerceiraTabelaBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25311tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuColunaDiaAnteriorNaPrimeiraLinhaDaTerceiraTabelaBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25311tbody0\"]/tr[1]/td[3]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuColunaVariacaoNaPrimeiraLinhaDaTerceiraTabelaBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25311tbody0\"]/tr[1]/td[4]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuColunaDataNaPrimeiraLinhaDaTerceiraTabelaBolsasMundiais(){
+		return !getDriver().findElement(By.xpath("//*[@id=\"25311tbody0\"]/tr[1]/td[5]")).getText().isEmpty();
+	}
+
+	public boolean exibiuOTextoDeFechamentoDoDiaAnterior() {
+		return getDriver().findElement(By.xpath("//*[@id=\"f1\"]/div[6]/p")).getText().toLowerCase().contains("* fechamento do dia anterior");
+	}
+	
+	
+	
+	public WebElement exibiuTabelaDeCambioEMoedas() {
+		return getDriver().findElement(By.id("cambio-moedas"));
+	}
+	
+	public String exibiuTituloDeCambiosEMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.tagName("h3")).getText().toLowerCase();
+	}
+	
+	public boolean exibiuColunaPapelCambiosEMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("tab")).findElement(By.className("papel")).getText().equals("PAPEL");
+	}
+	
+	public boolean exibiuColunaDescricaoCambiosEMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("DESCRIÇÃO");
+	}
+	
+	public boolean exibiuColunaUltimoCambiosEMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("tab")).findElement(By.className("ultimo")).getText().equals("ÚLTIMO");
+	}
+	
+	public boolean exibiuColunaCompraCambiosEMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("tab")).findElement(By.className("compra")).getText().equals("COMPRA");
+	}
+	
+	public boolean exibiuColunaVendaCambiosEMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("tab")).findElement(By.className("venda")).getText().equals("VENDA");
+	}
+	
+	public boolean exibiuColunaVariacaoCambiosEMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("tab")).findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaPapelCambiosEMoedas() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25313tbody0\"]/tr[1]/td[1]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaDescricaoCambiosEMoedas() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25313tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaUltimoCambiosEMoedas() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25313tbody0\"]/tr[1]/td[3]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaCompraCambiosEMoedas() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25313tbody0\"]/tr[1]/td[4]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaVendaCambiosEMoedas() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25313tbody0\"]/tr[1]/td[5]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaVariacaoCambiosEMoedas() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25313tbody0\"]/tr[1]/td[6]")).getText().isEmpty();
+	}
+
+	public String exibiuOTextoDeConversorDeMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("obs")).getText().toLowerCase();
+	}
+
+	public boolean exibiuLinkNoTextoDeConversorDeMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("obs")).findElement(By.tagName("a")).isDisplayed();
+	}
+
+	public boolean exibiuLinkValidoNoTextoDeConversorDeMoedas() {
+		return exibiuTabelaDeCambioEMoedas().findElement(By.className("obs")).findElement(By.tagName("a")).getAttribute("href").equals("http://www4.bcb.gov.br/pec/conversao/conversao.asp?id=txconversao");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public WebElement exibiuTabelaDePetroleoEOuro() {
+		return getDriver().findElement(By.id("petroleo-ouro"));
+	}
+	
+	public String exibiuTituloDePetroleoEOuro() {
+		return exibiuTabelaDePetroleoEOuro().findElement(By.tagName("h3")).getText();
+	}
+	
+	public boolean exibiuColunaIndicePetroleoEOuro() {
+		return exibiuTabelaDePetroleoEOuro().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("ÍNDICE");
+	}
+	
+	public boolean exibiuColunaUltimoPetroleoEOuro() {
+		return exibiuTabelaDePetroleoEOuro().findElement(By.className("tab")).findElement(By.className("ultimo")).getText().equals("ÚLTIMO");
+	}
+	
+	public boolean exibiuColunaVariacaoPetroleoEOuro() {
+		return exibiuTabelaDePetroleoEOuro().findElement(By.className("tab")).findElement(By.className("variacao")).getText().equals("VARIAÇÃO");
+	}
+	
+	public boolean exibiuColunaFechamentoPetroleoEOuro() {
+		return exibiuTabelaDePetroleoEOuro().findElement(By.className("tab")).findElement(By.className("fechamento")).getText().equals("FECHAMENTO");
+	}
+	
+	public boolean exibiuColunaMoedaPetroleoEOuro() {
+		return exibiuTabelaDePetroleoEOuro().findElement(By.className("tab")).findElement(By.className("moeda")).getText().equals("MOEDA");
+	}
+	
+	public boolean exibiuColunaHoraPetroleoEOuro() {
+		return exibiuTabelaDePetroleoEOuro().findElement(By.className("tab")).findElement(By.className("hora")).getText().equals("HORA");
+	}
+	
+	public boolean exibiuColunaDataPetroleoEOuro() {
+		return exibiuTabelaDePetroleoEOuro().findElement(By.className("tab")).findElement(By.className("data")).getText().equals("DATA");
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaIndiceDePetroleoEOuro() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25314tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaUltimoPetroleoEOuro() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25314tbody0\"]/tr[1]/td[3]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaVariacaoPetroleoEOuro() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25314tbody0\"]/tr[1]/td[4]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaFechamentoPetroleoEOuro() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25314tbody0\"]/tr[1]/td[5]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaMoedaPetroleoEOuro() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25314tbody0\"]/tr[1]/td[6]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaHoraPetroleoEOuro() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25314tbody0\"]/tr[1]/td[7]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaDataPetroleoEOuro() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25314tbody0\"]/tr[1]/td[8]")).getText().isEmpty();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public WebElement exibiuTabelaDeIndicadoresFinanceiros() {
+		return getDriver().findElement(By.id("indicadores-economicos"));
+	}
+	
+	public String exibiuTituloDeIndicadoresFinanceiros() {
+		return exibiuTabelaDeIndicadoresFinanceiros().findElement(By.tagName("h3")).getText();
+	}
+	
+	public boolean exibiuColunaPapelIndicadoresFinanceiros() {
+		return exibiuTabelaDeIndicadoresFinanceiros().findElement(By.className("tab")).findElement(By.className("papel")).getText().equals("PAPEL");
+	}
+	
+	public boolean exibiuColunaDescricaoIndicadoresFinanceiros() {
+		return exibiuTabelaDeIndicadoresFinanceiros().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("DESCRIÇÃO");
+	}
+	
+	public boolean exibiuColunaVariacaoIndicadoresFinanceiros() {
+		return exibiuTabelaDeIndicadoresFinanceiros().findElement(By.className("tab")).findElement(By.className("variacao")).getText().equals("VARIAÇÃO (%)");
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaPapelDeIndicadoresFinanceiros() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25315tbody0\"]/tr[1]/td[1]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaDescricaoIndicadoresFinanceiros() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25315tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaVariacaoIndicadoresFinanceiros() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25315tbody0\"]/tr[1]/td[3]")).getText().isEmpty();
+	}
+	
+	public WebElement exibiuTabelaDoINSS() {
+		return getDriver().findElement(By.id("inss"));
+	}
+	
+	public String exibiuTituloDoINSS() {
+		return exibiuTabelaDoINSS().findElement(By.tagName("h3")).getText();
+	}
+	
+	public boolean exibiuColunaSalarioDeContribuicaoDoINSS() {
+		return exibiuTabelaDoINSS().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("SALÁRIO DE CONTRIBUIÇÃO");
+	}
+	
+	public boolean exibiuColunaAliquotaDoINSS() {
+		return exibiuTabelaDoINSS().findElement(By.className("tab")).findElement(By.className("valor")).getText().equals("ALÍQUOTA");
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaSalarioDeContribuicaoDoINSS() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25315tbody0\"]/tr[1]/td[1]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaAliquotaDoINSS() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25315tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public String exibiuPrimeiroParagrafoDeObservacao() {
+		return exibiuTabelaDoINSS().findElement(By.className("tab")).findElement(By.className("observacao")).findElement(By.tagName("p")).getText();
+	}
+		
+	public String exibiuSegundoParagrafoDeObservacao() {
+		return exibiuTabelaDoINSS().findElement(By.className("tab")).findElement(By.className("observacao")).findElements(By.tagName("p")).get(1).getText();
+	}		
+	
+	public String exibiuTerceiroParagrafoDeObservacao() {
+		return exibiuTabelaDoINSS().findElement(By.className("tab")).findElement(By.className("observacao")).findElements(By.tagName("p")).get(2).getText();
+	}
+	
+	public WebElement exibiuTabelaDoImpostoDeRenda() {
+		return getDriver().findElement(By.id("imposto-de-renda"));
+	}
+	
+	public String exibiuTituloDoImpostoDeRenda() {
+		return exibiuTabelaDoImpostoDeRenda().findElement(By.tagName("h3")).getText();
+	}
+	
+	public boolean exibiuColunaDescricaoDoImpostoDeRenda() {
+		return exibiuTabelaDoImpostoDeRenda().findElement(By.className("tab")).findElement(By.className("descricao")).getText().equals("DESCRIÇÃO");
+	}
+	
+	public boolean exibiuColunaValorDoImpostoDeRenda() {
+		return exibiuTabelaDoImpostoDeRenda().findElement(By.className("tab")).findElement(By.className("valor")).getText().equals("VALOR");
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaDescricaoDoImpostoDeRenda() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25317tbody0\"]/tr[1]/td[1]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaValorDoImpostoDeRenda() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25317tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public String exibiuPrimeiroParagrafoDeObservacaoDoIR() {
+		return exibiuTabelaDoImpostoDeRenda().findElement(By.className("tab")).findElement(By.className("observacao")).findElement(By.tagName("p")).getText();
+	}
+		
+	public String exibiuSegundoParagrafoDeObservacaoDoIR() {
+		return exibiuTabelaDoImpostoDeRenda().findElement(By.className("tab")).findElement(By.className("observacao")).findElements(By.tagName("p")).get(1).getText();
+	}
+	
+	
+	
+	public WebElement exibiuTabelaDoSalarioMinimo() {
+		return getDriver().findElement(By.id("salario-minimo"));
+	}
+	
+	public String exibiuTituloDoSalarioMinimo() {
+		return exibiuTabelaDoSalarioMinimo().findElement(By.tagName("h3")).getText();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaDescricaoDoSalarioMinimo() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25318tbody0\"]/tr[1]/td[1]")).getText().isEmpty();
+	}
+	
+	public boolean exibiuPrimeiraLinhaDaColunaValorDoSalarioMinimo() {
+		return !getDriver().findElement(By.xpath("//*[@id=\"25318tbody0\"]/tr[1]/td[2]")).getText().isEmpty();
+	}
+	
+	public String exibiuPrimeiroParagrafoDeObservacaoDoSalarioMinimo() {
+		return exibiuTabelaDoSalarioMinimo().findElement(By.className("tab")).findElement(By.className("observacao")).findElement(By.tagName("p")).getText();
+	}
+}

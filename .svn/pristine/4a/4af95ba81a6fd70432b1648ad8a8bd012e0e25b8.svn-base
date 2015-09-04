@@ -1,0 +1,66 @@
+package br.com.infoglobo.pages.capa.direita;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxProjetosInstitucionais extends AceitacaoAbstractTest{
+	
+	public BoxProjetosInstitucionais(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+
+	public WebElement exibiuClasseProjetosInstitucionais() {
+		return getDriver().findElement(By.className("projetos-institucionais"));
+	}
+	
+	public boolean exibiuBoxProjetosInstitucionais() throws InterruptedException {
+		return exibiuClasseProjetosInstitucionais().isDisplayed();
+	}
+	
+	public String exibiuTituloProjetosIntitucionais() {
+		return exibiuClasseProjetosInstitucionais().findElement(By.className("titulo")).getText();
+	}
+
+	public List<WebElement> listaTotalDeConteudosDoCarrossel(){
+		return exibiuClasseProjetosInstitucionais().findElement(By.id("ulBoxProjetos")).findElements(By.tagName("li"));
+	}
+	
+	public boolean exibiuUmaListaDeConteudos() {
+		return listaTotalDeConteudosDoCarrossel().size() > 1;
+	}
+
+	public boolean exibiuOTotalDeConteudos() {
+		return !exibiuClasseProjetosInstitucionais().findElement(By.className("slider-controls")).findElement(By.className("count-container")).getText().isEmpty();
+	}
+	
+	public WebElement exibiuOBoxDePaginacao() {
+		return exibiuClasseProjetosInstitucionais().findElement(By.className("slider-controls")).findElement(By.className("nav-container"));
+	}
+	
+	public boolean exibiuPaginacaoParaEsquerda() {
+		return exibiuOBoxDePaginacao().findElement(By.className("anterior")).isDisplayed();
+	}
+	
+	public boolean exibiuPaginacaoParaDireita() {
+		return exibiuOBoxDePaginacao().findElement(By.className("proxima")).isDisplayed();
+	}
+	
+	public void clicouNaSetaDaDireita() throws InterruptedException {
+		esperaCarregar(3);
+		getDriver().findElement(By.cssSelector("div.projetos-institucionais.slider-lateral > div.slider-controls.clearfix > div.nav-container.clearfix > span.proxima")).click();
+	}
+
+	public void clicouNaSetaDaEsquerda() throws InterruptedException {
+		esperaCarregar(3);
+		getDriver().findElement(By.cssSelector("div.projetos-institucionais.slider-lateral > div.slider-controls.clearfix > div.nav-container.clearfix > span.anterior")).click();
+	}
+
+	public boolean exibiuUmConteudoValidoNoBox() {
+		return getDriver().findElement(By.className("active")).isDisplayed();
+	}
+}

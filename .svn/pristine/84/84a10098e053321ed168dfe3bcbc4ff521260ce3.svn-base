@@ -1,0 +1,127 @@
+package br.com.infoglobo.login;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class LoginDegustacao extends AceitacaoAbstractTest {
+
+	public LoginDegustacao() throws Exception {
+		super();
+	}
+
+	public LoginDegustacao(WebDriver driver) {
+		super(driver);
+	}
+
+	public void setUsuario(String usuario) {
+		getDriver().findElement(By.id("login")).sendKeys(usuario);
+	}
+
+	public void setSenha(String senha) {
+		WebElement campoSenha = getDriver().findElement(By.id("password"));
+		super.preencherCampoTexto(campoSenha, senha);
+	}
+
+	public AceitacaoAbstractTest logar() throws InterruptedException {
+		esperaCarregar(3);
+		getDriver().findElement(By.className("button")).click();
+		return (AceitacaoAbstractTest) this;
+	}
+	
+	public void setUsuarioBarraGloboCom(String usuario) {
+		getDriver().findElement(By.id("login-passaporte")).sendKeys(usuario);
+	}
+
+	public void setSenhaBarraGloboCom(String senha) {
+		WebElement campoSenha = getDriver().findElement(By.id("senha-passaporte"));
+		super.preencherCampoTexto(campoSenha, senha);
+	}
+
+	public AceitacaoAbstractTest logarNaBarraDaGloboCom() throws InterruptedException {
+		esperaCarregar(3);
+		getDriver().findElement(By.id("submit-form")).click();
+		return (AceitacaoAbstractTest) this;
+	}
+	
+	/*login de STG8080*/
+	public AceitacaoAbstractTest efetuarLoginAutorizado() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("oglobo_autorizado102@mailinator.com");
+		this.setSenha("teste1234");
+		return this.logar();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginAutorizadoComRessalva() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("oglobo_ressalva103@mailinator.com");
+		this.setSenha("teste1234");
+		return this.logar();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginCancelado() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("oglobo_cancelado102@mailinator.com");
+		this.setSenha("teste1234");
+		return this.logar();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginEncerrado() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("oglobo_encerrado100@mailinator.com");
+		this.setSenha("teste1234");
+		return this.logar();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginInexistente() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("oglobo_inexistente100@mailinator.com");
+		this.setSenha("teste1234");
+		return this.logar();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginPNDuplicado() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("oglobo_pnduplicado@mailinator.com");
+		this.setSenha("teste1234");
+		return this.logar();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginUpgrade() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("oglobo_upgrade101@mailinator.com");
+		this.setSenha("teste1234");
+		return this.logar();
+	}
+	
+	/*login de Produção*/
+	public AceitacaoAbstractTest efetuarLoginAutorizadoEmProducao() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("sistemasdeproducao@infoglobo.com.br");
+		this.setSenha("5VWY1691");
+		return this.logar();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginInexistenteEmProducao() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuario("sistemasinexistente@yopmail.com");
+		this.setSenha("Q1w2e3r4");
+		return this.logar();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginAutorizadoBarraDaGloboCom() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuarioBarraGloboCom("sistemasdeproducao@infoglobo.com.br");
+		this.setSenhaBarraGloboCom("5VWY1691");
+		return this.logarNaBarraDaGloboCom();
+	}
+	
+	public AceitacaoAbstractTest efetuarLoginInexistenteBarraDaGloboCom() throws InterruptedException {
+		esperaCarregar(3);
+		this.setUsuarioBarraGloboCom("sistemasinexistente@yopmail.com");
+		this.setSenhaBarraGloboCom("Q1w2e3r4");
+		return this.logarNaBarraDaGloboCom();
+	}
+}

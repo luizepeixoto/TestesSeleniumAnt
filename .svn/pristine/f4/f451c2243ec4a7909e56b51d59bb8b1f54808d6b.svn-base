@@ -1,0 +1,142 @@
+package br.com.infoglobo.testes.plantao;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.plantao.PlantaoDeEditoria;
+
+public class PlantaoDeEditoriaTest {
+	
+	private static PlantaoDeEditoria plantao;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		plantao = new PlantaoDeEditoria();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		plantao.fechar();
+	}
+	
+	@Test
+	public void exibiuOAntetituloDaPagina(){
+		assertTrue(plantao.exibiuOAntititulo());
+	}
+	
+	@Test
+	public void exibiuOBoxDePublicidade(){
+		assertNotNull(plantao.exibiuAPublicidade());
+	}
+	
+	@Test
+	public void exibiuOBoxDePlantaoNoticias(){
+		assertNotNull(plantao.exibiuPlantaoNoticias());
+	}
+	
+	@Test
+	public void exibiuUmaListaDePlantaoNoticias(){
+		assertTrue(plantao.exibiuUmaListaDePlantao());
+	}
+	
+	@Test
+	public void exibiuOPrimeiroDestaqueComoPrincipal(){
+		assertNotNull(plantao.exibiuDestaquePrincipal());
+	}
+	
+	@Test
+	public void exibiuApenasUmaMateriaComoDestaque(){
+		assertTrue(plantao.exibiuApenasUmDestaquePrincipal());
+	}
+	
+	@Test
+	public void exibiuUmaFotoParaAMateriaEmDestaque(){
+		assertTrue(plantao.exibiuUmaParaODestaquePrincipal());
+	}
+	
+	@Test
+	public void exibiuUmaFotoParaAMateriaEmDestaqueComWidth704Px(){
+		assertTrue(plantao.exibiuWidthNaFotoEmDestaque());
+	}
+	
+	@Test
+	public void exibiuUmaFotoParaAMateriaEmDestaqueComHeigth421Px(){
+		assertTrue(plantao.exibiuHeightNaFotoEmDestaque());
+	}
+	
+	@Test
+	public void exibiuODestaqueEsquerdaSuperior(){
+		assertTrue(plantao.exibiuDestaqueEsquerdaSuperior());
+	}
+
+	@Test
+	public void exibiuODestaqueDireitaSuperior(){
+		assertTrue(plantao.exibiuDestaqueEsquerdaInferior());
+	}
+	
+	@Test
+	public void exibiuAsImagensParaAsMateriasDePlantao(){
+		assertTrue(plantao.exibiuImagensParaAsMaterias());
+	}
+	
+	@Test
+	public void exibiuAsImagensParaAsMateriasDePlantaoComWidht234Px(){
+		assertTrue(plantao.exibiuImagensParaAsMateriasComWidht234Px());
+	}
+	
+	@Test
+	public void exibiuAsImagensParaAsMateriasDePlantaoComHeight140Px(){
+		assertTrue(plantao.exibiuImagensParaAsMateriasComHeight140Px());
+	}
+	
+	@Test
+	public void exibiuEditoriaParaAsMateriasDePlantao(){
+		assertTrue(plantao.exibiuEditoriaParaAsMateriasDePlantao());
+	}
+	
+	@Test
+	public void exibiuTituloParaAsMaterias(){
+		assertTrue(plantao.exibiuTituloParaAsMateriasDePlantao());
+	}
+	
+	@Test
+	public void exibiuTituloParaAsMateriasComNoMaximo100Caracteres(){
+		assertTrue(plantao.exibiuTituloComMaximoDeCaracteres());
+	}
+	
+	@Test
+	public void exibiuTempoPostadoParaAsMaterias(){
+		assertTrue(plantao.exibiuTempoPostadoParaAsMateriasDePlantao());
+	}
+	
+	@Test
+	public void exibiuUmLinkNoTituloDaMateriaDePlantao(){
+		assertTrue(plantao.exibiuUmLinkNoTitulo());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoNoTituloDaMateriaDePlantao(){
+		assertTrue(plantao.exibiuUmLinkValidoNoTitulo());
+	}
+	
+	@Test
+	public void exibiuBoxDeCarregarMais(){
+		assertNotNull(plantao.exibiuCarregarMais());
+	}
+	
+	@Test
+	public void exibiuOTextoDeCarregarMaisNoticias(){
+		String tituloEsperado="Carregar mais notícias";
+		assertEquals(tituloEsperado, plantao.exibiuTituloCarregarMais());
+	}
+	
+	@Test
+	public void exibiuUmLinkCorretoParaCarregarMais(){
+		assertTrue(plantao.exibiuLinkCarregarMais());
+	}
+}

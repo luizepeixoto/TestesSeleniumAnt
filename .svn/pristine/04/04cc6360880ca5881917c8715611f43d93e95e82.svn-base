@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.newsletter.selecaoDosEditores;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.newsletter.NewsletterTagueamentoPaginaPadrao;
+
+public class SelecaoDosEditoresTagueamento extends NewsletterTagueamentoPaginaPadrao {
+	
+	public SelecaoDosEditoresTagueamento(Navegador navegador) throws Exception {
+		super(navegador, "newssemanal");
+	}
+}

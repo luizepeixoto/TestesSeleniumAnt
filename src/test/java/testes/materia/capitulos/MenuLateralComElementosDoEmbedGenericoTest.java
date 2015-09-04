@@ -1,0 +1,131 @@
+package testes.materia.capitulos;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.materia.capitulo.MenuLateralElementosEmbedGenerico;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class MenuLateralComElementosDoEmbedGenericoTest { 
+	
+	private static MenuLateralElementosEmbedGenerico materia;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(materia.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new MenuLateralElementosEmbedGenerico(Navegador.CHROME);
+		materia.esperaCarregar(2);
+		materia.executarScroll(materia.acessaPrimeiroCapitulo().getLocation());
+		materia.esperaCarregar(2);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	/*CONFIGURAÇÃO DA MATÉRIA*/
+	/*Materia com 11 capitulos - Posição Lista de Matérias de 0 a 10
+	 * Layout Menu Lateral *
+	1º Capitulo - Twitter
+	2º Capitulo - Post do Facebook
+	3º Capitulo - Vídeo do Facebook
+	4º Capitulo - Instagram
+	5º Capitulo - SoundCloud
+	6º Capítulo - SoundCloud com playlist
+	7º Capítulo - Vídeo do Dailymotion
+	8º Capítulo - Vevo
+	9º Capítulo - Vimeo
+	10º Capítulo - Vine
+	11º Capítulo - Youtube
+	12º Capítulo - Widget de Audio: Utilizado no MenuLateralComAudioTest.java*/
+	
+	@OrdemExecucaoTeste(Ordem = 1)
+	@Test
+	public void verificaSeOPrimeiroCapituloEstaExibindoUmEmbedDoTwitter() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(0);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComTwitter(materia.acessaOCapituloDesejado(0)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 2)
+	@Test
+	public void verificaSeOSegundoCapituloEstaExibindoUmPostDoFacebook() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(1);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComFacebook(materia.acessaOCapituloDesejado(1)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 3)
+	@Test
+	public void verificaSeOTerceiroCapituloEstaExibindoUmVideoDoFacebook() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(2);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoDoFacebookComVideo(materia.acessaOCapituloDesejado(2)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 4)
+	@Test
+	public void verificaSeOQuartoCapituloEstaExibindoUmPostDoInstagram() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(3);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComInstagram(materia.acessaOCapituloDesejado(3)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 5)
+	@Test
+	public void verificaSeOQuintoCapituloEstaExibindoUmEmbedDoSoundcloud() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(4);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComSoundcloud(materia.acessaOCapituloDesejado(4)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 6)
+	@Test
+	public void verificaSeOSextoCapituloEstaExibindoUmEmbedDoSoundcloudComPlaylist() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(5);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComSoundcloudComPlaylist(materia.acessaOCapituloDesejado(5)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 7)
+	@Test
+	public void verificaSeOSetimoCapituloEstaExibindoUmEmbedDoDailymotion() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(6);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComDailymotion(materia.acessaOCapituloComVideoDesejado(6)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 8)
+	@Test
+	public void verificaSeOOitavoCapituloEstaExibindoUmEmbedDoVevo() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(7);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComVevo(materia.acessaOCapituloComVideoDesejado(7)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 9)
+	@Test
+	public void verificaSeONonoCapituloEstaExibindoUmEmbedDoVimeo() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(8);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComVimeo(materia.acessaOCapituloComVideoDesejado(8)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 10)
+	@Test
+	public void verificaSeODecimoCapituloEstaExibindoUmEmbedDoVine() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(9);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComVine(materia.acessaOCapituloDesejado(9)));
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 11)
+	@Test
+	public void verificaSeODecimoPrimeiroCapituloEstaExibindoUmEmbedDoYoutube() throws InterruptedException{
+		materia.executaScrollAteOCapituloDesejado(10);
+		assertTrue(materia.exibiuBoxDoWidgetGenericoComYoutube(materia.acessaOCapituloComVideoDesejado(10)));
+	}
+}

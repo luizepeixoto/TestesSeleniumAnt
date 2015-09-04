@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<project name="Validação de Deploy - Parte 2" basedir="." default="test">
+	<property name="testdir" location="test" />
+
+	<property name="report.dir" location="test" />
+	<property name="testdir" location="test" />
+	<property name="srcdir" location="src" />
+	<property name="engine_lib_path" value="lib" />
+	<property name="full-compile" value="false" />
+	<path id="classpath.base" />
+	<path id="classpath.test">
+		<fileset dir="${engine_lib_path}" includes="**/*.jar" />
+		<pathelement location="${testdir}" />
+		<pathelement location="${srcdir}" />
+		<path refid="classpath.base" />
+	</path>
+
+	<target name="clean">
+		<delete verbose="${full-compile}">
+			<fileset dir="${testdir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${srcdir}" destdir="${testdir}" verbose="${full-compile}">
+			<compilerarg line="-encoding utf-8" />
+			<classpath refid="classpath.test" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile">
+		<junit printsummary="yes" haltonfailure="no">
+			<classpath refid="classpath.test" />
+			<sysproperty key="propertyFile" value="src/resources/Configuracoes-STG.properties" />
+			<!-- formatter type="brief" usefile="false" / -->
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${srcdir}">
+				<fileset dir="${srcdir}">
+					<!--br.com.infoglobo.testes.colunas-->
+					<include name="**/ColunaAutorNaDescricaoTest.java" />
+					<include name="**/ColunaComFotoTest.java" />
+					<include name="**/ColunaLinkPatrocinadoTest.java" />
+					<include name="**/ColunaMetadadoTest.java" />
+					<include name="**/ColunaTest.java" />
+					
+					<!--br.com.infoglobo.testes.materia-->
+					<include name="**/MateriaCom2NiveisTest.java" />
+					<include name="**/MateriaCom3NiveisTest.java" />
+					<include name="**/MateriaComDuasPublicidadesTest.java" />
+					<include name="**/MateriaComTresPublicidadesTest.java" />
+					<include name="**/MateriaComUmaPublicidadeTest.java" />
+					<include name="**/MateriaLinksPatrocinadosTest.java" />
+					<include name="**/MateriaMetadadoTest.java" />
+					<include name="**/MateriaNavegacaoSemMaisAntigaTest.java" />
+					<include name="**/MateriaNavegacaoSemMaisRecenteTest.java" />
+					<include name="**/MateriaNavegacaoTest.java" />
+					<include name="**/MateriaSemAutorTest.java" />
+					<include name="**/MateriaSemFotoTest.java" />
+					
+					<!--br.com.infoglobo.testes.materia.comentario	
+					<include name="**/ComentarioBloqueadoTest.java" />
+					<include name="**/ComentarioBotaoMaisComentariosTest.java" />
+					<include name="**/ComentarioCabecalhoTest.java" />
+					<include name="**/ComentarioComRespostaTest.java" />
+					<include name="**/ComentarioFechadoTest.java" />
+					<include name="**/ComentarioModeradoTest.java" />
+					<include name="**/ComentarioResponderTest.java" />
+					<include name="**/ComentarioSemLoginTest.java" />
+					<include name="**/ComentariosVazioTest.java" />
+					<include name="**/ComentarioUnicoTest.java" />-->
+					
+					<!--br.com.infoglobo.testes.materia.foto-->
+					<include name="**/FotoCentroGrandeTest.java" />
+					<include name="**/FotoEsquerdaGrandeTest.java" />
+					<include name="**/FotoEsquerdaPequenaTest.java" />
+					<include name="**/FotoEsquerdaVerticalTest.java" />
+					<include name="**/FotoNaPosicaoPrincipal.java" />
+					<include name="**/MultiplasFotosInlineTest.java" />
+					
+					<!--br.com.infoglobo.testes.materia.video-->
+					<include name="**/MateriaComDoisVideoGloboTest.java" />
+					<include name="**/MateriaComVideoGloboTest.java" />
+					<include name="**/MateriaComVideoLivestreamTest.java" />
+					<include name="**/MateriaComVideosMultiplosInlineTest.java" />
+					<include name="**/MateriaComVideoUstreamTest.java" />
+					<include name="**/MateriaComVideoVimeoTest.java" />
+					<include name="**/MateriaComVideoYoutubeTest.java" />
+					<include name="**/MateriaComViveoVevoTest.java" />
+					
+					<!--br.com.infoglobo.testes.materia.widget-->
+					<include name="**/BoxCitacaoTest.java" />
+					<include name="**/BoxDeMusicaAEsquerdaTest.java" />
+					<include name="**/BoxDeMusicaCentralizadaTest.java" />
+					<include name="**/BoxEmDestaqueAgoraNoGloboExclusoesTest.java" />
+					<include name="**/BoxEmDestaqueAgoraNoGloboTest.java" />
+					<include name="**/BoxFotoGaleriaInlineComNavegacaoTest.java" />
+					<include name="**/BoxFotoGaleriaInlineTest.java" />
+					<include name="**/BoxInteressadoTest.java" />
+					<include name="**/BoxMaisLidasTest.java" />
+					<include name="**/BoxTwitterEmbedTest.java" />
+					<include name="**/BoxVejaTambemComTarjaTest.java" />
+					<include name="**/BoxVejaTambemDefeitoSemLinksTest.java" />
+					<include name="**/BoxVejaTambemDeListaDeFatosTest.java" />
+					<include name="**/BoxVejaTambemTest.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+</project>

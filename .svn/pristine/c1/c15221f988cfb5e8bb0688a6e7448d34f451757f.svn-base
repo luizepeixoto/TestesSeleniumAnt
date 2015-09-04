@@ -1,0 +1,230 @@
+package br.com.infoglobo.pages.destaques;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.crops.CropsDestaques;
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class DestaqueCom6Fotos extends AceitacaoAbstractTest {
+	
+	public DestaqueCom6Fotos() throws Exception {
+		super();
+	}
+
+	public DestaqueCom6Fotos(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+
+	public boolean exibiuOAntititulo() {
+		return !getDriver().findElement(By.className("subtitulo-container")).findElement(By.className("subtitulo")).getText().isEmpty();
+	}
+
+	public WebElement exibiuDestaqueHorizontal() {
+		return getDriver().findElement(By.className("destaque-horizontal"));
+	}
+
+	public boolean exibiuFotoDoDestaqueHorizontal() {
+		List<WebElement> possuiFotoNoDestaque = exibiuDestaqueHorizontal().findElements(By.tagName("img"));
+		if(possuiFotoNoDestaque.size() > 0){
+			if(exibiuDestaqueHorizontal().findElement(By.tagName("img")).getAttribute("src").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuLinkNaFotoDoDestaque() {
+		List<WebElement> possuiFotoNoDestaque = exibiuDestaqueHorizontal().findElements(By.tagName("img"));
+		if(possuiFotoNoDestaque.size() > 0){
+			if(!exibiuDestaqueHorizontal().findElement(By.tagName("a")).isDisplayed()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuLinkValidoNaFotoDoDestaque() {
+		List<WebElement> possuiFotoNoDestaque = exibiuDestaqueHorizontal().findElements(By.tagName("img"));
+		if(possuiFotoNoDestaque.size() > 0){
+			if(exibiuDestaqueHorizontal().findElement(By.tagName("a")).getAttribute("href").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuOCropCorretoNaFotoDoDestaque() {
+		String urlDaFotoNoDestaque = exibiuDestaqueHorizontal().findElement(By.tagName("img")).getAttribute("src");
+		return urlDaFotoNoDestaque.contains(CropsDestaques.semiAutomaticoSeisDestaques.cropProporcional());
+	}
+
+	public String exibiuFotoDoDestaqueComWidth700() {
+		return exibiuDestaqueHorizontal().findElement(By.tagName("img")).getAttribute("width");
+	}
+
+	public String exibiuFotoDoDestaqueComHeight420() {
+		return exibiuDestaqueHorizontal().findElement(By.tagName("img")).getAttribute("height");
+	}
+
+	public boolean exibiuTituloDoDestaqueHorizontal() {
+		return !exibiuDestaqueHorizontal().findElement(By.className("titulo")).getText().isEmpty();
+	}
+	
+	public boolean exibiuTituloDoDestaqueHorizontalComNoMaximo96Caracteres() {
+		return exibiuDestaqueHorizontal().findElement(By.className("titulo")).getText().length() < 99;
+	}
+	
+	public boolean exibiuLinkNoTituloDoDestaqueHorizontal() {
+		return exibiuDestaqueHorizontal().findElement(By.className("titulo")).findElement(By.tagName("a")).isDisplayed();
+	}
+
+	public boolean exibiuLinkValidoNoTituloDoDestaqueHorizontal() {
+		return !exibiuDestaqueHorizontal().findElement(By.className("titulo")).findElement(By.tagName("a")).getAttribute("href").isEmpty();
+	}
+
+	public boolean exibiuDescricaoDoDestaqueHorizontal() {
+		return !exibiuDestaqueHorizontal().findElement(By.className("subtitulo")).getText().isEmpty();
+	}
+	
+	public boolean exibiuDescricaoDoDestaqueHorizontalComNoMaximo143Caracteres() {
+		return exibiuDestaqueHorizontal().findElement(By.className("subtitulo")).getText().length() < 146;
+	}
+	
+	public List<WebElement> listasDeDestaques(){
+		return getDriver().findElement(By.className("destaques-editaveis")).findElements(By.className("destaques-lista"));
+	}
+	
+	public List<WebElement> listaDeDestaquesSecundarios(){
+		return getDriver().findElement(By.className("destaques-editaveis")).findElements(By.tagName("li"));
+	}
+
+	public boolean exibiuDuasListasDeDestaques() {
+		return listasDeDestaques().size() == 2;
+	}
+
+	public boolean exibiuSeisDestaquesSecundarios() {
+		return listaDeDestaquesSecundarios().size() == 6;
+	}
+	
+	public boolean exibiuFotoOuDescricaoNosDestaquesDaLista() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			List<WebElement> exibiuFoto = listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElements(By.tagName("img"));
+			if(exibiuFoto.size()>0){
+				if(!listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("img")).isDisplayed()){
+					return false;
+				}
+			}else{
+				if(listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("h3")).getText().isEmpty()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuFotoDosDestaquesComOCropCorreto() {
+		for(int i=0; i<listaDeDestaquesSecundarios().size(); i++){
+			List<WebElement> exibiuFoto = listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElements(By.tagName("img"));
+			if(exibiuFoto.size()>0){
+				if(!listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("img")).getAttribute("src").contains(CropsDestaques.semiAutomaticoMateria.cropProporcional())){
+					imprimirMensagemDeErro("crop incorreto", i);
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuFotoDaListaComWidth234Px() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			List<WebElement> exibiuFoto = listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElements(By.tagName("img"));
+			if(exibiuFoto.size()>0){
+				if(!listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("img")).getAttribute("width").equals(CropsDestaques.semiAutomaticoMateria.getWidth())){
+					imprimirMensagemDeErroDeImagem(i, listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("img")).getAttribute("height"), CropsDestaques.semiAutomaticoMateria.getWidth());
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuFotoDaListaComHeight140Px() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			List<WebElement> exibiuFoto = listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElements(By.tagName("img"));
+			if(exibiuFoto.size()>0){
+				if(!listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("img")).getAttribute("height").equals("140")){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuLinkNaFotoDaLista() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			List<WebElement> exibiuFoto = listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElements(By.tagName("img"));
+			if(exibiuFoto.size()>0){
+				if(!listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("a")).isDisplayed()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuUmLinkValidoNaFotoDaLista() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			List<WebElement> exibiuFoto = listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElements(By.tagName("img"));
+			if(exibiuFoto.size()>0){
+				if(listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("a")).getAttribute("href").isEmpty()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuTituloParaOsDestaquesDaLista() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			if(listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("h2")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuTituloComNoMaximo96Caracteres() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			if(listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("h2")).getText().length() > 99){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuLinkNoTituloDosDestaquesDaLista() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			if(!listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("h2")).findElement(By.tagName("a")).isDisplayed()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuLinkValidoNosTitulosDosDestaquesDaLista() {
+		for(int i=0;i<listaDeDestaquesSecundarios().size();i++){
+			if(listaDeDestaquesSecundarios().get(i).findElement(By.className("inner-border")).findElement(By.tagName("h2")).findElement(By.tagName("a")).getAttribute("href").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuTituloMaisSobre() {
+		return !getDriver().findElement(By.className("mais-sobre-titulo")).getText().isEmpty();
+	}
+}

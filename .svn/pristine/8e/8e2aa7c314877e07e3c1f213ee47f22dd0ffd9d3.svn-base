@@ -1,0 +1,66 @@
+package br.com.infoglobo.testes.materia.widget;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.materia.widget.BoxFotogaleriaInline;
+
+public class BoxFotoGaleriaInlineTest {
+	
+	private static BoxFotogaleriaInline materia;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new BoxFotogaleriaInline();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDeFotogaleriaInlineEstaSendoExibido(){
+		assertNotNull(materia.exibiuBoxDeFotogaleriaInline());
+	}
+	
+	@Test
+	public void verificaSeOBoxDeFotogaleriaInlinePossuiUmaListaDeFotos(){
+		assertTrue(materia.exibiuUmaListaDeFotos());
+	}
+	
+	@Test
+	public void verificaSeCadaUmaDasFotosEstaExibindoOWidthCorreto(){
+		assertTrue(materia.exibiuOWidthCorretoParaCadaFoto());
+	}
+	
+	@Test
+	public void verificaSeCadaUmaDasFotosEstaExibindoOHeightCorreto(){
+		assertTrue(materia.exibiuOHeightCorretoParaCadaFoto());
+	}
+	
+	@Test
+	public void verificaSeCadaUmaDasFotosEstaExibindoALegenda(){
+		assertTrue(materia.exibiuLegendaParaCadaFoto());
+	}
+	
+	@Test
+	public void verificaSeCadaUmaDasFotosEstaExibindoOAutorNaLegenda(){
+		assertTrue(materia.exibiuOAutorDeCadaFotoNaLegenda());
+	}
+	
+	@Test
+	public void verificaSeOTotalDeFotosEstaSendoExibindo(){
+		assertTrue(materia.exibiuOTotalDeFotos());
+	}
+	
+	@Test
+	public void verificaSeAsSetasDeNavegacaoEstaoSendoExibidos(){
+		assertTrue(materia.exibiuSetaDeNavegacaoParaAEsquerda());
+		assertTrue(materia.exibiuSetaDeNavegacaoParaADireita());
+	}
+}

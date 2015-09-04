@@ -1,0 +1,159 @@
+package br.com.infoglobo.testes.editorias.destaques;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.editoria.destaques.DestaqueFimDeSemanaTresDestaques;
+
+public class DestaqueFimDeSemanaTresDestaquesTest {
+	
+	private static DestaqueFimDeSemanaTresDestaques editoria;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(editoria.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		editoria = new DestaqueFimDeSemanaTresDestaques(Navegador.CHROME);
+	}
+	
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		editoria.fechar();
+	}
+	
+	//Destaque Layout 2
+	
+	@Test
+	public void verificaSeODestaqueDoFimDeSemanaEstaSendoExibido(){
+		assertNotNull(editoria.exibiuDestaqueFimDeSemana());
+	}
+	
+	@Test
+	public void verificaSeBoxDoDestaqueEstaExibindoTresBoxDeMaterias(){
+		assertTrue(editoria.exibiuTresBoxDeMaterias());
+	}
+	
+	@Test
+	public void verificaSeOsDoisPrimeirosBoxPossuemEstaoExibindoEditoria(){
+		assertTrue(editoria.exibiuEditoriaParaAsMateriasDoPrimeiroBox());
+	}
+	
+	@Test
+	public void verificaSeAsEditoriasDasMateriasDoPrimeiroBoxPossuemUmLink(){
+		assertTrue(editoria.exibiuLinkNaEditoriaDasMateriasDoPrimeiroBox());
+	}
+	
+	@Test
+	public void verificaSeAsEditoriasDasMateriasDoPrimeiroBoxPossuemUmLinkValido(){
+		assertTrue(editoria.exibiuLinkValidoNaEditoriaDasMateriasDoPrimeiroBox());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDoPrimeiroBoxPossuemUmTitulo(){
+		assertTrue(editoria.exibiuTituloParaAsMateriasDoPrimeiroBox());
+	}
+	
+	@Test
+	public void verificaSeOsTitulosDasMateriasDoPrimeiroBoxPossuemUmLink(){
+		assertTrue(editoria.exibiuTituloComLinkNasMateriasDoPrimeiroBox());
+	}
+	
+	@Test
+	public void verificaSeOsTitulosDasMateriasDoPrimeiroBoxPossuemUmLinkValido(){
+		assertTrue(editoria.exibiuTituloComLinkValidoNasMateriasDoPrimeiroBox());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDoPrimeiroBoxPossuemUmTituloComOMaximoDeCaracteresPermitidos(){
+		assertTrue(editoria.exibiuTituloParaAsMateriasDoPrimeiroBoxComNoMaximo68Caracteres());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDoPrimeiroBoxPossuemUmaImagem(){
+		assertTrue(editoria.exibiuImagemParaAsMateriasDoPrimeiroBox());
+	}
+	
+	@Test
+	public void verificaSeAsImagensDosDoisPrimeirosBoxPossuemOWidthDe281Px(){
+		assertTrue(editoria.exibiuImagemDoPrimeiroBoxComWidhtCorreto());
+	}
+	
+	@Test
+	public void verificaSeAsImagensDosDoisPrimeirosBoxPossuemOHeightDe189Px(){
+		assertTrue(editoria.exibiuImagemDoPrimeiroBoxComHeightCorreto());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDosDoisPrimeirosBoxPossuemUmaListaDeWebChamadas(){
+		assertTrue(editoria.exibiuUmaListaDeWebChamadasParaCadaUmDosDestaques());
+	}
+	
+	@Test
+	public void verificaSeAsWebChamadasDasMateriasDosDoisPrimeirosBoxPossuemUmTitulo(){
+		assertTrue(editoria.exibiuUmTituloParaCadaWebChamadasDosDestaques());
+	}
+	
+	@Test
+	public void verificaSeOsTitulosDasWebChamadasDasMateriasDosDoisPrimeirosBoxPossuemUmLink(){
+		assertTrue(editoria.exibiuUmLinkParaCadaWebChamadasDosDestaques());
+	}
+	
+	//Início do Box Azul com foto
+	
+	@Test
+	public void verificaSeOSegundoBoxDoDestaqueDoFimDeSemanaEstaSendoExibido(){
+		assertNotNull(editoria.exibiuSegundoBoxDoDestaque());
+	}
+	
+	@Test
+	public void verificaSeOSegundoBoxDoDestaqueDoFimDeSemanaEstaExibindoAEditoria(){
+		assertTrue(editoria.exibiuEditoriaParaSegundoBoxDoDestaque());
+	}
+	
+	@Test
+	public void verificaSeAEditoriaDoSegundoBoxDoDestaqueDoFimDeSemanaPossuiUmLink(){
+		assertTrue(editoria.exibiuUmLinkNaEditoriaDoSegundoBoxDoDestaque());
+	}
+	
+	@Test
+	public void verificaSeOLinkNaEditoriaDoSegundoBoxDoDestaqueDoFimDeSemanaEhValido(){
+		assertTrue(editoria.exibiuUmLinkValidoNaEditoriaDoSegundoBoxDoDestaque());
+	}
+	
+	@Test
+	public void verificaSeOSegundoBoxDoDestaqueDoFimDeSemanaEstaExibindoUmTitulo(){
+		assertTrue(editoria.exibiuTituloParaSegundoBoxDoDestaque());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoSegundoBoxDoDestaqueDoFimDeSemanaPossuiUmLink(){
+		assertTrue(editoria.exibiuUmLinkNoTituloDoSegundoBoxDoDestaque());
+	}
+	
+	@Test
+	public void verificaSeOLinkDoTituloDoSegundoBoxDoDestaqueDoFimDeSemanaEhValido(){
+		assertTrue(editoria.exibiuUmLinkValidoNoTituloDoSegundoBoxDoDestaque());
+	}
+	
+	@Test
+	public void verificaSeOSegundoBoxDoDestaqueDoFimDeSemanaEstaExibindoUmTituloComOMaximoDeCaracteresPermitidos(){
+		assertTrue(editoria.exibiuTituloParaSegundoBoxDoDestaqueComNoMaximo53Caracteres());
+	}
+	
+	@Test
+	public void verificaSeADescricaoDaMateriaDoSegundoBoxEstaSendoExibida(){
+		assertTrue(editoria.exibiuDescricaoDoSegundoBox()); 
+	}
+	
+	@Test
+	public void verificaSeOSegundoBoxDoDestaqueDoFimDeSemanaEstaExibindoUmaDescricaoComOMaximoDeCaracteresPermitidos(){
+		assertTrue(editoria.exibiuTituloParaSegundoBoxDoDestaqueComNoMaximo60Caracteres());
+	}
+}

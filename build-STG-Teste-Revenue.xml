@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<project name="Revenue e Tealium" basedir="." default="test">
+	<property name="testdir" location="test" />
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+
+	<property name="report.dir" location="test" />
+	<property name="testdir" location="test" />
+	<property name="srcdir" location="src" />
+	<property name="engine_lib_path" value="lib" />
+	<property name="full-compile" value="false" />
+	<path id="classpath.base" />
+	<path id="classpath.test">
+		<fileset dir="${engine_lib_path}" includes="**/*.jar" />
+		<pathelement location="${testdir}" />
+		<pathelement location="${srcdir}" />
+		<path refid="classpath.base" />
+	</path>
+
+	<target name="clean">
+		<delete verbose="${full-compile}">
+			<fileset dir="${testdir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${srcdir}" destdir="${testdir}" verbose="${full-compile}">
+			<compilerarg line="-encoding utf-8" />
+			<classpath refid="classpath.test" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile">
+		<parallel threadCount="3">
+			<junit printsummary="yes" haltonfailure="no">
+				<classpath refid="classpath.test" />
+				<sysproperty key="propertyFile" value="src/resources/Configuracoes-STG.properties" />
+				<!-- formatter type="brief" usefile="false" / -->
+				<formatter type="xml" />
+				<batchtest fork="yes" todir="${srcdir}">
+					<fileset dir="${srcdir}">
+					<!--br.com.infoglobo.testes.revenue-->	
+						<include name="**/MarcacoesEditoriaComDestaqueHorizontal2ColunasTest.java" />
+						<include name="**/MarcacoesEditoriaComDestaqueHorizontal2E3ColunasTest.java" />
+						<include name="**/MarcacoesEditoriaComDestaqueHorizontal3ColunasTest.java" />
+						<include name="**/MarcacoesEditoriaSimplesTest.java" />
+						
+					<!--br.com.infoglobo.testes.tealium-->	
+						<include name="**/CapaBlogsAspTealiumTest.java" />
+						<include name="**/CapaDeTopicoTealiumTest.java" />
+						<include name="**/CapaDeUmBlogAspTealiumTest.java" />
+						<include name="**/CapaEditoriaTealiumTest.java" />
+						<include name="**/CapaHomeTealiumTest.java" />
+						<include name="**/ColunaTealiumTest.java" />
+						<include name="**/EuReporterAspTealiumTest.java" />
+						<include name="**/FotogaleriaTealiumTest.java" />
+						<include name="**/ListaDeFatosTealiumTest.java" />
+						<include name="**/MateriaCapitulosTealiumTest.java" />
+						<include name="**/MateriaTealiumTest.java" />
+						<include name="**/PlantaoTealiumTest.java" />
+						<include name="**/PostDeUmBlogTealiumTest.java" />
+						<include name="**/TempoRealPosJogoTealiumTest.java" />
+						<include name="**/TempoRealTealiumTest.java" />
+						<include name="**/TireDuvidasAspTealiumTest.java" />
+					</fileset>
+				</batchtest>
+			</junit>
+		</parallel>
+	</target>
+</project>

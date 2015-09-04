@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.newsletter.selecaoDosEditores;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.newsletter.NewsletterCorpoPaginaPadrao;
+
+public class SelecaoDosEditoresCorpo extends NewsletterCorpoPaginaPadrao {
+	
+	public SelecaoDosEditoresCorpo(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

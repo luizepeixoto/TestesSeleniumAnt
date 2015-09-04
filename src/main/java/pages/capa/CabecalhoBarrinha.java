@@ -1,0 +1,178 @@
+package pages.capa;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import pages.tealium.MarcacoesDoTealium;
+
+import br.com.infoglobo.pages.Navegador;
+
+public class CabecalhoBarrinha extends MarcacoesDoTealium {
+	
+	public CabecalhoBarrinha(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+
+	public WebElement barrinhaDeProdutos(){
+		return getDriver().findElement(By.className("barrinha-container"));
+	}
+	
+	public boolean exibiuCabecalhoBarrinha() {
+		return barrinhaDeProdutos().isDisplayed();
+	}
+	
+	public WebElement acessaClasseOGlobo() {
+		return barrinhaDeProdutos().findElement(By.className("oglobo"));
+	}
+	
+	public boolean exibiuProdutoOGloboNoTopoDoSite() {
+		return acessaClasseOGlobo().isDisplayed();
+	}
+
+	public String exibiuTituloOGlobo() {
+		return acessaClasseOGlobo().getText();
+	}
+	
+	public boolean exibiuOGloboMarcadoComoAtivo() {
+		return acessaClasseOGlobo().findElement(By.className("ativo-link")).isDisplayed();
+	}
+	
+	public String validarLinkProdutoOGlobo() {
+		return acessaClasseOGlobo().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement acessaClasseMemoria() {
+		return barrinhaDeProdutos().findElement(By.className("memoria"));
+	}
+	
+	public boolean exibiuProdutoMemoriaNoTopoDoSite() {
+		return acessaClasseMemoria().isDisplayed();
+	}
+	
+	public String exibiuProdutoMemoria() {
+		return acessaClasseMemoria().findElement(By.tagName("a")).getText();
+	}
+
+	public String validarLinkProdutoMemoria() {
+		return acessaClasseMemoria().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement acessaClasseAcervo() {
+		return barrinhaDeProdutos().findElement(By.className("acervo"));
+	}
+	
+	public boolean exibiuProdutoAcervoNoTopoDoSite() {
+		return acessaClasseAcervo().isDisplayed();
+	}
+	
+	public String exibiuProdutoAcervo() {
+		return acessaClasseAcervo().findElement(By.tagName("a")).getText();
+	}
+	
+	public String validarLinkProdutoAcervo() {
+		return acessaClasseAcervo().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement acessaClasseEla() {
+		return barrinhaDeProdutos().findElement(By.className("ela"));
+	}
+	
+	public boolean exibiuProdutoElaNoTopoDoSite() {
+		return acessaClasseEla().isDisplayed();
+	}
+	
+	public String exibiuProdutoEla() {
+		return acessaClasseEla().findElement(By.tagName("a")).getText();
+	}
+	
+	public String validarLinkProdutoEla() {
+		return acessaClasseEla().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement acessaClasseKogut() {
+		return barrinhaDeProdutos().findElement(By.className("kogut"));
+	}
+	
+	public boolean exibiuProdutoKogutNoTopoDoSite() {
+		return acessaClasseKogut().isDisplayed();
+	}
+
+	public String exibiuProdutoPatriciaKogut() {
+		return acessaClasseKogut().findElement(By.tagName("a")).getText();
+	}
+
+	public String validarLinkProdutoPatriciaKogut() {
+		return acessaClasseKogut().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement acessaClasseRioShow() {
+		return barrinhaDeProdutos().findElement(By.className("rioshow"));
+	}
+	
+	public boolean exibiuProdutoRioShowNoTopoDoSite() {
+		return acessaClasseRioShow().isDisplayed();
+	}
+	
+	public String exibiuProdutoRioShow() {
+		return acessaClasseRioShow().findElement(By.tagName("a")).getText();
+	}
+
+	public String validarLinkProdutoRioShow() {
+		return acessaClasseRioShow().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement acessaClasseExtra() {
+		return barrinhaDeProdutos().findElement(By.className("extra"));
+	}
+	
+	public boolean exibiuProdutoExtraNoTopoDoSite() {
+		return acessaClasseExtra().isDisplayed();
+	}
+	
+	public String exibiuProdutoExtra() {
+		return acessaClasseExtra().findElement(By.tagName("a")).getText();
+	}
+	
+	public String validarLinkProdutoExtra() {
+		return acessaClasseExtra().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement acessaClasseClassificados() {
+		return barrinhaDeProdutos().findElement(By.className("classificados"));
+	}
+	
+	public boolean exibiuProdutoClassificadosNoTopoDoSite() {
+		return acessaClasseClassificados().isDisplayed();
+	}
+
+	public String exibiuProdutoClassificadosDoRio() {
+		return acessaClasseClassificados().findElement(By.tagName("a")).getText();
+	}
+
+	public String validarLinkProdutoClassificadosDoRio() {
+		return acessaClasseClassificados().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement acessaClasseSouMaisRio() {
+		return barrinhaDeProdutos().findElement(By.className("clubemaisrio"));
+	}
+	
+	public boolean exibiuProdutoSouMaisRioNoTopoDoSite() {
+		return acessaClasseSouMaisRio().isDisplayed();
+	}
+	
+	public String exibiuProdutoClubeSouMaisRio() {
+		return acessaClasseSouMaisRio().findElement(By.tagName("a")).getText();
+	}
+
+	public String validarLinkProdutoClubesouMaisRio() {
+		return acessaClasseSouMaisRio().findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public boolean exibiuApenasUmProdutoComoAtivo() {
+		List<WebElement> totalDeProdutosMarcadosComoAtivo = barrinhaDeProdutos().findElements(By.className("ativo-link"));
+		return totalDeProdutosMarcadosComoAtivo.size() == Integer.parseInt("1");
+	}
+}

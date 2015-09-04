@@ -1,0 +1,155 @@
+package br.com.infoglobo.pages.editoria.destaques;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.crops.CropsDestaques;
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class DestaqueHorizontalCom2ColunasComVariacoes extends AceitacaoAbstractTest {
+	
+	public DestaqueHorizontalCom2ColunasComVariacoes() throws Exception{
+		super();
+	}
+	
+	public DestaqueHorizontalCom2ColunasComVariacoes(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+
+//	***** CHAMADA COM FOTO GRANDE *****
+	
+	public WebElement chamadaComFotoGrande(){
+		return getDriver().findElement(By.className("box2ColDuplo"));
+	}
+	
+	public boolean exibiuChamadaComFotoGrande() {
+		return chamadaComFotoGrande().isDisplayed();
+	}
+
+	public boolean exibiuTituloDaChamadaComFotoGrande() {
+		return !chamadaComFotoGrande().findElement(By.tagName("h3")).findElement(By.tagName("a")).getText().isEmpty();
+	}
+
+	public boolean exibiuAutorDaChamadaComFotoGrande() {
+		return !chamadaComFotoGrande().findElement(By.xpath("//div[@class='subtitulo']/span/b")).getText().isEmpty();
+	}
+
+	public boolean exibiuSubtituloDaChamadaComFotoGrande() {
+		return !chamadaComFotoGrande().findElement(By.xpath("//div[@class='subtitulo']/span")).getText().isEmpty();
+	}
+
+	public boolean exibiuUmLinkValidoNoTituloDaChamadaComFotoGrande() {
+		return !chamadaComFotoGrande().findElement(By.tagName("h3")).findElement(By.tagName("a")).getAttribute("href").isEmpty();
+	}
+
+	public boolean exibiuImagemDaChamadaComFotoGrande() {
+		return chamadaComFotoGrande().findElement(By.className("animado-opacity")).findElement(By.tagName("img")).isDisplayed();
+	}
+	
+	public boolean exibiClasseAnimadaOpacityNaChamadaComFotoGrande() {
+		return chamadaComFotoGrande().findElement(By.className("animado-opacity")).findElement(By.tagName("img")).isDisplayed();
+	}
+	
+	public boolean exibiuOCropCorretoParaAImagemDaChamadaComFotoGrande() {
+		String urlDaImagem = chamadaComFotoGrande().findElement(By.tagName("img")).getAttribute("src");
+		return urlDaImagem.contains(CropsDestaques.duasColunasChamadaComFotoGrande.cropProporcional());
+	}
+	
+	public boolean exibiuOWidthCorretoParaAImagemDaChamadaComFotoGrande() {
+		String urlDaImagem = chamadaComFotoGrande().findElement(By.tagName("img")).getAttribute("width");
+		return urlDaImagem.equals(CropsDestaques.duasColunasChamadaComFotoGrande.getWidth());
+	}
+	
+	public boolean exibiuOHeightCorretoParaAImagemDaChamadaComFotoGrande() {
+		String urlDaImagem = chamadaComFotoGrande().findElement(By.tagName("img")).getAttribute("height");
+		return urlDaImagem.equals(CropsDestaques.duasColunasChamadaComFotoGrande.getHeight());
+	}
+	
+	public boolean exibiuUmLinkValidoNaImagemDaChamadaComFotoGrande() {
+		return !chamadaComFotoGrande().findElement(By.className("link animado-opacity")).getAttribute("href").isEmpty();
+	}
+
+	public boolean naoExibiuImagemDaChamadaComFotoGrande() {
+		try {
+			getDriver().findElement(By.xpath("//div[@class='row materia-principal-2col']")).findElement(By.xpath("div[3]")).findElement(By.xpath("a"));
+			return false;
+		} catch (Exception e) {
+			return true;
+		}
+		
+	}
+
+//	***** CHAMADA COM FOTO PEQUENA *****
+	
+	public List<WebElement> listaDeClassesBox2Col(){
+		return getDriver().findElement(By.className("materia-principal-2col")).findElements(By.className("box2Col"));
+	}
+	
+	public WebElement chamadaComFotoPequena(){
+		return listaDeClassesBox2Col().get(2);
+	}
+	
+	public boolean exibiuChamadaComFotoPequena() {
+		return chamadaComFotoPequena().isDisplayed();
+	}
+
+	public boolean exibiuTituloDaChamadaComFotoPequena() {
+		return !chamadaComFotoPequena().findElement(By.tagName("h3")).findElement(By.tagName("a")).getText().isEmpty();
+	}
+
+	public boolean exibiuAutorDaChamadaComFotoPequena() {
+		return !chamadaComFotoPequena().findElement(By.xpath("//div[@class='subtitulo']/span/b")).getText().isEmpty();
+	}
+
+	public boolean exibiuSubtituloDaChamadaComFotoPequena() {
+		return !chamadaComFotoPequena().findElement(By.xpath("//div[@class='subtitulo']/span")).getText().isEmpty();
+	}
+
+	public boolean exibiuUmLinkValidoNoTituloDaChamadaComFotoPequena() {
+		return !chamadaComFotoPequena().findElement(By.tagName("h3")).findElement(By.tagName("a")).getAttribute("href").isEmpty();
+	}
+	
+	public WebElement acessaImagemDaChamadaComFotoPequena() {
+		return chamadaComFotoPequena().findElement(By.className("subtitulo")).findElement(By.tagName("img"));
+	}
+	
+	public boolean exibiuImagemDaChamadaComFotoPequena() {
+		return acessaImagemDaChamadaComFotoPequena().isDisplayed();
+	}
+	
+	public boolean exibiuCropCorretoParaAImagemDaChamadaComFotoPequena() {
+		String urlDaImagem = acessaImagemDaChamadaComFotoPequena().getAttribute("src");
+		return urlDaImagem.contains(CropsDestaques.duasColunasChamadaComFotoPequena.cropProporcional());
+	}
+	
+	public boolean exibiuWidthCorretoParaAImagemDaChamadaComFotoPequena() {
+		String urlDaImagem = acessaImagemDaChamadaComFotoPequena().getAttribute("width");
+		return urlDaImagem.equals(CropsDestaques.duasColunasChamadaComFotoPequena.getWidth());
+	}
+	
+	public boolean exibiuHeightCorretoParaAImagemDaChamadaComFotoPequena() {
+		String urlDaImagem = acessaImagemDaChamadaComFotoPequena().getAttribute("height");
+		return urlDaImagem.equals(CropsDestaques.duasColunasChamadaComFotoPequena.getHeight());
+	}
+	
+	public boolean exibiuUmLinkValidoNaImagemDaChamadaComFotoPequena() {
+		return !chamadaComFotoPequena().findElement(By.xpath("//div[@class='subtitulo']/a")).getAttribute("href").isEmpty();
+	}
+
+	public boolean exibiuImagemDaChamadaComFotoPequenaComAClasseOpacity() {
+		return chamadaComFotoPequena().findElement(By.xpath("//div[@class='subtitulo']/a")).getAttribute("class").contains("link animado-opacity");
+	}
+
+	public boolean naoExibiuImagemDaChamadaComFotoPequena() {
+		try {
+			getDriver().findElement(By.xpath("//div[@class='row materia-principal-2col']")).findElement(By.xpath("//div[6]/div[@class='subtitulo']/a"));
+			return false;
+		} catch (Exception e) {
+			return true;
+		}
+		
+	}
+}

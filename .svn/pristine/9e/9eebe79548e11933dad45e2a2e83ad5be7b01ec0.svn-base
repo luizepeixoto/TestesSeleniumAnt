@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.newsletter.destaquesDoDia;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.newsletter.NewsletterCorpoPaginaPadrao;
+
+public class DestaquesDoDiaCorpo extends NewsletterCorpoPaginaPadrao {
+	
+	public DestaquesDoDiaCorpo(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

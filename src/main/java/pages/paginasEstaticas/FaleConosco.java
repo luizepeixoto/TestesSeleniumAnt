@@ -1,0 +1,216 @@
+package pages.paginasEstaticas;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class FaleConosco extends AceitacaoAbstractTest{
+
+	public FaleConosco() throws Exception {
+		super();
+	}
+	
+	public FaleConosco(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public WebElement exibiuPublicidade() {
+		return getDriver().findElement(By.className("publicidade"));
+	}
+	
+	public WebElement exibiuFormulario() {
+		return getDriver().findElement(By.id("fc"));
+	}
+	
+	public boolean exibiuTexto() {
+		//List<WebElement> textoEsperado = getDriver().findElement(By.id("fl")).findElements(By.tagName("p")); 
+		for(int i=0; i<8; i++){
+			if(getDriver().findElement(By.id("fl")).findElements(By.tagName("p")).get(i).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuBannerDeAssinatura() {
+		return getDriver().findElements(By.className("subscriptionFooter")).size()==0;
+	}
+
+	public WebElement exibiuForm() {
+		return getDriver().findElement(By.id("fl"));
+	}
+	
+	public boolean exibiuLabelNome() {
+		return exibiuForm().findElements(By.tagName("li")).get(0).findElement(By.tagName("label")).getText().contains("Nome");
+	}
+
+	public boolean exibiuTextBoxParaNome() {
+		return exibiuForm().findElements(By.tagName("li")).get(0).findElement(By.tagName("input")).getAttribute("name").contains("nome");
+	}
+	
+	public boolean exibiuLabelEmail() {
+		return exibiuForm().findElements(By.tagName("li")).get(1).findElement(By.tagName("label")).getText().contains("E-mail");
+	}
+
+	public boolean exibiuTextBoxParaEmail() {
+		return exibiuForm().findElements(By.tagName("li")).get(1).findElement(By.tagName("input")).getAttribute("name").contains("remetente");
+	}
+	
+	public boolean exibiuLabelDeOndeAcessa() {
+		return exibiuForm().findElements(By.tagName("li")).get(2).findElement(By.tagName("label")).getText().contains("De onde acessa");
+	}
+
+	public boolean exibiuComboDeOndeAcessa() {
+		return exibiuForm().findElements(By.tagName("li")).get(2).findElement(By.tagName("select")).getAttribute("name").contains("localidade");
+	}
+	
+	public boolean exibiuOpcoesParaOComboDeOndeAcessa() {
+		List<WebElement> opcoesDoCompo = exibiuForm().findElements(By.tagName("li")).get(2).findElements(By.tagName("option"));
+		for(int i=0 ; i<opcoesDoCompo.size(); i++){
+			if(opcoesDoCompo.get(i).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuValueOpcoesParaOComboDeOndeAcessa() {
+		List<WebElement> opcoesDoCompo = exibiuForm().findElements(By.tagName("li")).get(2).findElements(By.tagName("option"));
+		for(int i=0 ; i<opcoesDoCompo.size(); i++){
+			if(opcoesDoCompo.get(i).getAttribute("value").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuLabelAssunto() {
+		return exibiuForm().findElements(By.tagName("li")).get(3).findElement(By.tagName("label")).getText().contains("Assunto");
+	}
+
+	public boolean exibiuComboAssunto() {
+		return exibiuForm().findElements(By.tagName("li")).get(3).findElement(By.tagName("select")).getAttribute("name").contains("assunto");
+	}
+	
+	public boolean exibiuOpcoesParaOComboAssunto() {
+		List<WebElement> opcoesDoCompo = exibiuForm().findElements(By.tagName("li")).get(3).findElements(By.tagName("option"));
+		for(int i=0 ; i<opcoesDoCompo.size(); i++){
+			if(opcoesDoCompo.get(i).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuValueOpcoesParaOComboAssunto() {
+		List<WebElement> opcoesDoCompo = exibiuForm().findElements(By.tagName("li")).get(3).findElements(By.tagName("option"));
+		for(int i=0 ; i<opcoesDoCompo.size(); i++){
+			if(opcoesDoCompo.get(i).getAttribute("value").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuLabelSuaMensagem() {
+		return exibiuForm().findElements(By.tagName("li")).get(5).findElement(By.tagName("label")).getText().contains("Sua mensagem");
+	}
+
+	public boolean exibiuComboSuaMensagem() {
+		return exibiuForm().findElements(By.tagName("li")).get(5).findElement(By.tagName("textarea")).getAttribute("name").contains("mensagem");
+	}
+
+	public String exibiuTextoCaptcha() {
+		return getDriver().findElement(By.id("digitacao")).findElement(By.tagName("label")).getText();
+	}
+
+	public boolean exibiuTextBoxDoCaptcha() {
+		return getDriver().findElement(By.id("digitacao")).findElement(By.tagName("input")).getAttribute("name").contains("captcha");
+	}
+
+	public boolean exibiuImagemDoCaptcha() {
+		return getDriver().findElement(By.id("box-captcha")).findElement(By.tagName("img")).isDisplayed();
+	}
+
+	public boolean exibiuBotaoDeAtualizarCaptcha() {
+		return getDriver().findElement(By.id("box-captcha")).findElement(By.id("refresh-captcha")).isDisplayed();
+	}
+	
+	public boolean exibiuBotaoDeLimpar() {
+		return getDriver().findElement(By.id("bt_limpa")).isDisplayed();
+	}
+	
+	public boolean exibiuTextoLimparDoBotaoLimpar() {
+		return getDriver().findElement(By.id("bt_limpa")).getText().contains("Limpar");
+	}
+	
+	public boolean exibiuBotaoDeEnviar() {
+		return getDriver().findElement(By.id("bt_envia")).isDisplayed();
+	}
+	
+	public boolean exibiuTextoEnviarDoBotaoLimpar() {
+		return getDriver().findElement(By.id("bt_envia")).getAttribute("value").contains("Enviar");
+	}
+	
+	public String exibiuTextoNoFimDoBox() {
+		List<WebElement> listaDeTagsP = getDriver().findElement(By.id("fl")).findElements(By.tagName("p"));
+		return getDriver().findElements(By.tagName("p")).get(listaDeTagsP.size()).getText();
+	}
+	
+	public boolean exibiuValidacaoParaNome() {
+		getDriver().findElement(By.id("bt_envia")).click();
+		return getDriver().findElement(By.id("erroNome")).getText().contains("Campo obrigatório");
+	}
+
+	public boolean exibiuValidacaoParaEmail() {
+		return getDriver().findElement(By.id("erroEmail")).getText().contains("Campo obrigatório");
+	}
+
+	public boolean exibiuValidacaoParaAssunto() {
+		return getDriver().findElement(By.id("erroAssunto")).getText().contains("Campo obrigatório");
+	}
+
+	public boolean exibiuValidacaoParaSuaMensagem() {
+		return getDriver().findElement(By.id("erroMensagem")).getText().contains("Campo obrigatório");
+	}
+
+	public boolean exibiuValidacaoParaCaptcha() {
+		return getDriver().findElement(By.id("erroCaptcha")).getText().contains("Campo obrigatório");
+	}
+	
+	public boolean exibiuValidacaoParaNomeAposPreenchimento() {
+		exibiuForm().findElements(By.tagName("li")).get(0).findElement(By.tagName("input")).sendKeys("O Globo");
+		getDriver().findElement(By.id("bt_envia")).click();
+		return !getDriver().findElement(By.xpath("//*[@id=\"erroNome\"]")).isDisplayed();
+	}
+	
+	public boolean exibiuValidacaoParaEmailAposPreenchimento() {
+		exibiuForm().findElements(By.tagName("li")).get(1).findElement(By.tagName("input")).sendKeys("usuario@oglobo.com");
+		getDriver().findElement(By.id("bt_envia")).click();
+		return !getDriver().findElement(By.xpath("//*[@id=\"erroEmail\"]")).isDisplayed();
+	}
+	
+	public boolean exibiuValidacaoParaAssuntoAposPreenchimento() {
+		new Select(getDriver().findElement(By.id("assunto"))).selectByVisibleText("Acervo O GLOBO - Assinaturas");
+		getDriver().findElement(By.id("bt_envia")).click();
+		return !getDriver().findElement(By.xpath("//*[@id=\"erroAssunto\"]")).isDisplayed();
+	}
+
+	public boolean exibiuValidacaoParaSuaMensagemAposPreenchimento() {
+		exibiuForm().findElements(By.tagName("li")).get(5).findElement(By.tagName("input")).sendKeys("Nova matéria");
+		getDriver().findElement(By.id("bt_envia")).click();
+		return !getDriver().findElement(By.xpath("//*[@id=\"erroMensagem\"]")).isDisplayed();
+	}
+	
+	public boolean exibiuValidacaoParaSuaCaptchaAposPreenchimento() {
+		getDriver().findElement(By.id("digitacao")).findElement(By.tagName("input")).sendKeys("asdf");
+		getDriver().findElement(By.id("bt_envia")).click();
+		return !getDriver().findElement(By.xpath("//*[@id=\"erroCaptcha\"]")).isDisplayed();
+	}
+}
+

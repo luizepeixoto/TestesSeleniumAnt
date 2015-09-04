@@ -1,0 +1,81 @@
+package testes.ela.capa;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.ela.capa.CapaEla;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class BoxDestaqueTest {
+
+	private static CapaEla capa;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(capa.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		capa = new CapaEla(Navegador.CHROME);
+		capa.esperaSuperLeaderboardVoltarAoTamanhoNormal(150);
+		capa.executaScrollParaAparecerOTituloDeUmaPosicao(capa.acessaBoxDeDestaque());
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		capa.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void verificaSeOBoxDeDestaquesEstaSendoExibido(){
+		assertTrue(capa.exibiuBoxDeDestaquesDasCapas());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void verificaSeAEditoriaDeCadaChamadaDoBoxDeDestaquesEstaSendoExibidoCorretamente(){
+		assertTrue(capa.exibiuEditoriaDoBoxDeDestaquesDasCapas());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void verificaSeCadaUmaDasChamadaDoBoxDeDestaquesEstaExibindoUmaImagemComCropWidthEHeightCorretos(){
+		assertTrue(capa.exibiuImagemNasChamadasDasBoxDeDestaquesDasCapas());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void verificaSeCadaUmaDasChamadaDoBoxDeDestaquesEstaExibindoUmTitulo() throws InterruptedException{
+		capa.executaScrollParaAparecerOTituloDeUmaPosicao(capa.acessaPosicaoDoPrimeiroTitulo());
+		capa.esperaCarregar(3);
+		assertTrue(capa.exibiuTituloNasChamadasDosBoxDeDestaquesDasCapas());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void verificaSeCadaUmaDasChamadaDoBoxDeDestaquesEstaExibindoUmaDescricao(){
+		assertTrue(capa.exibiuDescricaoNasChamadasDosBoxDeDestaquesDasCapas());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=6)
+	@Test
+	public void verificaSeAChamadaPrincipalDoBoxDeDestaquesEstaSendoExibidoCorretamente(){
+		assertTrue(capa.exibiuChamadaPrincipalDosBoxDeDestaquesDasCapasCorretamente());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=7)
+	@Test
+	public void verificaSeAChamadaPrincipalDoBoxDeDestaquesEstaExibindoUmaTarjaCinza(){
+		assertTrue(capa.exibiuChamadaPrincipalDosBoxDeDestaquesComUmaTarjaCinza());
+	}
+}

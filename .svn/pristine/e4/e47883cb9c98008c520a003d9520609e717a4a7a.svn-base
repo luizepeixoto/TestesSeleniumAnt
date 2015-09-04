@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<project name="Validação de Deploy - Parte 1" basedir="." default="test">
+	<property name="testdir" location="test" />
+
+	<property name="report.dir" location="test" />
+	<property name="testdir" location="test" />
+	<property name="srcdir" location="src" />
+	<property name="engine_lib_path" value="lib" />
+	<property name="full-compile" value="false" />
+	<path id="classpath.base" />
+	<path id="classpath.test">
+		<fileset dir="${engine_lib_path}" includes="**/*.jar" />
+		<pathelement location="${testdir}" />
+		<pathelement location="${srcdir}" />
+		<path refid="classpath.base" />
+	</path>
+
+	<target name="clean">
+		<delete verbose="${full-compile}">
+			<fileset dir="${testdir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${srcdir}" destdir="${testdir}" verbose="${full-compile}">
+			<compilerarg line="-encoding utf-8" />
+			<classpath refid="classpath.test" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile">
+		<junit printsummary="yes" haltonfailure="no">
+			<classpath refid="classpath.test" />
+			<sysproperty key="propertyFile" value="src/resources/Configuracoes-STG.properties" />
+			<!-- formatter type="brief" usefile="false" / -->
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${srcdir}">
+				<fileset dir="${srcdir}">
+					<!--br.com.infoglobo.testes.capa-->
+					<include name="**/CabecalhoBarrinhaTest.java" />
+					<include name="**/CabecalhoBuscaTest.java" />
+					<!--<include name="**/CabecalhoCentralTest.java" />-->
+					<include name="**/CabecalhoEditoriasTest.java" />
+					<include name="**/CabecalhoTopicosTest.java" /> 
+					
+					<!--br.com.infoglobo.testes.capa.direita-->
+					<!--<include name="**/BoxAcervoTest.java" />
+					<include name="**/BoxAsMaisTest.java" />
+					<include name="**/BoxClubeSouMaisRioTest.java" />
+					<include name="**/BoxCotacoesFinanceirasTest.java" />
+					<include name="**/BoxDeAgendaTest.java" />-->
+					<!--<include name="**/BoxDeEnqueteFechadaTest.java" />-->
+					<!--<include name="**/BoxEdicaoDigitalTest.java" />
+					<include name="**/BoxEuReporterTest.java" />
+					<include name="**/BoxGenteDoGloboComExclusoesTest.java" />
+					<include name="**/BoxGenteDoGloboTest.java" />
+					<include name="**/BoxHoroscopoTest.java" />
+					<include name="**/BoxMaisBlogsTest.java" />
+					<include name="**/BoxMemoriaTest.java" />
+					<include name="**/BoxNewsletterTest.java" />
+					<include name="**/BoxOGloboAMaisTest.java" />
+					<include name="**/BoxProjetosDeMarketingTest.java" />-->
+					<!--<include name="**/BoxProjetosInstitucionaisTest.java" />-->
+					<!--<include name="**/BoxRevistaDaTvTest.java" />
+					<include name="**/BoxUltimasPlantaoTest.java" />
+					<include name="**/BoxVaiRioTest.java" />-->
+					
+					<!--br.com.infoglobo.testes.capa.esquerda-->
+					<include name="**/BoxDeMaisMateriasComTarjaTest.java" />
+					<include name="**/BoxDeMaisMateriasTest.java" />
+					<include name="**/ChamadaComFotoTest.java" />
+					<include name="**/ChamadaComWebChamadasComTarjaTest.java" />
+					<include name="**/ChamadaComWebChamadasTest.java" />
+					<include name="**/ChamadaConteudoComVideoTest.java" />
+					<include name="**/ChamadaInformePublicitarioLinkExternoTest.java" />
+					<include name="**/ChamadaInformePublicitarioTest.java" />
+					<include name="**/ChamadaMateriaEspecialTest.java" />
+					<include name="**/ChamadaPrincipalTest.java" />
+					<include name="**/ChamadaSecundariaComTarjaTest.java" />
+					<include name="**/ChamadaSemEditoriaTest.java" />
+					
+					<!--br.com.infoglobo.testes.capa.inferior-->
+					<include name="**/BoxDeFotogaleriaTest.java" />
+					<include name="**/BoxPageNotFoundTest.java" />
+					<include name="**/BoxSelecaoOGloboTest.java" />
+					
+					<!--br.com.infoglobo.testes.capa.meio-->
+					<include name="**/BoxCarrosselMancheteHorizontalTest.java" />
+					<include name="**/BoxDeColunistasEBlogueirosTest.java" />
+					<include name="**/BoxHumorTest.java" />
+					<include name="**/BoxMateriaEspecialTest.java" />
+					<include name="**/BoxOpinicaoDoGloboTest.java" />
+					<include name="**/BoxVideosTest.java" />
+					<include name="**/MancheteDuasColunasDuasManchetesComVideoTest.java" />
+					<include name="**/MancheteDuasColunasDuasManchetesTest.java" />
+					<include name="**/MancheteDuasColunasUmaMancheteComVideoHorizontalTest.java" />
+					<include name="**/MancheteDuasColunasUmaMancheteFotoHorizontalTest.java" />
+					<include name="**/MancheteDuasColunasUmaMancheteFotoVerticalTest.java" />
+					<include name="**/MancheteHorizontalComVideoTest.java" />
+					<include name="**/MancheteHorizontalTest.java" />
+					<include name="**/MancheteInformePublicitarioComLinkExternoTest.java" />
+					<include name="**/MancheteInformePublicitarioTest.java" />
+					<include name="**/PublicidadeTest.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+</project>

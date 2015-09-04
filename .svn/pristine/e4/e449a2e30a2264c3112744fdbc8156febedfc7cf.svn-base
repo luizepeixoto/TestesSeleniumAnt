@@ -1,0 +1,29 @@
+package br.com.infoglobo.testes.materia.widget;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.materia.widget.BoxEmDestaque;
+
+public class BoxEmDestaqueAgoraNoGloboExclusoesTest {
+	
+	private static BoxEmDestaque materia;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new BoxEmDestaque();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxEmDestaqueAgoraNoGloboEstaExibindoAlgumaMateriaDeEspecialPublicitario(){
+		assertTrue(materia.exibiuMateriaDeEspecialPublicitarioNoBoxEmDestaqueAgoraNoGLobo());
+	}
+}

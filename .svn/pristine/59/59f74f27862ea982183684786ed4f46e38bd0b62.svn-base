@@ -1,0 +1,105 @@
+package br.com.infoglobo.testes.compartilhamento;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.materia.Materia;
+
+@RunWith(OrdenadorTestes.class)
+public class CompartilhamentoInlineMateriaTest {
+	
+	private static Materia materia;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new Materia(Navegador.CHROME);
+		materia.esperaCarregar(3);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=11)
+	@Test
+	public void verificaSeOCompartilhamentoInlineDaMateriaEstaSendoExibidoNoTopoDaMateria(){
+		materia.executarScroll(materia.acessaDescricaoDaMateria().getLocation());
+		assertTrue(materia.exibiuCompartilhamento(materia.acessaClasseHeadMateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=12)
+	@Test
+	public void verificaSeOBotaoDeCurtirEstaSendoExibidoNoTopoDaMateria(){
+		assertTrue(materia.exibiuBotaoDelike(materia.acessaClasseHeadMateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=13)
+	@Test
+	public void verificaSeOBotaoDeRecomendarEstaSendoExibidoNoTopoDaMateria(){
+		assertTrue(materia.exibiuBotaoDeRecomendar(materia.acessaClasseHeadMateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=14)
+	@Test
+	public void verificaSeOBotaoDoTwitterEstaSendoExibidoNoTopoDaMateria(){
+		assertTrue(materia.exibiuBotaoDeTwitter(materia.acessaClasseHeadMateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=15)
+	@Test
+	public void verificaSeOBotaoDoGooglePlusEstaSendoExibidoNoTopoDaMateria(){
+		assertTrue(materia.exibiuBotaoDoGooglePlus(materia.acessaClasseHeadMateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=16)
+	@Test
+	public void verificaSeOsBotoesDeCompartilhamentoEstaoSendoExibidosNaOrdemCorretaNoTopoDaPagina(){
+		assertTrue(materia.exibiuOsBotoesDeCompartilhamentoNaOrdemCorrreta(materia.acessaClasseHeadMateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=17)
+	@Test
+	public void verificaSeOCompartilhamentoInlineDaMateriaEstaSendoExibidoNoFinalDaMateria() throws InterruptedException{
+		materia.executaScrollParaAparecerOTituloDeUmaPosicao(materia.acessaCompartilhamento(materia.acessaCorpoDamateria(), 0));
+		materia.esperaCarregar(2);
+		assertTrue(materia.exibiuCompartilhamento(materia.acessaCorpoDamateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=18)
+	@Test
+	public void verificaSeOBotaoDeCurtirEstaSendoExibidoNoFinalDaMateria(){
+		assertTrue(materia.exibiuBotaoDelike(materia.acessaCorpoDamateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=19)
+	@Test
+	public void verificaSeOBotaoDeRecomendarEstaSendoExibidoNoFinalDaMateria(){
+		assertTrue(materia.exibiuBotaoDeRecomendar(materia.acessaCorpoDamateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=20)
+	@Test
+	public void verificaSeOBotaoDoTwitterEstaSendoExibidoNoFinalDaMateria(){
+		assertTrue(materia.exibiuBotaoDeTwitter(materia.acessaCorpoDamateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=21)
+	@Test
+	public void verificaSeOBotaoDoGooglePlusEstaSendoExibidoNoFinalDaMateria(){
+		assertTrue(materia.exibiuBotaoDoGooglePlus(materia.acessaCorpoDamateria(), 0));
+	}
+	
+	@OrdemExecucaoTeste(Ordem=22)
+	@Test
+	public void verificaSeOsBotoesDeCompartilhamentoEstaoSendoExibidosNaOrdemCorretaNoFinalDaPagina(){
+		assertTrue(materia.exibiuOsBotoesDeCompartilhamentoNaOrdemCorrreta(materia.acessaCorpoDamateria(), 0));
+	}
+}

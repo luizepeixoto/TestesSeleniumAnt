@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.ela.editoria;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.destaques.DestaquesLista;
+
+public class DestaquesElaLista extends DestaquesLista {
+	
+	public DestaquesElaLista(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

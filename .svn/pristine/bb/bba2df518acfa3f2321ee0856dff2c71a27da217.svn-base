@@ -1,0 +1,99 @@
+package br.com.infoglobo.pages.materia.widget;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxFotogaleriaInline extends AceitacaoAbstractTest {
+
+	public BoxFotogaleriaInline() throws Exception {
+		super();
+	}
+	
+	public BoxFotogaleriaInline(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public WebElement exibiuBoxDeFotogaleriaInline() {
+		return getDriver().findElement(By.className("fotogaleriasmateriaCapitulos"));
+	}
+	
+	public List<WebElement> listaTotalDeImagens(){
+		return exibiuBoxDeFotogaleriaInline().findElement(By.tagName("ul")).findElements(By.tagName("li"));
+	}
+	
+	public boolean exibiuUmaListaDeFotos() {
+		for(int i=0; i< listaTotalDeImagens().size(); i++){
+			if(!listaTotalDeImagens().get(i).findElement(By.className("fotoIten")).findElement(By.tagName("img")).isDisplayed()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOWidthCorretoParaCadaFoto() {
+		for(int i=0; i< listaTotalDeImagens().size(); i++){
+			if(!listaTotalDeImagens().get(i).findElement(By.className("fotoIten")).findElement(By.tagName("img")).getAttribute("width").equals("700")){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOHeightCorretoParaCadaFoto() {
+		for(int i=0; i< listaTotalDeImagens().size(); i++){
+			if(!listaTotalDeImagens().get(i).findElement(By.className("fotoIten")).findElement(By.tagName("img")).getAttribute("height").equals("427")){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuLegendaParaCadaFoto() {
+		for(int i=0; i< listaTotalDeImagens().size(); i++){
+			if(listaTotalDeImagens().get(i).findElement(By.className("legenda")).findElement(By.tagName("h3")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOAutorDeCadaFotoNaLegenda() {
+		for(int i=0; i< listaTotalDeImagens().size(); i++){
+			if(listaTotalDeImagens().get(i).findElement(By.className("legenda")).findElement(By.tagName("h3")).findElement(By.tagName("span")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOTotalDeFotos() {
+		return !exibiuBoxDeFotogaleriaInline().findElement(By.className("nav")).findElement(By.className("count-container")).getText().isEmpty();
+	}
+
+	public boolean exibiuSetaDeNavegacaoParaAEsquerda() {
+		return exibiuBoxDeFotogaleriaInline().findElement(By.className("nav")).findElement(By.className("anterior")).isDisplayed();
+	}
+	
+	public boolean exibiuSetaDeNavegacaoParaADireita() {
+		return exibiuBoxDeFotogaleriaInline().findElement(By.className("nav")).findElement(By.className("proxima")).isDisplayed();
+	}
+
+	public void executouNavegacaoCorretamente() throws InterruptedException {
+		Thread.sleep(2000);
+		for(int i=0; i< listaTotalDeImagens().size()-1; i++){
+			Thread.sleep(500);
+			executarScroll(getDriver().findElement(By.className("fotoIten")).findElement(By.tagName("img")).getLocation().toString());
+			getDriver().findElement(By.cssSelector("a.proxima")).click();
+			Thread.sleep(500);
+		}
+	}
+	
+	public boolean exibiuASetaParaDireitaDesabilitadaNaUltimaFoto() throws InterruptedException {
+		return exibiuBoxDeFotogaleriaInline().findElement(By.className("nav")).findElements(By.tagName("a")).get(1).getAttribute("class").contains("disabled");
+	}
+}

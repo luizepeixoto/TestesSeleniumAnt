@@ -1,0 +1,97 @@
+package testes.materia.capitulos;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.materia.capitulo.MenuLateralComAudio;
+
+import static org.junit.Assert.*;
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class MenuLateralComAudioTest {
+	
+	private static MenuLateralComAudio materiaEmCapitulo;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(materiaEmCapitulo.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materiaEmCapitulo = new MenuLateralComAudio(Navegador.CHROME);
+		materiaEmCapitulo.esperaCarregar(2);
+		materiaEmCapitulo.executarScroll(materiaEmCapitulo.acessaPrimeiroCapitulo().getLocation());
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materiaEmCapitulo.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void exibiuBoxDoAudio() throws InterruptedException{
+		materiaEmCapitulo.executaScrollAteOCapituloDesejado(11);
+		assertTrue(materiaEmCapitulo.exibiuBoxDoAudio());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void exibiuPlayDoAudio(){
+		assertTrue(materiaEmCapitulo.exibiuPlayDoAudio());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void exibiuNomeDoArquivoDoAudio(){
+		assertTrue(materiaEmCapitulo.exibiuNomeDoArquivoDoAudio());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void exibiuBarraDeProgressoDoAudio(){
+		assertTrue(materiaEmCapitulo.exibiuBarraDeProgressoDoAudio());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void exibiuProgressTimeDoAudio() throws InterruptedException{
+		assertTrue(materiaEmCapitulo.exibiuProgressTimeDoAudio());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=6)
+	@Test
+	public void exibiuTotalTimeDoAudio() throws InterruptedException{
+		assertTrue(materiaEmCapitulo.exibiuTotalTimeDoAudio());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=7)
+	@Test
+	public void exibiuVolumeDoAudio(){
+		assertTrue(materiaEmCapitulo.exibiuVolumeDoAudio());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=8)
+	@Test
+	public void exibiuBotaoDeMudoDoAudio(){
+		assertTrue(materiaEmCapitulo.exibiuBotaoDeMudoDoAudio());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=9)
+	@Test
+	public void exibiuBarraDeVolumeDoAudio(){
+		assertTrue(materiaEmCapitulo.exibiuBarraDeVolumeDoAudio());
+	}
+		
+	@OrdemExecucaoTeste(Ordem=10)
+	@Test
+	public void verificaSeOAudioPossuiUmaUrl(){
+		assertTrue(materiaEmCapitulo.verificaSeOAudioPossuiUmaUrl());
+	}
+}

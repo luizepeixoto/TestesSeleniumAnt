@@ -1,0 +1,160 @@
+package br.com.infoglobo.testes.destaquesSemiAutomaticos;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import br.com.infoglobo.crops.CropsDestaques;
+import br.com.infoglobo.pages.destaques.DestaqueCom4FotosAoLado;
+
+public class DestaqueCom4FotosAoLadoTest {
+	
+	private static DestaqueCom4FotosAoLado ultimas;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		ultimas = new DestaqueCom4FotosAoLado();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		ultimas.fechar();
+	}
+	
+	@Test
+	public void exibiuOAntititulo(){
+		assertTrue(ultimas.exibiuOAntititulo());
+	}
+	
+	@Test
+	public void exibiuBoxDeDestaqueHorizontal(){
+		assertNotNull(ultimas.exibiuDestaqueHorizontal());
+	}
+	
+	@Test
+	public void exibiuFotoDoDestaqueHorizontal(){
+		assertTrue(ultimas.exibiuFotoDoDestaqueHorizontal());
+	}
+	
+	@Test
+	public void verificaSeAFotoDoDestaqueHorizontalPossuiOCropCorreto(){
+		assertTrue(ultimas.exibiuCropCorretoParaAFotoDoDestaqueHorizontal());
+	}
+	
+	@Test
+	public void exibiuLinkNaFotoDoDestaqueHorizontal(){
+		assertTrue(ultimas.exibiuLinkNaFotoDoDestaque());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoNaFotoDoDestaqueHorizontal(){
+		assertTrue(ultimas.exibiuLinkValidoNaFotoDoDestaque());
+	}
+	
+	@Test
+	public void exibiuFotoDoDestaqueHorizontalComWidthDe470(){
+		String widthEsperado = CropsDestaques.semiAutomaticoQuatroDestaquesAoLado.getWidth();
+		assertEquals(widthEsperado, ultimas.exibiuFotoDoDestaqueComWidth470());
+	}
+	
+	@Test
+	public void exibiuFotoDoDestaqueHorizontalComHeightDe281(){
+		String heightEsperado = CropsDestaques.semiAutomaticoQuatroDestaquesAoLado.getHeight();
+		assertEquals(heightEsperado, ultimas.exibiuFotoDoDestaqueComHeight281());
+	}
+	
+	@Test
+	public void exibiuTituloDoDestaqueHorizontal(){
+		assertTrue(ultimas.exibiuTituloDoDestaqueHorizontal());
+	}
+	
+	@Test
+	public void exibiuTituloDoDestaqueHorizontalComNoMaximo96Caracteres(){
+		assertTrue(ultimas.exibiuTituloDoDestaqueHorizontalComNoMaximo96Caracteres());
+	}
+	
+	@Test
+	public void exibiuLinkNoTituloDoDestaqueHorizontal(){
+		assertTrue(ultimas.exibiuLinkNoTituloDoDestaqueHorizontal());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoNoTituloDoDestaqueHorizontal(){
+		assertTrue(ultimas.exibiuLinkValidoNoTituloDoDestaqueHorizontal());
+	}
+	
+	@Test
+	public void exibiuDescricaoDaMateriaDoDestaqueHorizontal(){
+		assertTrue(ultimas.exibiuDescricaoDoDestaqueHorizontal());
+	}
+	
+	@Test
+	public void exibiuDescricaoDaMateriaDoDestaqueHorizontalComNoMaximo143Caracteres(){
+		assertTrue(ultimas.exibiuDescricaoDoDestaqueHorizontalComNoMaximo143Caracteres());
+	}
+	
+	@Test
+	public void exibiuListaDeDestaques(){
+		assertTrue(ultimas.exibiuListaDeDestaques());
+	}
+	
+	@Test
+	public void verificaSeUmaFotoOuUmaDescricaoEstaSendoExibidaParaODestaque(){
+		assertTrue(ultimas.exibiuFotoOuDescricaoNosDestaquesDaLista());
+	}
+	
+	@Test
+	public void verificaSeUmaFotoDosDestaquesPossuemOCropCorreto(){
+		assertTrue(ultimas.exibiuFotoDosDestaquesComOCropCorreto());
+	}
+	
+	@Test
+	public void verificaCasoExistaFotoNaPosicaoSeElaPossuiWidthDe234Px(){
+		assertTrue(ultimas.exibiuFotoDaListaComWidth234Px());
+	}
+	
+	@Test
+	public void verificaCasoExistaFotoNaPosicaoSeElaPossuiHeightDe140Px(){
+		assertTrue(ultimas.exibiuFotoDaListaComHeight140Px());
+	}
+	
+	@Test
+	public void verificaCasoExistaFotoNaPosicaoSeElaPossuiUmLink(){
+		assertTrue(ultimas.exibiuLinkNaFotoDaLista());
+	}
+	
+	@Test
+	public void verificaCasoExistaFotoNaPosicaoSeElaPossuiUmLinkValido(){
+		assertTrue(ultimas.exibiuUmLinkValidoNaFotoDaLista());
+	}
+	
+	@Test
+	public void verificaSeOsDestaquesPossuemTitulo(){
+		assertTrue(ultimas.exibiuTituloParaOsDestaquesDaLista());
+	}
+	
+	@Test
+	public void exibiuTituloComNoMaximo96Caracteres(){
+		assertTrue(ultimas.exibiuTituloComNoMaximo96Caracteres());
+	}
+	
+	@Test
+	public void verificaSeOsDestaquesPossuemUmLinkNoTitulo(){
+		assertTrue(ultimas.exibiuLinkNoTituloDosDestaquesDaLista());
+	}
+	
+	@Ignore
+	@Test
+	public void verificaSeOsDestaquesPossuemUmLinkValidoNoTitulo(){
+		assertTrue(ultimas.exibiuLinkValidoNosTitulosDosDestaquesDaLista());
+	}
+	
+	@Ignore
+	@Test
+	public void verificaSeOTituloMaisSobreEstaSendoExibido(){
+		assertTrue(ultimas.exibiuTituloMaisSobre());
+	}
+}

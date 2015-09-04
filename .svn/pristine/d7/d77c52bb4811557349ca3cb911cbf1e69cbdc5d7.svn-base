@@ -1,0 +1,407 @@
+# 1) Ambiente (host, proxy, proxyUser...)
+ambiente=PRD
+
+#WebLogic
+dominio=oglobo.globo.com
+
+#Tomcat
+#dominio=oglobobeta.globo.com/
+
+# 2) "path" para os modelos usados no teste.
+
+##Agenda##
+  AgendaEventos.path=rio/agenda/
+
+##BarraGloboCom##
+  LogarNaBarraGloboCom.path=
+
+##Barreira##
+  Degustacao.path=
+  BarreiraEspecialPublicitario.path=
+  
+##Capa##
+  CabecalhoBarrinha.path= 
+  CapaMenuMeio.path=
+  CapaMenuInferior.path=
+  CapaCabecalho.path=
+  CapaCabecalhoPublicidade.path=
+  
+##Capa da Esquerda##
+  ChamadaPrincipal.path=
+  ChamadaSemEditoria.path=
+  ChamadaComWebChamada.path=
+  ChamadaComFoto.path=
+  ChamadaComChamadaSecundariaComTarja.path=
+  ChamadaComWebChamadasComTarjas.path=
+  ChamadaEspecial.path=
+  ChamadaInformePublicitario.path=
+  ChamadaInformePublicitarioLinkExterno.path=
+  ChamadaConteudoComVideo.path=
+  BoxDeMaisMaterias.path=
+
+##Capa: Coluna da Direita##
+  BoxAcervo.path=
+  BoxArroba.path=
+  BoxAsMais.path=
+  BoxCincoMinutos.path=
+  BoxCotacoesFinanceiras.path=
+  BoxDeAgenda.path=
+  BoxEdicaoDigital.path=
+  BoxEuReporter.path=
+  BoxGenteDoGlobo.path=
+  BoxGenteDoGloboComExclusoes.path=
+  BoxHoroscopo.path=
+  BoxMemoria.path=
+  BoxMaisBlogs.path=
+  BoxOGloboAMais.path=
+  BoxProjetosInstitucionais.path=
+  BoxProjetosDeMarketing.path=
+  BoxDeEnqueteAberta.path=
+  BoxDeEnqueteFechada.path=
+  BoxRevistaDaTv.path=
+  BoxRioShow.path=
+  BoxUltimasPlantao.path=
+  BoxVaiRio.path=
+  BoxClubeSouMaisRio.path=
+
+##Capa: Coluna da Meio##
+  BoxCarrosselMancheteHorizontal.path=
+  BoxColunistasEBlogueiros.path=
+  BoxHumor.path=
+  BoxOpiniao.path=
+  BoxDeVideos.path=
+  BoxEspecial.path=
+  CapaMeioPublicidade.path=
+  CapaMeioMancheteDuasColunasDuasManchetes.path=
+  CapaMeioMancheteDuasColunasUmaMancheteFotoHorizontal.path=
+  CapaMeioMancheteDuasColunasUmaMancheteFotoVertical.path=
+  CapaMeioMancheteHorizontal.path=
+  CapaMeioMancheteDuasColunasDuasManchetesComVideo.path=
+  CapaMeioMancheteDuasColunasUmaMancheteComVideoHorizontal.path=
+  CapaMeioMancheteHorizontalComVideo.path=
+  CapaMeioMancheteInformePublicitario.path=
+  CapaMeioMancheteInformePublicitarioLinkExterno.path=
+
+##Compartilhamento##
+  CompartilharColuna.path=cultura/marcha-brasilia-15884318
+  CompartilharMateria.path=esportes/federacao-desconhece-problemas-do-engenhao-diz-que-custos-levaram-semifinal-ao-estadio-15894046
+  CompartilharEditoria.path=esportes/
+  CompartilharPlantao.path=rio/transito/avenida-maracana-com-boas-condicoes-nos-dois-sentidos-altura-da-rua-mata-machado-15894209
+  CompartilharFotogaleria.path=rio/o-amanhecer-no-maracana-15891108
+
+##Coluna##
+  Coluna.path=cultura/marcha-brasilia-15884318
+  ColunaComFoto.path=rio/bairros/diversao-garantida-15873719
+  ColunaComAutorNaDescricao.path=sociedade/a-agua-voltou-consciencia-nem-tanto-15888553
+  ColunaMetadado.path=rio/bairros/diversao-garantida-15873719
+  ColunaNavegacao.path=rio/bairros/os-resenheiros-15833984
+  ColunaNavegacaoSemAnterior.path=
+  ColunaNavegacaoSemProxima.path=
+  ColunaSemBoxNavegacao.path=
+
+##Comentário##
+  CabecalhoComentario.path=sociedade/educacao/governo-prorroga-ate-29-de-maio-inscricoes-para-renovacao-de-contratos-do-fies-15958043
+  ComentarioComRespostas.path=
+  ComentarioInvalido.path=sociedade/educacao/governo-prorroga-ate-29-de-maio-inscricoes-para-renovacao-de-contratos-do-fies-15958043
+  FormularioBotaoDenunciar.path=sociedade/educacao/governo-prorroga-ate-29-de-maio-inscricoes-para-renovacao-de-contratos-do-fies-15958043
+  FormularioBotaoResponder.path=sociedade/educacao/governo-prorroga-ate-29-de-maio-inscricoes-para-renovacao-de-contratos-do-fies-15958043
+  FormularioDeComentarioAberto.path=sociedade/educacao/governo-prorroga-ate-29-de-maio-inscricoes-para-renovacao-de-contratos-do-fies-15958043
+  MateriaComBotaoMaisComentarios.path=brasil/grafica-usada-por-vaccari-para-lavar-dinheiro-esta-em-nome-de-sindicatos-ligados-ao-pt-15880571
+  MateriaComComentarioExpirado.path=brasil/grafica-usada-por-vaccari-para-lavar-dinheiro-esta-em-nome-de-sindicatos-ligados-ao-pt-15880571
+  MateriaComComentarioModerado.path=
+  MateriaComComentarios.path=brasil/pt-anuncia-afastamento-de-vaccari-mas-repudia-prisao-15882114
+  MateriaComUmComentario.path=
+  MateriaSemComentarioHabilitado.path=economia/levy-apoio-do-fmi-importante-para-sucesso-do-ajuste-15895785
+  MateriaSemComentarios.path=
+
+##Destaques##
+  DestaqueHorizontalCom2Colunas.path=
+  DestaqueHorizontalCom2ColunasComVariacoes.path= 
+  DestaqueHorizontalCom3Colunas1Foto.path=
+  DestaqueHorizontalCom3Colunas2Fotos.path=
+  DestaqueHorizontalEspecialCom3Colunas.path=
+  DestaqueFimDeSemanaDoisDestaques.path=
+  DestaqueFimDeSemanaTresDestaques.path=
+  DestaqueDuasColunasUrgente.path=
+
+##Destaques Semi-Automáticos##
+  DestaqueCom4FotosAoLado.path=
+  DestaqueCom4FotosAbaixo.path=
+  DestaqueCom6Fotos.path=
+  DestaquesBlog.path=
+  DestaquesLista.path=
+  DestaquesComInformePublicitario.path=
+  DestaquesVideos.path=
+  DestaquesTopicoAutomatico.path=
+  DestaqueSemManchete.path=
+
+##Editorias##
+  EditoriaAutomaticaTitulo.path=
+  BarraDeBuscaRioGastronomia.path=
+  BoxDeCriticasComPaginacao.path=
+  BoxDeCriticasSemPaginacao.path=
+  BoxDeUltimasNoticiasDeEditoria.path=
+  BoxDeUltimasNoticiasDeSubEditoria.path=
+  BoxDeUltimasNoticiasDeUmTopico.path=
+  EditoriaComDoisIncludesDeMancheteDuasColunasUrgente.path=
+  Editorias.path=
+  MenuDestaquesComColunaEsquerdaVazia.path=
+  MenuDestaquesComColunaEsquerdaVaziaSubEditoria.path=
+
+##Editoria - Eu-Reporter##
+  EuReporterMenuSubEditorias.path=eu-reporter/
+  EuReporterWidget.path=eu-reporter/
+  
+##Enem##
+  EnemIframe.path=sociedade/educacao/enem-e-vestibular/simulados/
+  EnemValidaJson.path=correcaoprova/2014/enem/arquivos/correcaoprovaenem-alterado.json
+    
+##Enquete##
+  EnqueteEnriquecidaBusca.path=
+  EnqueteEnriquecidaPaginaGeral.path=
+  EnqueteEnriquecidaVotada.path=
+  EnqueteEnriquecidaVotarNovamente.path=
+  EnqueteSuperPaginaGeral.path= 
+  EnqueteSuperResultados.path= 
+  EnqueteSuperVotada.path= 
+  EnqueteSuperVotarNovamente.path= 
+
+##Fotogaleria##
+  FotogaleriaHome.path=fotogalerias/
+  FotogaleriaLinkRelacionado.path=esportes/psg-barca-porto-bayern-15885522
+  FotogaleriaMetadado.path=rio/o-amanhecer-no-maracana-15891108
+  Fotogaleria.path=rio/a-invasao-no-flamengo-15860528
+  FotogaleriaAmpliada.path=rio/o-amanhecer-no-maracana-15891108
+  BoxDeUltimasFotogalerias.path=rio/o-amanhecer-no-maracana-15891108
+  
+##Horóscopo##
+  Horoscopo.path=horoscopo/
+  HoroscopoCabecalho.path=horoscopo/
+
+##Informe Publicitário##
+  EditoriaInformeDestaquePequeno.path=
+  EditoriaInformeDestaqueGrande.path=
+  MateriaInformePublicitario.path=esportes/descubra-os-segredos-de-quem-ama-correr-14236226
+  PaginaAutomaticaDeTopicosComInformePublicitario.path=
+  
+##Indicadores Financeiros##
+  Indicadores.path=economia/indicadores/
+  
+##Json de Aplicativos##
+  JsonHome.path=api/oglobo/v1/ece_frontpage/conteudo.json
+  JsonFotogaleria.path=api/v1/app-noticias/fotogalerias/ece_frontpage/conteudo.json
+  JsonUltimasNoticias.path=api/v1/app-noticias/ultimas/ece_frontpage/conteudo.json
+  JsonPais.path=api/v1/app-noticias/pais/conteudo.json
+  JsonSociedade.path=api/v1/app-noticias/sociedade/conteudo.json
+  JsonRio.path=api/v1/app-noticias/rio/conteudo.json
+  JsonEsportes.path=api/v1/app-noticias/esportes/conteudo.json
+  JsonEconomia.path=api/v1/app-noticias/economia/conteudo.json
+  JsonCultura.path=api/v1/app-noticias/cultura/conteudo.json
+  JsonMundo.path=api/v1/app-noticias/mundo/conteudo.json
+  JsonTecnologia.path=api/v1/app-noticias/tecnologia/conteudo.json
+  JsonCiencia.path=api/v1/app-noticias/ciencia/conteudo.json
+  JsonSaude.path=api/v1/app-noticias/saude/conteudo.json
+  JsonOpiniao.path=api/v1/app-noticias/opiniao/conteudo.json
+
+##Json de Blogs##
+  JsonBoxDeBlogs.path=blogs/box-capas.asp
+  JsonListaDeBlogs.path=servicos/json/lerlistablogs.asp?quantidade=10
+  JsonPostDeBlog.path=servicos/json/lerpost.asp?p=512281
+  JsonPostsDeUmBlog.path=servicos/json/lerblog.asp?dir=moreno&quantidadePosts=20
+
+##Lista de Fatos##
+  ListaComFoto.path=sociedade/ciencia/quatro-imagens-da-historia-do-hubble-15888349
+  ListaSemFoto.path=
+  ListaTextoComLink.path=
+  ListaComVideoGlobo.path=
+  ListaComVideoYoutube.path=
+  ListaComVideoVevo.path=
+  ListaComVideoVimeo.path=
+  ListaComVideosMisto.path=cultura/musica/gravacoes-marcantes-realizadas-nos-estudios-de-abbey-road-15885291
+  ListaBoxDeMaisGalerias.path=rio/os-finalistas-do-architizer-awards-na-categoria-predios-governamentais-15884678
+
+##Marcação##
+  MarcacaoFacebook.path=
+  MarcacaoGoogleArticle.path=
+  MarcacaoGoogleFotoGaleria.path=
+
+##Matéria##
+  Materia2Niveis.path=
+  Materia3Niveis.path=
+  MateriaComUmaPublicidade.path=economia/producao-de-petroleo-da-opep-cresce-percepcao-de-excesso-de-demanda-tambem-15894649
+  MateriaComDuasPublicidades.path=brasil/para-oposicao-prisao-de-vaccari-pode-levar-perda-de-registro-do-pt-15880596
+  MateriaComTresPublicidades.path=brasil/tesoureiro-do-pt-joao-vaccari-neto-preso-em-sp-15877477
+  MateriaNavegacao.path=economia/lagarde-adiar-pagamentos-da-grecia-ao-fmi-nao-solucao-15894226
+  MateriaNavegacaoMaiorQue90Dias.path=
+  MateriaNavegacaoSemAnterior.path=
+  MateriaNavegacaoSemProxima.path=
+  MateriaSemBoxNavegacao.path=
+  Materia.path=brasil/analise-prisao-de-vaccari-fara-governo-sangrar-da-argumento-poderoso-oposicao-15879927
+  MateriaSemAutor.path=economia/producao-de-petroleo-da-opep-cresce-percepcao-de-excesso-de-demanda-tambem-15894649
+  MateriaMetadado.path=brasil/para-oposicao-prisao-de-vaccari-pode-levar-perda-de-registro-do-pt-15880596
+  
+##Matéria - Menu##
+  Menu.path=rio/
+  MenuBusca.path=rio/
+  MenuEditorias.path=rio/
+  MenuEditoriaSubeditoriaVazia.path=
+  MenuTopicoVazio.path=
+  MenuFotogaleria.path=rio/
+  MenuSubEditorias.path=rio/transito/
+  MenuDestaques.path=rio/
+  SubmenuDeEditorias.path=rio/
+  
+##Matéria Widgets##
+  BoxCitacao.path=cultura/revista-da-tv/sophie-turner-maisie-williams-as-jovens-atrizes-que-cresceram-em-game-of-thrones-15774998
+  MateriaComBoxDeMusicaAEsquerda.path=ultura/musica/expoente-da-nova-safra-do-folk-rock-the-lumineers-traz-ao-brasil-seus-violoes-chapeus-14639959
+  MateriaComBoxDeMusicaCentralizada.path=cultura/musica/alem-do-rio-los-hermanos-tocarao-em-outras-oito-capitais-em-outubro-15436368
+  BoxEmDestaque.path=brasil/lideres-de-movimentos-causam-saia-justa-ao-pressionar-oposicao-para-se-posicionar-sobre-impeachment-15885431
+  BoxFotogaleriaInline.path=mundo/clinica-se-prepara-para-receber-kate-middleton-15893390
+  BoxInteressadoEm.path=brasil/lideres-de-movimentos-causam-saia-justa-ao-pressionar-oposicao-para-se-posicionar-sobre-impeachment-15885431
+  BoxMaisLidas.path=brasil/lideres-de-movimentos-causam-saia-justa-ao-pressionar-oposicao-para-se-posicionar-sobre-impeachment-15885431
+  BoxTwitterEmbed.path=cultura/musica/novo-dia-de-venda-de-ingressos-para-shows-do-los-hermanos-comeca-com-sistema-estavel-15454858
+  BoxVejaTambem.path=esportes/federacao-desconhece-problemas-do-engenhao-diz-que-custos-levaram-semifinal-ao-estadio-15894046
+  BoxVejaTambemComTarja.path=
+  BoxVejaTambemDefeitoSemLinks.path=
+  BoxVejaTambemDeListaDeFatos.path=
+  
+##Matéria Widget Genérico##
+  BoxGenericoDailymotion.path=
+  BoxGenericoFacebook.path=
+  BoxGenericoFacebookComVideo.path=
+  BoxGenericoFacebookPostComVideo.path=
+  BoxGenericoInstagram.path=
+  BoxGenericoInstagramComVideo.path=
+  BoxGenericoSoundcloud.path=
+  BoxGenericoSoundcloudComPlaylist.path=
+  BoxGenericoTwitterComVideo.path=
+  BoxGenericoVevo.path=
+  BoxGenericoVimeo.path=
+  BoxGenericoVine.path=
+  BoxGenericoYoutube.path=
+  
+##Matéria Com Imagem Inline##
+  MateriaComFotoCentroGrande.path=brasil/tesoureiro-do-pt-joao-vaccari-neto-preso-em-sp-15877477
+  MateriaComFotoEsquerdaGrande.path=brasil/lava-jato-marco-aurelio-mello-critica-disputa-entre-pgr-pf-pelo-comando-dos-inqueritos-15895460
+  MateriaComFotoEsquerdaPequena.path=brasil/pedro-barusco-esta-vendendo-titulo-de-socio-no-iate-clube-do-rio-15896950
+  MateriaComFotoEsquerdaVertical.path=brasil/irregularidades-na-bancoop-contribuiram-para-prisao-preventiva-de-vaccari-nesta-quarta-feira-15879657
+  MateriaComFotoPosicaoPrincipal.path=mundo/sip-alerta-para-possiveis-fechamentos-de-jornais-na-venezuela-15895689
+  MateriaComMultiplasFotos.path=
+
+##Matéria Com Vídeos Inline##
+  MateriaComVideoGlobo.path=cultura/musica/sintonizando-lucas-vasconcellos-15895582
+  MateriaComDoisVideosGlobo.path=
+  MateriaComVideoLivestream.path=
+  MateriaComVideoUstream.path=
+  MateriaComVideoVimeo.path=sociedade/educacao/curta-produzido-por-alunos-da-ufrj-selecionado-para-mostra-no-festival-de-cannes-15892818
+  MateriaComVideoVevo.path=
+  MateriaComVideoYoutube.path=esportes/descubra-os-segredos-de-quem-ama-correr-14236226
+  MateriaComVideosMultiplosInline.path=
+
+##Matéria Em Capítulo - Menu Lateral##
+  MateriaEmCapitulosMenuLateralComComentario.path=
+  MateriaEmCapitulosMenuLateralComElementosInline.path=
+  MateriaEmCapitulosMenuLateralComFoto.path=
+  MateriaEmCapitulosMenuLateralNavegacao.path=
+  MateriaEmCapitulosMenuLateralSemAutor.path=
+  MateriaEmCapitulosMenuLateralComAncora.path=cultura/livros/literatura-perde-dois-gigantes-uruguaio-eduardo-galeno-alemao-gunter-grass-15857042#3
+ 
+##Matéria Em Capítulo - Menu Topo##
+  MateriaEmCapitulosMenuTopoComComentario.path=
+  MateriaEmCapitulosMenuTopoComFoto.path=
+  MateriaEmCapitulosMenuTopoElementosInline.path=
+  MateriaEmCapitulosMenuTopoNavegacao.path=
+  MateriaEmCapitulosMenuTopoSemAutor.path=sociedade/tecnologia/vale-do-silicio-terra-hostil-para-mulheres-15791030
+  MateriaEmCapitulosMenuTopoSemFoto.path=
+  MateriaEmCapitulosMenuTopoComAncora.path=sociedade/tecnologia/vale-do-silicio-terra-hostil-para-mulheres-15791030#3
+  
+##Opine##
+  Opine.path=teste-jenkins/vasco-ou-flamengo-quem-sera-campeao-1047560
+
+##Páginas Estáticas##
+  Expediente.path=expediente/
+  FaleConosco.path=fale-conosco/
+  PrincipiosEditoriais.path=principios-editoriais/
+
+##Páginas de Erro##
+  Pagina404.path=jaskilk/
+  PaginaErroInesperado.path=?service=erroInesperado
+  PaginaErroEscenic.path=?service=estatica
+
+##Plantão##
+  Plantao.path=rio/promotor-diz-que-reconstituicao-da-morte-de-eduardo-esta-sendo-produtiva-15906715
+  PlantaoDeEditoria.path=rio/plantao
+  PlantaoLegendaFotos.path=
+  PlantaoNavegacao.path=rio/policia-civil-faz-reconstituicao-da-morte-de-eduardo-no-complexo-do-alemao-15906648
+  PlantaoNavegacaoMaiorQue90Dias.path=
+  PlantaoNavegacaoSemAnterior.path=
+  PlantaoNavegacaoSemProxima.path=
+  PlantaoSemBoxNavegacao.path=
+
+##Rodapé##
+  Rodape.path=
+  RodapeBannerAssinatura.path=
+  
+##Tabela - Copa Do Brasil##
+  TabelaCopaDoBrasil.path=esportes/tabela-copa-brasil-2015/
+  TabelaCopaDoBrasilComTempoReal.path=esportes/siga-as-emocoes-de-flamengo-brasil-rs-15633744
+
+##Tabela - Campeonato Carioca##  
+  TabelaCampeonatoCariocaPaginaTempoReal.path=esportes/siga-tempo-real-de-fluminense-botafogo-15841470
+  TabelaCampeonatoCarioca.path=esportes/tabela-campeonato-carioca-2015
+  
+##Tabelas - Campeonato Brasileiro##
+  TabelaSerieA.path=esportes/tabela-campeonato-brasileiro/2015/
+  TabelaSerieARodadas.path=esportes/tabela-campeonato-brasileiro/2015/
+  TabelaSerieB.path=esportes/tabela-campeonato-brasileiro-serie-b/2015/
+  TabelaSerieBRodadas.path=esportes/tabela-campeonato-brasileiro-serie-b/2015/
+  TempoRealComTabelaSerieA.path=esportes/fluminense-colonia-15083551
+  TempoRealComTabelaSerieARodadas.path=esportes/fluminense-colonia-15083551
+  TempoRealComTabelaSerieB.path=
+  TempoRealComTabelaSerieBRodadas.path=
+   
+##Tabelas - Formula Um##
+  TabelaFormulaUm.path=esportes/tabela-formula-1/
+  TabelaFormulaUmAbaCalendario.path=esportes/tabela-formula-1/
+  TabelaFormulaUmAbaResultadoPorPiloto.path=esportes/tabela-formula-1/
+  TabelaFormulaUmAbaResultadoPorEquipe.path=esportes/tabela-formula-1/
+  TabelaFormulaUmAbaResultadoPorCorrida.path=esportes/tabela-formula-1/
+  
+##Tabelas - Libertadores##
+  TabelaLibertadores.path=esportes/tabela-libertadores-2015/
+  TabelaLibertadoresPaginaTempoReal.path=
+  #Fases MataMata#
+  TabelaLibertadoresFaseMataMataPaginaPadrao.path=esportes/tabela-libertadores-2015/
+  TabelaLibertadoresFaseMataMataPaginaTempoRealPaginaPadrao.path=
+  #Fase De Grupos#
+  TabelaLibertadoresFaseDeGrupos.path=esportes/tabela-libertadores-2015/
+  TabelaLibertadoresFaseDeGruposPaginaTempoReal.path=
+
+##Tabela - Copa América#  
+  CopaAmerica.path=
+  CopaAmericaComTempoReal.path=
+    
+##Tempo Real##
+  AbasPosJogo.path=esportes/tempo-real-de-brasil-panama-12705381
+  Cronica.path=
+  LancesDoJogo.path=esportes/botafogo-vasco-12674277
+  Penaltis.path=esportes/botafogo-vasco-12674277
+  PlacarDoJogo.path=esportes/siga-nova-iguacu-flamengo-15815705
+  TabEmCampo.path=esportes/copa-2014/brasil-colombia-13131250
+  TabEscalacao.path=esportes/botafogo-vasco-12674277
+  TabEstatisticasDoJogo.path=
+  TabSobreOJogo.path=
+  JogosDeHoje.path=
+  	  
+##Últimas Notícias##
+  UltimasDeEditoria.path=economia/ultimas-noticias
+  UltimasDeTopicos.path=rio/rio-450/
+  UltimasDaCapa.path=ultimas-noticias/
+  UltimasNoticiasComInformePublicitario.path=
+
+##Visual Revenue##
+  MarcacoesCapaEditoriaSimples.path=
+  MarcacoesCapaDestaque2Colunas.path=
+  MarcacoesCapaDestaque3Colunas.path=
+  MarcacoesCapaDestaque3E2Colunas.path=
+  

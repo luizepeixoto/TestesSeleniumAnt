@@ -1,0 +1,15 @@
+package br.com.infoglobo.pages.ela.editoria;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.destaques.DestaquesBlog;
+
+public class DestaquesElaBlog extends DestaquesBlog {
+	
+	public DestaquesElaBlog() throws Exception {
+		super();
+	}
+
+	public DestaquesElaBlog(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

@@ -1,0 +1,54 @@
+package testes.fotogaleria;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.openqa.selenium.By;
+
+import pages.fotogaleria.FotogaleriaLinkRelacionado;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+public class FotogaleriaLinkRelacionadoTest {
+	
+	private static FotogaleriaLinkRelacionado fotogaleria;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(fotogaleria.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		fotogaleria = new FotogaleriaLinkRelacionado(Navegador.CHROME);
+		fotogaleria.executarScroll(fotogaleria.getDriver().findElement(By.className("gallery")).getLocation());
+		fotogaleria.esperaCarregar3Segundos();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		fotogaleria.fechar();
+	}
+	
+	@Test
+	public void verificaSeNoFimDaPaginaEstaSendoExibidaUmaMateriaRelacionada(){
+		assertTrue(fotogaleria.exibiuChamadaDeLinkRelacionado());
+	}
+	
+	@Test
+	public void verificaSeOTextoLeiaAMateriaEstaSendoExibido(){
+		assertTrue(fotogaleria.exibiuTituloLeiaAMateria());
+	}
+	
+	@Test
+	public void verificaSeAMateriaRealcionadaEstaExibindoUmTitulo(){
+		assertTrue(fotogaleria.exibiuTituloParaAMateriaRelacionada());
+	}
+	
+	@Test
+	public void verificaSeOTituloDaMateriaRealcionadaPossuiUmLink(){
+		assertTrue(fotogaleria.exibiuUmLinkParaOTituloDaMateriaRelacionada());
+	}
+}

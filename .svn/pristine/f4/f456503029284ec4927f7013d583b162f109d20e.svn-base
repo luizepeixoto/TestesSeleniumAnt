@@ -1,0 +1,197 @@
+package br.com.infoglobo.testes.capa;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import static org.junit.Assert.*;
+import br.com.infoglobo.pages.capa.CabecalhoBarrinha;
+
+public class CabecalhoBarrinhaTest {
+
+	private static CabecalhoBarrinha capa;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(capa.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		capa = new CabecalhoBarrinha(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		capa.fechar();
+	}
+
+	@Test
+	public void verificaSeABarraComProdutosOGloboEstaSendoExibidoNoTopodaPagina(){
+		assertTrue(capa.exibiuCabecalhoBarrinha());
+	}
+	
+	@Test
+	public void verificaSeOGloboEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoOGloboNoTopoDoSite());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoOGloboEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "OGlobo";
+		assertEquals(tituloEsperado, capa.exibiuTituloOGlobo());
+	}
+	
+	@Test
+	public void verificaSeOPrimeiroProdutoEstaMarcadoComoAtivo(){
+		assertTrue(capa.exibiuOGloboMarcadoComoAtivo());
+	}
+	
+	@Test
+	public void verificaSeOLinkDoJornalOGloboEstaCorreto(){
+		String urlEsperada = "http://oglobo.globo.com/";
+		assertEquals(urlEsperada, capa.validarLinkProdutoOGlobo());
+	}
+	
+	@Test
+	public void verificaSeOMemoriaEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoMemoriaNoTopoDoSite());
+	}
+	
+	
+	@Test
+	public void verificaSeOTituloDoMemoriaEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "Memória";
+		assertEquals(tituloEsperado, capa.exibiuProdutoMemoria());
+	}
+
+	@Test
+	public void verificaSeOLinkDoMemoriaEstaCorreto(){
+		String urlEsperada = "http://memoria.oglobo.globo.com/";
+		assertEquals(urlEsperada, capa.validarLinkProdutoMemoria());
+	}
+
+	@Test
+	public void verificaSeOAcervoEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoAcervoNoTopoDoSite());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoAcervoEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "Acervo";
+		assertEquals(tituloEsperado, capa.exibiuProdutoAcervo());
+	}
+
+	@Test
+	public void verificaSeOLinkDoAcervoEstaCorreto(){
+		String urlEsperada = "http://acervo.oglobo.globo.com/";
+		assertEquals(urlEsperada, capa.validarLinkProdutoAcervo());
+	}
+
+	@Test
+	public void verificaSeOElaEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoElaNoTopoDoSite());
+	}
+	
+	@Test
+	public void verificaSeOTituloElaEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "Ela";
+		assertEquals(tituloEsperado, capa.exibiuProdutoEla());
+	}
+
+	@Test
+	public void verificaSeOLinkDoElaEstaCorreto(){
+		String urlEsperada = "http://ela.oglobo.globo.com/";
+		assertEquals(urlEsperada, capa.validarLinkProdutoEla());
+	}
+
+	@Test
+	public void verificaSeOBlogDaKogutEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoKogutNoTopoDoSite());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoPatriciaKogutEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "Patrícia Kogut";
+		assertEquals(tituloEsperado, capa.exibiuProdutoPatriciaKogut());
+	}
+
+	@Test
+	public void verificaSeOLinkDaKogutEstaCorreto(){
+		String urlEsperada = "http://kogut.oglobo.globo.com/";
+		assertEquals(urlEsperada, capa.validarLinkProdutoPatriciaKogut());
+	}
+
+	@Test
+	public void verificaSeORioShowEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoRioShowNoTopoDoSite());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoRioShowEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "Rio Show";
+		assertEquals(tituloEsperado, capa.exibiuProdutoRioShow());
+	}
+
+	@Test
+	public void verificaSeOLinkDoRioShowEstaCorreto(){
+		String urlEsperada = "http://rioshow.oglobo.globo.com/";
+		assertEquals(urlEsperada, capa.validarLinkProdutoRioShow());
+	}
+
+	@Test
+	public void verificaSeOExtraEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoExtraNoTopoDoSite());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoExtraEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "Extra";
+		assertEquals(tituloEsperado, capa.exibiuProdutoExtra());
+	}
+
+	@Test
+	public void verificaSeOLinkDoExtraEstaCorreto(){
+		String urlEsperada = "http://extra.globo.com/";
+		assertEquals(urlEsperada, capa.validarLinkProdutoExtra());
+	}
+
+	@Test
+	public void verificaSeOClassificadosEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoClassificadosNoTopoDoSite());
+	}
+	
+	@Test
+	public void verificaSeOTituloClassificadosEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "Classificados";
+		assertEquals(tituloEsperado, capa.exibiuProdutoClassificadosDoRio());
+	}
+
+	@Test
+	public void verificaSeOLinkDoClassificadosEstaCorreto(){
+		String urlEsperada = "http://classificadosdorio.globo.com/";
+		assertEquals(urlEsperada, capa.validarLinkProdutoClassificadosDoRio());
+	}
+	
+	@Test
+	public void verificaSeOClubeSouMaisRioEstaSendoExibidoNaBarraDoTopoDoSite(){
+		assertTrue(capa.exibiuProdutoSouMaisRioNoTopoDoSite());
+	}
+
+	@Test
+	public void verificaSeOTituloDoClubSouMaisRioEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "Clube Sou + Rio";
+		assertEquals(tituloEsperado, capa.exibiuProdutoClubeSouMaisRio());
+	}
+
+	@Test
+	public void verificaSeOLinkDoClubeSouMaisRioEstaCorreto(){
+		String urlEsperada = "https://clubesoumaisrio.oglobo.globo.com/?link=og-menu-sup";
+		assertEquals(urlEsperada, capa.validarLinkProdutoClubesouMaisRio());
+	}
+	
+	@Test
+	public void verificaSeMaisDeUmProdutoEstaSendoExibidoComAMarcacaoDeAtivo(){
+		assertTrue(capa.exibiuApenasUmProdutoComoAtivo());
+	}
+}

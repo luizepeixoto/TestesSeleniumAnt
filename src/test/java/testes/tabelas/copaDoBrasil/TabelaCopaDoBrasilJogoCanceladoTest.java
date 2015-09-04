@@ -1,0 +1,44 @@
+package testes.tabelas.copaDoBrasil;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.tabela.copaDoBrasil.TabelaCopaDoBrasil;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class TabelaCopaDoBrasilJogoCanceladoTest {
+
+	private static TabelaCopaDoBrasil tabela;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(tabela.getDriver());
+	
+	@BeforeClass
+	public static void before() throws Exception{
+		tabela = new TabelaCopaDoBrasil(Navegador.CHROME);
+		tabela.esperaSuperLeaderboardVoltarAoTamanhoNormal(150);
+	}
+	
+	@AfterClass
+	public static void finalizaTeste() {
+		tabela.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 1)
+	@Test
+	public void verificaSeAlgumDosJogosEstaSendoExibidoComoCancelo() throws InterruptedException {
+		String tituloEsperado = "* Classificado sem a necessidade do jogo de volta";
+		tabela.clicarTabPrimeiraFase();
+		assertEquals(tituloEsperado, tabela.exibiuAlgumDosJogosComoCancelado());
+	}
+}

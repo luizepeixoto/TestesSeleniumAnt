@@ -1,0 +1,110 @@
+package br.com.infoglobo.pages.coluna;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.compartilhamento.CompartilhamentoInlinePadrao;
+
+public class Coluna extends CompartilhamentoInlinePadrao {
+
+	public Coluna() throws Exception{
+		super();
+	}
+	
+	public Coluna(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+
+	public WebElement exibiuCabecalhoDaColuna() {
+		return getDriver().findElement(By.className("header-coluna")).findElement(By.className("columns"));
+	}
+
+	public String exibiuOTituloColuna() {
+		return exibiuCabecalhoDaColuna().findElement(By.className("sub-editoria")).getText();
+	}
+
+	public boolean exibiuOTituloComOAutorDaColuna() {
+		return !exibiuCabecalhoDaColuna().findElement(By.className("autor")).getText().isEmpty();
+	}
+
+	public boolean exibiuADescricaoDaColuna() {
+		return !exibiuCabecalhoDaColuna().findElement(By.className("slogan")).getText().isEmpty();
+	}
+	
+	public WebElement exibiuClasseCorpoLarge16Columns() {
+		return getDriver().findElement(By.tagName("article")).findElement(By.className("corpo"));
+	}
+	
+	public boolean exibiuAFotoDoColunista() {
+		return exibiuClasseCorpoLarge16Columns().findElement(By.className("user")).isDisplayed();
+	}
+
+	public WebElement exibiuCorpoDaColuna() {
+		return exibiuClasseCorpoLarge16Columns().findElement(By.className("corpo-coluna"));
+	}
+
+	public boolean exibiuAData() {
+		return !exibiuCorpoDaColuna().findElement(By.className("data-cadastro")).findElement(By.tagName("time")).getText().isEmpty();
+	}
+
+	public boolean exibiuOTitulo() {
+		return !exibiuCorpoDaColuna().findElement(By.tagName("h1")).getText().isEmpty();
+	}
+
+	public boolean exibiuOTexto() {
+		List<WebElement> resultadoEsperado = exibiuCorpoDaColuna().findElements(By.tagName("p"));
+		for(int i=0; i<resultadoEsperado.size();i++){
+			if(resultadoEsperado.get(i).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public WebElement acessaTituloDeLerTodasAsColunas(){
+		return acessaClasseCorpoColuna().findElement(By.className("todas"));
+	}
+	
+	public String exibiuTituloDeLerTodasAsColunas(){
+		return acessaTituloDeLerTodasAsColunas().getText();
+	}
+	
+	public boolean exibiuLayoutCorretoParaOTituloDeLerTodasAsColunas(){
+		
+		String corTituloEsperado = "rgba(30, 150, 200, 1)";
+		String tamanhoFonteEsperado = "15px";
+		String estiloTituloEsperado = "uppercase";
+		
+		String corTituloAtual = acessaTituloDeLerTodasAsColunas().getCssValue("color");
+		String tamanhoFonteAtual = acessaTituloDeLerTodasAsColunas().getCssValue("font-size");
+		String estiloTituloAtual = acessaTituloDeLerTodasAsColunas().getCssValue("text-transform");
+		
+		if(!corTituloAtual.equals(corTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("cor do título", corTituloEsperado, corTituloAtual);
+			return false;
+		}
+		
+		if(!tamanhoFonteAtual.equals(tamanhoFonteEsperado)){
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteEsperado, tamanhoFonteAtual);
+			return false;
+		}
+		
+		if(!estiloTituloAtual.equals(estiloTituloEsperado)){
+			imprimirMensagemDeErroDeUmaTag("estilo da fonte do título", estiloTituloEsperado, estiloTituloAtual);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public WebElement exibiuBoxDaArroba() {
+		return getDriver().findElement(By.className("arroba"));
+	}
+
+	public WebElement exibiuBoxDeLinkPatrocinado() {
+		return getDriver().findElement(By.className("publicidade-materia"));
+	}
+}

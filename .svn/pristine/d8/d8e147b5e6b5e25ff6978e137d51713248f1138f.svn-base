@@ -1,0 +1,45 @@
+package br.com.infoglobo.testes.ultimas;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.ultimas.UltimasDaCapa;
+
+@RunWith(OrdenadorTestes.class)
+public class BotaoCarregarMaisMateriasTest {
+	
+	private static UltimasDaCapa ultimasNoticias;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		ultimasNoticias = new UltimasDaCapa(Navegador.CHROME);
+		ultimasNoticias.esperaCarregar(3);
+		ultimasNoticias.executaScrollParaAparecerOTituloDeUmaPosicao(ultimasNoticias.acessaBotaoCarregarMaisNoticias());
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		ultimasNoticias.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void verificaSeOTituloDoBotaoDeCarregarMaisMateriasEstaSendoExibidoCorretamente() throws InterruptedException{
+		String tituloEsperado = "CARREGAR MAIS NOTÍCIAS";
+		assertEquals(tituloEsperado, ultimasNoticias.exibiuTituloDoBotao());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void verificaSeOBotaoDeCarregarMaisMateriasEstaSendoExibidoComOLayoutCorreto() throws InterruptedException{
+		assertTrue(ultimasNoticias.exibiuBotaoComOLayoutCorreto());
+	}
+}

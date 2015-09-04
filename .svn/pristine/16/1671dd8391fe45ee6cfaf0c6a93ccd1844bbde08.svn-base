@@ -1,0 +1,93 @@
+package br.com.infoglobo.pages.materia.widget;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class BoxVejaTambemComTarja extends AceitacaoAbstractTest {
+	
+	public BoxVejaTambemComTarja() throws Exception {
+		super();
+	}
+	
+	public WebElement getBoxMateriaInline(){
+		return getDriver().findElement(By.className("corpo"));
+	}
+	
+	public WebElement getBoxVeja(){
+		return getBoxMateriaInline().findElement(By.className("box-vejaTambem"));
+	}
+	
+	public String getBoxTitulo(){
+		return getBoxVeja().findElement(By.tagName("h6")).getText();
+	}
+	
+	public boolean getBoxTituloTag(){
+		if(getBoxVeja().findElement(By.tagName("h6")).isDisplayed()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public List<WebElement> getBoxLista(){
+		return getBoxVeja().findElement(By.tagName("ul")).findElements(By.tagName("li"));
+	}
+	
+	public boolean getBoxListaTamanho() {
+		if(getBoxLista().size() > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public boolean getBoxListaTitulos() {
+		for(int i=0;i<getBoxLista().size();i++){
+			if(getBoxLista().get(i).findElement(By.tagName("a")).getText() == ""){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean getBoxLinks() {
+		for(int i=0;i<getBoxLista().size();i++){
+			if(getBoxLista().get(i).findElement(By.tagName("a")).getAttribute("href") == ""){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean getBoxLinksValidos() {
+		for(int i=0;i<getBoxLista().size();i++){
+			if(!getBoxLista().get(i).findElement(By.tagName("a")).getAttribute("href").contains(".html")){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public WebElement getBoxListaA(){
+		return getDriver().findElement(By.className("box-vejaTambem")).findElement(By.tagName("ul")).findElement(By.tagName("li")).findElement(By.tagName("a")).findElement(By.className("video"));
+	}
+	
+	public boolean getTarja() {
+		for(int i=0;i<getBoxLista().size();i++){
+			List<WebElement> possuiTarjaNaPosição = getBoxLista().get(i).findElements(By.className("retranca"));
+			if(possuiTarjaNaPosição.size()>0){
+				if(!(getBoxLista().get(i).findElement(By.className("retranca")).getText().contains("Vídeo") || 
+						getBoxLista().get(i).findElement(By.className("retranca")).getText().contains("Galeria") || 
+						getBoxLista().get(i).findElement(By.className("retranca")).getText().contains("Infográfico"))){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+}

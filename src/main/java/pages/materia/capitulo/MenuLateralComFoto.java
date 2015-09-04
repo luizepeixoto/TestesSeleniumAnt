@@ -1,0 +1,216 @@
+package pages.materia.capitulo;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class MenuLateralComFoto extends AceitacaoAbstractTest {
+	
+	public MenuLateralComFoto() throws Exception {
+		super();
+	}
+	
+	public MenuLateralComFoto(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public WebElement exibiuMateriaEmCapitulos() {
+		return getDriver().findElement(By.className("v2"));
+	}
+	
+	public WebElement acessaClasseRowDoAntititulo() {
+		return exibiuMateriaEmCapitulos().findElement(By.className("corpo")).findElement(By.className("row"));
+	}
+	
+	public boolean exibiuUmAntitituloNoTopo() {
+		return !acessaClasseRowDoAntititulo().findElement(By.className("preTitle")).getText().isEmpty();
+	}
+	
+	public boolean exibiuUmAntitituloAlinhadoAEsquerda() {
+		return !acessaClasseRowDoAntititulo().findElement(By.tagName("p")).getAttribute("class").contains("center");
+	}
+	
+	public boolean exibiuUmAntitituloComNoMaximo50Caracteres() {
+		return acessaClasseRowDoAntititulo().findElement(By.className("preTitle")).getText().length() <= Integer.parseInt("50");
+	}
+	
+	public WebElement exibiuFotoDoCabecalho() {
+		return exibiuMateriaEmCapitulos().findElement(By.className("inicio")).findElement(By.className("foto-principal-capitulo"));
+	}
+	
+	public WebElement exibiuFotoDoCabecalhoDaMateriaEmCapitulos() {
+		return exibiuFotoDoCabecalho().findElement(By.tagName("figure")).findElement(By.tagName("img"));
+	}
+
+	public boolean exibiuFotoDaMateriaPrincipalComWidthCorreto() {
+		String widthAtual = exibiuFotoDoCabecalhoDaMateriaEmCapitulos().getAttribute("width");
+		return Integer.parseInt(widthAtual) == Integer.parseInt("1500");
+	}
+
+	public boolean exibiuFotoDaMateriaPrincipalComHeightCorreto() {
+		String heightAtual = exibiuFotoDoCabecalhoDaMateriaEmCapitulos().getAttribute("height");
+		return Integer.parseInt(heightAtual) == Integer.parseInt("650");
+	}
+
+	public boolean exibiuLegendaParaAFotoDaMateriaPrincipal() {
+		List<WebElement> possuiLegenda = exibiuFotoDoCabecalho().findElement(By.tagName("figure")).findElements(By.tagName("figcaption"));
+		return possuiLegenda.size() == Integer.parseInt("0");
+	}
+	
+	public WebElement exibiuClasseHeadmateria() {
+		return exibiuMateriaEmCapitulos().findElement(By.className("inicio")).findElement(By.className("head-materia"));
+	}
+	
+	public boolean exibiuTituloParaAMateriaPrincipal() {
+		return !exibiuClasseHeadmateria().findElement(By.tagName("h1")).getText().isEmpty();
+	}
+
+	public boolean exibiuSubtituloParaAMateriaPrincipal() {
+		return !exibiuClasseHeadmateria().findElement(By.tagName("h2")).getText().isEmpty();
+	}
+
+	public boolean exibiuAutorParaAMateriaPrincipal() {
+		return !exibiuClasseHeadmateria().findElement(By.className("meta")).findElement(By.className("autor")).getText().isEmpty();
+	}
+
+	public boolean exibiuDataParaAMateriaPrincipal() {
+		return !exibiuClasseHeadmateria().findElement(By.className("meta")).findElement(By.className("meta-data")).findElement(By.className("data-cadastro")).getText().isEmpty();
+	}
+
+	public boolean exibiuTextoParaAMateriaPrincipal() {
+		return !exibiuClasseHeadmateria().findElement(By.className("resumo-capitulos")).findElement(By.tagName("p")).getText().isEmpty();
+	}
+
+	public boolean exibiuHRNoFimDaMateriaPrincipal() {
+		return exibiuMateriaEmCapitulos().findElement(By.className("hr")).isDisplayed();
+	}
+
+	/*Inicio da validação dos capitulos*/
+	
+	public List<WebElement> listaTotalDeMaterias() {
+		return exibiuMateriaEmCapitulos().findElements(By.className("capituloPage"));
+	}
+	
+	public boolean exibiuUmaListaDeDozeMaterias() {
+		return listaTotalDeMaterias().size() == Integer.parseInt("12");
+	}
+	
+	public boolean exibiuONumeroEmAlgumCapitulo() {
+		for(int i=0; i<listaTotalDeMaterias().size(); i++){
+			List<WebElement> possuiNumeroDoCapituloNaPosicao = listaTotalDeMaterias().get(i).findElements(By.className("number"));
+			if(possuiNumeroDoCapituloNaPosicao.size() > 0){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuUmAntiTituloParaCadaCapitulo() {
+		for(int i=0; i<listaTotalDeMaterias().size(); i++){
+			if(listaTotalDeMaterias().get(i).findElement(By.tagName("h2")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuUmTituloParaCadaCapitulo() {
+		for(int i=0; i<listaTotalDeMaterias().size(); i++){
+			List<WebElement> possuiTituloNaPosicao = listaTotalDeMaterias().get(i).findElement(By.tagName("h2")).findElements(By.className("titulo"));
+			if(possuiTituloNaPosicao.size() > 0){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuUmAutorParaCadaCapitulo() {
+		for(int i=0; i<listaTotalDeMaterias().size(); i++){
+			if(listaTotalDeMaterias().get(i).findElement(By.className("info")).findElement(By.className("autor")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuUmaFotoParaCadaCapitulo() {
+		for(int i=0; i<listaTotalDeMaterias().size(); i++){
+			List<WebElement> possuiFotoNaAberturaDoCapitulo = listaTotalDeMaterias().get(i).findElement(By.tagName("h2")).findElements(By.tagName("img"));
+			if(possuiFotoNaAberturaDoCapitulo.size() > 0){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuUmTextoEmCadaUmDosCapitulos() {
+		for(int i=0; i<listaTotalDeMaterias().size(); i++){
+			if(listaTotalDeMaterias().get(i).findElement(By.tagName("p")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public List<WebElement> listaTotalDeFotosNasMaterias() {
+		return exibiuMateriaEmCapitulos().findElements(By.className("row")).get(2).findElements(By.tagName("figure"));
+	}
+	
+	public boolean exibiuAsFotosInlineDosCapitulosComWidthCorreto() {
+		for(int i=0; i<listaTotalDeFotosNasMaterias().size(); i++){
+			if(!listaTotalDeFotosNasMaterias().get(i).findElement(By.tagName("img")).getAttribute("width").equals("700")){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuAsFotosInlineDosCapitulosComHeightCorreto() {
+		for(int i=0; i<listaTotalDeFotosNasMaterias().size(); i++){
+			if(!listaTotalDeFotosNasMaterias().get(i).findElement(By.tagName("img")).getAttribute("height").equals("420")){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/*Início da validação do widget de navegação*/
+	
+	public boolean exibiuNavegacaoEntreMateriasNoFimDaPagina() {
+		List<WebElement> possuiNavegacaoMaisRecente = getDriver().findElements(By.className("mais-recente"));
+		List<WebElement> possuiNavegacaoMaisAntiga = getDriver().findElements(By.className("mais-antiga"));
+		
+		return (possuiNavegacaoMaisRecente.size()==0 && possuiNavegacaoMaisAntiga.size()==0);
+	}
+	
+	/*Início da validação do banner arroba*/
+	
+	public boolean exibiuBannerArroba() {
+		List<WebElement> totalDeBannersArroba = getDriver().findElement(By.className("v2")).findElements(By.className("arroba"));
+		return totalDeBannersArroba.size() == Integer.parseInt("1");
+	}
+
+	public boolean exibiuBannerArrobaParaOPrimeiroCapitulo() {
+		List<WebElement> totalDeBannersArrobaNoPrimeiroCapitulo = listaTotalDeMaterias().get(0).findElements(By.className("arroba"));
+		return totalDeBannersArrobaNoPrimeiroCapitulo.size() == Integer.parseInt("1");
+	}
+
+	public boolean exibiuBannerArrobaParaAlgumCapitulo() {
+		for(int i=1; i<listaTotalDeMaterias().size(); i++){
+			List<WebElement> possuiBannerArrobaNesteCapitulo = listaTotalDeMaterias().get(i).findElements(By.className("arroba"));
+			if(possuiBannerArrobaNesteCapitulo.size() > 0){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuBannerArrobaParaAMateriaPrincipal() {
+		List<WebElement> totalDeBannersArrobaNoPrimeiroCapitulo = getDriver().findElement(By.className("inicio")).findElements(By.className("arroba"));
+		return totalDeBannersArrobaNoPrimeiroCapitulo.size() == Integer.parseInt("0");
+	}
+}

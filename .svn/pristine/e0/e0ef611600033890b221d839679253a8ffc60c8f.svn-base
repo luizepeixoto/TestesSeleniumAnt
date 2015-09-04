@@ -1,0 +1,59 @@
+package br.com.infoglobo.testes.materia.widget;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.materia.widget.BoxVejaTambem;
+
+public class BoxVejaTambemTest {
+	
+	private static BoxVejaTambem pageObject;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		pageObject = new BoxVejaTambem();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		pageObject.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDoVejaTambemEstaSendoExibidoNaMateria(){
+		assertNotNull("Erro",pageObject.getBoxVeja());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoBoxVejaTambemEstaSendoExibido(){
+		assertEquals("Veja Também",pageObject.getBoxTitulo());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoBoxDoVejaTambemEstaSendoExibidoComUmaFonteDiferenciada(){
+		assertTrue("Erro",pageObject.getBoxTituloTag());
+	}
+	
+	@Test
+	public void verificaSeAListaDeMateriasDoBoxDoVejaTambemEhMaiorQueZero(){
+		assertTrue("Erro",pageObject.getBoxListaTamanho());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDoBoxDoVejaTambemPossuemUmTitulo(){
+		assertTrue("Erro",pageObject.getBoxListaTitulos());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDoBoxDoVejaTambemPossuemUmLink(){
+		assertTrue("Erro",pageObject.getBoxLinks());
+	}
+	
+	@Test
+	public void verificaSeAsMateriasDoBoxDoVejaTambemPossuemUmLinkValido(){
+		assertTrue("Erro",pageObject.getBoxLinksValidos());
+	}
+}

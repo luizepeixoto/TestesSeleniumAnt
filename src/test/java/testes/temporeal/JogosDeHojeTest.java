@@ -1,0 +1,62 @@
+package testes.temporeal;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import pages.temporeal.JogosDeHoje;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+public class JogosDeHojeTest {
+	
+	private static JogosDeHoje tempoReal;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(tempoReal.getDriver());
+	
+	@BeforeClass
+	public static void iniciarExecucaoTestes() throws Exception {
+		tempoReal = new JogosDeHoje(Navegador.CHROME);
+	}
+	
+	@AfterClass
+	public static void finalizaTeste() {
+		tempoReal.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDeJogosDeHojeEstaSendoExibidoAcimaDaTabela(){
+		assertNotNull(tempoReal.exibiuJogosDeHoje());
+	}
+	
+	@Test
+	public void exibiuTituloJogosDeHoje(){
+		String tituloEsperado = "Jogos de Hoje";
+		assertEquals(tituloEsperado, tempoReal.exibiuTituloJogosDeHoje());
+	}
+	
+	@Test
+	public void verificaSeEstaSendoExibidoUmaListaDeJogos(){
+		assertTrue(tempoReal.exibiuUmaListaComOsJogosDehoje());
+	}
+
+	@Test
+	public void verificaSeEstaSendoExibidoOHorarioDosJogos(){
+		assertTrue(tempoReal.exibiuOHorarioDosJogos());
+	}
+	
+	@Test
+	public void verificaSeEstaSendoExibidoOsEscudosDosTimes(){
+		assertTrue(tempoReal.exibiuOsEscudosDosTimes());
+	}
+	
+	@Test
+	public void verificaSeEstaSendoExibidoOPlacarDosJogos(){
+		assertTrue(tempoReal.exibiuOPlacarDosJogos());
+	}
+}

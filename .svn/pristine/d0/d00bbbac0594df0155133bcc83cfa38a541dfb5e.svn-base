@@ -1,0 +1,105 @@
+package br.com.infoglobo.testes.materia.comentario;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+
+import br.com.infoglobo.login.LoginComentario;
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.materia.comentario.FormularioDeComentarioAberto;
+
+@RunWith(OrdenadorTestes.class)
+public class MateriaComFormularioAbertoTest {
+	
+	private static FormularioDeComentarioAberto materia;
+	private static LoginComentario login;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(materia.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new FormularioDeComentarioAberto(Navegador.CHROME);
+		materia.esperaCaixaDeComentarioCarregar();
+		materia.executarScroll(materia.getDriver().findElement(By.className("comentarios")).getLocation());
+		login = new LoginComentario(materia.getDriver());
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void verificaSeAposEfetuarOLoginACaixaDeComentarioEstaSendoExibida() throws Exception{
+		materia.clicarNoBotaoDeComentario();
+		login.efetuarLoginCadum();
+		materia.esperaCarregar(3);
+		assertTrue(materia.exibiuCaixaDeComentario());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void verificaSeONomeDoUsuarioEstaSendoExibidoNaCaixaDeComentario() {
+		assertTrue(materia.exibiuONomeDoUsuario());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void verificaSeOTituloDeCaracteresRestantesEstaoSendoExibidos() {
+		assertTrue(materia.exibiuOTituloDeCaracteresRestantes());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void verificaSeAQuantidadeDeCaracteresRestantesEstaSendoExibido() {
+		assertTrue(materia.exibiuOTotalDeCaracteresParaOComentario());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void verificaSeOTextAreaParaInserirOComentarioEstaSendoExibido() {
+		assertTrue(materia.exibiuAreaDeComentario());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=6)
+	@Test
+	public void verificaSeOTextoParaPreencherOCaptchaEstaSendoExibido() {
+		String tituloEsperado = "Digite as letras ao lado: ";
+		assertEquals(tituloEsperado, materia.exibiuCaptchaTexto());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=7)
+	@Test
+	public void verificaSeOTextboxParaPreencherOCaptchaEstaSendoExibido() {
+		assertTrue(materia.exibiuAreaDoCaptcha());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=8)
+	@Test
+	public void verificaSeAImagemDoCaptchaEstaSendoExibida(){
+		assertTrue(materia.exibiuImagemDoCaptcha());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=9)
+	@Test
+	public void verificaSeOTextoTrocarImagemEstaSendoExibido(){
+		String tituloEsperado = "Trocar imagem";
+		assertEquals(tituloEsperado, materia.exibiuTextoDeTrocarImagemDoCaptcha());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=10)
+	@Test
+	public void verificaSeOBotaoDePostarEstaSendoExibido(){
+		assertTrue(materia.exibiuBotaoEnviar());
+	}
+}

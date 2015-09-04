@@ -1,0 +1,84 @@
+package br.com.infoglobo.testes.temporeal;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.temporeal.AbasPosJogo;
+
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+
+@RunWith(OrdenadorTestes.class)
+public class AbaPosJogoFotogaleriaNavegacaoTest {
+	
+	/*Fotogaleria na aba de imagens com no mínimo 3 fotos*/
+	
+	private static AbasPosJogo tempoReal;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(tempoReal.getDriver());
+	
+	@BeforeClass
+	public static void iniciarExecucaoTestes() throws Exception {
+		tempoReal = new AbasPosJogo(Navegador.CHROME);
+		tempoReal.esperaCarregar3Segundos();
+		tempoReal.executarScroll(tempoReal.getDriver().findElement(By.className("orbit-caption")).getLocation());
+	}
+	
+	@AfterClass
+	public static void finalizaTeste() {
+		tempoReal.fechar();
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 1)
+	public void verificaSeOBoxDeNavegacaoDaFotogaleriaEstaExibindoANavegacaoParaAEsquerda(){
+		assertTrue(tempoReal.exibiuNavegacaoDaFotogaleriaParaEsquerda());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 2)
+	public void verificaSeOBoxDeNavegacaoDaFotogaleriaEstaExibindoANavegacaoParaADireita(){
+		assertTrue(tempoReal.exibiuNavegacaoDaFotogaleriaParaDireita());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 3)
+	public void verificaSeOTotalDeFotosEstaSendoExibidoParaAPrimeiraFoto(){
+		assertTrue(tempoReal.exibiuOTotalDeFotos());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 4)
+	public void verificaSeALegendaEstaSendoExibidoParaAPrimeiraFoto(){
+		assertTrue(tempoReal.exibiuAPrimeiraLegenda());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 5)
+	public void verificaSeAoClicarNaSegundaFotoAFotogaleriaEstaExibindoAsInformacoesCorretamente() throws InterruptedException{
+		tempoReal.clicarNaProximaFoto();
+		tempoReal.esperaCarregar3Segundos();
+		assertTrue(tempoReal.exibiuAFotoAtual());
+		assertTrue(tempoReal.exibiuALegendaDaFotoAtual());
+		assertTrue(tempoReal.exibiuOTotalDeFotos());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 6)
+	public void verificaSeAoClicarNaTerceiraFotoAFotogaleriaEstaExibindoAsInformacoesCorretamente() throws InterruptedException{
+		tempoReal.clicarNaProximaFoto();
+		tempoReal.esperaCarregar3Segundos();
+		assertTrue(tempoReal.exibiuAFotoAtual());
+		assertTrue(tempoReal.exibiuALegendaDaFotoAtual());
+		assertTrue(tempoReal.exibiuOTotalDeFotos());
+	}
+}

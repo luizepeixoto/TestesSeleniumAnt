@@ -1,0 +1,132 @@
+package br.com.infoglobo.testes.tealium;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import br.com.infoglobo.login.LoginComentario;
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.asp.CapaEuReporter;
+
+@RunWith(OrdenadorTestes.class)
+public class EuReporterAspTealiumTest {
+	
+	private static CapaEuReporter euReporter;
+	private static LoginComentario login;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(euReporter.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		euReporter = new CapaEuReporter(Navegador.CHROME);
+		login = new LoginComentario(euReporter.getDriver());
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		euReporter.fechar();
+	}
+
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void verificaSeOBoxDoEuReporterEstaSendoExibido() throws InterruptedException{
+		login.efetuarLoginCadum();
+		euReporter.esperaCarregar(5);
+		assertTrue(euReporter.exibiuPaginaDoEuReporter());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	public String codigoFonte = euReporter.getCodigoFonte();
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void verificaSeAVariavelUtagDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("var utag_data"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void verificaSeATagProdutoDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("produto"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void verificaSeATagTipoPaginaDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("tipo_pagina"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=6)
+	@Test
+	public void verificaSeATagEditoriaDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("editoria"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=7)
+	@Test
+	public void verificaSeATagIdConteudoDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("id_conteudo"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=8)
+	@Test
+	public void verificaSeATagEntidadesDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("entidades"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=9)
+	@Test
+	public void verificaSeATagTopicosDataEstaSendoCarregadaNoCodigoDaPagina(){
+		assertTrue(codigoFonte.contains("topicos"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=10)
+	@Test
+	public void verificaSeATagProdutoEhIgualOGlobo(){
+		assertTrue(codigoFonte.contains("produto : \"O Globo\""));
+	}
+
+	@OrdemExecucaoTeste(Ordem=11)
+	@Test
+	public void verificaSeATagTipoPaginaEhIgualAEuReporter(){
+		assertTrue(codigoFonte.contains("tipo_pagina : \"Eu-Reporter\""));
+	}
+
+	@OrdemExecucaoTeste(Ordem=12)
+	@Test
+	public void verificaSeATagEditoriaEstaPreenchida(){
+		assertTrue(codigoFonte.contains("editoria : \"participe\""));
+	}
+
+	@OrdemExecucaoTeste(Ordem=13)
+	@Test
+	public void verificaSeATagIdConteudoEstaPreenchida(){
+		assertTrue(codigoFonte.contains("id_conteudo : \"\""));
+	}
+
+	@OrdemExecucaoTeste(Ordem=14)
+	@Test
+	public void verificaSeATagEntidadesEstaPreenchida(){
+		assertTrue(codigoFonte.contains("entidades : [\"\"]"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=15)
+	@Test
+	public void verificaSeATagTopicosEstaPreenchida(){
+		assertTrue(codigoFonte.contains("topicos : [\"\"]"));
+	}
+
+	@OrdemExecucaoTeste(Ordem=16)
+	@Test
+	public void verificaSeOScriptAssincronoEstaSendoCarregadoNoCodigoDaPagina() throws InterruptedException{
+		assertTrue(euReporter.carregouJSNoModoAssincrono());
+	}
+}

@@ -1,0 +1,10 @@
+package pages.json.blogs;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class JsonPostsDeUmBlog extends AceitacaoAbstractTest {
+	
+	public JsonPostsDeUmBlog() throws Exception {
+		super();
+	}
+}

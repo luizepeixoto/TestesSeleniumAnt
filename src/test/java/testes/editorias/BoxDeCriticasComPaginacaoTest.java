@@ -1,0 +1,78 @@
+package testes.editorias;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.editoria.BoxDeCriticasComPaginacao;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class BoxDeCriticasComPaginacaoTest {
+	
+	private static BoxDeCriticasComPaginacao editoria;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(editoria.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		editoria = new BoxDeCriticasComPaginacao(Navegador.CHROME);
+	}
+	
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		editoria.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 1)
+	@Test
+	public void exibiuBoxDeCriticas() throws InterruptedException{
+		Thread.sleep(1000);
+		assertNotNull(editoria.exibiuBoxDeCriticas());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 2)
+	@Test
+	public void exibiuUmaListaComNoMinimo5Conteudos(){
+		assertTrue(editoria.exibiuUmaListaValida());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 3)
+	@Test
+	public void exibiuBoxDePaginacao(){
+		assertNotNull(editoria.exibiuBoxDePaginacao());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 4)
+	@Test
+	public void exibiuSetaDaDireitaDesabilitadaEDaEsquerdaHabilitada(){
+		assertTrue(editoria.exibiuSetasDePaginacaoParaEsquerdaDesabilitada());
+		assertTrue(editoria.exibiuSetasDePaginacaoParaDireitaHabilitada());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 5)
+	@Test
+	public void verificaSeAoClicarNaSetaDaDireitaAPaginacaoDaSetaDaEsquerdaPassaASerHabilitada() throws InterruptedException{
+		editoria.clicarNaPaginacaoDaDireita();
+		assertTrue(editoria.exibiuSetaParaEsquerdaHabilitada());
+	}
+	
+	@Ignore
+	@OrdemExecucaoTeste(Ordem = 6)
+	@Test
+	public void verificaSeAoClicarMaisUmaVezNaSetaDaDireitaAMesmaPassaASerHabilitada() throws InterruptedException{
+		editoria.clicarNaPaginacaoDaDireita();
+		assertTrue(editoria.exibiuSetaParaADireitaDesabilitada());
+	}
+}

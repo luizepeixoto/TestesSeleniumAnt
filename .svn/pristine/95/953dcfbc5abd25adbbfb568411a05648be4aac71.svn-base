@@ -1,0 +1,45 @@
+package br.com.infoglobo.pages.temporeal;
+
+import org.openqa.selenium.By;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.tealium.MarcacoesDoTealium;
+
+public class LancesDoJogo extends MarcacoesDoTealium{
+	
+	public LancesDoJogo(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+
+	public String exibiuTituloTempoReal() throws InterruptedException {
+		Thread.sleep(500);
+		return getDriver().findElement(By.xpath("//div[@class='centralizado']/h2")).getText();
+	}
+
+	public boolean exibiuDataDoEvento() throws InterruptedException {
+		Thread.sleep(500);
+		return !getDriver().findElement(By.xpath("//p[@class='data-hora-evento']")).getText().isEmpty();
+	
+	}
+
+	public String exibiuDataNoFormatoHHMM() throws InterruptedException{
+		Thread.sleep(500);
+		return getDriver().findElement(By.xpath("//p[@class='data-hora-evento']/span")).getText();
+	}
+
+	public boolean exibiuNomeDoEstadio() throws InterruptedException{
+		Thread.sleep(500);
+		return !getDriver().findElement(By.xpath("//div[@class='cabecalho-tempo-real row']/div[2]/div/p[2]")).getText().isEmpty();
+	}
+
+	public boolean exibiuNomeDoEditorDoJogo() throws InterruptedException{
+		Thread.sleep(500);
+		return !getDriver().findElement(By.xpath("//div[@class='colunista-evento medium-7 large-7 column']/p/b")).getText().isEmpty();
+	}
+
+	public boolean exibiuConteudoDosLances() throws InterruptedException{
+		Thread.sleep(500);
+		return !getDriver().findElement(By.xpath("//div[@class='timeline-tempo-real medium-16 large-16 column']")).getText().isEmpty();
+	}
+}

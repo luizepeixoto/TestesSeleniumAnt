@@ -1,0 +1,104 @@
+package pages.compartilhamento;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import pages.tealium.MarcacoesDoTealium;
+
+import br.com.infoglobo.pages.Navegador;
+
+public class CompartilhamentoInlinePadrao extends MarcacoesDoTealium {
+	
+	public CompartilhamentoInlinePadrao() throws Exception {
+		super();
+	}
+	
+	public CompartilhamentoInlinePadrao(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public WebElement acessaClasseHeadMateria(){
+		return getDriver().findElement(By.className("head-materia"));
+	}
+	
+	public WebElement acessaClasseMateriaEmCapitulo(){
+		return getDriver().findElement(By.className("materia-capitulos"));
+	}
+	
+	public WebElement acessaCorpoDamateria(){
+		return getDriver().findElement(By.className("corpo"));
+	}
+	
+	public WebElement acessaClasseCorpoColuna(){
+		return getDriver().findElement(By.className("corpo-coluna"));
+	}
+	
+	public WebElement acessaCompartilhamento(WebElement articleDesejado, int posicao){
+		return articleDesejado.findElements(By.className("share-materia")).get(posicao);
+	}
+	
+	public boolean exibiuCompartilhamento(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamento(articleDesejado, posicao).isDisplayed();
+	}
+	
+	public WebElement acessaCompartilhamentoInlineCurtirDoFacebook(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamento(articleDesejado, posicao).findElement(By.className("facebook-like"));
+	}
+	
+	public WebElement acessaCompartilhamentoInlineRecomendarDoFacebook(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamento(articleDesejado, posicao).findElement(By.className("facebook-share"));
+	}
+	
+	public WebElement acessaCompartilhamentoInlineDoTweeter(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamento(articleDesejado, posicao).findElement(By.className("twitter"));
+	}
+	
+	public WebElement acessaCompartilhamentoInlineDoGooglePlus(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamento(articleDesejado, posicao).findElement(By.className("google-plus"));
+	}
+	
+	public boolean exibiuBotaoDelike(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamentoInlineCurtirDoFacebook(articleDesejado, posicao).isDisplayed();
+	}
+	
+	public boolean exibiuBotaoDeRecomendar(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamentoInlineRecomendarDoFacebook(articleDesejado, posicao).isDisplayed();
+	}
+	
+	public boolean exibiuBotaoDeTwitter(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamentoInlineDoTweeter(articleDesejado, posicao).isDisplayed();
+	}
+	
+	public boolean exibiuBotaoDoGooglePlus(WebElement articleDesejado, int posicao){
+		return acessaCompartilhamentoInlineDoGooglePlus(articleDesejado, posicao).isDisplayed();
+	}
+	
+	public boolean exibiuOsBotoesDeCompartilhamentoNaOrdemCorrreta(WebElement articleDesejado, int posicao){
+		
+		List<WebElement> elementoRedeSocial = acessaCompartilhamento(articleDesejado, posicao).findElements(By.tagName("li"));
+		
+		if(!elementoRedeSocial.get(0).getAttribute("class").equals("facebook-like")){
+			imprimirMensagemDeErroGenerica("Curtir do facebook não está sendo exibido na primeira posição.");
+			return false;
+		}
+		
+		if(!elementoRedeSocial.get(1).getAttribute("class").equals("facebook-share")){
+			imprimirMensagemDeErroGenerica("Recomendar do facebook não está sendo exibido na segunda posição.");
+			return false;
+		}
+		
+		if(!elementoRedeSocial.get(2).getAttribute("class").equals("twitter")){
+			imprimirMensagemDeErroGenerica("Twitter não está sendo exibido na terceira posição.");
+			return false;
+		}
+		
+		if(!elementoRedeSocial.get(3).getAttribute("class").equals("google-plus")){
+			imprimirMensagemDeErroGenerica("Compartilhamento do GooglePlus não está sendo exibido na quarta posição.");
+			return false;
+		}
+		return true;
+	}
+	
+}

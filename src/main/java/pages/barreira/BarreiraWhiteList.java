@@ -1,0 +1,32 @@
+package pages.barreira;
+
+import java.util.ArrayList;
+
+import org.openqa.selenium.By;
+
+import assistente.AssistenteComWhiteList;
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class BarreiraWhiteList extends AceitacaoAbstractTest{
+	
+	public BarreiraWhiteList(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+	
+	public void navegarPorDozeMateriasDiferentes(String midiaSocialDesejada) throws Exception{
+		AssistenteComWhiteList assistenteDeCompartilhamento = new AssistenteComWhiteList();
+		ArrayList<String> urlsDeNavegacao = new ArrayList<String>();
+		urlsDeNavegacao = assistenteDeCompartilhamento.obterOnzeUrlsSendoAUltimaComWhiteList(getAmbiente(), getDominio(), midiaSocialDesejada);
+
+		for (int i = 0; i < urlsDeNavegacao.size(); i++) {
+			getDriver().navigate().to(urlsDeNavegacao.get(i));
+			System.out.println("Matéria nº"+ (i+1) + ": " + getDriver().getCurrentUrl());
+			esperaCarregar(1);
+		}	
+	}
+	
+	public boolean exibiuMateriaSemApresentarBarreira() {
+		return getDriver().findElement(By.className("corpo")).isDisplayed();
+	}
+}

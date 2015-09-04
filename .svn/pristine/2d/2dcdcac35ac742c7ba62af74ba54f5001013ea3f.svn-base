@@ -1,0 +1,53 @@
+package br.com.infoglobo.pages.capa.direita;
+
+import org.openqa.selenium.By;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class BoxRevistaDaTv extends AceitacaoAbstractTest{
+	
+	private String urlDaPagina;
+	private String urlAposClicar;
+	
+	public BoxRevistaDaTv() throws Exception{
+		super();
+		this.urlDaPagina = getDriver().getCurrentUrl();
+	}
+
+	public boolean exibiuBoxRevistaDaTv() {
+		return getDriver().findElement(By.className("revistadatv")).isDisplayed();
+	}
+
+	public boolean exibiuTituloRevistaDaTv() {
+		return getDriver().findElement(By.xpath("//div[@class='revistadatv']/div[1]/p")).isDisplayed();
+	}
+
+	public boolean exibiuAntetituloDoConteudo() {
+		return getDriver().findElement(By.xpath("//div[@class='revistadatv']/div/div/p")).isDisplayed();
+	}
+
+	public boolean exibiuTituloDoConteudo() {
+		return getDriver().findElement(By.xpath("//div[@class='revistadatv']/div/div/a")).isDisplayed();
+	}
+
+	public boolean exibiuBotaoResumoDasNovelas() {
+		return getDriver().findElement(By.xpath("//div[@class='revistadatv']/div/div/a[2]")).isDisplayed();
+	}
+
+	public boolean exibiuImagemDoConteudo() {
+		return getDriver().findElement(By.xpath("//div[@class='revistadatv']/a/img")).isDisplayed();
+	}
+
+	public void clicouNoTituloDoConteudo() {
+		getDriver().findElement(By.xpath("//div[@class='revistadatv']/div/div/a")).click();
+	}
+
+	public boolean redirecionouParaAPaginaDoConteudo() {
+		return this.urlDaPagina != this.urlAposClicar;
+	}
+
+	public void clicouNaImagemDoConteudo() {
+		getDriver().findElement(By.xpath("//div[@class='revistadatv']/a/img")).click();
+		
+	}
+}

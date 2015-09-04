@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.ela.materia.widget;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.materia.widget.BoxVejaTambem;
+
+public class BoxVejaTambemEla extends BoxVejaTambem {
+	
+	public BoxVejaTambemEla(Navegador navegador) throws Exception {
+		super(navegador);
+	}	
+}

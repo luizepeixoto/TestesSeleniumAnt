@@ -1,0 +1,136 @@
+<?xml version="1.0" ?>
+<project name="Teste Funcional Globo Produção" basedir="." default="test">
+	<property name="testdir" location="test" />
+
+	<property name="report.dir" location="test" />
+	<property name="srcdir" location="src" />
+	<property name="engine_lib_path" value="lib" />
+	<property name="full-compile" value="true" />
+	<path id="classpath.base" />
+	<path id="classpath.test">
+		<fileset dir="${engine_lib_path}" includes="**/*.jar" />
+		<pathelement location="${testdir}" />
+		<pathelement location="${srcdir}" />
+		<path refid="classpath.base" />
+	</path>
+
+	<target name="clean">
+		<delete verbose="${full-compile}">
+			<fileset dir="${testdir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${srcdir}" destdir="${testdir}" verbose="${full-compile}">
+			<compilerarg line="-encoding utf-8" />
+			<classpath refid="classpath.test" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile">
+		<junit printsummary="yes" haltonfailure="no">
+			<sysproperty key="propertyFile" value="src/resources/Configuracoes-PRD.properties" />
+			<classpath refid="classpath.test" />
+
+			<!-- formatter type="brief" usefile="false" / -->
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${srcdir}">
+				<fileset dir="${srcdir}">
+					<!--<include name="**/*Test.java" />
+					<exclude name="**/AceitacaoAbstractTest.java" />-->
+
+				
+						<include name="**/BoxCotacoesTest.java" />
+						<include name="**/PublicidadeTest.java" />
+						<include name="**/TabelaBolsasMundiaisTest.java" />
+						<include name="**/TabelaBovespaTest.java" />
+						<include name="**/TabelaCambioMoedasTest.java" />
+						<include name="**/TabelaIbovespaTest.java" />
+						<include name="**/TabelaIndicadoresEconomicosTest.java" />
+						<include name="**/TabelaINSSTest.java" />
+						<include name="**/TabelaPetroleoEOuroTest.java" />
+						<include name="**/TabelaSalarioMinimoTest.java" />
+						<include name="**/InfograficoTest.java" />
+						<include name="**/PublicidadeTest.java" />
+										
+						<include name="**/MateriaCom2NiveisTest.java" />
+						<include name="**/MateriaCom3NiveisTest.java" />
+						<include name="**/MateriaLinksPatrocinadosTest.java" />
+						<include name="**/MateriaMetadadoTest.java" />
+						<include name="**/MateriaNavegacaoTest.java" />
+						<include name="**/MateriaPublicidadeArrobaTest.java" />
+						<include name="**/MateriaSemAutorTest.java" />
+						<include name="**/MateriaSemFotoTest.java" />
+										
+						<include name="**/ComentarioBloqueadoTest.java" />
+						<include name="**/ComentarioBotaoMaisComentariosTest.java" />
+						<include name="**/ComentarioFechadoTest.java" />
+						<include name="**/ComentarioUnicoTest.java" />
+						
+						<include name="**/LoginGoogleNewsstandTest.java" />
+					
+										
+						<include name="**/MateriaComFotoInlineCentroGrandeTest.java" />
+						<include name="**/MateriaComFotoInlineEsquerdaGrandeTest.java" />
+						<include name="**/MateriaComFotoInlineEsquerdaPequenaTest.java" />
+						<include name="**/MateriaComFotoInlineEsquerdaVerticalTest.java" />
+						<include name="**/MateriaComFotoPrimeiraPosicaoTest.java" />
+										
+						<include name="**/BannerAssinaturaTest.java" />
+						<include name="**/BuscaComResultadoTest.java" />
+						<include name="**/BuscaComTextoInvalidoTest.java" />
+						<include name="**/BuscaSemResultadoTest.java" />
+						<include name="**/BuscaTest.java" />
+					
+						<include name="**/CompartilharColunaTest.java" />
+						<include name="**/CompartilharEditoriaTest.java" />
+						<include name="**/CompartilharFotogaleriaTest.java" />
+						<include name="**/CompartilharMateriaTest.java" />
+						<include name="**/CompartilharPlantaoTest.java" />
+					
+						<include name="**/DestaquesTest.java" />
+						<include name="**/DestaquesTitulosTest.java" />
+						<include name="**/FotogaleriaTest.java" />
+						<include name="**/FotogaleriaTituloFotosTest.java" />
+						<include name="**/FotogaleriaTituloTest.java" />
+						<include name="**/MenuEditoriasTest.java" />
+						<include name="**/SubeditoriasTest.java" />
+						<include name="**/TopicosTest.java" />
+										
+						<include name="**/MateriaComVideoGloboTest.java" />
+						<include name="**/MateriaComVideoYoutubeTest.java" />
+										
+						<include name="**/BoxMaisLidasTest.java" />
+						<include name="**/BoxTwitterEmbedTest.java" />
+						<include name="**/BoxVejaTambemComTarjaTest.java" />
+						<include name="**/BoxVejaTambemTest.java" />
+										
+						<include name="**/ExpedienteTest.java" />
+						<include name="**/FaleConoscoMensagensDeErroTest.java" />
+						<include name="**/FaleConoscoTest.java" />
+						<include name="**/PrincipiosEditoriaisTest.java" />
+										
+						<include name="**/PaginaDePlantaoTest.java" />
+						<include name="**/PlantaoLinkPatrocinadoTest.java" />
+						<include name="**/PlantaoNavegacaoTest.java" />
+										
+						<include name="**/UltimasNoticiasTest.java" />
+						<include name="**/UltimasNoticiasDeUmaEditoriaTest.java" />
+						<include name="**/UltimasNoticiasDeUmTopicosTest.java" />
+						<include name="**/UltimasNoticiasCarregarMaisMateriasTest.java" />
+						
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+
+	<target name="relatorio-junit" depends="test">
+		<junitreport todir="${report.dir}">
+			<fileset dir="${report.dir}">
+				<include name="TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="${report.dir}" />
+		</junitreport>
+	</target>
+</project>

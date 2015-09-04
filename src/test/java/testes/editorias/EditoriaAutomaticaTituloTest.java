@@ -1,0 +1,30 @@
+package testes.editorias;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import pages.editoria.EditoriaAutomaticaTitulo;
+
+
+public class EditoriaAutomaticaTituloTest {
+	
+	private static EditoriaAutomaticaTitulo editoria;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		editoria = new EditoriaAutomaticaTitulo();
+	}
+	
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		editoria.fechar();
+	}
+	
+	@Test
+	public void verificaSeOTituloNaoEstaSendoExibido(){
+		assertTrue(editoria.exibiuOTitulo());
+	}
+}

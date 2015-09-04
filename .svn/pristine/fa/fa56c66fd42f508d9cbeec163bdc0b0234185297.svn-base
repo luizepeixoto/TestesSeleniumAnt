@@ -1,0 +1,87 @@
+package br.com.infoglobo.testes.editorias.euReporter;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.openqa.selenium.By;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.editoria.EuReporterWidget;
+
+public class EuReporterWidgetTest {
+	
+	private static EuReporterWidget colunaDaDireita;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(colunaDaDireita.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		colunaDaDireita = new EuReporterWidget(Navegador.CHROME);
+		colunaDaDireita.esperaCarregar(3);
+		colunaDaDireita.executarScroll(colunaDaDireita.getDriver().findElement(By.className("col-right")).findElement(By.className("arroba")).getLocation());
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		colunaDaDireita.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDoEuReporterEstaSendoExibido(){
+		assertNotNull(colunaDaDireita.exibiuBoxEuReporter());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoBoxEstaSendoExibido(){
+		String tituloEsperado="Eu Repórter";
+		assertEquals(tituloEsperado, colunaDaDireita.exibiuOTitulo());
+	}
+	
+	@Test
+	public void verificaSeOBoxDoEuReporterEstaExibindoUmaFoto(){
+		assertTrue(colunaDaDireita.exibiuFotoNoBoxEuReporter());
+	}
+	
+	@Test
+	public void verificaSeOBoxDoEuReporterEstaExibindoUmIconeDentriDaFoto(){
+		assertTrue(colunaDaDireita.exibiuIconeNaFoto());
+	}
+	
+	@Test
+	public void verificaSeOTextoDoBoxDoEuReporterEstaSendoExibidoAbaixoDaFoto(){
+		String tituloEsperado="Transforme seu flagrante em notícia";
+		assertEquals(tituloEsperado, colunaDaDireita.exibiuTextoNoBoxEuReporter());
+	}
+	
+	@Test
+	public void verificaSeEstaSendoExibidoDoisBotoesAbaixoDoTexto(){
+		assertTrue(colunaDaDireita.exibiuDoisBotoes());
+	}
+	
+	@Test
+	public void verificaSeOBotaoDeSaibaComoEnviarEstaSendoExibido(){
+		assertTrue(colunaDaDireita.exibiuBotaoSaibaComoEnviar());
+	}
+	
+	@Test
+	public void verificaSeOBotaoDeEnviarSuaNoticiaEstaSendoExibido(){
+		assertTrue(colunaDaDireita.exibiuBotaoEnviarSuaNoticia());
+	}
+	
+	@Test
+	public void verificaSeOBotaoDeSaibaComoEnviarPossuiUmLinkConfigurado(){
+		assertTrue(colunaDaDireita.exibiuUmLinkConfiguradoNoBotaoSaibaComoEnviar());
+	}
+	
+	@Test
+	public void verificaSeOBotaoDeEnviarSuaNoticiaEstaConfiguradoComUmLinkCorreto(){
+		assertTrue(colunaDaDireita.exibiuUmLinkConfiguradoCorretamenteNoBotaoEnviarSuaNoticia());
+	}
+}

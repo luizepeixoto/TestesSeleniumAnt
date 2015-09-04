@@ -1,0 +1,199 @@
+package br.com.infoglobo.pages.editoria;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.crops.CropsDestaques;
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxDeCriticasSemPaginacao extends AceitacaoAbstractTest {
+	
+	public BoxDeCriticasSemPaginacao() throws Exception{
+		super();
+	}
+	
+	public BoxDeCriticasSemPaginacao(Navegador navegador) throws Exception{
+		super(navegador);
+	}
+	
+	public WebElement exibiuBoxDeCriticas() {
+		return getDriver().findElement(By.className("criticas-carrossel"));
+	}
+	
+	public WebElement exibiuClasseCriticasCarrossel() {
+		return exibiuBoxDeCriticas().findElement(By.className("criticas-carrossel-top"));
+	}
+	
+	public boolean exibiuUmTituloNoBoxDeCriticas() {
+		return !exibiuClasseCriticasCarrossel().findElement(By.className("title")).getText().isEmpty();
+	}
+
+	public boolean exibiuUmTituloComUmLink() {
+		return exibiuClasseCriticasCarrossel().findElement(By.tagName("a")).getAttribute("class").contains("title");
+	}
+
+	public boolean exibiuUmLinkValidoNoTitulo() {
+		return !exibiuClasseCriticasCarrossel().findElement(By.tagName("a")).getAttribute("href").isEmpty();
+	}
+
+	public List<WebElement> listaDeConteudos(){
+		return exibiuBoxDeCriticas().findElement(By.className("slider-container")).findElements(By.tagName("li"));
+	}
+	
+	public boolean exibiuUmaListaValida() {
+		return listaDeConteudos().size() >= Integer.parseInt("4");
+	}
+
+	public boolean exibiuImagemParaOsItensDaLista() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(!listaDeConteudos().get(i).findElement(By.className("link-img")).findElement(By.tagName("img")).isDisplayed()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuCropCorretoParaAsImagem() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			String urlDaImagemAtual = listaDeConteudos().get(i).findElement(By.className("link-img")).findElement(By.tagName("img")).getAttribute("src");
+			if(!urlDaImagemAtual.contains(CropsDestaques.boxDeCriticas.cropProporcional())){
+				imprimirMensagemDeErro("crop correto", i);
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuImagemComLink() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(!listaDeConteudos().get(i).findElement(By.tagName("a")).getAttribute("class").contains("link-img")){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuImagemComLinkValido() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(listaDeConteudos().get(i).findElement(By.tagName("a")).getAttribute("href").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuImagemComWidthCorreto() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			String widthDaImagem = listaDeConteudos().get(i).findElement(By.className("link-img")).findElement(By.tagName("img")).getAttribute("width");
+			if(!widthDaImagem.equals(CropsDestaques.boxDeCriticas.getWidth())){
+				imprimirMensagemDeErroDeImagem(i, widthDaImagem, CropsDestaques.boxDeCriticas.getWidth());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuImagemComHeightCorreto() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			String heightDaImagem = listaDeConteudos().get(i).findElement(By.className("link-img")).findElement(By.tagName("img")).getAttribute("height");
+			if(!heightDaImagem.equals(CropsDestaques.boxDeCriticas.getHeight())){
+				imprimirMensagemDeErroDeImagem(i, heightDaImagem, CropsDestaques.boxDeCriticas.getHeight());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuEditoria() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.className("link-title")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuUmLinkNaEditoria() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(!listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.tagName("a")).isDisplayed()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuUmLinkValidoNaEditoria() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.tagName("a")).getAttribute("href").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuTitulo() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.className("subtitle")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuTituloComLink() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(!listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.className("subtitle")).findElement(By.tagName("a")).isDisplayed()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuTituloComLinkValido() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.className("subtitle")).findElement(By.tagName("a")).getAttribute("href").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuQuantidadeMaximaDeCaracteresParaOsTitulosDosConteudos() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.className("subtitle")).getText().length() > 53){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuDescricao() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.className("resume")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuQuantidadeMaximaDeCaracteresParaAsDescricoesDeConteudos() {
+		for(int i=0; i<listaDeConteudos().size(); i++){
+			if(listaDeConteudos().get(i).findElement(By.className("padding-container")).findElement(By.className("resume")).getText().length() > 98){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public List<WebElement> listaDePaginacao() {
+		return exibiuClasseCriticasCarrossel().findElements(By.className("nav"));
+	}
+
+	
+	public boolean exibiuBoxDePaginacao() {
+		return listaDePaginacao().size() == 0;
+	}
+}

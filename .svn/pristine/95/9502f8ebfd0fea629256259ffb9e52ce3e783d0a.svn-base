@@ -1,0 +1,44 @@
+package br.com.infoglobo.pages.materia.video;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class MateriaComDoisVideosGlobo extends AceitacaoAbstractTest {
+	
+	public MateriaComDoisVideosGlobo(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+
+	public WebElement getClassCorpo(){
+		return getDriver().findElement(By.className("corpo"));
+	}
+	
+	public List<WebElement> getBoxVideo(){
+		return getClassCorpo().findElements(By.className("artigo-video"));
+	}
+	
+	public List<WebElement> listaDeVideos(){
+		return getDriver().findElements(By.className("artigo-video"));
+	}
+	
+	public boolean exibiuAChamadaDoPrimeiroVideo(){
+		return listaDeVideos().get(0).isDisplayed();
+	}
+	
+	public boolean exibiuVideoDaGloboPontoNaPrimeiraPosicao(){
+		return listaDeVideos().get(0).getAttribute("id").contains("player-wrapper2");
+	}
+	
+	public boolean exibiuAChamadaDoSegundoVideo(){
+		return listaDeVideos().get(1).isDisplayed();
+	}
+	
+	public boolean exibiuVideoDaGloboPontoNaSegundaPosicao(){
+		return listaDeVideos().get(1).getAttribute("id").contains("player-wrapper2");
+	}
+}

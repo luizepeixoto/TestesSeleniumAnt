@@ -1,0 +1,139 @@
+package br.com.infoglobo.testes.capa.rodape;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.capa.Rodape;
+
+public class RodapeFooterTest {
+	
+	private static Rodape footer;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		footer = new Rodape();
+	}
+	
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		footer.fechar();
+	}
+	
+	@Test
+	public void exibiuOFooter(){
+		assertNotNull(footer.exibiuOFooter());
+	}
+	
+	@Test
+	public void exibiuOBannerContendoOGlobo(){
+		assertNotNull(footer.exibiuOLogoNoFooter());
+	}
+	
+	@Test
+	public void exibiuOUmLinkNoBannerContendoOGlobo(){
+		assertTrue(footer.exibiuUmLinkNoLogoNoFooter());
+	}
+	
+	@Test
+	public void exibiuOUmLinkValidoNoBannerContendoOGlobo(){
+		assertTrue(footer.exibiuUmLinkValidoNoLogoNoFooter());
+	}
+	
+	@Test
+	public void exibiuOIconeDoFacebook(){
+		assertNotNull(footer.exibiuOIconeFacebook());
+	}
+	
+	@Test
+	public void exibiuUmLinkNoIconeDoFacebook(){
+		assertTrue(footer.exibiuUmLinkNoIconeDoFacebook());
+	}
+	
+	@Test
+	public void exibiuOLinkCorretoNoIconeDoFacebook(){
+		String urlEsperada="http://facebook.com/JornalOGlobo";
+		assertEquals(urlEsperada, footer.exibiuUmLinkValidoNoIconeDoFacebook());
+	}
+	
+	@Test
+	public void exibiuOIconeDoTwitter(){
+		assertNotNull(footer.exibiuOIconeTwitter());
+	}
+	
+	@Test
+	public void exibiuOLinkCorretoNoIconeDoTwitter(){
+		assertTrue(footer.exibiuUmLinkNoIconeDoTwitter());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoNoIconeDoTwitter(){
+		String urlEsperada="https://twitter.com/JornalOGlobo";
+		assertEquals(urlEsperada, footer.exibiuUmLinkValidoNoIconeDoTwitter());
+	}
+	
+	@Test
+	public void exibiuOIconeDoGooglePlus(){
+		assertNotNull(footer.exibiuOIconeGooglePlus());
+	}
+	
+	@Test
+	public void exibiuUmLinkNoIconeDoGooglePlus(){
+		assertTrue(footer.exibiuUmLinkNoIconeDoGooglePlus());
+	}
+	
+	@Test
+	public void exibiuOLinkCorretoValidoNoIconeDoGooglePlus(){
+		String urlEsperada="https://plus.google.com/u/0/+JornalOGlobo/posts";
+		assertEquals(urlEsperada, footer.exibiuUmLinkValidoNoIconeDoGooglePlus());
+	}
+	
+	@Test
+	public void verificaSeOMenuDeTopicosEstaSendoExibido(){
+		assertNotNull(footer.exibiuOsTopicosNoFooter());
+	}
+	
+	@Test
+	public void verificaSeOTituloTopicosEstaSendoExibido(){
+		String resultadoEsperado="Tópicos";
+		assertEquals(resultadoEsperado, footer.exibiuOTituloTopicos());
+	}
+	
+	@Test
+	public void verificaSeUmaListaDeTopicosEstaSendoExibida(){
+		assertTrue(footer.exibiuListaDeTopicos());
+	}
+	
+	@Test
+	public void verificaSeOsTitulosDosTopicosEstaoSendoExibido(){
+		assertTrue(footer.exibiuTituloParaOsTopicos());
+	}
+	
+	@Test
+	public void verificaSeOsTitulosDosTopicosPossuemUmLink(){
+		assertTrue(footer.exibiuLinkNoTituloDosTopicos());
+	}
+	
+	@Test
+	public void verificaSeOsLinksNosTitulosDosTopicosSaoValidos(){
+		assertTrue(footer.oLinkDosTopicosSaoValidos());
+	}
+	
+	@Test
+	public void exibiuOBannerDeAssinatura(){
+		assertNotNull(footer.exibiuOBannerDeAssinatura());
+	}
+	
+	@Test
+	public void exibiuUmLinkNoBannerDeAssinaturas(){
+		assertTrue(footer.exibiuUmLinkNoBannerDeAssinatura());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoNoBannerDeAssinatura(){
+		//String urlEsperada="https://seguro.oglobo.com.br/assinatura/Default.aspx?id_parc=12";
+		assertTrue(footer.exibiuUmLinkValidoNoBannerDeAssinatura());
+	}
+}

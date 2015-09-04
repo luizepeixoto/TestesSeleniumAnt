@@ -1,0 +1,17 @@
+package br.com.infoglobo.pages.newsletter.urgente;
+
+import org.openqa.selenium.By;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.newsletter.NewsletterTagueamentoPaginaPadrao;
+
+public class UrgenteTagueamento extends NewsletterTagueamentoPaginaPadrao {
+	
+	public UrgenteTagueamento(Navegador navegador) throws Exception {
+		super(navegador, "newsurgente");
+	}
+	
+	public boolean exibiuOTagueamentoNaOpcaoContinuarLendoDaMateriaPrincipal() {
+		return elementoPossuiTagueamento(obterOpcaoContinuarLendoDaMateriaPrincipalDaNewsletterUrgente().findElement(By.tagName("a")));
+	}	
+}

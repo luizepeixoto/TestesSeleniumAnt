@@ -1,0 +1,59 @@
+package pages.capa.direita;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class BoxRevistaDaTv extends AceitacaoAbstractTest{
+	
+	private String urlAposClicar;
+	static String antesDoClick = ""; 
+	
+	public BoxRevistaDaTv() throws Exception{
+		super();
+	}
+	
+	public WebElement boxRevistaDaTV(){
+		return getDriver().findElement(By.className("revistadatv"));
+	}
+
+	public boolean exibiuBoxRevistaDaTv() {
+		return boxRevistaDaTV().isDisplayed();
+	}
+
+	public boolean exibiuTituloRevistaDaTv() {
+		return !boxRevistaDaTV().findElement(By.className("sobre")).findElement(By.tagName("p")).getText().isEmpty();
+	}
+
+	public boolean exibiuAntetituloDoConteudo() {
+		return !boxRevistaDaTV().findElement(By.className("materia")).findElement(By.tagName("p")).getText().isEmpty();
+	}
+
+	public boolean exibiuTituloDoConteudo() {
+		return !boxRevistaDaTV().findElement(By.className("materia")).findElement(By.tagName("a")).getText().isEmpty();
+	}
+
+	public boolean exibiuBotaoResumoDasNovelas() {
+		return boxRevistaDaTV().findElement(By.className("materia")).findElement(By.className("more")).isDisplayed();
+	}
+
+	public boolean exibiuImagemDoConteudo() {
+		return boxRevistaDaTV().findElement(By.tagName("a")).findElement(By.tagName("img")).isDisplayed();
+	}
+
+	public void clicouNoTituloDoConteudo() {
+		antesDoClick = getDriver().getCurrentUrl();
+		boxRevistaDaTV().findElement(By.className("materia")).findElement(By.tagName("a")).click();
+		urlAposClicar = getDriver().getCurrentUrl();
+	}
+
+	public boolean redirecionouParaAPaginaDoConteudo() {
+		return this.urlAposClicar != antesDoClick;
+	}
+	
+	public void clicouNaImagemDoConteudo() {
+		boxRevistaDaTV().findElement(By.tagName("a")).findElement(By.tagName("img")).click();
+		
+	}
+}

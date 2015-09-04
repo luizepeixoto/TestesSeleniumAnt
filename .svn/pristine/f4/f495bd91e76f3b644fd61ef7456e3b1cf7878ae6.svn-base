@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<project name="Tabelas de Campeonatos" basedir="." default="test">
+	<property name="testdir" location="test" />
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+
+	<property name="report.dir" location="test" />
+	<property name="testdir" location="test" />
+	<property name="srcdir" location="src" />
+	<property name="engine_lib_path" value="lib" />
+	<property name="full-compile" value="false" />
+	<path id="classpath.base" />
+	<path id="classpath.test">
+		<fileset dir="${engine_lib_path}" includes="**/*.jar" />
+		<pathelement location="${testdir}" />
+		<pathelement location="${srcdir}" />
+		<path refid="classpath.base" />
+	</path>
+
+	<target name="clean">
+		<delete verbose="${full-compile}">
+			<fileset dir="${testdir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${srcdir}" destdir="${testdir}" verbose="${full-compile}">
+			<compilerarg line="-encoding utf-8" />
+			<classpath refid="classpath.test" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile">
+		<parallel threadCount="3">
+			<junit printsummary="yes" haltonfailure="no">
+				<classpath refid="classpath.test" />
+				<sysproperty key="propertyFile" value="src/resources/Configuracoes-STG.properties" />
+				<!-- formatter type="brief" usefile="false" / -->
+				<formatter type="xml" />
+				<batchtest fork="yes" todir="${srcdir}">
+					<fileset dir="${srcdir}">
+					  <!--br.com.infoglobo.testes.tabela.copaDoBrasil-->
+						<include name="**/TabelaCopaDoBrasilTest.java" />
+						<include name="**/TabelaCopaDoBrasilComTempoRealTest.java" />
+						<include name="**/TabelaCopaDoBrasilJogoCanceladoTest.java" />
+						
+						<!--br.com.infoglobo.testes.tabelas.brasileiro-->
+						<include name="**/TabelaSerieARegulamentoTest.java" />
+						<include name="**/TabelaSerieARodadasTest.java" />
+						<include name="**/TabelaSerieATest.java" />
+						<include name="**/TabelaSerieBRegulamentoTest.java" />
+						<include name="**/TabelaSerieBRodadasTest.java" />
+						<include name="**/TabelaSerieBTest.java" />
+						<include name="**/TempoRealComTabelaSerieARodadasTest.java" />
+						<include name="**/TempoRealComTabelaSerieATest.java" />
+						<include name="**/TempoRealComTabelaSerieBRodadasTest.java" />
+						<include name="**/TempoRealComTabelaSerieBTest.java" />
+						
+					  <!--br.com.infoglobo.testes.tabelas.carioca
+						<include name="**/TabelaCampeonatoCariocaPaginaTempoRealTest.java" />
+						<include name="**/TabelaCampeonatoCariocaTest.java" /> Paginação quebrada. Verificar correção de defeito-->
+						
+					  <!--br.com.infoglobo.testes.tabelas.formulaUm
+						<include name="**/TabelaFormulaUmTest.java" />
+						<include name="**/TabelaFormulaUmAbaCalendarioTest.java" /> -->
+						<!--<include name="**/TabelaFormulaUmAbaResultadoPorPilotoTest.java" /> Não roda no jenkins-->
+						<!--<include name="**/TabelaFormulaUmAbaResultadoPorEquipeTest.java" /> Não roda no jenkins-->
+						<!--<include name="**/TabelaFormulaUmAbaResultadoPorCorridaTest.java" /> Não roda no jenkins-->
+						
+					  <!--br.com.infoglobo.testes.tabelas.libertadores-->
+						<!--<include name="**/LibertadoresFaseDeGruposTest.java" /> Não roda no jenkins: Analisar problema-->
+						<include name="**/LibertadoresFaseFinalTest.java" />
+						<include name="**/LibertadoresFaseOitavasDeFinalTest.java" />
+						<include name="**/LibertadoresFasePreviaTest.java" />
+						<include name="**/LibertadoresFaseQuartasDeFinalTest.java" />
+						<include name="**/LibertadoresFaseSemifinalTest.java" />
+						
+						<!--<include name="**/LibertadoresNoTempoRealFaseDeGruposTest.java" /> Não roda no jenkins: Analisar problema-->
+						<include name="**/LibertadoresNoTempoRealFaseFinalTest.java" />
+						<include name="**/LibertadoresNoTempoRealFaseOitavasDeFinalTest.java" />
+						<include name="**/LibertadoresNoTempoRealFasePreviaTest.java" />
+						<include name="**/LibertadoresNoTempoRealFaseQuartasDeFinalTest.java" />
+						<include name="**/LibertadoresNoTempoRealFaseSemifinalTest.java" />
+						<include name="**/LibertadoresNoTempoRealTest.java" />
+						<include name="**/LibertadoresTest.java" />
+						
+						<!--br.com.infoglobo.testes.tabelas.copaAmerica-->
+						<include name="**/CopaAmericaFaseDeGruposTest.java" />
+						<include name="**/CopaAmericaFaseDeQuartasTest.java" />
+						<include name="**/CopaAmericaFaseFinalTest.java" />
+						<include name="**/CopaAmericaFaseSemiFinalTest.java" />
+						<include name="**/CopaAmericaRegulamentoTest.java" />
+						<include name="**/CopaAmericaTest.java" />
+						<include name="**/CopaAmericaTempoRealFaseDeGruposTest.java" />
+						<include name="**/CopaAmericaTempoRealFaseDeQuartasTest.java" />
+						<include name="**/CopaAmericaTempoRealFaseFinalTest.java" />
+						<include name="**/CopaAmericaTempoRealFaseSemiFinalTest.java" />
+						<include name="**/CopaAmericaTempoRealRegulamentoTest.java" />
+						<include name="**/CopaAmericaTempoRealTest.java" />
+							
+					</fileset>
+				</batchtest>
+			</junit>
+		</parallel>
+	</target>
+</project>

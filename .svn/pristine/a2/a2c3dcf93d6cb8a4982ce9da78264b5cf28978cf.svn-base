@@ -1,0 +1,161 @@
+package br.com.infoglobo.testes.tabelas.libertadores;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.tabelas.libertadores.paginaTempoReal.TabelaLibertadoresFaseDeGruposPaginaTempoReal;
+
+@RunWith(OrdenadorTestes.class)
+public class LibertadoresNoTempoRealFaseDeGruposTest {
+
+	private static TabelaLibertadoresFaseDeGruposPaginaTempoReal libertadoresFaseDeGrupos;
+		
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(libertadoresFaseDeGrupos.getDriver());
+	
+	@BeforeClass
+	public static void before() throws Exception{
+		libertadoresFaseDeGrupos = new TabelaLibertadoresFaseDeGruposPaginaTempoReal(Navegador.CHROME);
+		libertadoresFaseDeGrupos.esperaSuperLeaderboardVoltarAoTamanhoNormal(150);
+	}
+	
+	@AfterClass
+	public static void finalizaTeste() {
+		libertadoresFaseDeGrupos.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 1)
+	@Test
+	public void verificaSeAoClicarNaOpcaoDaFaseDeGruposOBoxDosJogosDestaFaseEhExibido() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuBoxDosJogosDaFaseDeGruposAposClicarNoMenu());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 2)
+	@Test
+	public void verificaSeNoMinimoUmGrupoDaFaseDeGruposEstaSendoExibido() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuNoMinimoUmGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 3)
+	@Test
+	public void verificaSeParaCadaGrupoDaFaseDeGruposONomeEstaSendoExibido() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuONomeParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 4)
+	@Test
+	public void verificaSeParaCadaGrupoATabelaDeClassificacaoEstaSendoExibida() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuATabelaDeClassificacaoParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 5)
+	@Test
+	public void verificaSeParaCadaGrupoAsColunasDaTabelaDeClassificacaoEstaoSendoExibidas() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuAsColunasDaTabelaDeClassificacaoParaCadaGrupoDaFase());
+	}
+
+	@OrdemExecucaoTeste(Ordem = 6)
+	@Test
+	public void verificaSeParaCadaGrupoAsPosicoesDosTimesDaTabelaDeClassificacaoEstaoSendoExibidas() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuAsPosicoesDosTimesDaTabelaDeClassificacaoParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 7)
+	@Test
+	public void verificaSeParaCadaGrupoOsTimesDaTabelaDeClassificacaoEstaoSendoExibidos() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOsTimesDaTabelaDeClassificacaoParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 8)
+	@Test
+	public void verificaSeParaCadaGrupoOsDoisPrimeirosTimesDaTabelaDeClassificacaoEstaoSendoExibidosDestacados() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOsDoisPrimeirosTimesDaTabelaDeClassificacaoDestacadosParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 9)
+	@Test
+	public void verificaSeParaCadaGrupoARodadaAtualEstaSendoExibida() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuARodadaAtualParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 10)
+	@Test
+	public void verificaSeParaCadaGrupoOTituloDaRodadaAtualEstaSendoExibido() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOTituloDaRodadaAtualParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 11)
+	@Test
+	public void verificaSeParaCadaGrupoOBotaoDeRodadaAnteriorEstaSendoExibido() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOBotaoDeRodadaAnteriorParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 12)
+	@Test
+	public void verificaSeParaCadaGrupoOBotaoDeRodadaPosteriorEstaSendoExibido() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOBotaoDeRodadaPosteriorParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 13)
+	@Test
+	public void verificaSeParaCadaGrupoAListaDeJogosDaRodadaAtualEstaSendoExibida() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuAListaDeJogosDaRodadaAtualParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 14)
+	@Test
+	public void verificaSeParaCadaGrupoOsEscudosDosTimesEstaoSendoExibidosNosJogosDaRodadaAtual() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOsEscudosDosTimesNosJogosDaRodadaAtualParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 15)
+	@Test
+	public void verificaSeParaCadaGrupoOsNomesDosTimesEstaoSendoExibidosNosJogosDaRodadaAtual() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOsNomesDosTimesNosJogosDaRodadaAtualParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 16)
+	@Test
+	public void verificaSeParaCadaGrupoADataOEstadioEAHoraEstaoSendoExibidosNosJogosDaRodadaAtual() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuADataOEstadioEAHoraNosJogosDaRodadaAtualParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 17)
+	@Test
+	public void verificaSeParaCadaGrupoOBotaoDeRodadaPosteriorEstaDesabilitadoNaUltimaRodada() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOBotaoDeRodadaPosteriorDesabilitadoNaUltimaRodadaParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 18)
+	@Test
+	public void verificaSeParaCadaGrupoOBotaoDeRodadaAnteriorEstaDesabilitadoNaPrimeiraRodada() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOBotaoDeRodadaAnteriorDesabilitadoNaPrimeiraRodadaParaCadaGrupoDaFase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 19)
+	@Test
+	public void verificaSeALegendaEstaSendoExibida() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuALegendaDoCampeonato());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 20)
+	@Test
+	public void verificaSeACorParaOsTimesClassificadosEstaSendoExibida() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuACorParaOsTimesClassificadosNaLegenda());
+	}
+	
+	@OrdemExecucaoTeste(Ordem = 21)
+	@Test
+	public void verificaSeOTextoParaOsTimesClassificadosEstaSendoExibido() {
+		assertTrue(libertadoresFaseDeGrupos.exibiuOTextoParaOsTimesClassificadosNaLegenda());
+	}
+}

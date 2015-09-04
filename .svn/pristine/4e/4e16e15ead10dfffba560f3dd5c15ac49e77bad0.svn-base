@@ -1,0 +1,88 @@
+package br.com.infoglobo.pages.materia.menu;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class MenuFotogaleria extends AceitacaoAbstractTest {
+
+	public MenuFotogaleria() throws Exception {
+		super();
+	}
+	
+	public MenuFotogaleria(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public void mouseOver() throws InterruptedException{
+		getDriver().manage().deleteAllCookies();
+		WebElement menu = getDriver().findElement(By.cssSelector("#bt-editoria > a"));
+		Actions mouseOver = new Actions(getDriver());
+		mouseOver.moveToElement(menu).perform();
+		Thread.sleep(1500);
+	}
+	
+	public void mouseOverCom2Segundos() throws InterruptedException{
+		WebElement menu = getDriver().findElement(By.cssSelector("#bt-editoria > a"));
+		Actions mouseOver = new Actions(getDriver());
+		mouseOver.moveToElement(menu).perform();
+		Thread.sleep(2000);
+	}
+	
+	public WebElement oBoxDeFotogaleriaEstaSendoExibido() throws InterruptedException {
+		getDriver().manage().window().maximize(); 
+		
+		mouseOver();
+		
+		return getDriver().findElement(By.cssSelector("#menu-editoria > div:nth-child(1) > div > div > div.large-4.columns.fotos-dia"));
+	}
+	
+	public String oTituloFotosDoDiaEstaSendoExibido() throws InterruptedException {
+		mouseOver();
+		//return getDriver().findElement(By.cssSelector("#menu-editoria > div:nth-child(1) > div > div > div.large-4.columns.fotos-dia > h3")).getText();
+		return getDriver().findElement(By.xpath(".//*[@id='menu-editoria']/div[1]/div/div/div[3]/h3")).getAttribute("innerHTML");
+	}													
+	
+	public boolean aChamadaDaFotoGaleriaPossuiUmLink() throws InterruptedException {
+		mouseOver();
+		return getDriver().findElement(By.cssSelector("#menu-editoria > div:nth-child(1) > div > div > div.large-4.columns.fotos-dia > div > a")).isDisplayed();
+	}
+	
+	public boolean aChamadaDaFotoGaleriaPossuiUmLinkValido() throws InterruptedException {
+		mouseOver();
+		return !getDriver().findElement(By.cssSelector("#menu-editoria > div:nth-child(1) > div > div > div.large-4.columns.fotos-dia > div > a")).getAttribute("href").isEmpty();
+	}
+	
+	public WebElement aFotogaleriaNoMenuEstaExibindoUmaFoto() throws InterruptedException {
+		mouseOver();
+		return getDriver().findElement(By.cssSelector("#menu-editoria > div:nth-child(1) > div > div > div.large-4.columns.fotos-dia > div > a > img"));
+	}
+	
+	public WebElement caminhoImagem(){
+		return getDriver().findElement(By.className("navegacao-central")).findElement(By.className("foto-legenda")).findElement(By.tagName("img"));
+	}
+	
+	public boolean aFotoDaFotogaleriaDoMenuPossuiOWidthDe520Px() throws InterruptedException {
+		mouseOverCom2Segundos();
+		if(Integer.parseInt(caminhoImagem().getAttribute("width")) > 520){
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean aFotoDaFotogaleriaDoMenuPossuiOHeightDe315Px() throws InterruptedException {
+		mouseOverCom2Segundos();
+		if(Integer.parseInt(caminhoImagem().getAttribute("height")) > 315){
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean oTituloDaFotogaleriaDoMenuEstaSendoExibindo() throws InterruptedException {
+		mouseOver();
+		return !getDriver().findElement(By.xpath("//*[@id='menu-editoria']/div[1]/div/div/div[3]/div/a/span")).getAttribute("innerHTML").isEmpty();
+	}
+}

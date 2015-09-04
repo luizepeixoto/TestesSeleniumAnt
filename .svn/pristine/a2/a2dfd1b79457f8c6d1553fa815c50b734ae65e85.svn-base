@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.ela.editoria;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.destaques.DestaqueCom4FotosAbaixo;
+
+public class DestaqueElaCom4FotosAbaixo extends DestaqueCom4FotosAbaixo {
+	
+	public DestaqueElaCom4FotosAbaixo(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

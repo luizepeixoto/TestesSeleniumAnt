@@ -1,0 +1,92 @@
+package testes.materia.menu;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.materia.menu.MenuFotogaleria;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class FotogaleriaTest {
+	
+	private static MenuFotogaleria menuFotogaleria;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(menuFotogaleria.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		menuFotogaleria = new MenuFotogaleria(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		menuFotogaleria.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void verificaSeOBoxDeFotogaleriasEstaSendoExibidoNoMenu() throws InterruptedException{
+		assertNotNull(menuFotogaleria.oBoxDeFotogaleriaEstaSendoExibido());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void verificaSeOTituloFotosDoDiaEstaSendoExibido() throws InterruptedException{
+		String resultadoEsperado = "Fotos do dia";
+		assertEquals(resultadoEsperado.toLowerCase(), menuFotogaleria.oTituloFotosDoDiaEstaSendoExibido().toLowerCase());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void verificaSeAChamadaDaFotogaleriaPossuiUmLink() throws InterruptedException{
+		assertNotNull(menuFotogaleria.aChamadaDaFotoGaleriaPossuiUmLink());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void verificaSeOLinkDaChamadaDaFotogaleriaEhValido() throws InterruptedException{
+		assertNotNull(menuFotogaleria.aChamadaDaFotoGaleriaPossuiUmLinkValido());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void verificaSeAChamadaDaFotogaleriaEstaExibindoUmaFoto() throws InterruptedException{
+		assertNotNull(menuFotogaleria.aFotogaleriaNoMenuEstaExibindoUmaFoto());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=6)
+	@Test
+	public void verificaSeAChamadaDaFotogaleriaPossuiOTitulo() throws InterruptedException{
+		assertTrue(menuFotogaleria.oTituloDaFotogaleriaDoMenuEstaSendoExibindo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=7)
+	@Test
+	public void verificaSeAFotoDaChamadaDaFotogaleriaPossuiOWidthDe520Px() throws InterruptedException{
+		assertTrue(menuFotogaleria.aFotoDaFotogaleriaDoMenuPossuiOWidthDe520Px());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=8)
+	@Test
+	public void verificaSeAFotoDaChamadaDaFotogaleriaPossuiOHeightDe315Px() throws InterruptedException{
+		assertTrue(menuFotogaleria.aFotoDaFotogaleriaDoMenuPossuiOHeightDe315Px());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=9)
+	@Test
+	public void exibiuOTituloDaFotoGaleriaNoMenu() throws InterruptedException{
+		assertTrue(menuFotogaleria.oTituloDaFotogaleriaDoMenuEstaSendoExibindo());
+	}
+}

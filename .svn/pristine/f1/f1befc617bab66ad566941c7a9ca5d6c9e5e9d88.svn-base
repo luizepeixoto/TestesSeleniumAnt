@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.newsletter.destaquesDoDia;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.newsletter.NewsletterRodapePaginaPadrao;
+
+public class DestaquesDoDiaRodape extends NewsletterRodapePaginaPadrao {
+	
+	public DestaquesDoDiaRodape(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

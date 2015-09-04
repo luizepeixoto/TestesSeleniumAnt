@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.ela.materia.widget;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.materia.widget.BoxInteressadoEm;
+
+public class BoxInteressadoEmEla extends BoxInteressadoEm {
+	
+	public BoxInteressadoEmEla(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

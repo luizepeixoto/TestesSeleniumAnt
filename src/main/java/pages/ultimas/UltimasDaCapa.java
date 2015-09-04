@@ -1,0 +1,496 @@
+package pages.ultimas;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import crops.CropsCapa;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class UltimasDaCapa extends AceitacaoAbstractTest {
+	
+	public int quantidadeAValidar = 5; 
+	
+	public UltimasDaCapa() throws Exception {
+		super();
+	}
+
+	public UltimasDaCapa(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public WebElement acessaTituloDeUltimas() {
+		return getDriver().findElement(By.className("titulo-ultimas")).findElement(By.tagName("h1"));
+	}
+	
+	public String exibiuOTituloDeUltimas() {
+		return acessaTituloDeUltimas().getText();
+	}
+
+	public WebElement acessaAsUltimasNoticias() {
+		return getDriver().findElement(By.id("ultimasNoticias"));
+	}
+
+	public List<WebElement> listaTotalDeUltimas() {
+		return acessaAsUltimasNoticias().findElement(By.tagName("ul")).findElements(By.tagName("li"));
+	}
+	
+	public int tamanhoTotalDeUltimasComoOcultas() {
+		List<WebElement> totalDeUltimasOcultas = acessaAsUltimasNoticias().findElement(By.tagName("ul")).findElements(By.className("item-ultimas-oculto"));
+		return totalDeUltimasOcultas.size();
+	}
+	
+	public WebElement acessaDestaquePrincipal() {
+		return acessaAsUltimasNoticias().findElement(By.tagName("ul")).findElement(By.className("destaque"));
+	}
+	
+	public WebElement acessaImagemDestaquePrincipal() {
+		return acessaDestaquePrincipal().findElement(By.tagName("img"));
+	}
+	
+	public boolean exibiuDestaquePrincipal() {
+		return acessaDestaquePrincipal().isDisplayed();
+	}
+	
+	public boolean exibiuCropWidthEHeightCorretosParaAFotoEmDestaque() {
+		
+		int contadorDeErros = 0;
+		
+		String cropEsperado = CropsCapa.ultimasNoticiasDestaquePrincipal.getCropProporcional();
+		String widthEsperado = CropsCapa.ultimasNoticiasDestaquePrincipal.getWidth();
+		String heightEsperado = CropsCapa.ultimasNoticiasDestaquePrincipal.getHeight();
+		
+		String urlImagemEmDestaque = acessaImagemDestaquePrincipal().getAttribute("src");
+		String widthAtual = acessaImagemDestaquePrincipal().getAttribute("width");
+		String heightAtual = acessaImagemDestaquePrincipal().getAttribute("height");
+		
+		if (!urlImagemEmDestaque.contains(cropEsperado)) {
+			imprimirMensagemDeErroGenerica("Não exibiu crop correto para a imagem no destaque principal");
+			contadorDeErros++;
+		}
+		
+		if (Integer.parseInt(widthAtual) > Integer.parseInt(widthEsperado)) {
+			imprimirMensagemDeErroDeUmaTag("width do destaque principal", widthEsperado, widthAtual);
+			contadorDeErros++;
+		}
+		
+		if (Integer.parseInt(heightAtual) > Integer.parseInt(heightEsperado)) {
+			imprimirMensagemDeErroDeUmaTag("height do destaque principal", heightEsperado, heightAtual);
+			contadorDeErros++;
+		}
+		
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public boolean exibiuLinkNaFotoDaMateriaEmDestaque() {
+		return acessaDestaquePrincipal().findElement(By.tagName("a")).findElement(By.tagName("img")).isDisplayed();
+	}
+	
+	public boolean exibiuTituloEmDestaqueComNoMaximo120Caracteres() {
+		
+		String tituloMateriaEmDestaque = acessaAsUltimasNoticias().findElement(By.className("destaque")).findElement(By.tagName("h2")).getText();
+		int totalDecaracteres = tituloMateriaEmDestaque.length();
+		
+		if(totalDecaracteres > Integer.parseInt("120")){
+			imprimirMensagemDeErroGenerica("O total de caracteres permitidos está sendo excedido");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean exibiuDestaqueEsquerdaSuperior(){
+		return acessaAsUltimasNoticias().findElement(By.className("superior")).isDisplayed();
+	}
+	
+	public boolean exibiuDestaqueEsquerdaInferior(){
+		return acessaAsUltimasNoticias().findElement(By.className("inferior")).isDisplayed();
+	}
+	
+	public boolean exibiuUmaImagemOuUmaDescricaoParaAsMaterias() {
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			List<WebElement> possuiFotoNaPosicao = listaTotalDeUltimas().get(i).findElements(By.tagName("img"));
+			
+			if(possuiFotoNaPosicao.size() == Integer.parseInt("1")){
+				if(!listaTotalDeUltimas().get(i).findElement(By.tagName("img")).isDisplayed()){
+					imprimirMensagemDeErroGenerica("Não exibiu foto para a "+(i+1)+"ª posição.");
+					return false;
+				}
+			}else{
+				if(listaTotalDeUltimas().get(i).findElement(By.tagName("h3")).getText().isEmpty()){
+					imprimirMensagemDeErroGenerica("Não exibiu foto e nem descrição para a "+(i+1)+"ª posição.");
+					return false;
+				}
+			}
+			
+			if(i==2){
+				executaScrollParaAparecerOTituloDeUmaPosicao(listaTotalDeUltimas().get(i));
+			}
+		}
+		
+		return true;
+	}
+	
+	public boolean exibiuLinkNasImagensDasMaterias() {
+	
+		for(int i=1; i < quantidadeAValidar; i++){
+			List<WebElement> possuiFotoNaPosicao = listaTotalDeUltimas().get(i).findElements(By.tagName("img"));
+			if(possuiFotoNaPosicao.size()>0){
+				if(!listaTotalDeUltimas().get(i).findElement(By.tagName("a")).isDisplayed()){
+					imprimirMensagemDeErroGenerica("Não exibiu link na foto para a "+(i+1)+"ª posição.");
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuCropHeightEWidthCorretosParaAsChamadas() {
+		
+		int contadorDeErros = 0;
+		
+		String cropEsperado = CropsCapa.ultimasNoticias.getCropProporcional();
+		String widthEsperado = CropsCapa.ultimasNoticias.getWidth();
+		String heightEsperado = CropsCapa.ultimasNoticias.getHeight();
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			List<WebElement> possuiFotoNaPosicao = listaTotalDeUltimas().get(i).findElements(By.tagName("img"));
+			
+			if(possuiFotoNaPosicao.size()>0){
+				
+				WebElement acessaFotoNaPosicao = listaTotalDeUltimas().get(i).findElement(By.tagName("img"));
+				
+				String urlImagemEmDestaque = acessaFotoNaPosicao.getAttribute("src");
+				String widthAtual = acessaFotoNaPosicao.getAttribute("width");
+				String heightAtual = acessaFotoNaPosicao.getAttribute("height");
+				
+				if (!urlImagemEmDestaque.contains(cropEsperado)) {
+					imprimirMensagemDeErroGenerica("Não exibiu crop correto para a imagem na "+(i+1)+"ª posição.");
+					contadorDeErros++;
+				}
+				
+				if (Integer.parseInt(widthAtual) > Integer.parseInt(widthEsperado)) {
+					imprimirMensagemDeErroDeUmaTag("width da foto na "+(i+1)+"ª posição.", widthEsperado, widthAtual);
+					contadorDeErros++;
+				}
+				
+				if (Integer.parseInt(heightAtual) > Integer.parseInt(heightEsperado)) {
+					imprimirMensagemDeErroDeUmaTag("height da foto na "+(i+1)+"ª posição.", heightEsperado, heightAtual);
+					contadorDeErros++;
+				}
+			}
+		}
+
+		return validacaoDeErros(contadorDeErros);		
+	}	
+	
+	public boolean exibiuApenasUmDestaquePrincipal() {
+		
+		List<WebElement> quantidadeDeMateriasEmDestaquePrincipaloticias = acessaAsUltimasNoticias().findElements(By.className("destaque"));
+		
+		if(quantidadeDeMateriasEmDestaquePrincipaloticias.size() > 1){
+			imprimirMensagemDeErroGenerica("Exibiu mais de uma matéria com a classe de destaque principal.");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean exibiuEditoriaParaAsMateriasDeUltimas() {
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			if(listaTotalDeUltimas().get(i).findElement(By.className("editoria")).getText().isEmpty()){
+				imprimirMensagemDeErroGenerica("Não exibiu Editoria na chamada para a "+(i+1)+"ª posição.");
+				return false;
+			}
+			
+		}
+		return true;
+
+	}
+	
+	public boolean exibiuTituloParaAsMateriasDeUltimas() {
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			if(listaTotalDeUltimas().get(i).findElement(By.tagName("h2")).getText().isEmpty()){
+				imprimirMensagemDeErroGenerica("Não exibiu título na chamada para a "+(i+1)+"ª posição.");
+				return false;
+			}
+			
+		}
+		return true;
+	}
+	
+	public boolean exibiuTituloDasChamadasComNoMaximo100DeCaracteres() {
+		
+		int quantidadeMaximaDeCaracteresPermitidos = 100;
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			String tituloAtual = listaTotalDeUltimas().get(i).findElement(By.tagName("h2")).getText();
+			int quantidadeDeCaracteresDoTituloAtual = tituloAtual.length();
+			
+			if(quantidadeDeCaracteresDoTituloAtual > quantidadeMaximaDeCaracteresPermitidos){
+				imprimirMensagemDeErroDeUmaTag("O total de caracteres na "+(i+1)+"ª posição", Integer.toString(quantidadeMaximaDeCaracteresPermitidos), Integer.toString(quantidadeDeCaracteresDoTituloAtual));
+				return false;
+			}
+			
+		}
+		return true;
+	}
+
+	public boolean exibiuTempoPostadoParaAsMateriasDeUltimas() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(153, 153, 153, 1)";
+		String tamanhoFonteEsperada = "15px";
+		String textTransformEsperado = "none";
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			WebElement acessaTempoDePostagemPosicaoAtual = listaTotalDeUltimas().get(i).findElement(By.className("tempo"));
+				
+			String fonteAtual = acessaTempoDePostagemPosicaoAtual.getCssValue("font-family");
+			String corFonteAtual = acessaTempoDePostagemPosicaoAtual.getCssValue("color");
+			String tamanhoFonteAtual = acessaTempoDePostagemPosicaoAtual.getCssValue("font-size");
+			String textTransformAtual = acessaTempoDePostagemPosicaoAtual.getCssValue("text-transform");
+				
+			if(acessaTempoDePostagemPosicaoAtual.getText().isEmpty()){
+				imprimirMensagemDeErroGenerica("Não exibiu tempo de postagem para "+(i+1)+"ª posição");
+				return false;
+			}
+				
+			if (!fonteEsperada.equals(fonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!corFonteEsperada.equals(corFonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("cor da fonte do título", corFonteEsperada, corFonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteEsperada, tamanhoFonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!textTransformEsperado.equals(textTransformAtual)) {
+				imprimirMensagemDeErroDeUmaTag("alinhamento do título", textTransformEsperado, textTransformAtual);
+				contadorDeErros++;
+			}
+				
+		}
+			
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public boolean exibiuUmLinkNoTituloDasChamadasDeUltimasNoticias() {
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			if(!listaTotalDeUltimas().get(i).findElement(By.tagName("h2")).findElement(By.tagName("a")).isDisplayed()){
+				return false;
+			}
+			
+		}
+		
+		return true;
+	}
+	
+	public WebElement acessaBotaoCarregarMaisNoticias() {
+		return getDriver().findElement(By.className("mais-ultimas"));
+	}
+	
+	public String exibiuTituloDoBotao(){
+		return acessaBotaoCarregarMaisNoticias().getText();
+	}
+	
+	public String exibiuCodigoFonteDaPagina(){
+		return getDriver().getPageSource();
+	}
+
+	public boolean exibiuBotaoComOLayoutCorreto() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(30, 150, 200, 1)";
+		String tamanhoFonteEsperada = "18px";
+		String alinhamentoEsperado = "center";
+		String backgroundColorEsperado = "rgba(249, 249, 249, 1)";
+		String textTransformEsperado = "uppercase";
+		
+		String fonteAtual = acessaBotaoCarregarMaisNoticias().getCssValue("font-family");
+		String corFonteAtual = acessaBotaoCarregarMaisNoticias().getCssValue("color");
+		String tamanhoFonteAtual = acessaBotaoCarregarMaisNoticias().getCssValue("font-size");
+		String alinhamentoAtual = acessaBotaoCarregarMaisNoticias().getCssValue("text-align");
+		String backgroundColorAtual = acessaBotaoCarregarMaisNoticias().getCssValue("background-color");
+		String textTransformAtual = acessaBotaoCarregarMaisNoticias().getCssValue("text-transform");
+		
+		if (!fonteEsperada.equals(fonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("fonte do botão", fonteEsperada, fonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!corFonteEsperada.equals(corFonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("cor da fonte do botão", corFonteEsperada, corFonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do botão", tamanhoFonteEsperada, tamanhoFonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!alinhamentoEsperado.equals(alinhamentoAtual)) {
+			imprimirMensagemDeErroDeUmaTag("alinhamento do botão", alinhamentoEsperado, alinhamentoAtual);
+			contadorDeErros++;
+		}
+		
+		if (!backgroundColorEsperado.equals(backgroundColorAtual)) {
+			imprimirMensagemDeErroDeUmaTag("cor de fundo do botão", backgroundColorEsperado, backgroundColorAtual);
+			contadorDeErros++;
+		}
+		
+		if (!textTransformEsperado.equals(textTransformAtual)) {
+			imprimirMensagemDeErroDeUmaTag("Text Transform do título do botão", textTransformEsperado, textTransformAtual);
+			contadorDeErros++;
+		}
+		
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public boolean exibiuOLayoutCorretoDoTituloDeUltimas() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(28, 49, 77, 1)";
+		String tamanhoFonteEsperada = "45px";
+		String alinhamentoEsperado = "center";
+		
+		String fonteAtual = acessaTituloDeUltimas().getCssValue("font-family");
+		String corFonteAtual = acessaTituloDeUltimas().getCssValue("color");
+		String tamanhoFonteAtual = acessaTituloDeUltimas().getCssValue("font-size");
+		String alinhamentoAtual = acessaTituloDeUltimas().getCssValue("text-align");
+		
+		if (!fonteEsperada.equals(fonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!corFonteEsperada.equals(corFonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("cor da fonte do título", corFonteEsperada, corFonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+			imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteEsperada, tamanhoFonteAtual);
+			contadorDeErros++;
+		}
+		
+		if (!alinhamentoEsperado.equals(alinhamentoAtual)) {
+			imprimirMensagemDeErroDeUmaTag("alinhamento do título", alinhamentoEsperado, alinhamentoAtual);
+			contadorDeErros++;
+		}
+		
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public boolean exibiuLayoutCorretoParaAsEditoriaDasMateriasDeUltimas() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(30, 150, 200, 1)";
+		String tamanhoFonteEsperada = "16px";
+		String textTransformEsperado = "uppercase";
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			WebElement acessaEditoria = listaTotalDeUltimas().get(i).findElement(By.className("editoria"));
+				
+			String fonteAtual = acessaEditoria.getCssValue("font-family");
+			String corFonteAtual = acessaEditoria.getCssValue("color");
+			String tamanhoFonteAtual = acessaEditoria.getCssValue("font-size");
+			String textTransformAtual = acessaEditoria.getCssValue("text-transform");
+				
+			if (!fonteEsperada.equals(fonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("fonte da editoria", fonteEsperada, fonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!corFonteEsperada.equals(corFonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("cor da fonte da editoria", corFonteEsperada, corFonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("tamanho da fonte da editoria", tamanhoFonteEsperada, tamanhoFonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!textTransformEsperado.equals(textTransformAtual)) {
+				imprimirMensagemDeErroDeUmaTag("alinhamento da editoria", textTransformEsperado, textTransformAtual);
+				contadorDeErros++;
+			}
+				
+		}
+		
+		return validacaoDeErros(contadorDeErros);
+	}
+	
+	public boolean exibiuLayoutCorretoParaOTituloDasMateriasDeUltimas() {
+		
+		int contadorDeErros = 0;
+		
+		String fonteEsperada = "OgloboCondensed, Arial, sans-serif";
+		String corFonteEsperada = "rgba(37, 49, 74, 1)";
+		String tamanhoFonteEsperada = "25px";
+		String textTransformEsperado = "none";
+		
+		for(int i=1; i < quantidadeAValidar; i++){
+			
+			WebElement acessaTituloPosicaoAtual = listaTotalDeUltimas().get(i).findElement(By.tagName("h2")).findElement(By.tagName("a"));
+				
+			String fonteAtual = acessaTituloPosicaoAtual.getCssValue("font-family");
+			String corFonteAtual = acessaTituloPosicaoAtual.getCssValue("color");
+			String tamanhoFonteAtual = acessaTituloPosicaoAtual.getCssValue("font-size");
+			String textTransformAtual = acessaTituloPosicaoAtual.getCssValue("text-transform");
+				
+			if (!fonteEsperada.equals(fonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("fonte do título", fonteEsperada, fonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!corFonteEsperada.equals(corFonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("cor da fonte do título", corFonteEsperada, corFonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!tamanhoFonteEsperada.equals(tamanhoFonteAtual)) {
+				imprimirMensagemDeErroDeUmaTag("tamanho da fonte do título", tamanhoFonteEsperada, tamanhoFonteAtual);
+				contadorDeErros++;
+			}
+				
+			if (!textTransformEsperado.equals(textTransformAtual)) {
+				imprimirMensagemDeErroDeUmaTag("alinhamento do título", textTransformEsperado, textTransformAtual);
+				contadorDeErros++;
+			}
+				
+		}
+		
+		return validacaoDeErros(contadorDeErros);
+	}
+}

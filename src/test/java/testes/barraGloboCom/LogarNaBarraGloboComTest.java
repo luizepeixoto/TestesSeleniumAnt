@@ -1,0 +1,68 @@
+package testes.barraGloboCom;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import login.LoginDegustacao;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import pages.barraGloboCom.LogarNaBarraGloboCom;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+
+@RunWith(OrdenadorTestes.class)
+public class LogarNaBarraGloboComTest {
+	
+	private static LogarNaBarraGloboCom barraGloboCom;
+	private static LoginDegustacao login;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(barraGloboCom.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		barraGloboCom = new LogarNaBarraGloboCom(Navegador.CHROME);
+		login = new LoginDegustacao(barraGloboCom.getDriver());
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		barraGloboCom.fechar();
+	}
+	
+	public void efetuarLoginNaBarraDaGloboCom() throws Exception{
+		barraGloboCom.logarNaBarraGloboPontoCom();
+		login.efetuarLoginAutorizadoBarraDaGloboCom();
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 1)
+	public void verificarSeAposEfetuarOLoginOCookieGlbidFoiCriado() throws Exception{
+		efetuarLoginNaBarraDaGloboCom();
+		assertTrue(barraGloboCom.verificaSeExisteOCookieGlbid());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 2)
+	public void verificarSeAoClicarEmComentarOCookieInfgCadunEhCriado() throws InterruptedException{
+		barraGloboCom.localizarEClicarEmMateriaComComentario();
+		barraGloboCom.esperaCarregar(5);
+		barraGloboCom.clicarNoBotaoComentar();
+		assertTrue(barraGloboCom.verificaSeExisteOCookieInfgCadun());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 3)
+	public void verificarSeAoDeslogarOsCookiesGlbidEhInfgCadunForamApagados() throws InterruptedException{
+		barraGloboCom.deslogarNaBarraDaGloboCom();
+		assertFalse(barraGloboCom.verificaSeExisteOCookieGlbid());
+		assertFalse(barraGloboCom.verificaSeExisteOCookieInfgCadun());
+	}
+}

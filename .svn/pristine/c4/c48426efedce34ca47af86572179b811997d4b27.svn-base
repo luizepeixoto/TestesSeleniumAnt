@@ -1,0 +1,96 @@
+package br.com.infoglobo.testes.capa.direita;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.capa.direita.BoxProjetosInstitucionais;
+
+@RunWith(OrdenadorTestes.class)
+public class BoxProjetosInstitucionaisTest {
+
+	private static BoxProjetosInstitucionais colunaDaDireita;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(colunaDaDireita.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		colunaDaDireita = new BoxProjetosInstitucionais(Navegador.CHROME);
+		colunaDaDireita.esperaCarregar3Segundos();
+		colunaDaDireita.executarScroll(colunaDaDireita.getDriver().findElement(By.className("projetos-institucionais")).getLocation());
+	}
+	
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		colunaDaDireita.fechar();
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 1)
+	public void exibiuBoxProjetosInstitucionais() throws InterruptedException{
+		assertTrue(colunaDaDireita.exibiuBoxProjetosInstitucionais());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 2)
+	public void exibiuTituloProjetosInstitucionais(){
+		String tituloEsperado = "Projetos Institucionais";
+		assertEquals(tituloEsperado, colunaDaDireita.exibiuTituloProjetosIntitucionais());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 3)
+	public void verificaSeEstaSendoExbidoUmaListaDeConteudos(){
+		assertTrue(colunaDaDireita.exibiuUmaListaDeConteudos());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 4)
+	public void verificaSeOTotalDeConteudosEstaSendoExibido(){
+		assertTrue(colunaDaDireita.exibiuOTotalDeConteudos());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 5)
+	public void verificaSeOBoxDePaginacaoEstaSendoExibido(){
+		assertNotNull(colunaDaDireita.exibiuOBoxDePaginacao());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 6)
+	public void verificaSeAPaginacaoParaAEsquerdaEstaSendoExibida(){
+		assertTrue(colunaDaDireita.exibiuPaginacaoParaEsquerda());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 7)
+	public void verificaSeAPaginacaoParaADireitaEstaSendoExibida(){
+		assertTrue(colunaDaDireita.exibiuPaginacaoParaDireita());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 8)
+	public void clicouNaSetaDaDireitaEExibiuSegundoConteudo() throws InterruptedException{
+		colunaDaDireita.clicouNaSetaDaDireita();
+		assertTrue(colunaDaDireita.exibiuUmConteudoValidoNoBox());
+	}
+	
+	@Test
+	@OrdemExecucaoTeste(Ordem = 9)
+	public void clicouNaSetaDaEsquerdaEExibiuPrimeiroConteudo() throws InterruptedException{
+		colunaDaDireita.clicouNaSetaDaEsquerda();
+		assertTrue(colunaDaDireita.exibiuUmConteudoValidoNoBox());
+	}
+}

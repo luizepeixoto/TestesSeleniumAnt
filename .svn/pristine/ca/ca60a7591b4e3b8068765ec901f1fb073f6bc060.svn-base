@@ -1,0 +1,15 @@
+package br.com.infoglobo.pages.ela.materia.widget;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.materia.widget.BoxFotogaleriaInline;
+
+public class BoxFotogaleriaInlineEla extends BoxFotogaleriaInline {
+
+	public BoxFotogaleriaInlineEla(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+
+	public boolean exibiuOCssCorretoNasLegendasEAutores() {
+		return false;
+	}
+}

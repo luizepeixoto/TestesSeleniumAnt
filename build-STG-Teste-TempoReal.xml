@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<project name="Tempo Real" basedir="." default="test">
+	<property name="testdir" location="test" />
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+
+	<property name="report.dir" location="test" />
+	<property name="testdir" location="test" />
+	<property name="srcdir" location="src" />
+	<property name="engine_lib_path" value="lib" />
+	<property name="full-compile" value="false" />
+	<path id="classpath.base" />
+	<path id="classpath.test">
+		<fileset dir="${engine_lib_path}" includes="**/*.jar" />
+		<pathelement location="${testdir}" />
+		<pathelement location="${srcdir}" />
+		<path refid="classpath.base" />
+	</path>
+
+	<target name="clean">
+		<delete verbose="${full-compile}">
+			<fileset dir="${testdir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${srcdir}" destdir="${testdir}" verbose="${full-compile}">
+			<compilerarg line="-encoding utf-8" />
+			<classpath refid="classpath.test" />
+		</javac>
+	</target>
+
+	<target name="test" depends="compile">
+		<parallel threadCount="3">
+			<junit printsummary="yes" haltonfailure="no">
+				<classpath refid="classpath.test" />
+				<sysproperty key="propertyFile" value="src/resources/Configuracoes-STG.properties" />
+				<!-- formatter type="brief" usefile="false" / -->
+				<formatter type="xml" />
+				<batchtest fork="yes" todir="${srcdir}">
+					<fileset dir="${srcdir}">
+						<!--br.com.infoglobo.testes.temporeal-->
+						<include name="**/AbaPosJogoFotogaleriaNavegacaoTest.java" />
+						<include name="**/AbaPosJogoFotogaleriaTest.java" />
+						<include name="**/AbasPosJogoTest.java" />
+						<include name="**/CronicaTest.java" />
+						<include name="**/JogosDeHojeTest.java" />
+						<include name="**/LancesDoJogoTest.java" />
+						<include name="**/PenaltisTest.java" />
+						<include name="**/PlacarDoJogoTest.java" />
+						<include name="**/TabEmCampoTest.java" />
+						<include name="**/TabEscalacaoTest.java" />
+						<include name="**/TabEstatisticasDoJogoTest.java" />
+						<include name="**/TabSobreOJogoTest.java" />
+					</fileset>
+				</batchtest>
+			</junit>
+		</parallel>
+	</target>
+</project>

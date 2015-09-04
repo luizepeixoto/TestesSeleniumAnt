@@ -1,0 +1,83 @@
+package pages.horoscopo;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class Horoscopo extends AceitacaoAbstractTest{
+
+	public Horoscopo() throws Exception {
+		super();
+	}
+
+	public boolean exibiuTituloDePrevisoes() {
+		return !getDriver().findElement(By.className("info")).findElement(By.className("resume")).getText().isEmpty();
+	}
+	
+	public boolean exibiuData() {
+		return !getDriver().findElement(By.className("info")).findElement(By.className("dateTime")).getText().isEmpty();
+	}
+	
+	public List<WebElement> obterSignos() {
+		return getDriver().findElement(By.className("lista")).findElements(By.tagName("li"));		
+	}
+	
+	public boolean obterQuantidadeDeSignos(){
+		return obterSignos().size()==12;
+	}
+
+	public boolean exibiuImagemParaCadaSigno() {
+		for(int i=0; i<obterSignos().size();i++){
+			if(!obterSignos().get(i).findElement(By.tagName("img")).isDisplayed()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuTituloParaCadaSigno() {
+		for(int i=0; i<obterSignos().size();i++){
+			if(obterSignos().get(i).findElement(By.className("title")).findElement(By.tagName("b")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuRegenteParaCadaSigno() {
+		for(int i=0; i<obterSignos().size();i++){
+			if(!obterSignos().get(i).findElement(By.className("title")).getText().contains(" - Regente:")){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuDescricaoParaCadaSigno() {
+		for(int i=0; i<obterSignos().size();i++){
+			if(obterSignos().get(i).findElement(By.className("resume")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public WebElement exibiuPublicidade() {
+		return getDriver().findElement(By.className("publicidade"));
+	}
+
+	public boolean exibiuTituloPublicidade() {
+		return !getDriver().findElement(By.className("publicidade-container")).findElement(By.tagName("p")).getText().isEmpty();
+	}
+
+	public WebElement exibiuConteudoPublicidade() {
+		return getDriver().findElement(By.className("publicidade-container")).findElement(By.tagName("script"));
+	}
+	
+	public boolean exibiuBannerDeAssinatura() {
+		return getDriver().findElements(By.className("subscriptionFooter")).size()==0;
+	}
+}

@@ -1,0 +1,87 @@
+package br.com.infoglobo.testes.materia.widget;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.materia.widget.BoxInteressadoEm;
+
+public class BoxInteressadoTest {
+	
+	private static BoxInteressadoEm materia;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(materia.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new BoxInteressadoEm(Navegador.CHROME);
+		Thread.sleep(10000);
+		materia.executaScrollAteOBoxDaZunit();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxVocePodeEstarInteressadoEmEstaSendoExibido(){
+		assertNotNull(materia.exibiuBoxDaZunit());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoBoxEstaSendoExibido(){
+		assertTrue(materia.exibiuTitulo());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoBoxEstaCorreto(){
+		assertTrue(materia.exibiuTituloCorreto());
+	}
+	
+	@Test
+	public void verificaSeEstaSendoExibidoUmaListaDeMaterias(){
+		assertTrue(materia.exibiuListaDeMaterias());
+	}
+	
+	@Test
+	public void verificaSeAEditoriaEstaSendoExibidaParaAsMateriasDaLista(){
+		assertTrue(materia.exibiuEditoria());
+	}
+	
+	@Test
+	public void verificaCasoUmaImagemEstejaSendoExibidaOWidthEhDe234Px(){
+		assertTrue(materia.exibiuImagemWidth());
+	}
+	
+	@Test
+	public void verificaCasoUmaImagemEstejaSendoExibidaOHeightEhDe140Px(){
+		assertTrue(materia.exibiuImagemHeight());
+	}
+	
+	@Test
+	public void verificaSeAFotoCasoEstejaSendoExibidaPossuiUmLink(){
+		assertTrue(materia.exibiuLinkNaFoto());
+	}
+	
+	@Test
+	public void verificaSeOTituloEstaSendoExibidoParaAsMateriasDaLista(){
+		assertTrue(materia.exibiuEditoria());
+	}
+	
+	@Test
+	public void verificaRegraDeExclusaoDasMateriasDentroDoBox(){
+		assertTrue(materia.repetiuAlgumaMateriaDoBox());
+	}
+	
+	@Test
+	public void verificaRegraDeExclusaoDoBoxEAMateriaExibida(){
+		assertTrue(materia.repetiuAMateriaNoBox());
+	}
+}

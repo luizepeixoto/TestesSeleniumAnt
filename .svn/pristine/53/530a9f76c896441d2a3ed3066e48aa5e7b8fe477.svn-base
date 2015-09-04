@@ -1,0 +1,61 @@
+package br.com.infoglobo.crops;
+
+public enum CropsDeArticles {
+	
+	agenda("/FT1500A/200/", "470", "204"),
+	
+	colunaFotoDoAutor("/FT460B/220/", "220", "220"),
+	colunaFotoInline("/FT1086A/420/", "700", "420"),
+	
+	fotogaleriaHorizontal("/FT1086A/", "1086", "652"),
+	fotogaleriaHorizontalAmpliada("/FT1086A/", "1680", "1009"),
+	fotogaleriaVertical("/FT460A/652/", "392", "652"),
+	fotogaleriaVerticalAmpliada("/FT460A/652/", "574", "962"),
+	fotogaleriaBoxDeUltimas("/FT1086A/180/", "300", "180"),
+	fotogaleriaHomeDeUltimasRecomendadas("/FT460B/300/", "324", "324"),
+	fotogaleriaHomeDeUltimasMaisVistas("/FT460B/100/", "100", "100"),
+	fotogaleriaInline("/FT1086A/420/", "700", "427"),
+	fotogaleriaNoMenuFotosDoDia("/FT1086A/315/", "520", "315"),
+	
+	materiaFotoCentroGrande("/FT1086A/420/", "700", "420"),
+	materiaFotoEsquerdaGrande("/FT1086A/275/", "460", "275"),
+	materiaFotoEsquerdaPequena("/FT1086A/420/", "300", "180"),
+	materiaFotoEsquerdaVertical("/FT460A/", "460", "770"),
+	materiaFotoNaPrimeiraPosicao("/FT1500A/550/", "1260", "550"),
+	materiaNoMenuAssuntosEmDestaque("/FT1086A/230/", "380", "230"),
+	
+	materiaEmCapituloPhotoParallax("/FT1500A/", "", ""),
+	materiaBoxDaZunit("/FT1086A/230/", "234", "140"),
+	materiaBoxEmDestaque("/FT1086A/140/", "234", "140"),
+	
+	plantaoFotoNaPrimeiraPosicao("/FT1086A/420/", "700", "420"),
+	plantaoFotoCentroGrande("/FT1086A/420/", "700", "421"),
+	plantaoFotoEsquerdaGrande("/FT1086A/275/", "460", "275"),
+	plantaoFotoEsquerdaPequena("/FT1086A/420/", "300", "180"),
+	plantaoFotoEsquerdaVertical("/FT460A/", "460", "770"),
+	
+	listaDeFatosHorizontal("/FT1086A/421/", "704", "421"),
+	listaDeFatosVertical("/FT460A/432/", "260", "432"),
+	listaDeFatosHorizontalInline("/FT1086A/230/", "350", "230"),
+	listaDeFatosVerticalInline("/FT460A/384/", "229", "384"),
+	listaDeFatosMaisGalerias("FT460A/384", "235", "141"),
+	
+	tempoRealAbasPosJogo("/FT1500A/", "1500", "652"),
+	tempoRealAbasLancesDoJogo("/FT630A/", "630", "500"),
+	tempoRealFotoCronica("/FT1086A/420/", "700", "420");
+	
+private  final String cropProporcional;  
+private  final String width;
+private  final String height;
+
+CropsDeArticles (String cropProporcional, String width, String height) {
+    this.cropProporcional = cropProporcional;
+    this.width = width;
+    this.height = height;
+}
+
+public String cropProporcional() { return cropProporcional; }
+public String getWidth() { return width; }
+public String getHeight() { return height; }
+
+}

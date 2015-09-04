@@ -1,0 +1,200 @@
+package br.com.infoglobo.pages.lista;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class ListaComVideoGlobo extends AceitacaoAbstractTest {
+	
+	public ListaComVideoGlobo(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+
+	public WebElement acessaClasseGaleria() {
+		return getDriver().findElement(By.className("galeria"));
+	}
+
+	public boolean exibiuOTituloDaListaDeFatos() {
+		return !acessaClasseGaleria().findElement(By.className("titulo-galeria")).getText().isEmpty();
+	}
+	
+	public WebElement acessaNavegacao(){
+		return acessaClasseGaleria().findElement(By.className("nav")).findElement(By.className("nav-container"));
+	}
+	
+	public boolean exibiuPaginacaoDesabilitadaParaEsquerdaEHabilitadaParaADireita() {
+		
+		WebElement paginacaoParaEsquerda = acessaNavegacao().findElements(By.tagName("a")).get(0);
+		WebElement paginacaoParaDireita = acessaNavegacao().findElements(By.tagName("a")).get(1);
+		
+		if(!paginacaoParaEsquerda.getAttribute("class").contains("disabled") ||
+				!paginacaoParaEsquerda.isDisplayed()){
+			System.out.println("Exibiu paginação para esquerda Ativa.");
+			return false;
+		}
+		
+		if(!paginacaoParaDireita.getAttribute("class").equals("proxima") ||
+				!paginacaoParaDireita.isDisplayed()){
+			System.out.println("Exibiu paginação para direita desabilitada.");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public WebElement acessaClasseMaisLista(){
+		return getDriver().findElement(By.className("dez-mais-lista"));
+	}
+	
+	public List<WebElement> listaComTodosOsFatos() {
+		return acessaClasseMaisLista().findElement(By.className("itens-container")).findElements(By.tagName("li"));
+	}
+	
+	public int totalDeItensDalistaDeFatos() {
+		return listaComTodosOsFatos().size();
+	}
+	
+	public boolean exibiuUmaListaDeFatos() {
+		return acessaClasseMaisLista().isDisplayed();
+	}
+	
+	public boolean exibiuUmaListaValida() {
+		return totalDeItensDalistaDeFatos() > Integer.parseInt("1");
+	}
+	
+	public void clicarNoProximoItem() {
+		getDriver().findElement(By.cssSelector("a.proxima")).click();
+	}
+	
+	public boolean exibiuTituloDescricaoContadorVideoDaGloboComParaCadaFato() throws InterruptedException{
+		
+		String corTituloEsperado = "rgba(68, 68, 68, 1)";
+		String fonteTituloEsperada = "OgloboCondensed, Arial, sans-serif";
+		String tamanhoTituloEsperada = "26px"; 
+		
+		String corDescricaoEsperada = "rgba(119, 119, 119, 1)";
+		String fonteDescricaoEsperada = "Georgia, Times, serif";
+		String tamanhoDescricaoEsperada = "18px";
+		
+		String corTotalDeFotosEsperado = "rgba(30, 150, 200, 1)";
+		String tamanhoTotalDeFotosEsperado = "16px";
+		String fonteTotalDeFotosEsperado = "Arial";
+		
+		for(int i=0; i < totalDeItensDalistaDeFatos(); i++){
+			
+			String corTituloAtual = listaComTodosOsFatos().get(i).findElement(By.className("titulo-foto")).getCssValue("color");
+			String fonteTituloAtual = listaComTodosOsFatos().get(i).findElement(By.className("titulo-foto")).getCssValue("font-family");
+			String tamanhoTituloAtual = listaComTodosOsFatos().get(i).findElement(By.className("titulo-foto")).getCssValue("font-size"); 
+			
+			String corDescricaoAtual = listaComTodosOsFatos().get(i).findElement(By.className("subtitulo-foto")).getCssValue("color");
+			String fonteDescricaoAtual = listaComTodosOsFatos().get(i).findElement(By.className("subtitulo-foto")).getCssValue("font-family");
+			String tamanhoDescricaoAtual = listaComTodosOsFatos().get(i).findElement(By.className("subtitulo-foto")).getCssValue("font-size"); 
+			
+			String corTotalDeFotosAtual = listaComTodosOsFatos().get(i).findElement(By.className("counter")).getCssValue("color");
+			String tamanhoTotalDeFotosAtual = listaComTodosOsFatos().get(i).findElement(By.className("counter")).getCssValue("font-size");
+			String fonteTotalDeFotosAtual = listaComTodosOsFatos().get(i).findElement(By.className("counter")).getCssValue("font-family");
+			String totalDeFotosAtual = listaComTodosOsFatos().get(i).findElement(By.className("counter")).getText();
+			String totalDeFotosEsperado = ""+(i+1)+" de "+(totalDeItensDalistaDeFatos())+"";
+			
+			WebElement videoGloboCom = listaComTodosOsFatos().get(i).findElement(By.className("video-globo"));
+			
+			esperaCarregar1Segundo();
+			
+			/*Validação do título*/
+			
+			if(!corTituloAtual.equals(corTituloEsperado)){
+				imprimirMensagemDeErroDeUmaTag("Cor do título", corTituloAtual, corTituloEsperado);
+				return false;
+			}
+			
+			if(!fonteTituloAtual.equals(fonteTituloEsperada)){
+				imprimirMensagemDeErroDeUmaTag("Fonte do título", fonteTituloAtual, fonteTituloEsperada);
+				return false;
+			}
+			
+			if(!tamanhoTituloAtual.equals(tamanhoTituloEsperada)){
+				imprimirMensagemDeErroDeUmaTag("Tamanho da fonte do título", tamanhoTituloAtual, tamanhoTituloEsperada);
+				return false;
+			}
+			
+			/*Validação da descrição*/
+			
+			if(!corDescricaoAtual.equals(corDescricaoEsperada)){
+				imprimirMensagemDeErroDeUmaTag("Cor da descrição", corDescricaoAtual, corDescricaoEsperada);
+				return false;
+			}
+			
+			if(!fonteDescricaoAtual.equals(fonteDescricaoEsperada)){
+				imprimirMensagemDeErroDeUmaTag("Fonte da descrição", fonteDescricaoAtual, fonteDescricaoEsperada);
+				return false;
+			}
+			
+			if(!tamanhoDescricaoAtual.equals(tamanhoDescricaoEsperada)){
+				imprimirMensagemDeErroDeUmaTag("Tamanho da fonte da descrição", tamanhoDescricaoAtual, tamanhoDescricaoEsperada);
+				return false;
+			}
+			
+			/*Validação do contador de fotos*/
+			
+			if(!corTotalDeFotosAtual.equals(corTotalDeFotosEsperado)){
+				imprimirMensagemDeErroDeUmaTag("Cor do contador de fotos", corTotalDeFotosAtual, corTotalDeFotosEsperado);
+				return false;
+			}
+			
+			if(!tamanhoTotalDeFotosAtual.equals(tamanhoTotalDeFotosEsperado)){
+				imprimirMensagemDeErroDeUmaTag("Tamanho da fonte do contador de fotos", tamanhoTotalDeFotosAtual, tamanhoTotalDeFotosEsperado);
+				return false;
+			}
+			
+			if(!fonteTotalDeFotosAtual.equals(fonteTotalDeFotosEsperado)){
+				imprimirMensagemDeErroDeUmaTag("Fonte do contador de fotos", fonteTotalDeFotosAtual, fonteTotalDeFotosEsperado);
+				return false;
+			}
+			
+			if(!totalDeFotosAtual.equals(totalDeFotosEsperado)){
+				imprimirMensagemDeErroDeUmaTag("Total de fotos incorreto", totalDeFotosAtual, totalDeFotosEsperado);
+				return false;
+			}
+			
+			/*Validação do vídeo da globo.com*/
+			
+			if(!videoGloboCom.isDisplayed()){
+				imprimirMensagemDeErro("vídeo da globo.com", i);
+				return false;
+			}
+			
+			if( i < totalDeItensDalistaDeFatos() - Integer.parseInt("1")){
+				
+				esperaCarregar1Segundo();
+				clicarNoProximoItem();
+			}
+		}
+		
+		return true;
+		
+	}
+	
+	public boolean exibiuPaginacaoDesabilitadaParaDireitaEHabilitadaParaAEsquerda() {
+		
+		WebElement paginacaoParaEsquerda = acessaNavegacao().findElements(By.tagName("a")).get(0);
+		WebElement paginacaoParaDireita = acessaNavegacao().findElements(By.tagName("a")).get(1);
+		
+		if(!paginacaoParaEsquerda.getAttribute("class").equals("anterior") ||
+				!paginacaoParaEsquerda.isDisplayed()){
+			System.out.println("Exibiu paginação para esquerda Ativa.");
+			return false;
+		}
+		
+		if(!paginacaoParaDireita.getAttribute("class").contains("disabled") ||
+				!paginacaoParaDireita.isDisplayed()){
+			System.out.println("Exibiu paginação para direita desabilitada.");
+			return false;
+		}
+		
+		return true;
+	}
+}

@@ -1,0 +1,196 @@
+package br.com.infoglobo.testes.capa.rodape;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.capa.RodapeBannerAssinatura;
+
+@RunWith(OrdenadorTestes.class)
+public class RodapeBannerAssinaturaTest {
+	
+	private static RodapeBannerAssinatura capa;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(capa.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		capa = new RodapeBannerAssinatura(Navegador.CHROME);
+		capa.esperaCarregar(5);
+	}
+	
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		capa.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void exibiuOBoxDoBannerDeAssinatura(){
+		assertNotNull(capa.exibiuBannerDeAssinatura());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void exibiuOTituloDeAssineOPacoteOGlobo() throws InterruptedException{
+		assertTrue(capa.exibiuTitulo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void exibiuOLinkNoTituloDeAssineOPacoteOGlobo() throws InterruptedException{
+		assertTrue(capa.exibiuLinkNoTitulo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void exibiuOLinkCorretoNoTituloDeAssineOPacoteOGlobo() throws InterruptedException{
+		assertTrue(capa.exibiuLinkCorretoNoTitulo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void verificaSeAoClicarNoLinkDoBannerOTituloQuemAssinaEhExibido() throws InterruptedException{
+		assertTrue(capa.exibiuTextoQuemAssina());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=6)
+	@Test
+	public void verificaSeOBannerDeProdutosOGloboEstaSendoExibidoAposOClick() throws InterruptedException{
+		assertTrue(capa.exibiuBannerDeProdutos());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=7)
+	@Test
+	public void exibiutextoDeVantagensDeAssinaOGlobo() throws InterruptedException{
+		String primeiroParagradoEsperado="Tenha toda a credibilidade do jornalismo do Globo no computador e no tablet para ficar sempre bem informado;";
+		String segundoParagradoEsperado="Acesse todos os produtos digitais e acompanhe nossos colunistas, notícias atualizadas, matérias exclusivas, reportagens históricas, vídeos e muito mais;";
+		String terceiroParagradoEsperado="E ainda faça parte do Clube Sou+Rio, novo programa de relacionamento em que você resgata recompensas e benefícios em serviços, cultura e lazer.";
+		
+		assertEquals("Não Exibiu Primeiro Parágrafo de Vantagens", primeiroParagradoEsperado, capa.exibiuPrimeiroParagrafoDeVantagens());
+		assertEquals("Não Exibiu Segundo Parágrafo de Vantagens", segundoParagradoEsperado, capa.exibiuSegundoParagrafoDeVantagens());
+		assertEquals("Não Exibiu Terceiro Parágrafo de Vantagens", terceiroParagradoEsperado, capa.exibiuTerceiroParagrafoDeVantagens());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=8)
+	@Test
+	public void exibiuTextoDeQueroAssinar() throws InterruptedException{
+		String textoEsperado="Quero assinar";
+		assertEquals(textoEsperado, capa.exibiuTituloQueroAssinar());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=9)
+	@Test
+	public void exibiuLinkNoTextoDeQueroAssinar() throws InterruptedException{
+		assertTrue(capa.exibiuLinkNoTextoDeQueroAssinar());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=10)
+	@Test
+	public void exibiuUmLinkValidoNoTextoDeQueroAssinar() throws InterruptedException{
+		assertTrue(capa.exibiuLinkCorretoNoTextoDeQueroAssinar());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=11)
+	@Test
+	public void exibiuBannerDeRelacionamentoOGlobo() throws InterruptedException{
+		assertTrue(capa.exibiuBannerDeRelacionamentoOGlobo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=12)
+	@Test
+	public void exibiuSetaDePaginacaoParaDireita() throws InterruptedException{
+		assertTrue(capa.exibiuPaginacaoParaDireita());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=13)
+	@Test
+	public void verificaSeASetaDePaginacaoParaEsquerdaNaoEstaSendoExibida() throws InterruptedException{
+		assertTrue(capa.exibiuPaginacaoParaEsquerdaComoDesabilitada());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=14)
+	@Test
+	public void verificaSeAposOClickNaSetaDaDireitaASetaDePaginacaoParaEsquerdaEstaSendoExibida() throws InterruptedException{
+		assertTrue(capa.exibiuPaginacaoParaEsquerda());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=15)
+	@Test
+	public void exibiuTituloSiteDoGloboNaSegundaPaginaDoBanner() throws InterruptedException{
+		assertTrue(capa.exibiuTituloSiteDoGlobo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=16)
+	@Test
+	public void exibiuTextoAbaixoDoTituloSiteDoGloboNaSegundaPaginaDoBanner() throws InterruptedException{
+		String textoEsperado="Acesso ilimitado a notícias atualizadas em tempo real.";
+		assertEquals(textoEsperado, capa.exibiuTextoSiteDoGlobo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=17)
+	@Test
+	public void exibiuImagemDeProdutosOGloboNaSegundaPaginaDoBanner() throws InterruptedException{
+		assertTrue(capa.exibiuSegundoBanner());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=18)
+	@Test
+	public void exibiuTituloEdicaoDigitalNaSegundaPaginaDoBanner() throws InterruptedException{
+		assertTrue(capa.exibiuTituloEdicaoDigital());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=19)
+	@Test
+	public void exibiuTextoAbaixoDoTituloEdicaoDigitalNaSegundaPaginaDoBanner() throws InterruptedException{
+		String textoEsperado="Versão diária do jornal O Globo na tela do seu computador, iPad e tablet Android.";
+		assertEquals(textoEsperado, capa.exibiuTextoEdicaoDigital());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=20)
+	@Test
+	public void exibiuTituloSiteDoAcervoNaTerceiraPaginaDoBanner() throws InterruptedException{
+		assertTrue(capa.exibiuTituloSiteAcervo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=21)
+	@Test
+	public void exibiuTextoAbaixoDoTituloAcervoGloboNaTerceiraPaginaDoBanner() throws InterruptedException{
+		String textoEsperado="Todo o conteúdo do Globo digitalizado, desde 1925, à sua disposição.";
+		assertEquals(textoEsperado, capa.exibiuTextoSiteAcervo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=22)
+	@Test
+	public void exibiuImagemDeProdutosOGloboNaTerceiraPaginaDoBanner() throws InterruptedException{
+		assertTrue(capa.exibiuTerceiroBanner());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=23)
+	@Test
+	public void exibiuTituloGloboMaisNaTerceiraPaginaDoBanner() throws InterruptedException{
+		assertTrue(capa.exibiuTituloGloboMais());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=24)
+	@Test
+	public void exibiuTextoAbaixoDoTituloGloboMaisNaTerceiraPaginaDoBanner() throws InterruptedException{
+		String textoEsperado="Livros digitais exclusivos de diversos temas para ler no seu tablet, e-reader, smartphone e computador.";
+		assertEquals(textoEsperado,capa.exibiuTextoGloboMais());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=26)
+	@Test
+	public void verificaSeASetaParaADireitaNaoEstaSendoExibidaNaNaTerceiraPagina() throws InterruptedException{
+		assertTrue(capa.exibiuPaginacaoParaADireita());
+	}
+}

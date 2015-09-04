@@ -1,0 +1,54 @@
+package br.com.infoglobo.testes.materia.widget;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.materia.widget.BoxVejaTambemDeListaDeFatos;
+
+public class BoxVejaTambemDeListaDeFatosTest {
+	
+	private static BoxVejaTambemDeListaDeFatos materia;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new BoxVejaTambemDeListaDeFatos();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDoVejaTambemEstaSendoExibidoUmaListaDeFatos(){
+		assertNotNull(materia.getBoxVeja());
+	}
+	
+	@Test
+	public void verificaSeOTituloDoBoxVejaTambemEstaSendoExibido(){
+		assertEquals("Veja Também",materia.getBoxTitulo());
+	}
+	
+	@Test
+	public void verificaSeOBoxEstaExibindoUmaListaDeFatos(){
+		assertTrue(materia.getBoxListaTamanho());
+	}
+	
+	@Test
+	public void verificaSeCadaUmDosFatosPossuiTitulo(){
+		assertTrue(materia.getBoxListaTitulos());
+	}
+	
+	@Test
+	public void verificaSeOTituloDeCadaUmDosFatosPossuiUmLink(){
+		assertTrue(materia.getBoxLinks());
+	}
+	
+	@Test
+	public void verificaSeOTituloDeCadaUmDosFatosPossuiUmLinkValido(){
+		assertTrue(materia.getBoxLinksValidos());
+	}
+}

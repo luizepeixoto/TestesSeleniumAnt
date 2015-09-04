@@ -1,0 +1,17 @@
+package pages.revenue;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+
+public class MarcacoesCapaDestaque3E2Colunas extends AceitacaoAbstractTest {
+	
+	public MarcacoesCapaDestaque3E2Colunas() throws Exception {
+		super();
+	}
+
+	public String exibiuCodigoFonteDaPagina() {
+		getDriver().manage().deleteAllCookies();
+		return getDriver().getPageSource();
+	}
+
+	
+}

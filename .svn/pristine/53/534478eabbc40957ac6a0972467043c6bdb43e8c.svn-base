@@ -1,0 +1,157 @@
+package br.com.infoglobo.testes.indicadores;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.indicadores.Indicadores;
+
+public class BoxCotacoesTest {
+	
+	private static Indicadores boxCotacoes;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(boxCotacoes.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		boxCotacoes = new Indicadores(Navegador.CHROME);
+		//indicadores = new Indicadores();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		boxCotacoes.fechar();
+	}
+	
+	@Test
+	public void exibiuTresBoxDeCotacoesNoTopoDaPagina(){
+		assertTrue(boxCotacoes.exibiuTresCotacoes());
+	}
+	
+	//Box Ibovespa
+	@Test
+	public void exibiuBoxIbovespa(){
+		assertNotNull(boxCotacoes.exibiuOBoxIbovespa());
+	}
+	
+	@Test
+	public void exibiuTituloIbovespa(){
+		String tituloEsperado="IBOVESPA";
+		assertEquals(tituloEsperado, boxCotacoes.exibiuOTituloIbovespa());
+	}
+	
+	@Test
+	public void exibiuSetaDeVariacaoIbovespa(){
+		assertTrue(boxCotacoes.exibiuVariacaoIbovespa());
+	}
+	
+	@Test
+	public void exibiuTabelaDeVariacaoIbovespa(){
+		assertTrue(boxCotacoes.exibiuColunaUltimoDoBoxIbovespa());
+		assertTrue(boxCotacoes.exibiuColunaDiaAnteriorIbovespa());
+		assertTrue(boxCotacoes.exibiuColunaVariacaoDoBoxIbovespa());
+	}
+	
+	@Test
+	public void exibiuTextoDeVerMaisBolsas(){
+		String resultadoEsperado="VER + BOLSAS";
+		assertEquals(resultadoEsperado, boxCotacoes.exibiuIbovespaVerMais());
+	}
+	
+	@Test
+	public void exibiuLinkEmDeVerMaisBolsas(){
+		assertTrue(boxCotacoes.exibiuIbovespaLinkVerMaisBolsas());
+	}
+	
+	@Test
+	public void exibiuLinkCorretoEmDeVerMaisBolsas(){
+		assertTrue(boxCotacoes.exibiuIbovespaLinkCorretoEmVerMaisBolsas());
+	}
+	
+	//Box Dolar Comercial
+	@Test
+	public void exibiuBoxCotacaoDolarComercial(){
+		assertNotNull(boxCotacoes.exibiuOBoxDolarComercial());
+	}
+	
+	@Test
+	public void exibiuTituloDolarComercial(){
+		assertTrue(boxCotacoes.exibiuOTituloDolarComercial());
+	}
+	
+	@Test
+	public void exibiuSetaDeVariacaoDoDolarComercial(){
+		assertTrue(boxCotacoes.exibiuVariacaoDolarComercial());
+	}
+	
+	@Test
+	public void exibiuTabelaDeVariacaoDoDolarComercial(){
+		assertTrue("Não exibiu Coluna Último Na Tabela Do Dolar Comercial", boxCotacoes.exibiuColunaUltimoDolarComercial());
+		assertTrue("Não exibiu Coluna Compra Na Tabela Do Dolar Comercial", boxCotacoes.exibiuColunaCompraDolarComercial());
+		assertTrue("Não exibiu Coluna Venda Na Tabela Do Dolar Comercial", boxCotacoes.exibiuColunaVendaDolarComercial());
+		assertTrue("Não exibiu Coluna Variação Na Tabela Do Dolar Comercial", boxCotacoes.exibiuColunaVariacaoDolarComercial());
+	}
+	
+	@Test
+	public void exibiuTextoDeVerMaisMoedas(){
+		//String resultadoEsperado="VER + MOEDA";
+		assertTrue(boxCotacoes.exibiuDolarComercialVerMais());
+	}
+	
+	@Test
+	public void exibiuLinkEmDeVerMaisMoedas(){
+		assertTrue(boxCotacoes.exibiuDolarComercialLinkVerMaisMoedas());
+	}
+	
+	@Test
+	public void exibiuLinkCorretoEmDeVerMaisMoedas(){
+		assertTrue(boxCotacoes.exibiuDolarComercialLinkCorretoEmVerMaisMoedas());
+	}
+	
+	//Box Dolar Turismo
+	@Test
+	public void exibiuBoxCotacaoDolarTurismo(){
+		assertNotNull(boxCotacoes.exibiuOBoxDolarTurismo());
+	}
+	
+	@Test
+	public void exibiuTituloDolarTurismo(){
+		//String tituloEsperado="DÓLAR TURISMO";
+		assertTrue(boxCotacoes.exibiuOTituloDolarTurismo());
+	}
+	
+	@Test
+	public void exibiuSetaDeVariacaoDoDolarTurismo(){
+		assertTrue(boxCotacoes.exibiuVariacaoDolarTurismo());
+	}
+	
+	@Test
+	public void exibiuTabelaDeVariacaoDoDolarTurismo(){
+		assertTrue("Não exibiu Coluna Último Na Tabela Do Dolar Comercial", boxCotacoes.exibiuColunaUltimoDolarTurismo());
+		assertTrue("Não exibiu Coluna Compra Na Tabela Do Dolar Comercial", boxCotacoes.exibiuColunaCompraDolarTurismo());
+		assertTrue("Não exibiu Coluna Venda Na Tabela Do Dolar Comercial", boxCotacoes.exibiuColunaVendaDolarTurismo());
+		assertTrue("Não exibiu Coluna Variação Na Tabela Do Dolar Comercial", boxCotacoes.exibiuColunaVariacaoDolarTurismo());
+	}
+	
+	@Test
+	public void exibiuTextoDeVerMaisMoedasDoDolarTurismo(){
+		assertTrue(boxCotacoes.exibiuDolarTurismoVerMais());
+	}
+	
+	@Test
+	public void exibiuLinkEmDeVerMaisMoedasDoDolarTurismo(){
+		assertTrue(boxCotacoes.exibiuDolarTurismoLinkVerMaisMoedas());
+	}
+	
+	@Test
+	public void exibiuLinkCorretoEmDeVerMaisMoedasDoDolarTurismo(){
+		assertTrue(boxCotacoes.exibiuDolarTurismoLinkCorretoEmVerMaisMoedas());
+	}
+	
+}

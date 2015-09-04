@@ -1,0 +1,27 @@
+package br.com.infoglobo.pages.newsletter.urgente;
+
+import org.openqa.selenium.By;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.newsletter.NewsletterRodapePaginaPadrao;
+
+public class UrgenteRodape extends NewsletterRodapePaginaPadrao {
+	
+	public UrgenteRodape(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public boolean naoExibiuOBanner() {
+		try {
+			obterBanner().isDisplayed();
+			return false;
+		} catch (Exception e) {
+			return true;
+		}
+	}
+
+	public boolean exibiuABarraAntesDoFooterComACorEsperada() {
+		String corEsperada = "rgba(0, 94, 151, 1)";
+		return obterRodape().findElement(By.tagName("td")).getCssValue("background-color").equals(corEsperada);
+	}
+}

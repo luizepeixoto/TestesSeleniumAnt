@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.ela.editoria;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.destaques.DestaqueCom6Fotos;
+
+public class DestaqueElaCom6Fotos extends DestaqueCom6Fotos {
+	
+	public DestaqueElaCom6Fotos(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

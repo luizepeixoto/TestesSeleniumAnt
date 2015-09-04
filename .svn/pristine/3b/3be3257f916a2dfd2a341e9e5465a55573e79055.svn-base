@@ -1,0 +1,35 @@
+package br.com.infoglobo.testes.materia.menu;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.materia.menu.MenuBusca;
+
+public class BuscaComResultadoTest {
+	
+	private static MenuBusca busca;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(busca.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		busca = new MenuBusca(Navegador.FIREFOX);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		busca.fechar();
+	}
+	
+	@Test
+	public void verificaSeAoexecutarUmaBuscaComTextoValidoOsResultadosEstaoSendoExibido() throws InterruptedException{
+		assertTrue(busca.executarBuscaValidaComResultado());
+	}
+}

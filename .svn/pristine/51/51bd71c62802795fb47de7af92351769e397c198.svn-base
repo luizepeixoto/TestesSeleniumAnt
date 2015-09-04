@@ -1,0 +1,11 @@
+package br.com.infoglobo.pages.ela.materia.widget;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.materia.widget.BoxTwitterEmbed;
+
+public class BoxTwitterEmbeddedEla extends BoxTwitterEmbed {
+	
+	public BoxTwitterEmbeddedEla(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

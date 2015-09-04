@@ -1,0 +1,10 @@
+package pages.materia.widget;
+
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxListaDeFatosInlineComFoto extends BoxListaDeFatosInlinePadrao {
+	
+	public BoxListaDeFatosInlineComFoto(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

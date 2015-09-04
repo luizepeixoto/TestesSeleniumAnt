@@ -1,0 +1,10 @@
+package pages.materia.widget.generico;
+
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxGenericoSoundcloudComPlaylist extends BoxGenericoInstagram {
+	
+	public BoxGenericoSoundcloudComPlaylist(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+}

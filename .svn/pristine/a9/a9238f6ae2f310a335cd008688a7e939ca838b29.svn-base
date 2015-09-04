@@ -1,0 +1,36 @@
+package br.com.infoglobo.testes.materia.widget;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.RegraTirarScreenShot;
+import br.com.infoglobo.pages.materia.widget.BoxFotogaleriaInline;
+
+public class BoxFotoGaleriaInlineComNavegacaoTest {
+	
+	private static BoxFotogaleriaInline materia;
+	
+	@Rule
+	public RegraTirarScreenShot tirarScreenShot = new RegraTirarScreenShot(materia.getDriver());
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new BoxFotogaleriaInline(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeANavegacaoDaFotogaleriaInlineEstaFuncionandoCorretamente() throws InterruptedException{
+		materia.executouNavegacaoCorretamente();
+		assertTrue(materia.exibiuASetaParaDireitaDesabilitadaNaUltimaFoto());
+	}
+}

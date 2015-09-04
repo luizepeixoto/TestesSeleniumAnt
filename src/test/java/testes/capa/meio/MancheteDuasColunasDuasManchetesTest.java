@@ -1,0 +1,209 @@
+package testes.capa.meio;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import pages.capa.meio.CapaMeioMancheteDuasColunasDuasManchetes;
+
+import crops.CropsCapaColunaDoMeio;
+
+
+public class MancheteDuasColunasDuasManchetesTest {
+	
+	private static CapaMeioMancheteDuasColunasDuasManchetes colunaDoMeio;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		colunaDoMeio = new CapaMeioMancheteDuasColunasDuasManchetes();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		colunaDoMeio.fechar();
+	}
+	
+	@Test
+	public void exibiuMancheteDuasColunasDuasManchetes(){
+		assertNotNull(colunaDoMeio.exibiuMancheteDuasColunasDuasManchetes());
+	}
+	
+	@Test
+	public void exibiuEditoriaPrincipalDoBoxDuasColunasDuasManchetes(){
+		assertTrue(colunaDoMeio.exibiuEditoriaPrincipalDoBox());
+	}
+	
+	@Test
+	public void verificaSeAColunaDaEsquerdaEstaSendoExibida(){
+		assertNotNull(colunaDoMeio.exibiuColunaDaEsquerda());
+	}
+	
+	@Test
+	public void exibiuFotoParaAMateriaEmDestaque(){
+		assertTrue(colunaDoMeio.exibiuFotoEmDestaque());
+	}
+	
+	@Test
+	public void verificaSeOCropParaAMateriaEmDestaqueEstaCorreto(){
+		assertTrue(colunaDoMeio.exibiuCropCorretoParaFotoEmDestaque());
+	}
+	
+	@Test
+	public void exibiuClasseAnimadaParaAFotoDaMateriaEmDestaque(){
+		assertTrue(colunaDoMeio.exibiuClasseAnimadaEmDestaque());
+	}
+	
+	@Test
+	public void exibiuLinkNaFotoDaMateriaEmDestaque(){
+		assertTrue(colunaDoMeio.exibiuLinkNaFotoEmDestaque());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoNaFotoDaMateriaEmDestaque(){
+		assertTrue(colunaDoMeio.exibiuLinkValidoNaFotoEmDestaque());
+	}
+	
+	@Test
+	public void exibiuFotoEmDestaqueComWidthDe300px(){
+		String widthEsperado=CropsCapaColunaDoMeio.boxDuasColunasDuasManchetes.getWidth();
+		assertEquals(widthEsperado, colunaDoMeio.getWidthDaFotoEmDestaque());
+	}
+	
+	@Test
+	public void exibiuFotoEmDestaqueComHeightDe180px(){
+		String heightEsperado=CropsCapaColunaDoMeio.boxDuasColunasDuasManchetes.getHeight();
+		assertEquals(heightEsperado, colunaDoMeio.getHeightDaFotoEmDestaque());
+	}
+	
+	@Test
+	public void exibiuEditoriaDaMateriaEmDestaque(){
+		assertTrue(colunaDoMeio.exibiuEditoriaDaMateriaEmDestaque());
+	}
+	
+	@Test
+	public void exibiuTituloDaMateriaEmDestaque(){
+		assertTrue(colunaDoMeio.exibiuTituloDaMateriaEmDestaque());
+	}
+	
+	@Test
+	public void verificaSeOTituloDaMateriaEmDestaquePossuiNoMaximo75Caracteres(){
+		assertTrue(colunaDoMeio.exibiuTituloComQuantidadeMaximaPermitida());
+	}
+	
+	@Test
+	public void exibiuTituloDaMateriaEmDestaqueComUmLink(){
+		assertTrue(colunaDoMeio.exibiuTituloDaMateriaEmDestaqueComLink());
+	}
+	
+	@Test
+	public void exibiuTituloDaMateriaEmDestaqueComUmLinkValido(){
+		assertTrue(colunaDoMeio.exibiuUmLinkValidoNoTituloDaMateriaEmDestaque());
+	}
+	
+	@Test
+	public void exibiuTotalDeComentariosParaAMateriaEmDestaque(){
+		assertTrue(colunaDoMeio.exibiuTotalDeComentariosParaAMateriaEmDestaque());
+	}
+	
+	@Test
+	public void exibiuComentarioParaAMateriaEmDestaqueComUmLink(){
+		assertTrue(colunaDoMeio.exibiuLinkNosComentariosParaAMateriaEmDestaque());
+	}
+	
+	@Test
+	public void exibiuComentarioParaAMateriaEmDestaqueComUmLinkValido(){
+		assertTrue(colunaDoMeio.exibiuLinkValidoNosComentariosParaAMateriaEmDestaque());
+	}
+
+	@Test
+	public void exibiuEditoriaDaMateriaEmSubDestaque(){
+		assertTrue(colunaDoMeio.exibiuEditoriaDaMateriaEmSubDestaque());
+	}
+	
+	@Test
+	public void exibiuTituloDaMateriaEmSubDestaque(){
+		assertTrue(colunaDoMeio.exibiuTituloDaMateriaEmSubDestaque());
+	}
+	
+	@Test
+	public void exibiuUmLinkNoTituloDaMateriaEmSubDestaque(){
+		assertTrue(colunaDoMeio.exibiuLinkNoTituloDaMateriaEmSubDestaque());
+	}
+	
+	@Test
+	public void verificaSeOTituloDaMateriaEmSubDestaquePossuiNoMaximo75Caracteres(){
+		assertTrue(colunaDoMeio.exibiuTituloDeSubDestaqueComQuantidadeMaximaPermitida());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoNoTituloDaMateriaEmSubDestaque(){
+		assertTrue(colunaDoMeio.exibiuLinkValidoNoTituloDaMateriaEmSubDestaque());
+	}
+	
+	@Test
+	public void exibiuTotalDeComentariosParaMateriaEmSubDestaque(){
+		assertTrue(colunaDoMeio.exibiuTotalDeComentariosEmSubDestaque());
+	}
+	
+	@Test
+	public void exibiuUmLinkEmTotalDeComentariosParaMateriaEmSubDestaque(){
+		assertTrue(colunaDoMeio.exibiuLinkEmTotalDeComentariosParaSubDestaque());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoEmTotalDeComentariosParaMateriaEmSubDestaque(){
+		assertTrue(colunaDoMeio.exibiuLinkValidoEmTotalDeComentariosParaSubDestaque());
+	}
+	
+	@Test
+	public void exibiuColunaDaDireita(){
+		assertNotNull(colunaDoMeio.exibiuColunaDaDireita());
+	}
+	
+	@Test
+	public void exibiuUmaListaDeMateriasNaColunaDaDireita(){
+		assertTrue(colunaDoMeio.exibiuMaterias());
+	}
+	
+	@Test
+	public void exibiuEditoriaParaAsMateriasDaDireita(){
+		assertTrue(colunaDoMeio.exibiuEditoriaParaAsMateriasDaDireita());
+	}
+	
+	@Test
+	public void exibiuTituloParaAsMateriasDaDireita(){
+		assertTrue(colunaDoMeio.exibiuTituloParaAsMateriasDaDireita());
+	}
+	
+	@Test
+	public void exibiuTituloParaAsMateriasDaDireitaComNoMaximo55Caracteres(){
+		assertTrue(colunaDoMeio.exibiuTituloParaAsMateriasDaDireitaComMaximoDeCaracteres());
+	}
+	
+	@Test
+	public void exibiuTituloComLinkParaAsMateriasDaDireita(){
+		assertTrue(colunaDoMeio.exibiuLinkNoTituloNasMateriasDaDireita());
+	}
+	
+	@Test
+	public void exibiuTituloValidoComLinkParaAsMateriasDaDireita(){
+		assertTrue(colunaDoMeio.exibiuLinkValidoNoTituloNasMateriasDaDireita());
+	}
+	
+	@Test
+	public void exibiuTotalDeComentariosParaAsMateriasDaDireita(){
+		assertTrue(colunaDoMeio.exibiuTotalDeComentariosParaAsMateriasDaDireita());
+	}
+	
+	@Test
+	public void exibiuUmLinkNosComentariosDasMateriasDaDireita(){
+		assertTrue(colunaDoMeio.exibiuUmLinkNosComentariosDasMateriasDaDireita());
+	}
+	
+	@Test
+	public void exibiuUmLinkValidoNosComentariosDasMateriasDaDireita(){
+		assertTrue(colunaDoMeio.exibiuUmLinkValidoNosComentariosDasMateriasDaDireita());
+	}
+}

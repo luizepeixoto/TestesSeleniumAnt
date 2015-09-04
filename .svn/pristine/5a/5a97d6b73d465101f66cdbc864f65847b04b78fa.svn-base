@@ -1,0 +1,117 @@
+package br.com.infoglobo.pages.materia.widget;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class BoxInteressadoEm extends AceitacaoAbstractTest {
+	
+	public BoxInteressadoEm(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+	
+	public WebElement exibiuBoxDaZunit(){
+		return getDriver().findElement(By.className("estou-interessado"));
+	}
+	
+	public void executaScrollAteOBoxDaZunit(){
+		executarScroll(exibiuBoxDaZunit().getLocation().toString());
+	}
+
+	public boolean exibiuTitulo() {
+		return exibiuBoxDaZunit().findElement(By.tagName("p")).isDisplayed();
+	}
+	
+	public boolean exibiuTituloCorreto() {
+		return !exibiuBoxDaZunit().findElement(By.tagName("p")).getText().isEmpty();
+	}
+	
+	public List<WebElement> listaDeMaterias() {
+		return exibiuBoxDaZunit().findElement(By.id("estouInteressado")).findElements(By.tagName("li"));
+	}
+	
+	public boolean exibiuListaDeMaterias() {
+		return listaDeMaterias().size() > 1;
+	}
+
+	public boolean exibiuEditoria() {
+		for(int i=0;i<listaDeMaterias().size();i++){
+			if(listaDeMaterias().get(i).findElement(By.className("editoria")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuImagemWidth() {
+		String cropCorreto = "/FT1086A/230/";
+		for(int i=0;i<listaDeMaterias().size();i++){
+			List<WebElement> possuiFotoNaPosicao = listaDeMaterias().get(i).findElements(By.tagName("img"));
+			if(possuiFotoNaPosicao.size()>0){
+				if(!listaDeMaterias().get(i).findElement(By.tagName("img")).getAttribute("src").contains(cropCorreto)){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuImagemHeight() {
+		String cropCorreto = "/FT1086A/230/";
+		for(int i=0;i<listaDeMaterias().size();i++){
+			List<WebElement> possuiFotoNaPosicao = listaDeMaterias().get(i).findElements(By.tagName("img"));
+			if(possuiFotoNaPosicao.size()>0){
+				if(!listaDeMaterias().get(i).findElement(By.tagName("img")).getAttribute("src").contains(cropCorreto)){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuLinkNaFoto() {
+		for(int i=0;i<listaDeMaterias().size();i++){
+			List<WebElement> possuiFotoNaPosicao = listaDeMaterias().get(i).findElements(By.tagName("img"));
+			if(possuiFotoNaPosicao.size()>0){
+				if(!listaDeMaterias().get(i).findElement(By.tagName("a")).findElement(By.tagName("img")).isDisplayed()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean repetiuAlgumaMateriaDoBox() {
+		String titulo1 = listaDeMaterias().get(0).findElement(By.className("titulo")).getText();
+		String titulo2 = listaDeMaterias().get(1).findElement(By.className("titulo")).getText();
+		String titulo3 = listaDeMaterias().get(2).findElement(By.className("titulo")).getText();
+		String titulo4 = listaDeMaterias().get(3).findElement(By.className("titulo")).getText();
+		String titulo5 = listaDeMaterias().get(4).findElement(By.className("titulo")).getText();
+		
+		if((titulo1==titulo2) || (titulo1==titulo3) || (titulo1==titulo4) || (titulo1==titulo5) ||
+							 (titulo2==titulo3) || (titulo2==titulo4) || (titulo2==titulo5) ||
+							 (titulo3==titulo4) || (titulo3==titulo5) || (titulo4==titulo5)){
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean repetiuAMateriaNoBox() {
+		
+		String tituloMateria = getDriver().findElement(By.className("head-materia")).findElement(By.tagName("h1")).getText();
+		
+		if(tituloMateria.equals(listaDeMaterias().get(0).findElement(By.className("titulo")).getText()) ||
+				tituloMateria.equals(listaDeMaterias().get(1).findElement(By.className("titulo")).getText()) ||
+				tituloMateria.equals(listaDeMaterias().get(2).findElement(By.className("titulo")).getText()) ||
+				tituloMateria.equals(listaDeMaterias().get(3).findElement(By.className("titulo")).getText()) ||
+				tituloMateria.equals(listaDeMaterias().get(4).findElement(By.className("titulo")).getText())){
+			return false;
+		}
+		return true;
+	}
+	
+}

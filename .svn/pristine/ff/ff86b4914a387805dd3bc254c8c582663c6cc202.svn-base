@@ -1,0 +1,83 @@
+package br.com.infoglobo.testes.horoscopo;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.OrdemExecucaoTeste;
+import br.com.infoglobo.pages.OrdenadorTestes;
+import br.com.infoglobo.pages.horoscopo.HoroscopoCabecalho;
+
+@RunWith(OrdenadorTestes.class)
+public class HoroscopoCabecalhoEditoriasTest {
+	
+	private static HoroscopoCabecalho horoscopo;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		horoscopo = new HoroscopoCabecalho(Navegador.CHROME);
+	}
+	
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		horoscopo.fechar();
+	}
+	
+	@OrdemExecucaoTeste(Ordem=1)
+	@Test
+	public void verificaSeOCabecalhoDeEditoriasEstaSendoExibido(){
+		assertNotNull(horoscopo.exibiuCabecalhoComEditorias());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=2)
+	@Test
+	public void verificaSeOCabecalhoPossuiListaDeEditorias(){
+		assertTrue(horoscopo.exibiuUmaListaDeEditorias());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=3)
+	@Test
+	public void verificaSeOTituloDeCadaEditoriaEstaSendoExibido(){
+		assertTrue(horoscopo.exibiuOTituloDeCadaEditoria());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=4)
+	@Test
+	public void verificaSeAPrimeiraOpcaoDoMenuHomeEstaSendoExibidoComoAtivo(){
+		String resultadoEsperado="HOME";
+		assertEquals(resultadoEsperado, horoscopo.exibiuOTituloHomeComoAtivo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=5)
+	@Test
+	public void verificaSeAOpcaoMaisPossuiUmaListaDeItens() throws InterruptedException{
+		assertTrue(horoscopo.exibiuListaDeLinksNoMenuMais());
+	}
+	
+	@Ignore
+	@OrdemExecucaoTeste(Ordem=6)
+	@Test
+	public void verificaSeOsItensDeMaisPossuemUmTitulo() throws InterruptedException{
+		assertTrue(horoscopo.exibiuOsItensDeMaisComTitulo());
+	}
+	
+	@Ignore
+	@OrdemExecucaoTeste(Ordem=7)
+	@Test
+	public void verificaSeOsItensDeMaisPossuemUmTituloComLink() throws InterruptedException{
+		assertTrue(horoscopo.exibiuOsItensDeMaisComUmLinkNoTitulo());
+	}
+	
+	@OrdemExecucaoTeste(Ordem=8)
+	@Test
+	public void verificaSeOsItensDeMaisPossuemUmTituloComLinkValido() throws InterruptedException{
+		assertTrue(horoscopo.exibiuOsItensDeMaisComUmLinkValidoNoTitulo());
+	}
+}

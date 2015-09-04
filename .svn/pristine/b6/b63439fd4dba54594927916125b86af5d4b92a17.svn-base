@@ -1,0 +1,74 @@
+package br.com.infoglobo.testes.capa.esquerda;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.capa.esquerda.ChamadaSemEditoria;
+
+public class ChamadaSemEditoriaTest {
+	
+	private static ChamadaSemEditoria capa;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		capa = new ChamadaSemEditoria();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		capa.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxQueContemAEditoriaEmBrancoEstaSendoExibida(){
+		assertNotNull(capa.exibiuOBoxDaEditoriaEmBranco());
+	}
+	
+	@Test
+	public void verificaSeAEditoriaSendoExibidaEmBranco(){
+		assertTrue(capa.exibiuEditoriaEmBranco());
+	}
+	
+	@Test
+	public void verificaSeOTituloDaMateriaEstaSendoExibido(){
+		assertTrue(capa.exibiuTitulo());
+	}
+	
+	@Test
+	public void verificaSeOTituloDaMateriaPossuiUmLink(){
+		assertTrue(capa.exibiuTituloComLink());
+	}
+	
+	@Test
+	public void verificaSeOLinkNoTituloDaMateriaEhValido(){
+		assertTrue(capa.exibiuTituloComLinkValido());
+	}
+	
+	@Test
+	public void verificaSeOAutorEstaSendoExibido(){
+		assertTrue(capa.exibiuOAutor());
+	}
+	
+	@Test
+	public void verificaSeADescricaoDaMateriaEstaSendoExibida(){
+		assertTrue(capa.exibiuDescricaoDaMateria());
+	}
+	
+	@Test
+	public void verificaSeOTotalDeComentariosEstaSendoExibido(){
+		assertTrue(capa.exibiuTotalDeComentarios());
+	}
+	
+	@Test
+	public void verificaSeOTotalDeComentariosPossuiUmLink(){
+		assertTrue(capa.exibiuLinkEmComentarios());
+	}
+	
+	@Test
+	public void verificaSeOLinkEmTotalDeComentariosEhValido(){
+		assertTrue(capa.exibiuLinkValidoEmComentarios());
+	}
+}

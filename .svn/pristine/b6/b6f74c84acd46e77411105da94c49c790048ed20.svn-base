@@ -1,0 +1,34 @@
+package br.com.infoglobo.testes.materia.widget;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.materia.widget.BoxTwitterEmbed;
+
+public class BoxTwitterEmbedTest {
+	
+	private static BoxTwitterEmbed pageObject;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		pageObject = new BoxTwitterEmbed();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		pageObject.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDoTwitterEmbedSendoExibidoNaMateria(){
+		assertNotNull("Erro",pageObject.getBoxTwitter());
+	}
+	
+	@Test
+	public void verificaSeOConteudoEmbedDoTwitterEstaSendoExibido(){
+		assertTrue("Erro",pageObject.getBoxTwitterInformacao());
+	}
+}

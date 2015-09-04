@@ -1,0 +1,60 @@
+package br.com.infoglobo.testes.plantao;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.plantao.PlantaoNavegacaoSemAnterior;
+
+public class PlantaoNavegacaoSemAnteriorTest {
+	
+	private static PlantaoNavegacaoSemAnterior plantao;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		plantao = new PlantaoNavegacaoSemAnterior(Navegador.CHROME);
+		plantao.aguardaBoxDeNavegacaoCarregar();
+		plantao.executaScrollAteOBoxDePaginacao();
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		plantao.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDeNavegacaoEstaSendoExibido(){
+		assertNotNull(plantao.exibiuBoxDeNavegacao());
+	}
+	
+	@Test
+	public void verificaSeOBoxDeNavegacaoParaAMateriaMaisAntigaEstaSendoExibidoNaCorCinza(){
+		assertTrue(plantao.exibiuBoxDeAnteriorDesativado());
+	}
+	
+	@Test
+	public void verificaSeOBoxDeNavegacaoAnteriorEstaSendoExibidoSemLinkLink(){
+		assertTrue(plantao.exibiuUmLinkNoBoxDePaginacaoAnterior());
+	}
+	
+	@Test
+	public void verificaSeOTituloAnteriorEstaSendoExibidoCorretamente(){
+		String tituloEsperado = "ANTERIOR";
+		assertEquals(tituloEsperado, plantao.exibiuTitulodaMateriaNoBoxPaginacaoMaisAntiga());
+	}
+	
+	@Test
+	public void verificaSeOTituloDaMateriaAnteriorEstaSendoExibidoEmNegrito(){
+		assertTrue(plantao.exibiuTituloDaMateriaAnteriorEmNegrito());
+	}
+	
+	@Test
+	public void verificaSeOTituloDaMateriaDoBoxDeNavegacaoAnteriorEhOMesmoTituloDaMateriaDaPagina(){
+		assertTrue(plantao.exibiuOTituloDoBoxAnteriorIgualAoTituloDaMateria());
+	}
+}

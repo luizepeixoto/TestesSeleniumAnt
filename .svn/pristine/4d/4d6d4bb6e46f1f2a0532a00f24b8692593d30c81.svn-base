@@ -1,0 +1,30 @@
+package br.com.infoglobo.testes.materia;
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import br.com.infoglobo.pages.Navegador;
+import br.com.infoglobo.pages.materia.MateriaSemBoxNavegacao;
+
+public class MateriaSemBoxNavegacaoTest {
+	
+	private static MateriaSemBoxNavegacao materia;
+	
+	@BeforeClass
+	public static void antesDeCadaTeste() throws Exception {
+		materia = new MateriaSemBoxNavegacao(Navegador.CHROME);
+	}
+
+	@AfterClass
+	public static void depoisDeCadaTeste() {
+		materia.fechar();
+	}
+	
+	@Test
+	public void verificaSeOBoxDeNavegacaoNaoEstaSendoExibidoParaMateriasComDataDeCriacaoMaioreMenorQue7Dias(){
+		assertTrue(materia.exibiuBoxDeNavegacao());
+	}
+}

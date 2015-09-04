@@ -1,0 +1,241 @@
+package br.com.infoglobo.pages.capa;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class CapaCabecalho extends AceitacaoAbstractTest {
+	
+	public CapaCabecalho() throws Exception {
+		super();
+	}
+	
+	public CapaCabecalho(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+
+	public WebElement exibiuOBoxCentralDoCabecalho() {
+		return getDriver().findElement(By.className("logo-home"));
+	}
+
+	public boolean exibiuOBannerDoCabecalho() {
+		return exibiuOBoxCentralDoCabecalho().findElement(By.tagName("img")).isDisplayed();
+	}
+
+	public boolean exibiuUmLinkNoBanner() {
+		return exibiuOBoxCentralDoCabecalho().findElement(By.tagName("a")).isDisplayed();
+	}
+
+	public boolean exibiuOLinkCorretoNoBanner() {
+		return exibiuOBoxCentralDoCabecalho().findElement(By.tagName("a")).getAttribute("href").equals(getDriver().getCurrentUrl());
+	}
+	
+	public String exibiuPrincipioEditoriais() {
+		return exibiuOBoxCentralDoCabecalho().findElement(By.className("principios-editoriais")).findElement(By.tagName("a")).getText();
+	}
+	
+	public boolean exibiuLinkEmPrincipioEditoriais() {
+		return exibiuOBoxCentralDoCabecalho().findElement(By.className("principios-editoriais")).findElement(By.tagName("a")).isDisplayed();
+	}
+	
+	public boolean exibiuLinkCorretoEmPrincipioEditoriais() {
+		return exibiuOBoxCentralDoCabecalho().findElement(By.className("principios-editoriais")).findElement(By.tagName("a")).getAttribute("href").contains("principios-editoriais");
+	}
+	
+	public WebElement exibiuClasseRedesSociais() {
+		return getDriver().findElement(By.className("menu-contents")).findElement(By.className("redes-sociais"));
+	}
+
+	public WebElement exibiuOIconeFacebook() {
+		return exibiuClasseRedesSociais().findElement(By.className("facebook"));
+	}
+
+	public boolean exibiuUmLinkNoIconeDoFacebook() {
+		return exibiuClasseRedesSociais().findElements(By.tagName("li")).get(0).findElement(By.tagName("a")).isDisplayed();
+	}
+
+	public String exibiuUmLinkValidoNoIconeDoFacebook() {
+		return exibiuClasseRedesSociais().findElements(By.tagName("li")).get(0).findElement(By.tagName("a")).getAttribute("href");
+	}
+
+	public WebElement exibiuOIconeTwitter() {
+		return exibiuClasseRedesSociais().findElement(By.className("twitter"));
+	}
+
+	public boolean exibiuUmLinkNoIconeDoTwitter() {
+		return exibiuClasseRedesSociais().findElements(By.tagName("li")).get(1).findElement(By.tagName("a")).isDisplayed();
+	}
+
+	public String exibiuUmLinkValidoNoIconeDoTwitter() {
+		return exibiuClasseRedesSociais().findElements(By.tagName("li")).get(1).findElement(By.tagName("a")).getAttribute("href");
+	}
+
+	public WebElement exibiuOIconeGooglePlus() {
+		return exibiuClasseRedesSociais().findElement(By.className("plus"));
+	}
+
+	public boolean exibiuUmLinkNoIconeDoGooglePlus() {
+		return exibiuClasseRedesSociais().findElements(By.tagName("li")).get(2).findElement(By.tagName("a")).isDisplayed();
+	}
+
+	public String exibiuUmLinkValidoNoIconeDoGooglePlus() {
+		return exibiuClasseRedesSociais().findElements(By.tagName("li")).get(2).findElement(By.tagName("a")).getAttribute("href");
+	}
+	
+	public WebElement exibiuOBannerDeAssinatura() {
+		return getDriver().findElement(By.id("banner-assinatura"));
+	}
+
+	public boolean exibiuUmLinkNoBannerDeAssinatura() {
+		return exibiuOBannerDeAssinatura().findElement(By.tagName("a")).isDisplayed();
+	}
+
+	public boolean exibiuUmLinkValidoNoBannerDeAssinatura() {
+		return !exibiuOBannerDeAssinatura().findElement(By.tagName("a")).getAttribute("href").isEmpty();
+	}
+
+	public WebElement exibiuABuscaNoCabecalho() {
+		return getDriver().findElement(By.id("buscar"));
+	}
+
+	public boolean executouABusca() throws InterruptedException {
+		esperaCarregar(4);
+		getDriver().findElement(By.xpath("//*[@id=\"buscar\"]/a")).click();
+		esperaCarregar(1);
+		getDriver().findElement(By.xpath("//*[@id=\"q\"]")).sendKeys("big brother");
+		esperaCarregar(1);
+		getDriver().findElement(By.className("search-submit")).click();
+		esperaCarregar(2);
+		
+		return getDriver().findElement(By.className("container")).isDisplayed();
+	}
+
+	public WebElement exibiuOMenuDeTopicos() throws InterruptedException {
+		esperaCarregar2Segundos();
+		return getDriver().findElement(By.className("artigo-topicos"));
+	}
+	
+	public List<WebElement> listaTotalDeTopicos() {
+		List<WebElement> listaDeClassesArtigosTopicos = getDriver().findElement(By.className("top-header")).findElements(By.className("artigo-topicos"));
+		return listaDeClassesArtigosTopicos.get(1).findElement(By.tagName("ul")).findElements(By.tagName("li"));
+	}
+	
+	public String exibiuOTituloTopicos() {
+		return listaTotalDeTopicos().get(0).getAttribute("textContent");
+	}											 
+
+	public boolean exibiuListaDeTopicos() {
+		return listaTotalDeTopicos().size()>0;
+	}
+
+	public boolean exibiuTituloParaOsTopicos() {
+		for(int i=1; i<listaTotalDeTopicos().size(); i++){
+			if(listaTotalDeTopicos().get(i).findElement(By.tagName("a")).getAttribute("innerHTML").isEmpty()){
+				return false;
+			}
+		}
+		return true; 
+	}
+
+	public boolean exibiuLinkNoTituloDosTopicos() {
+		for(int i=1;i<listaTotalDeTopicos().size();i++){
+			if(listaTotalDeTopicos().get(i).findElement(By.tagName("a")).getAttribute("href").isEmpty()){
+				return false;
+			}
+		}
+		return true; 
+	}
+
+	public WebElement exibiuCabecalhoComEditorias() {
+		return getDriver().findElement(By.className("menu-home"));
+	}
+
+	public List<WebElement> listaTotalDeEditorias(){
+		return getDriver().findElement(By.className("menu-home")).findElements(By.className("link-menu"));
+	}
+	public boolean exibiuUmaListaDeEditorias() {
+		return listaTotalDeEditorias().size() > 0;
+	}
+
+	public boolean exibiuOTituloDeCadaEditoria() {
+		for(int i=0;i<listaTotalDeEditorias().size();i++){
+			if(listaTotalDeEditorias().get(i).getText().isEmpty()){
+				return false;
+			}
+		}return true;
+	}
+
+	public boolean exibiuOTituloDeCadaEditoriaComUmLink() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean oLinkEmCadaEditoriaEhValido() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String exibiuOTituloHomeComoAtivo() {
+		return getDriver().findElements(By.className("no-arrow")).get(0).getText();
+	}
+
+	public boolean exibiuListaDeLinksNoMenuMais() throws InterruptedException {
+		
+		WebElement menu = getDriver().findElement(By.cssSelector("body > header > div.nav > div > div > nav > ul > li.mais > span"));
+		Actions mouseOver = new Actions(getDriver());
+		mouseOver.moveToElement(menu).perform();
+		esperaCarregar(1);
+		List<WebElement> totalDeLinksDeMais = getDriver().findElement(By.className("mais")).findElements(By.tagName("li"));
+		return totalDeLinksDeMais.size()>0;
+	}
+
+	public boolean exibiuOsItensDeMaisComTitulo() throws InterruptedException {
+		WebElement menu = getDriver().findElement(By.cssSelector("body > header > div.nav > div > div > nav > ul > li.mais > span"));
+		Actions mouseOver = new Actions(getDriver());
+		mouseOver.moveToElement(menu).perform();
+		esperaCarregar(1);
+		List<WebElement> totalDeLinksDeMais = getDriver().findElement(By.className("mais")).findElements(By.tagName("li"));
+		for(int i=0; i<totalDeLinksDeMais.size();i++){
+			esperaCarregar(1);
+			if(totalDeLinksDeMais.get(i).findElement(By.tagName("a")).getText().isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOsItensDeMaisComUmLinkNoTitulo() throws InterruptedException {
+		WebElement menu = getDriver().findElement(By.cssSelector("body > header > div.nav > div > div > nav > ul > li.mais > span"));
+		Actions mouseOver = new Actions(getDriver());
+		mouseOver.moveToElement(menu).perform();
+		esperaCarregar(1);
+		List<WebElement> totalDeLinksDeMais = getDriver().findElement(By.className("mais")).findElements(By.tagName("li"));
+		for(int i=0; i<totalDeLinksDeMais.size();i++){
+			esperaCarregar(1);
+			if(!totalDeLinksDeMais.get(i).findElement(By.tagName("a")).isDisplayed()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean exibiuOsItensDeMaisComUmLinkValidoNoTitulo() throws InterruptedException {
+		WebElement menu = getDriver().findElement(By.cssSelector("body > header > div.nav > div > div > nav > ul > li.mais > span"));
+		Actions mouseOver = new Actions(getDriver());
+		mouseOver.moveToElement(menu).perform();
+		esperaCarregar(1);
+		List<WebElement> totalDeLinksDeMais = getDriver().findElement(By.className("mais")).findElements(By.tagName("li"));
+		for(int i=0; i<totalDeLinksDeMais.size();i++){
+			esperaCarregar(1);
+			if(totalDeLinksDeMais.get(i).findElement(By.tagName("a")).getAttribute("href").isEmpty()){
+				return false;
+			}
+		}
+		return true;
+	}
+}

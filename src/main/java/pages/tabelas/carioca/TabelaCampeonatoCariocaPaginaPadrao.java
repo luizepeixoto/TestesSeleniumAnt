@@ -1,0 +1,306 @@
+package pages.tabelas.carioca;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import br.com.infoglobo.pages.AceitacaoAbstractTest;
+import br.com.infoglobo.pages.Navegador;
+
+public class TabelaCampeonatoCariocaPaginaPadrao  extends AceitacaoAbstractTest {	
+	
+	public TabelaCampeonatoCariocaPaginaPadrao(Navegador navegador) throws Exception {
+		super(navegador);
+	}
+
+	protected WebElement obterTabela() {
+		return getDriver().findElement(By.xpath("//*[contains(@class,'page-carioca')]"));
+	}
+	
+	protected WebElement obterTabelaDeClassificacao() {
+		return obterTabela().findElement(By.className("classificacao-jogos"));
+	}
+	
+	public boolean exibiuAClassificacaoDoCampeonato() {
+		return obterTabelaDeClassificacao().isDisplayed();
+	}
+	
+	protected List<WebElement> obterListaDeColunasDaTabelaDeClassificacao() {
+		return obterTabelaDeClassificacao().findElement(By.tagName("thead")).findElements(By.tagName("th"));
+	}
+	
+	public boolean exibiuAsColunasDaTabelaDeClassificacao() {
+		int qtde = obterListaDeColunasDaTabelaDeClassificacao().size();
+		
+		for (int i = 0; i < qtde; i++) {
+			if (obterListaDeColunasDaTabelaDeClassificacao().get(i).getText().isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	protected List<WebElement> obterListaDeTimesDaTabelaDeClassificacao() {
+		return obterTabelaDeClassificacao().findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
+	}
+	
+	public boolean exibiuOsTimesDaTabelaDeClassificacao() {
+		int qtde = obterListaDeTimesDaTabelaDeClassificacao().size();
+		
+		for (int i = 0; i < qtde; i++) {
+			String texto = obterListaDeTimesDaTabelaDeClassificacao().get(i).findElement(By.tagName("td")).getText();
+			String nomeDoTime = texto.substring(texto.indexOf("º")+1);
+			if (nomeDoTime.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuAsPosicoesDosTimesDaTabelaDeClassificacao() {
+		int qtde = obterListaDeTimesDaTabelaDeClassificacao().size();
+		
+		for (int i = 0; i < qtde; i++) {
+			String texto = obterListaDeTimesDaTabelaDeClassificacao().get(i).findElement(By.tagName("td")).getText();
+			String posicaoDoTime = texto.substring(0, texto.indexOf("º")+1);
+			if (posicaoDoTime.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuOsQuatroPrimeirosTimesDestacadosNaTabelaDeClassificacao() {
+		String corEsperada = "rgba(0, 128, 0, 1)";
+		for (int i = 0; i <= 3; i++) {
+			if (! obterListaDeTimesDaTabelaDeClassificacao().get(i).getCssValue("border-left-color").equals(corEsperada)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean exibiuOsDoisUltimosTimesDestacadosNaTabelaDeClassificacao() {
+		String corEsperada = "rgba(255, 0, 0, 1)";
+		int posicaoUltimoTime = obterListaDeTimesDaTabelaDeClassificacao().size() - 1;
+		int posicaoPenultimoTime = posicaoUltimoTime - 1;
+		
+		for (int i = posicaoPenultimoTime; i <= posicaoUltimoTime; i++) {
+			if (! obterListaDeTimesDaTabelaDeClassificacao().get(i).getCssValue("border-left-color").equals(corEsperada)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	protected WebElement obterTabelaDeRodada() {
+		return obterTabela().findElement(By.className("rodada-jogos"));
+	}
+	
+	public boolean exibiuARodadaDoCampeonato() {
+		return obterTabelaDeRodada().isDisplayed();
+	}
+	
+	protected String obterOTituloDaRodadaAtual() {
+		return obterTabelaDeRodada().findElement(By.tagName("h6")).getText();
+	}
+	
+	public boolean exibiuOTituloDaRodadaAtualDoCampeonato() {
+		return ! obterOTituloDaRodadaAtual().isEmpty();
+	}
+	
+	protected WebElement obterBotaoDeRodadaAnterior() {
+		return obterTabelaDeRodada().findElement(By.className("orbit-prev"));
+	}
+
+	public boolean exibiuOBotaoDeRodadaAnteriorDoCampeonato() {
+		return obterBotaoDeRodadaAnterior().isDisplayed();
+	}
+	
+	protected WebElement obterBotaoDeRodadaPosterior() {
+		return obterTabelaDeRodada().findElement(By.className("orbit-next"));
+	}
+
+	public boolean exibiuOBotaoDeRodadaPosteriorDoCampeonato() {
+		return obterBotaoDeRodadaPosterior().isDisplayed();
+	}
+	
+	protected List<WebElement> obterListaDeRodadas() {
+		return obterTabelaDeRodada().findElement(By.id("slideTabela")).findElements(By.tagName("li"));
+	}
+	
+	protected WebElement obterRodadaAtual() {
+		return obterTabelaDeRodada().findElement(By.id("slideTabela")).findElement(By.tagName("ul")).findElement(By.className("active"));
+	}
+	
+	protected List<WebElement> obterListaDeJogosDaRodadaAtual() {
+		return obterRodadaAtual().findElements(By.tagName("td"));
+	}
+	
+	protected int obterQuantidadeDeJogosDaRodadaAtual() {
+		return obterListaDeJogosDaRodadaAtual().size();
+	}
+
+	public boolean exibiuAListaDeJogosDaRodadaAtual() {
+		return obterQuantidadeDeJogosDaRodadaAtual() > 0;
+	}
+	
+	protected List<WebElement> obterListaDeEscudosDosTimesNosJogosDaRodadaAtualDeAcordoComAPosicaoDoJogo(int posicao) {
+		return obterListaDeJogosDaRodadaAtual().get(posicao).findElements(By.tagName("img"));
+	}
+
+	public boolean exibiuOsEscudosDosTimesNosJogosDaRodadaAtual() {
+		int qtdeJogos = obterQuantidadeDeJogosDaRodadaAtual();
+		
+		for (int jogo = 0; jogo < qtdeJogos; jogo++) {
+			for (int escudo = 0; escudo < 2; escudo++) {
+				if (obterListaDeEscudosDosTimesNosJogosDaRodadaAtualDeAcordoComAPosicaoDoJogo(jogo).get(escudo).getAttribute("src").isEmpty()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	protected List<WebElement> obterListaDeSiglasDosTimesNosJogosDaRodadaAtualDeAcordoComAPosicaoDoJogo(int posicao) {
+		return obterListaDeJogosDaRodadaAtual().get(posicao).findElement(By.className("times-jogos-rodada")).findElements(By.tagName("b"));
+	}
+
+	public boolean exibiuAsSiglasDosTimesNosJogosDaRodadaAtual() {
+		int qtdeJogos = obterQuantidadeDeJogosDaRodadaAtual();
+		
+		for (int jogo = 0; jogo < qtdeJogos; jogo++) {
+			for (int sigla = 0; sigla < 2; sigla++) {
+				if (obterListaDeSiglasDosTimesNosJogosDaRodadaAtualDeAcordoComAPosicaoDoJogo(jogo).get(sigla).getText().isEmpty()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	protected List<WebElement> obterListaDeDataEHoraNosJogosDaRodadaAtualDeAcordoComAPosicaoDoJogo(int posicao) {
+		return obterListaDeJogosDaRodadaAtual().get(posicao).findElement(By.className("data-rodada-jogo")).findElements(By.tagName("span"));
+	}
+
+	public boolean exibiuDataEAHoraNosJogosDaRodadaAtual() {
+		int qtdeJogos = obterQuantidadeDeJogosDaRodadaAtual();
+		
+		for (int jogo = 0; jogo < qtdeJogos; jogo++) {
+			for (int dado = 0; dado < 2; dado++) {
+				if (obterListaDeDataEHoraNosJogosDaRodadaAtualDeAcordoComAPosicaoDoJogo(jogo).get(dado).getText().isEmpty()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	protected boolean verificaSeOBotaoDeRodadaPosteriorEstaDesabilitado() {
+		return obterBotaoDeRodadaPosterior().getAttribute("class").contains("disabled");
+	}
+
+	public boolean exibiuOBotaoDeRodadaPosteriorDesabilitadoNaUltimaRodada() throws InterruptedException {
+		while (! verificaSeOBotaoDeRodadaPosteriorEstaDesabilitado()) {
+			obterBotaoDeRodadaPosterior().click();
+			if (verificaSeOBotaoDeRodadaPosteriorEstaDesabilitado()) {
+				break;
+			}
+		}
+		int ultimaRodada = obterListaDeRodadas().size() - 1;
+		return (verificaSeOBotaoDeRodadaPosteriorEstaDesabilitado()) && (obterListaDeRodadas().get(ultimaRodada).getAttribute("class").contains("active"));
+	}
+	
+	protected boolean verificaSeOBotaoDeRodadaAnteriorEstaDesabilitado() {
+		return obterBotaoDeRodadaAnterior().getAttribute("class").contains("disabled");
+	}
+
+	public boolean exibiuOBotaoDeRodadaAnteriorDesabilitadoNaPrimeiraRodada() throws InterruptedException {
+		while (! verificaSeOBotaoDeRodadaAnteriorEstaDesabilitado()) {
+			obterBotaoDeRodadaAnterior().click();
+			if (verificaSeOBotaoDeRodadaAnteriorEstaDesabilitado()) {
+				break;
+			}
+		}
+		return (verificaSeOBotaoDeRodadaAnteriorEstaDesabilitado()) && (obterListaDeRodadas().get(0).getAttribute("class").contains("active"));
+	}
+	
+	public boolean exibiuOTituloSemifinalNaPenultimaRodada() throws InterruptedException {
+		String tituloEsperado = "Semifinal";
+		int posicaoPenultimaRodada = obterListaDeRodadas().size() - 2;
+		
+		while (! obterListaDeRodadas().get(posicaoPenultimaRodada).getAttribute("class").contains("active")) {
+			String rodada = obterRodadaAtual().getAttribute("data-rodada");
+			int numeroDaRodadaAtual = Integer.valueOf(rodada.substring(0, rodada.indexOf("\"")));
+			int numeroDaPenultimaRodada = posicaoPenultimaRodada + 1;
+			
+			if (numeroDaRodadaAtual < (numeroDaPenultimaRodada)) {
+				obterBotaoDeRodadaPosterior().click();
+			}
+			if (numeroDaRodadaAtual > (numeroDaPenultimaRodada)) {
+				obterBotaoDeRodadaAnterior().click();
+			}
+		}
+		Thread.sleep(750);
+		return obterOTituloDaRodadaAtual().equalsIgnoreCase(tituloEsperado);
+	}
+	
+	public boolean exibiuOTituloFinalNaUltimaRodada() throws InterruptedException {
+		String tituloEsperado = "Final";
+		int posicaoUltimaRodada = obterListaDeRodadas().size() - 1;
+		
+		while (! obterListaDeRodadas().get(posicaoUltimaRodada).getAttribute("class").contains("active")) {
+			String rodada = obterRodadaAtual().getAttribute("data-rodada");
+			int numeroDaRodadaAtual = Integer.valueOf(rodada.substring(0, rodada.indexOf("\"")));
+			
+			if (numeroDaRodadaAtual < (posicaoUltimaRodada + 1)) {
+				obterBotaoDeRodadaPosterior().click();
+			}
+		}
+		Thread.sleep(750);
+		return obterOTituloDaRodadaAtual().equalsIgnoreCase(tituloEsperado);
+	}
+	
+	protected WebElement obterBoxDeLegendas() {
+		return obterTabela().findElement(By.className("legendas"));
+	}
+
+	public boolean exibiuALegendaDoCampeonato() {
+		return obterBoxDeLegendas().isDisplayed();
+	}
+	
+	protected WebElement obterLegendaClassificados() {
+		return obterBoxDeLegendas().findElement(By.className("classificados"));
+	}
+
+	public boolean exibiuACorParaOsTimesClassificadosNaLegenda() {
+		String corEsperada = "rgba(0, 128, 0, 1)";
+		return obterLegendaClassificados().findElement(By.tagName("span")).getCssValue("background-color").equalsIgnoreCase(corEsperada);
+	}
+
+	public boolean exibiuOTextoParaOsTimesClassificadosNaLegenda() {
+		return ! obterLegendaClassificados().getText().isEmpty();
+	}
+	
+	protected WebElement obterLegendaRebaixados() {
+		return obterBoxDeLegendas().findElement(By.className("rebaixados"));
+	}
+
+	public boolean exibiuACorParaOsTimesRebaixadosNaLegenda() {
+		String corEsperada = "rgba(255, 0, 0, 1)";
+		return obterLegendaRebaixados().findElement(By.tagName("span")).getCssValue("background-color").equalsIgnoreCase(corEsperada);
+	}
+
+	public boolean exibiuOTextoParaOsTimesRebaixadosNaLegenda() {
+		return ! obterLegendaRebaixados().getText().isEmpty();
+	}
+	
+	protected WebElement obterBotaoDeRegulamento() {
+		return obterTabela().findElement(By.className("button")).findElement(By.tagName("a"));
+	}
+	
+	public boolean exibiuOBotaoDeRegulamento() {
+		return obterBotaoDeRegulamento().isDisplayed();
+	}
+}
